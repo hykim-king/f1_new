@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.Member">
+	<resultMap id="MemberMap" type="MemberVO">
+        <result column="u_id"            property="uid"   />
+        <result column="u_password"      property="upassword"  />
+        <result column="u_email"         property="uemail"/>
+        <result column="u_grade"         property="ugrade"/>  
+        <result column="mj_time"         property="mjtime"/> 
+        <result column="no"         property="no"/>   
+    </resultMap>    
+    
+    <!-- 아이디로 회원정보 반환 -->
+    <select id="selectOne" parameterType="MemberVO"  resultMap="MemberMap" >
+        SELECT *
+        FROM road_member
+        WHERE u_id = #{uid} 
+    </select>
+    
+    
+    <select id="selectOneMypage" parameterType="MemberVO"  resultMap="MemberMap" >
+        SELECT  u_grade, u_id, u_upassword,
+        SUBSTR(email, 1, INSTR(email, '@')-1)AS emailFront,
+        SUBSTR(email, INSTR(email, '@') + 1) AS emailBack
+        FROM road_member
+        WHERE u_id = #{uid} 
+    </select>
+    
+    <!-- 아이디 체크 -->
+    <select id="idCheck" parameterType="MemberVO" resultType="int">
+      SELECT COUNT(*) cnt
+      FROM road_member
+      WHERE u_id = #{uid}
+    </select>
+    
+    
+    <!-- 이메일 체크 -->
+    <select id="emailCheck" parameterType="MemberVO" resultType="int">
+      SELECT COUNT(*) cnt
+      FROM road_member
+      WHERE u_email = #{uemail}
+    </select>
+    
+    <!-- 아이디 + 패스워드 체크 -->
+    <select id="passCheck" parameterType="MemberVO" resultType="int">
+      SELECT COUNT(*) cnt
+      FROM road_member
+      WHERE u_id = #{uid}
+      AND u_password = #{upassword}
+    </select>
+    
+  <!-- 이메일로  아이디 존재 여부 검색 -->
+  <select id="searchIdCheck" parameterType="MemberVO" resultType="int">
+    SELECT COUNT(*) cnt
+    FROM road_member
+    WHERE u_email  = #{uemail}
+    </select>    
+    
+    <!-- 이메일로  아이디 검색 -->
+    <select id="searchId" parameterType="MemberVO" resultMap="MemberMap">
+      SELECT u_id
+      FROM road_member
+      WHERE u_email  = #{uemail}
+    </select>
+        
+    <!-- id + 이메일  비밀번호 여부 검색 -->
+    <select id="searchPwCheck" parameterType="MemberVO" resultType="int">
+      SELECT COUNT(*) cnt
+      FROM road_member
+      WHERE u_email = #{uemail}
+      AND u_id     = #{uid}
+    </select>
+    
+     <!-- id + 이메일로  비밀번호 검색 -->
+    <select id="searchPw" parameterType="MemberVO" resultMap="MemberMap">
+      SELECT u_password
+      FROM road_member
+      WHERE u_email = #{uemail}
+      AND u_id  = #{uid}
+    </select>
+    
+    
+    
+    <!-- 회원가입  -->
+    <insert id="insertOne" parameterType="MemberVO" >
+    INSERT INTO road_member (    
+		        u_grade,     
+                u_id,       
+                u_password, 
+                u_email,
+                mj_time,
+                no
+     ) VALUES (
+        #{ugrade},    
+        #{uid},       
+        #{upassword},        
+        #{uemail},
+        SYSDATE,
+        MEMBER_NO.NEXTVAL
+     )      
+  </insert>  
+    
+  <!-- 사용자 비밀번호 변경 -->
+  <update id="updatepassword" parameterType="MemberVO">
+    UPDATE road_member         
+    SET  u_password = #{upassword}   
+    WHERE u_id = #{uid}
+    AND u_email  = #{uemail}
+  </update>
+  
+  <!-- 사용자 정보 변경 -->
+  <update id="updateUser" parameterType="MemberVO">
+    UPDATE road_member         
+    SET u_id      = #{uid},  
+        u_password        = #{upassword},
+        u_email     = #{uemail}
+    WHERE u_id = #{uid}
+  </update>
+  
+   <!-- 주소 즐겨찾기 delete:1로  update-->
+  <!-- <update id="updateDel" parameterType="int">
+    UPDATE road_member
+    SET del = '1'
+    WHERE no = #{no}
+  </update>  -->
+
+
+  
+  <!-- 유저 삭제 -->
+  <delete id="deleteOne" parameterType="MemberVO">
+    DELETE FROM road_member
+    WHERE u_id = #{uid}
+  </delete>
+</mapper>
