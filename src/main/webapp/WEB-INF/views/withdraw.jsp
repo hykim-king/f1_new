@@ -48,8 +48,8 @@
           <label for="password"></label>
           <input type="password" id="upassword" placeholder="비밀번호를 입력하세요">
         </form>
-        <input type="hidden" id="uid"  value="${user.uid}">
-        <input type="hidden" id="upw"  value="${user.upassword}">
+        <input type="hidden" id="uid"  value="${user.rid}">
+        <input type="hidden" id="upw"  value="${user.rpassword}">
         <button id="doWithdraw">회원 탈퇴하기</button>
    </div>
 </c:if>  
@@ -94,7 +94,7 @@
 	               url:"${CP}/withdraw",
 	               dataType:"html",
 	               data: {
-	                uid: $("#uid").val()
+	                rid: $("#uid").val()
 	               },
 	               success:function(data) {
 	                let parsedJSON = JSON.parse(data);

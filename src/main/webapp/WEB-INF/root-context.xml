@@ -35,9 +35,9 @@
         
         <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
             <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
-            <property name="url" value="jdbc:oracle:thin:@192.168.0.128:1521:XE"></property>
-            <property name="username" value="scott"></property>
-            <property name="password" value="pcwk"></property>
+            <property name="url" value="jdbc:oracle:thin:@192.168.0.123:1521:XE"></property>
+            <property name="username" value="f1"></property>
+            <property name="password" value="4444"></property>
         </bean>     
 
 </beans>

@@ -68,13 +68,13 @@ public class LoginController {
         MessageVO message = new MessageVO();
         
         // (1 : id 미입력)
-        if(null == user.getUid() || "".equals(user.getUid())) {
+        if(null == user.getRid() || "".equals(user.getRid())) {
             message.setMsgId("1");
             message.setMsgContents("아이디를 입력 하세요.");
             return new Gson().toJson(message);        
         }
         // (2 : pass 미입력)
-        if(null == user.getUpassword() || "".equals(user.getUpassword())) {
+        if(null == user.getRpassword() || "".equals(user.getRpassword())) {
             message.setMsgId("2");
             message.setMsgContents("비밀번호를 입력 하세요.");
             return new Gson().toJson(message);        
@@ -89,7 +89,7 @@ public class LoginController {
             message.setMsgContents("비밀번호를 확인  하세요.");
         }else if(30==status) {                    // (30 : 성공)
             message.setMsgId("30");
-            message.setMsgContents(user.getUid()+"가 로그인 되었습니다.");
+            message.setMsgContents(user.getRid()+"가 로그인 되었습니다.");
             
             //----------------------------------------------------------
             //- 사용자 정보 조회 : session처리

@@ -2,66 +2,74 @@ package com.roadscanner.domain;
 
 //VO(Value Object)
 public class MemberVO {
-	private String uid; // 회원 아이디
-	private String upassword; // 회원 비밀번호
-	private String uemail; // 회원 이메일
-	private int ugrade;// 회원 등급
-	private String mjtime;
-	private int no;
+	private String rid; // 회원 아이디
+	private String rpassword; // 회원 비밀번호
+	private String remail; // 회원 이메일
+	private int rgrade;// 회원 등급
+	private String rdate;	// 가입일
+	private int rnumber;	//회원 번호(시퀀스)
 	
 	public MemberVO() {	}
-	
-	public MemberVO(String uid, String upassword) {
+
+	public MemberVO(String rid, String rpassword) {
 		super();
-		this.uid = uid;
-		this.upassword = upassword;
-	
+		this.rid = rid;
+		this.rpassword = rpassword;
+		
 	}
-	public String getUid() {
-		return uid;
+
+	public String getRid() {
+		return rid;
 	}
-	public void setUid(String uid) {
-		this.uid = uid;
+
+	public String getRpassword() {
+		return rpassword;
 	}
-	public String getUpassword() {
-		return upassword;
+
+	public String getRemail() {
+		return remail;
 	}
-	public void setUpassword(String upassword) {
-		this.upassword = upassword;
+
+	public int getRgrade() {
+		return rgrade;
 	}
-	public String getUemail() {
-		return uemail;
+
+	public String getRdate() {
+		return rdate;
 	}
-	public void setUemail(String uemail) {
-		this.uemail = uemail;
+
+	public int getRnumber() {
+		return rnumber;
 	}
-	public int getUgrade() {
-		return ugrade;
+
+	public void setRid(String rid) {
+		this.rid = rid;
 	}
-	public void setUgrade(int ugrade) {
-		this.ugrade = ugrade;
+
+	public void setRpassword(String rpassword) {
+		this.rpassword = rpassword;
 	}
-	
-	public String getMjtime() {
-		return mjtime;
+
+	public void setRemail(String remail) {
+		this.remail = remail;
 	}
-	public void setMjtime(String mjtime) {
-		this.mjtime = mjtime;
+
+	public void setRgrade(int rgrade) {
+		this.rgrade = rgrade;
 	}
-	
-	public int getNo() {
-		return no;
+
+	public void setRdate(String rdate) {
+		this.rdate = rdate;
 	}
-	public void setNo(int no) {
-		this.no = no;
+
+	public void setRnumber(int rnumber) {
+		this.rnumber = rnumber;
 	}
 
 	@Override
 	public String toString() {
-		return "MemberVO [uid=" + uid + ", upassword=" + upassword + ", uemail=" + uemail + ", ugrade=" + ugrade
-				+ ", mjtime=" + mjtime + ", no=" + no + "]";
-	}
-
+		return "MemberVO [rid=" + rid + ", rpassword=" + rpassword + ", remail=" + remail + ", rgrade=" + rgrade
+				+ ", rdate=" + rdate + ", rnumber=" + rnumber + ", toString()=" + super.toString() + "]";
+	}	
 	
-		
 }

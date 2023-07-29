@@ -223,10 +223,10 @@
                 /* asyn:"true", */
                 dataType:"html",
                 data:{
-                	ugrade: $("#grade").val(),
-                    uid: $("#id").val(),
-                    upassword: $("#pw").val(),
-                    uemail: $("#email").val()
+                	rgrade: $("#grade").val(),
+                    rid: $("#id").val(),
+                    rpassword: $("#pw").val(),
+                    remail: $("#email").val()
                 },
                 success:function(data){//통신 성공
                     //console.log("success data:"+data);

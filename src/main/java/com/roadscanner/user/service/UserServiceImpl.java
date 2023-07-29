@@ -159,7 +159,7 @@ public class UserServiceImpl implements UserService {
         if(0==flag) {
             result = "-1";
         }else if(1==flag) {
-            result = this.userDao.searchId(user).getUid(); 
+            result = this.userDao.searchId(user).getRid(); 
         } 
         return result;
 	}
@@ -177,7 +177,7 @@ public class UserServiceImpl implements UserService {
         if(0==checkStatus) {
         	pwresult = "-1";
         } else if(1==checkStatus) {
-        	pwresult = this.userDao.searchPw(user).getUpassword(); 
+        	pwresult = this.userDao.searchPw(user).getRpassword(); 
         } 
         return pwresult;
     }
