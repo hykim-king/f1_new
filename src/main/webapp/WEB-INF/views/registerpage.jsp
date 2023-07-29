@@ -11,8 +11,34 @@
 <link  href="${CP}/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
 <script src="${CP}/resources/js/bootstrap/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
 <script src="${CP}/resources/js/jquery-3.7.0.js"></script>
-<title>test</title>
+<title>로드스캐너 회원가입</title>
 </head>
+<header class="p-3 text-bg-white">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">       
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+          <li><a href="#" class="nav-link px-2 text-secondary">추가기능1</a></li>
+          <li><a href="#" class="nav-link px-2 text-secondary">추가기능2</a></li>
+          <li><a href="#" class="nav-link px-2 text-secondary">추가기능3</a></li>
+          <li><a href="#" class="nav-link px-2 text-secondary">추가기능4</a></li>
+        </ul>
+
+        <div class="text-end">
+        <!-- 로그인 세션 O -->
+        <c:if test="${user ne null}">
+          <button type="button" class="btn btn-warning me-2"
+          onclick="location.href='${CP}/logout'">LogOut</button>
+        </c:if>
+        <!-- 로그인 세션 X -->
+        <c:if test="${user eq null}">
+          <button type="button" id="login" onclick="location.href='${CP}/login'" class="btn btn-warning me-2">Login</button>
+        </c:if>
+        </div>
+      </div>
+    </div>
+  </header>
 <body>
 <div class ="container">
     <h1>회원가입</h1>
@@ -79,7 +105,11 @@
      </form>
 </div>    
 </body>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<footer class="py-3 my-4 mt-auto">
+  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+  </ul>
+  <p class="text-center text-body-secondary">&copy; 2023 F1 RoadScanner Project, All rights reserved.</p>
+</footer>
     <script src="${CP}/resources/js/jquery-3.7.0.js"></script>
     <script>
        
@@ -155,7 +185,7 @@
       
         $("#noneRegister").on("click", function(){
             alert("회원가입을 취소했습니다");
-            window.location.href="${CP}/registerpage";
+            window.location.href="${CP}/login";
             
         });
       
@@ -209,7 +239,7 @@
                     
                     if("10" == parsedJSON.msgId){
                       alert(parsedJSON.msgContents);
-                      window.location.href="${CP}/";
+                      window.location.href="${CP}/login";
                     } 
                     
                     if("20" == parsedJSON.msgId){

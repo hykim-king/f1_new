@@ -14,7 +14,7 @@
 <link  href="${CP}/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
 <script src="${CP}/resources/js/bootstrap/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
 <script src="${CP}/resources/js/jquery-3.7.0.js"></script>
-<title>RoadScanner mypage test</title>
+<title>로드스캐너 마이페이지</title>
 </head>
   <header class="p-3 text-bg-white">
     <div class="container">
@@ -22,18 +22,20 @@
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-          <li><a href="#" class="nav-link px-2 text-secondary">Features</a></li>
-          <li><a href="#" class="nav-link px-2 text-secondary">Pricing</a></li>
-          <li><a href="#" class="nav-link px-2 text-secondary">FAQs</a></li>
-          <li><a href="#" class="nav-link px-2 text-secondary">About</a></li>
+          <li><a href="#" class="nav-link px-2 text-secondary">추가기능1</a></li>
+          <li><a href="#" class="nav-link px-2 text-secondary">추가기능2</a></li>
+          <li><a href="#" class="nav-link px-2 text-secondary">추가기능3</a></li>
+          <li><a href="#" class="nav-link px-2 text-secondary">추가기능4</a></li>
         </ul>
 
         <div class="text-end">
+        <!-- 로그인 세션 O -->
         <c:if test="${user ne null}">
           <button type="button" class="btn btn-warning me-2"
           onclick="location.href='${CP}/logout'">LogOut</button>
-          <button type="button" onclick="location.href='${CP}/mypage'" class="btn btn-warning me-2">MyPage</button>
+          <%-- <button type="button" onclick="location.href='${CP}/mypage'" class="btn btn-warning me-2">MyPage</button> --%>
         </c:if>
+        <!-- 로그인 세션 X -->
         <c:if test="${user eq null}">
           <button type="button" id="login" onclick="location.href='${CP}/login'" class="btn btn-warning me-2">Login</button>
         </c:if>
@@ -94,13 +96,8 @@
 
   <footer class="py-3 my-4 mt-auto">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
     </ul>
-    <p class="text-center text-body-secondary">&copy; 2023 F1 TEAM, RoadScanner Project</p>
+    <p class="text-center text-body-secondary">&copy; 2023 F1 RoadScanner Project, All rights reserved.</p>
   </footer>
 
 <script>
@@ -151,14 +148,7 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
 	    alert("탈퇴페이지 이동");
 	    window.location.href="${CP}/withdraw";
 	    
-	  });   // $("#withdraw") click
-
-   $("#withdraw").on("click", function(){
-	      
-	    alert("로그인페이지로 이동합니다");
-	    window.location.href="${CP}/withdraw";
-	    
-	  });   // $("#cancel") click
+	  });   // $("#withdraw") click 
 
   $("#cancel").on("click", function(){
 	  

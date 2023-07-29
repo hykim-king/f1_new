@@ -11,12 +11,26 @@
 <link  href="${CP}/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
 <script src="${CP}/resources/js/bootstrap/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
 <script src="${CP}/resources/js/jquery-3.7.0.js"></script>
-
-
-
-
-<title>메인페이지?</title>
+<title>로드스캐너 로그인</title>
 </head>
+<header class="p-3 text-bg-white">
+   <div class="container">
+     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">       
+
+       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+         <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+         <li><a href="#" class="nav-link px-2 text-secondary">추가기능1</a></li>
+         <li><a href="#" class="nav-link px-2 text-secondary">추가기능2</a></li>
+         <li><a href="#" class="nav-link px-2 text-secondary">추가기능3</a></li>
+         <li><a href="#" class="nav-link px-2 text-secondary">추가기능4</a></li>
+       </ul>
+
+       <div class="text-end">    
+         <button type="button" onclick="location.href='${CP}/registerpage'" class="btn btn-warning">Sign-up</button>
+       </div>
+     </div>
+   </div>
+ </header>
 <body>
     <div class = "roadscannercontainer">  
         <div class = loginbox>
@@ -51,8 +65,14 @@
             </div>
 	    </div>  <!-- class = loginbox  -->
     </div>
-
 </body>
+
+<footer class="py-3 my-4 mt-auto">
+  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+  </ul>
+  <p class="text-center text-body-secondary">&copy; 2023 F1 RoadScanner Project, All rights reserved.</p>
+</footer>
+
 <script>
   $(document).ready(function(){ //모든 화면이 다 로딩이 되면 실행하는 영역
     console.log("$document.ready");
