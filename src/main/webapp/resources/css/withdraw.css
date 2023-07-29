@@ -1,16 +1,11 @@
 @charset "UTF-8";
 
-h1 {
-  width: 900px;
-  margin: 300px auto; /* 위쪽과 아래쪽에 100px의 간격을 줌, 수평 가운데 정렬 */
-  text-align: center; 
-  font-weight: bold;
-  font-size: 70px;
-}
+
 
 /* 버튼 스타일 */
-button {
-  font-size: 40px;
+.btn.btn-outline-dark {
+  margin: 30px auto;
+  font-size: 20px;
   text-align: center; 
   padding: 10px 20px;
   border: none;
@@ -20,9 +15,6 @@ button {
   height: 60px;
 }
 
-button:hover {
-  background-color: #3367d6;
-}
 
 /* 비밀번호 입력란 스타일 */
 input[type="password"] {
