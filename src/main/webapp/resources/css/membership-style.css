@@ -11,12 +11,13 @@
 		  font-family: 'Noto Sans KR', sans-serif;
          }
          
-         ul {
+         .ccu {
             list-style:none;
                margin: auto; 
          }
+
          
-         li {
+         .cc {
            width:500px;
            margin: auto; 
            margin-top:20px;
