@@ -46,7 +46,7 @@
       </div>
     </div>
   </header>
-<body>
+<body class="d-flex flex-column min-vh-100">
 <div style="margin-top: 70px;">
       <div class = "roadscannercontainer"><!-- id 찾기 -->
         <h1 style="text-align: center; font-weight: 900;">RoadScanner</h1>

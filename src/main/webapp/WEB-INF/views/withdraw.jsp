@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="CP" value="${pageContext.request.contextPath }"/>  
+<c:set var="CP" value="${pageContext.request.contextPath}"/>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,9 +28,8 @@
         <div class="text-end">
         <!-- 로그인 세션 O -->
         <c:if test="${user ne null}">
-          <button type="button" class="btn btn-warning me-2"
-          onclick="location.href='${CP}/logout'">LogOut</button>
-          <button type="button" onclick="location.href='${CP}/mypage'" class="btn btn-warning me-2">MyPage</button>
+          <button type="button" class="btn btn-warning me-2" onclick="location.href='${CP}/logout'">LogOut</button>
+          <button type="button" class="btn btn-warning me-2" onclick="location.href='${CP}/mypage'">MyPage</button>
         </c:if>
         <!-- 로그인 세션 X -->
         <c:if test="${user eq null}">
@@ -41,7 +40,7 @@
       </div>
     </div>
   </header>
-<body>
+<body class="d-flex flex-column min-vh-100">
 <c:if test="${user ne null }">
     <div class="container">
         <h1 style="text-align: center; margin-top: 100px; margin-bottom: 100px;">RoadScanner</h1>

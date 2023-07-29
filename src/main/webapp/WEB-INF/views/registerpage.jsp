@@ -28,8 +28,8 @@
         <div class="text-end">
         <!-- 로그인 세션 O -->
         <c:if test="${user ne null}">
-          <button type="button" class="btn btn-warning me-2"
-          onclick="location.href='${CP}/logout'">LogOut</button>
+          <button type="button" class="btn btn-warning me-2" onclick="location.href='${CP}/logout'">LogOut</button>
+          <button type="button" class="btn btn-warning me-2" onclick="location.href='${CP}/mypage'">MyPage</button>
         </c:if>
         <!-- 로그인 세션 X -->
         <c:if test="${user eq null}">
@@ -39,10 +39,10 @@
       </div>
     </div>
   </header>
-<body>
-<div class ="container">
-    <h1>회원가입</h1>
-                 회원이 되어 다양한 혜택을 경험해 보세요
+<body class="d-flex flex-column min-vh-100">
+<div class ="reg_container">
+    <h1>RoadScanner 회원가입</h1>
+    &nbsp;
 	       <form action="" method="post" name="membership" style="margin: auto;">         
 	           <ul>
 	             <li>
@@ -61,48 +61,46 @@
 	               <input type="text" class="passblank" readonly="readonly">           
 	             </li>
 	             <li>
-	             <div>
-	               <label style="float: left">이메일 주소</label><br/>
-	               <input type="email" name="email_front" id="email_front" onkeyup="check_email(event)" placeholder="이메일 주소">
-	               <label>@</label>
-	               <input type="text" class="listinput" list="email_list" id="email_back" value="">
-	               <datalist id= "email_list">       
-		                 <option value="dreamwiz.com">dreamwiz.com</option>
-		                 <option value="empas.com">empas.com</option>
-		                 <option value="freechal.com">freechal.com</option>
-		                 <option value="gmail.com">gmail.com</option>
-		                 <option value="hanmail.net">hanmail.net</option>
-		                 <option value="hanmir.com">hanmir.com</option>
-		                 <option value="hotmail.com">hotmail.com</option>
-		                 <option value="kakao.com">kakao.com</option>
-		                 <option value="korea.com">korea.com</option>
-		                 <option value="lycos.co.kr">lycos.co.kr</option>
-		                 <option value="nate.com">nate.com</option>
-		                 <option value="naver.com">naver.com</option>
-		                 <option value="paran.com">paran.com</option>
-		                 <option value="yahoo.com">yahoo.com</option>              
-		           </datalist>
-	               <input type="button" class="emailDulpCheck" id="emailDulpCheck" value="중복확인">
-	             </div>
-	             </li>
-	             
-	             
+		             <div>
+		               <label style="float: left">이메일 주소</label><br/>
+		               <input type="email" name="email_front" id="email_front" onkeyup="check_email(event)" placeholder="이메일 주소">
+		               <label>@</label>
+		               <input type="text" class="listinput" list="email_list" id="email_back" value="">
+		               <datalist id= "email_list">       
+			                 <option value="dreamwiz.com">dreamwiz.com</option>
+			                 <option value="empas.com">empas.com</option>
+			                 <option value="freechal.com">freechal.com</option>
+			                 <option value="gmail.com">gmail.com</option>
+			                 <option value="hanmail.net">hanmail.net</option>
+			                 <option value="hanmir.com">hanmir.com</option>
+			                 <option value="hotmail.com">hotmail.com</option>
+			                 <option value="kakao.com">kakao.com</option>
+			                 <option value="korea.com">korea.com</option>
+			                 <option value="lycos.co.kr">lycos.co.kr</option>
+			                 <option value="nate.com">nate.com</option>
+			                 <option value="naver.com">naver.com</option>
+			                 <option value="paran.com">paran.com</option>
+			                 <option value="yahoo.com">yahoo.com</option>              
+			            </datalist>
+		               <input type="button" class="emailDulpCheck" id="emailDulpCheck" value="중복확인">
+		             </div>
+	             </li>         
 	           </ul>
 	       <div style="margin: auto;">
-	        <input type="button" id="register" value="가입하기">
-	        <input type="button" id="noneRegister" value="취소" onclick="firstForm()">
-           </div>
+		        <input type="button" id="register" value="가입하기">
+		        <input type="button" id="noneRegister" value="취소" onclick="firstForm()">
+         </div>
 	       <div style="margin: auto; margin-top: 20px;">
-	            <input type="button" class = "outbtn1" onclick="window.location.href='${CP}/login';" value="로그인페이지">
-	            <input type="button" class = "outbtn2" onclick="window.location.href='${CP}/';" value="홈페이지">	           
+           <input type="button" class = "outbtn1" onclick="window.location.href='${CP}/login';" value="로그인페이지">
+           <input type="button" class = "outbtn2" onclick="window.location.href='${CP}/';" value="홈페이지">	           
 	       </div>
      </form>
-   <form method="POST" name="register_form">
-         <input type="hidden" name="grade" id="grade" value="1">
-         <input type="hidden" name="id" id="id">
-         <input type="hidden" name="pw" id="pw">
-         <input type="hidden" name="email" id="email">         
-     </form>
+	<form method="POST" name="register_form">
+	      <input type="hidden" name="grade" id="grade" value="1">
+	      <input type="hidden" name="id" id="id">
+	      <input type="hidden" name="pw" id="pw">
+	      <input type="hidden" name="email" id="email">         
+	</form>
 </div>    
 </body>
 <footer class="py-3 my-4 mt-auto">
