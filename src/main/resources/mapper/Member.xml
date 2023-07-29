@@ -6,8 +6,8 @@
         <result column="r_password"      property="rpassword"  />
         <result column="r_email"         property="remail"/>
         <result column="r_grade"         property="rgrade"/>  
-        <result column="r_date"         property="rdate"/> 
-        <result column="r_number"         property="rnumber"/>   
+        <result column="r_date"          property="rdate"/> 
+        <result column="r_number"        property="rnumber"/>   
     </resultMap>    
     
     <!-- 아이디로 회원정보 반환 -->

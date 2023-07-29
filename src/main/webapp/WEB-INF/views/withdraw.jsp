@@ -50,7 +50,10 @@
         </form>
         <input type="hidden" id="uid"  value="${user.rid}">
         <input type="hidden" id="upw"  value="${user.rpassword}">
-        <button id="doWithdraw">회원 탈퇴하기</button>
+        <div class="wbut">
+	       <input type="button" class="btn btn-outline-dark" id="withdraw" value="회원 탈퇴하기">
+	    </div>
+    
     </div>
 </c:if>  
 <c:if test="${user eq null}">  <!-- 유저 정보X -->
