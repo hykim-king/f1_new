@@ -31,7 +31,7 @@
      </div>
    </div>
  </header>
-<body>
+<body class="d-flex flex-column min-vh-100" >
     <div class = "roadscannercontainer">  
         <div class = loginbox>
 
