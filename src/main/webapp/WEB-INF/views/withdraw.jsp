@@ -43,17 +43,16 @@
 <body class="d-flex flex-column min-vh-100">
 <c:if test="${user ne null }">
     <div class="container">
-        <h1>RoadScanner</h1>
+        <h1 style="text-align: center; margin-top: 100px; margin-bottom: 100px;">RoadScanner</h1>
         <form>
           <label for="password"></label>
-          <input type="password" id="upassword" placeholder="비밀번호를 입력하세요">
+          <input type="password" id="upassword"  placeholder="비밀번호를 입력하세요">
         </form>
         <input type="hidden" id="uid"  value="${user.rid}">
         <input type="hidden" id="upw"  value="${user.rpassword}">
         <button id="doWithdraw">회원 탈퇴하기</button>
-   </div>
+    </div>
 </c:if>  
-
 <c:if test="${user eq null}">  <!-- 유저 정보X -->
 	<div style="text-align: center; margin:80px; auto;">
 	    <h4>로그인 이후 진행해주세요.</h4><p/>
