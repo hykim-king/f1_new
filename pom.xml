@@ -106,6 +106,15 @@
 			<artifactId>ojdbc8</artifactId>
 			<version>${ojdbc8.version}</version>
 		</dependency>
+
+		<!--	테스트 용 데이터 베이스(H2) 설정에 따른 의존성 추가 	-->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.200</version>
+			<scope>runtime</scope>
+		</dependency>
+
 		<!-- spring-context-support -->
 		<dependency>
 			<groupId>org.springframework</groupId>
