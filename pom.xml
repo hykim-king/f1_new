@@ -20,7 +20,7 @@
 		<log4j-core.version>2.17.1</log4j-core.version> <!-- log4j core 버전 정보를 정의함. -->
 		<ojdbc8.version>21.1.0.0</ojdbc8.version>       <!-- ojdbc8의 버전 정보를 정의함. -->
 		<commons-dbcp.version>1.4</commons-dbcp.version>
-		<junit.version>4.13.1</junit.version> <!-- junit의 버전 정보를 정의함. -->
+		<junit.jupiter.version>5.7.2</junit.jupiter.version> <!-- junit의 버전 정보를 정의함. -->
 
 		<org.mybatis-version>3.5.11</org.mybatis-version>  <!-- mybatis 사용 -->
 		<mybatis-spring-version>2.0.6</mybatis-spring-version>
@@ -243,13 +243,28 @@
 			<version>1.2</version>
 		</dependency>
 
-		<!-- junit -->
+		<!-- JUnit Jupiter (API, Engine) -->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version> <!-- 위에서 정의한 라이브러리 버전을 가져온다. -->
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit.jupiter.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit.jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- JUnit Vintage Engine -->
+		<dependency>
+			<groupId>org.junit.vintage</groupId>
+			<artifactId>junit-vintage-engine</artifactId>
+			<version>${junit.jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
