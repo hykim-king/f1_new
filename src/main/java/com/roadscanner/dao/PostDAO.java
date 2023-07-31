@@ -1,24 +1,14 @@
 package com.roadscanner.dao;
 
-import com.roadscanner.dto.PostDTO;
+import com.roadscanner.dto.Posts;
 
 import java.util.List;
 
 public interface PostDAO {
 
-    // 전체 게시굴 찾기
-    List<PostDTO> getAllPosts();
+    List<Posts> getAllPosts();
 
-    // 게시글 읽기
-    PostDTO getPostById(Long id);
+    void createPost(Posts post);
 
-    // 게시글 작성
-    void createPost(PostDTO postDTO);
-
-    // 게시글 업데이트
-    void updatePost(PostDTO postDTO);
-
-    // 게시글 삭제
-    void deletePost(Long id);
-
+    Posts getPostById(Long id);
 }
