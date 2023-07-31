@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.roadscanner.dao.PostDAO">
+    <select id="getAllPosts" resultType="com.roadscanner.dto.PostDTO">
+        SELECT * FROM POSTS
+    </select>
+
+    <select id="getPostById" resultType="com.roadscanner.dto.PostDTO">
+        SELECT * FROM POSTS WHERE ID=#{id}
+    </select>
+
+    <insert id="createPost">
+        INSERT INTO POSTS(TITLE, CATEGORY, CONTENT, AUTHOR) VALUES (#{title}, #{category}, #{content}, #{author})
+    </insert>
+    
+    <delete id="deletePost">
+        DELETE FROM posts WHERE id = #{id}
+    </delete>
+</mapper>
