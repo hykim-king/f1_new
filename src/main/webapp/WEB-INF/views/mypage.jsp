@@ -29,17 +29,17 @@
         </ul>
 
         <div class="text-end">
+        <!-- 로그인 세션 X -->
+        <c:if test="${user eq null}">
+          <button type="button" id="login" onclick="location.href='${CP}/login'" class="btn btn-warning me-2">Login</button>
+        </c:if>
+          <button type="button" onclick="location.href='${CP}/registerpage'" class="btn btn-warning">Sign-up</button>
         <!-- 로그인 세션 O -->
         <c:if test="${user ne null}">
           <button type="button" class="btn btn-warning me-2"
           onclick="location.href='${CP}/logout'">LogOut</button>
           <%-- <button type="button" onclick="location.href='${CP}/mypage'" class="btn btn-warning me-2">MyPage</button> --%>
         </c:if>
-        <!-- 로그인 세션 X -->
-        <c:if test="${user eq null}">
-          <button type="button" id="login" onclick="location.href='${CP}/login'" class="btn btn-warning me-2">Login</button>
-        </c:if>
-          <button type="button" onclick="location.href='${CP}/registerpage'" class="btn btn-warning">Sign-up</button>
         </div>
       </div>
     </div>

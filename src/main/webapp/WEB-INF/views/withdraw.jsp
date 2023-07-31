@@ -13,33 +13,39 @@
     <script src="${CP}/resources/js/jquery-3.7.0.js"></script>
     <title>로드스캐너 탈퇴</title>
 </head>
-<header class="p-3 text-bg-white">
-    <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">       
-
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="${CP}/login" class="nav-link px-2 text-secondary">Home</a></li>
-          <li><a href="#" class="nav-link px-2 text-secondary">추가기능1</a></li>
-          <li><a href="#" class="nav-link px-2 text-secondary">추가기능2</a></li>
-          <li><a href="#" class="nav-link px-2 text-secondary">추가기능3</a></li>
-          <li><a href="#" class="nav-link px-2 text-secondary">추가기능4</a></li>
-        </ul>
-
-        <div class="text-end">
-        <!-- 로그인 세션 O -->
-        <c:if test="${user ne null}">
-          <button type="button" class="btn btn-warning me-2" onclick="location.href='${CP}/logout'">LogOut</button>
-          <button type="button" class="btn btn-warning me-2" onclick="location.href='${CP}/mypage'">MyPage</button>
-        </c:if>
+<nav class="navbar navbar-expand-md mb-4" style="background-color: white;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">RoadScanner</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
         <!-- 로그인 세션 X -->
         <c:if test="${user eq null}">
-          <button type="button" id="login" onclick="location.href='${CP}/login'" class="btn btn-warning me-2">Login</button>
+          <button type="button" id="login" onclick="location.href='${CP}/login'" class="btn btn-outline-primary me-2">Login</button>
         </c:if>
-          <button type="button" onclick="location.href='${CP}/registerpage'" class="btn btn-warning">Sign-up</button>
-        </div>
-      </div>
+        <!-- 로그인 세션 O -->
+        <c:if test="${user ne null}">
+          <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/mypage'">MyPage</button>
+          <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/logout'">LogOut</button>
+        </c:if>
+          <button type="button" onclick="location.href='${CP}/registerpage'" class="btn btn-outline-primary" style="margin-right: 50px;">Sign-up</button>
+      </form>
     </div>
-  </header>
+  </div>
+</nav>
 <body class="d-flex flex-column min-vh-100">
 <c:if test="${user ne null }">
     <div class="container">
