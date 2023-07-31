@@ -56,7 +56,7 @@
       <div class = "roadscannercontainer"><!-- id 찾기 -->
         <h1 style="text-align: center; font-weight: 900;">RoadScanner</h1>
             <h4 style="text-align: center; margin-top:50px; font-weight: 800;">아이디 찾기</h4>
-        <form>
+        <form onsubmit="return false;">
                 이메일<br/>
           <input type="email" class = "findinput" id="email" name= "email" placeholder="이메일"><br/>
           <button type="submit" class= "findbtn" id="findId" name="findId">아이디 찾기</button>
@@ -66,7 +66,7 @@
       <div class = "jb-division-line"></div>
 	  <div class = "roadscannercontainer"><!-- pw 찾기 -->
 	  <h4 style="text-align: center; margin-bottom:50px; font-weight: 800;">비밀번호 찾기</h4>
-        <form>
+        <form onsubmit="return false;">
           아이디<br/>
           <input type="text" class="findinput" style="margin-bottom: 20px;"
           id="userId" name="userId" placeholder="아이디"><br/>
@@ -110,7 +110,7 @@
                 dataType:"html",
                 data:{
                   
-                    uemail: $("#email").val()
+                    remail: $("#email").val()
                 },
                 success:function(data){//통신 성공
                     //console.log("success data:"+data);
@@ -128,8 +128,7 @@
                       console.log("id:"+id[1]);
                       $('#userId').attr('value',id[1]);
                       $('#email2').attr('value',$('#email').val());
-                      $('#email').val('');
-                      
+                      $('#email').val(''); 
                     }
                   },
                   error:function(data){//실패시 처리
@@ -163,8 +162,8 @@
                   /* asyn:"true", */
                   dataType:"html",
                   data:{
-                    uid   : $("#userId").val(),
-                    uemail : $("#email2").val(),
+                    rid   : $("#userId").val(),
+                    remail : $("#email2").val(),
                     
                   },
                   success:function(data){//통신 성공
