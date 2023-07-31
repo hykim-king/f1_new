@@ -46,25 +46,32 @@
 	       <form action="" method="post" name="membership" style="margin: auto;">         
 	           <ul class= "ccu">
 	             <li class="cc">
+	             
 	               <label for= "id_form" style="float: left">아이디</label><br/>
+	             <div style="display: flex">
 	               <input type="text" name="id_form" id="id_form" onkeyup="id_form_check(event)" onchange="id_length_check()" placeholder="아이디 입력(영어, 숫자포함 6~20자)">
-	               <input type="button" id="idDulpCheck" value="중복확인">
+	               <input type="button" class = "btn btn-outline-dark" id="idDulpCheck" value="중복확인"
+	               style="margin-left: 15px;">
+	             </div>
 	             </li>
 	             <li class="cc">
 	               <label style="float: left">비밀번호</label><br/>
-	               <input type="password" name="pw_form" id="pw_form" placeholder="(문자, 숫자, 특수문자[!,@,#,$,%,*]) 포함 8~20자)" onchange="check_pw()">
-	               <input type="text" class="passblank" readonly="readonly">
+	               <input type="password" name="pw_form" id="pw_form" placeholder="(문자, 숫자, 특수문자[!,@,#,$,%,*]) 포함 8~20자)" onchange="check_pw()"
+	               style="float: left;"><br/>
+	               
 	             </li>
 	             <li class="cc">
-	               <label style="float: left">비밀번호 확인</label><label id="pw_check"></label><br/>
-	               <input type="password" name="pw2_form" id="pw2_form" placeholder="비밀번호 재입력" onchange="check_pw()">
-	               <input type="text" class="passblank" readonly="readonly">           
+	               <label style="float: left; ">비밀번호 확인</label><label id="pw_check"></label><br/>
+	               <input type="password" name="pw2_form" id="pw2_form" placeholder="비밀번호 재입력" onchange="check_pw()"
+	               style="float: left;"><br/>
+	                        
 	             </li>
 	             <li class="cc">
 		             <div>
 		               <label style="float: left">이메일 주소</label><br/>
+		               <div style="display: flex">
 		               <input type="email" name="email_front" id="email_front" onkeyup="check_email(event)" placeholder="이메일 주소">
-		               <label>@</label>
+		               <label style="width:30px;">@</label>
 		               <input type="text" class="listinput" list="email_list" id="email_back" value="">
 		               <datalist id= "email_list">       
 			                 <option value="dreamwiz.com">dreamwiz.com</option>
@@ -82,17 +89,19 @@
 			                 <option value="paran.com">paran.com</option>
 			                 <option value="yahoo.com">yahoo.com</option>              
 			            </datalist>
-		               <input type="button" class="emailDulpCheck" id="emailDulpCheck" value="중복확인">
+		               <input type="button" class="btn btn-outline-dark" id="emailDulpCheck" value="중복확인"
+		                style="margin-left: 15px;">
+		               </div>
 		             </div>
 	             </li>         
 	           </ul>
-	       <div style="margin: auto;">
-		        <input type="button" id="register" value="가입하기">
-		        <input type="button" id="noneRegister" value="취소" onclick="firstForm()">
+	       <div style="margin: 40px auto;">
+		        <input type="button" class="btn btn-outline-dark nest1" id="register" value="가입하기">
+		        <input type="button" class="btn btn-outline-dark nest2" id="noneRegister" value="취소" onclick="firstForm()">
          </div>
 	       <div style="margin: auto; margin-top: 20px;">
-           <input type="button" class = "outbtn1" onclick="window.location.href='${CP}/login';" value="로그인페이지">
-           <input type="button" class = "outbtn2" onclick="window.location.href='${CP}/';" value="홈페이지">	           
+           <input type="button" class="btn btn-outline-dark nest1" onclick="window.location.href='${CP}/login';" value="로그인페이지">
+           <input type="button" class="btn btn-outline-dark nest2" onclick="window.location.href='${CP}/';" value="홈페이지">	           
 	       </div>
      </form>
 	<form method="POST" name="register_form">
