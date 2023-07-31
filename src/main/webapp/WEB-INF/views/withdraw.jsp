@@ -79,7 +79,7 @@
 <script>
    $(document).ready(function() {
 
-       $("#doWithdraw").click(function() {
+       $("#withdraw").click(function() {
            var password = $("#password").val();
 
            // 확인 메시지 표시
