@@ -238,7 +238,7 @@
                 /* asyn:"true", */
                 dataType:"html",
                 data:{
-                	rgrade: $("#grade").val(),
+                	  rgrade: $("#grade").val(),
                     rid: $("#id").val(),
                     rpassword: $("#pw").val(),
                     remail: $("#email").val()

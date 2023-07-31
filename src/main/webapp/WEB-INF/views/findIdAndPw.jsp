@@ -56,29 +56,28 @@
       <div class = "roadscannercontainer"><!-- id 찾기 -->
         <h1 style="text-align: center; font-weight: 900;">RoadScanner</h1>
             <h4 style="text-align: center; margin-top:50px; font-weight: 800;">아이디 찾기</h4>
-        <form>
+        <form onsubmit="return false;">
                 이메일<br/>
           <input type="email" class = "findinput" id="email" name= "email" placeholder="이메일"><br/>
-          <button type="submit" class= "findbtn" id="findId" name="findId">아이디 찾기</button>
+          <button type="button" class= "findbtn" id="findId" name="findId">아이디 찾기</button>
         </form>
         <input type ="hidden" id ="id" name ="id">
       </div><!-- id 찾기 -->
       <div class = "jb-division-line"></div>
 	  <div class = "roadscannercontainer"><!-- pw 찾기 -->
 	  <h4 style="text-align: center; margin-bottom:50px; font-weight: 800;">비밀번호 찾기</h4>
-        <form>
+        <form onsubmit="return false;">
           아이디<br/>
           <input type="text" class="findinput" style="margin-bottom: 20px;"
           id="userId" name="userId" placeholder="아이디"><br/>
           이메일<br/>
           <input type="email" class="findinput"  id="email2" name= "email2" placeholder="이메일"><br/>
-          <button type="submit" class= "findbtn" id="findPw" name="findPw">비밀번호 찾기</button>
+          <button type="button" class= "findbtn" id="findPw" name="findPw">비밀번호 찾기</button>
         </form>
         
         
         <div 
 	      style="text-align: center; width:400px; height: 60px; margin:40px auto;">
-	      <a href="${CP}/login" class= "pagetext">로그인 페이지</a>
 	      </div>
       </div><!-- pw 찾기 -->   
 </div> <!-- container --> 
@@ -109,8 +108,7 @@
                 /* asyn:"true", */
                 dataType:"html",
                 data:{
-                  
-                    uemail: $("#email").val()
+                    remail: $("#email").val()
                 },
                 success:function(data){//통신 성공
                     //console.log("success data:"+data);
@@ -129,7 +127,7 @@
                       $('#userId').attr('value',id[1]);
                       $('#email2').attr('value',$('#email').val());
                       $('#email').val('');
-                      
+                      $('#userId').focus();
                     }
                   },
                   error:function(data){//실패시 처리
@@ -152,7 +150,7 @@
               return;
             }
             if(""==$("#email2").val() || 0==$("#email2").val().length){
-              alert("이름을 입력하세요");  
+              alert("이메일을 입력하세요");  
               $("#email2").focus();      
               return;
             }
@@ -163,8 +161,8 @@
                   /* asyn:"true", */
                   dataType:"html",
                   data:{
-                    uid   : $("#userId").val(),
-                    uemail : $("#email2").val(),
+                    rid   : $("#userId").val(),
+                    remail : $("#email2").val(),
                     
                   },
                   success:function(data){//통신 성공
@@ -179,6 +177,8 @@
                       }
                       if("30"==paredJSON.msgId){//로그인 성공
                         alert(paredJSON.msgContents);
+                        $('#userId').val('');
+                        $('#email2').val('');
                         
                       }
                     },
