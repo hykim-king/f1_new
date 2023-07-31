@@ -74,8 +74,13 @@
           <input type="email" class="findinput"  id="email2" name= "email2" placeholder="이메일"><br/>
           <button type="submit" class= "findbtn" id="findPw" name="findPw">비밀번호 찾기</button>
         </form>
-      </div><!-- pw 찾기 -->
-      <a style="margin: auto;" href="${CP}/login">로그인 페이지</a>
+        
+        
+        <div 
+	      style="text-align: center; width:400px; height: 60px; margin:40px auto;">
+	      <a href="${CP}/login" class= "pagetext">로그인 페이지</a>
+	      </div>
+      </div><!-- pw 찾기 -->   
 </div> <!-- container --> 
  
 
