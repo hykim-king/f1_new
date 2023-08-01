@@ -71,7 +71,19 @@ public class FileUploadDaoImpl implements PcwkLogger, FileUploadDao {
 
 		return sqlSessionTemplate.selectOne(NAMESPACE + DOT + "doSelectOne", inVO);
 	}
-
+	
+	// 사진 구분, 싫어요 이유, 검토 여부 수정
+	@Override
+	public int doUpdate(FileUploadVO inVO) throws SQLException {
+		LOG.debug("┌────────────────────────┐");
+		LOG.debug("│       doUpdate()       │");
+		LOG.debug("│          inVO          │" + inVO);
+		LOG.debug("│        statement       │" + NAMESPACE + DOT + "doUpdate");
+		LOG.debug("└────────────────────────┘");
+		
+		return sqlSessionTemplate.delete(NAMESPACE + DOT + "doUpdate", inVO);
+	}
+	
 	// 사진 삭제
 	@Override
 	public int doDelete(FileUploadVO inVO) throws SQLException {
