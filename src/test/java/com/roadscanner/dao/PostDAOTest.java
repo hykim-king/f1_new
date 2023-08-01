@@ -25,7 +25,6 @@ public class PostDAOTest {
     @DisplayName("게시물 작성")
     @BeforeEach
     void setUp() {
-        assertNotNull(postDAO, "postDAO is null. Check if @Autowired is working properly.");
 
         Posts posts = Posts.builder()
                 .category("공지")
@@ -38,6 +37,13 @@ public class PostDAOTest {
         postDAO.createPost(posts);
 
         id = posts.getId(); // Get the generated id
+    }
+
+    @DisplayName("게시물 삭제")
+    @AfterEach
+    void tearDown() {
+        // Clear table after each test
+        postDAO.deletePost(id);  // Use the generated id
     }
 
     @DisplayName("게시물 전체 확인")
@@ -69,11 +75,5 @@ public class PostDAOTest {
         assertEquals("테스트 제목", actualPost.getTitle());
         assertEquals("테스트 내용", actualPost.getContent());
         assertEquals("admin", actualPost.getAuthor());
-    }
-
-    @AfterEach
-    void tearDown() {
-        // Clear table after each test
-        postDAO.deletePost(id);  // Use the generated id
     }
 }
