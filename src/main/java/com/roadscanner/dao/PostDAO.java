@@ -8,7 +8,9 @@ public interface PostDAO {
 
     List<Posts> getAllPosts();
 
-    void createPost(Posts post);
+    int createPost(Posts post);
 
     Posts getPostById(Long id);
+
+    void deletePost(Long id);
 }

@@ -10,9 +10,13 @@
         SELECT * FROM POST WHERE id=#{id}
     </select>
 
-    <insert id="createPost" parameterType="com.roadscanner.dto.Posts">
+    <insert id="createPost" parameterType="com.roadscanner.dto.Posts" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO post (category, title, content, author, created_date, updated_date)
         VALUES (#{category}, #{title}, #{content}, #{author}, #{createdDate}, #{updatedDate})
     </insert>
 
+
+    <delete id="deletePost" parameterType="Long">
+        DELETE FROM POST WHERE id=#{id}
+    </delete>
 </mapper>
