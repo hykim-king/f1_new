@@ -31,7 +31,6 @@ public class UploadController {
     // 파일 업로드 처리
 	@RequestMapping(value = "/fileUploaded", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public String uploadFile(@RequestParam("file") MultipartFile file) {
-		
         LOG.debug("┌────────────────────────────────────┐");
         LOG.debug("│Send convertedFile to S3FileUploader│");
         LOG.debug("└────────────────────────────────────┘");

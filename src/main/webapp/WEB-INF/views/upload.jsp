@@ -208,7 +208,15 @@
           RunContainer.style.display = 'block'; // "표지판 알아보기" 버튼 보이기
         };
         
-
+        // 추가: 허용된 이미지 확장자 체크
+        const allowedExtensions = ['jpg', 'jpeg', 'png', 'bmp', 'tiff', 'webp', 'ico', 'svg'];
+        const fileExtension = file.name.split('.').pop().toLowerCase();
+        if (!allowedExtensions.includes(fileExtension)) {
+          alert('이미지 파일이 아닙니다.');
+          fileUploadInput.value = '';
+          return;
+        }
+        
         reader.readAsDataURL(file);
         console.log(`displaySelectedFile`);
       } else {
@@ -260,7 +268,6 @@
     // 선택 상자 End-----------------------------------------------------------------
   </script>
   
-  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
   <script>
     // "Run" 버튼 클릭 시 호출되는 함수
     function showRightContent() {
@@ -278,7 +285,7 @@
         formData.append('file', file);
   
         // AWS S3로 파일 업로드 요청 보내기
-        fetch('/road-scanner/fileUploaded', {
+        fetch('/roadscanner/fileUploaded', {
           method: 'POST',
           body: formData
         })

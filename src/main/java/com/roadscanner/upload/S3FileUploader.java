@@ -14,6 +14,9 @@ import java.util.Properties;
 
 import org.apache.ibatis.io.Resources;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class S3FileUploader {
 
     public static void uploadFile(File fileToUpload, String fileKey) throws IOException {
@@ -47,10 +50,18 @@ public class S3FileUploader {
                 .build();
 
         try {
+        	// 현재 날짜 및 시간 정보를 가져오기
+        	Date currentDate = new Date();
+        	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        	String dateString = dateFormat.format(currentDate);
+        	
+        	// 파일명을 'SYSDATE+원본파일명' 형식으로 지정
+        	String fileNameWithDate = dateString + "_" + fileToUpload.getName();
+
         	PutObjectRequest request = PutObjectRequest.builder()
-                                   .bucket(bucketName)
-                                   .key(fileKey)
-                                   .build();
+        	        .bucket(bucketName)
+        	        .key(fileNameWithDate) // 업로드할 파일명 설정
+        	        .build();
 
         	s3Client.putObject(request, fileToUpload.toPath());
         	System.out.println("**********************");
