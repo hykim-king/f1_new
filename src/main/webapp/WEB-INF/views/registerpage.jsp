@@ -34,7 +34,7 @@
       <form class="d-flex" role="search">
         <!-- 로그인 세션 X -->
         <c:if test="${user eq null}">
-          <button type="button" id="login" onclick="location.href='${CP}/login'" class="btn btn-outline-primary me-2">Login</button>
+          <button type="button" id="login" onclick="location.href='${CP}/login'" class="btn btn-outline-primary" style="margin-right: 50px;">Login</button>
         </c:if>
         <!-- 로그인 세션 O -->
         <c:if test="${user ne null}">
@@ -101,14 +101,10 @@
 		             </div>
 	             </li>         
 	           </ul>
-	       <div style="margin: 40px auto;">
-		        <input type="button" class="btn btn-outline-dark nest1" id="register" value="가입하기">
+	       <div style="margin-top: 40px; margin-left: -50px;">
+		        <input type="button" class="btn btn-outline-dark nest1" id="register" value="회원가입">
 		        <input type="button" class="btn btn-outline-dark nest2" id="noneRegister" value="취소" onclick="firstForm()">
          </div>
-	       <div style="margin: auto; margin-top: 20px;">
-           <input type="button" class="btn btn-outline-dark nest1" onclick="window.location.href='${CP}/login';" value="로그인페이지">
-           <input type="button" class="btn btn-outline-dark nest2" onclick="window.location.href='${CP}/';" value="홈페이지">	           
-	       </div>
      </form>
 	<form method="POST" name="register_form">
 	      <input type="hidden" name="grade" id="grade" value="1">

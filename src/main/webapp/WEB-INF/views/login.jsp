@@ -48,7 +48,7 @@
 </nav>
 <body class="d-flex flex-column min-vh-100" >
     <div class = "roadscannercontainer">  
-        <div class = loginbox>
+        <div class = "loginbox">
 
             <div class= "loginboxdiv">
               <input class= "icon" type="image" src="${CP}/resources/img/usericon.png" readonly="readonly" >

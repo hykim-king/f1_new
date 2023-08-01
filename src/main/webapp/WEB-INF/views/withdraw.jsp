@@ -33,9 +33,9 @@
       </ul>
       <form class="d-flex" role="search">
         <!-- 로그인 세션 X -->
-        <c:if test="${user eq null}">
+        <%-- <c:if test="${user eq null}">
           <button type="button" id="login" onclick="location.href='${CP}/login'" class="btn btn-outline-primary me-2">Login</button>
-        </c:if>
+        </c:if> --%>
         <!-- 로그인 세션 O -->
         <c:if test="${user ne null}">
           <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/mypage'">MyPage</button>

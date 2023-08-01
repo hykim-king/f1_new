@@ -16,34 +16,39 @@
 <script src="${CP}/resources/js/jquery-3.7.0.js"></script>
 <title>로드스캐너 마이페이지</title>
 </head>
-  <header class="p-3 text-bg-white">
-    <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">       
-
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-          <li><a href="#" class="nav-link px-2 text-secondary">추가기능1</a></li>
-          <li><a href="#" class="nav-link px-2 text-secondary">추가기능2</a></li>
-          <li><a href="#" class="nav-link px-2 text-secondary">추가기능3</a></li>
-          <li><a href="#" class="nav-link px-2 text-secondary">추가기능4</a></li>
-        </ul>
-
-        <div class="text-end">
+  <nav class="navbar navbar-expand-md mb-4" style="background-color: white;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">RoadScanner</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
         <!-- 로그인 세션 X -->
         <c:if test="${user eq null}">
-          <button type="button" id="login" onclick="location.href='${CP}/login'" class="btn btn-warning me-2">Login</button>
+          <button type="button" id="login" onclick="location.href='${CP}/login'" class="btn btn-outline-primary me-2">Login</button>
+          <button type="button" onclick="location.href='${CP}/registerpage'" class="btn btn-outline-primary" style="margin-right: 50px;">Sign-up</button>
         </c:if>
-          <button type="button" onclick="location.href='${CP}/registerpage'" class="btn btn-warning">Sign-up</button>
         <!-- 로그인 세션 O -->
         <c:if test="${user ne null}">
-          <button type="button" class="btn btn-warning me-2"
-          onclick="location.href='${CP}/logout'">LogOut</button>
-          <%-- <button type="button" onclick="location.href='${CP}/mypage'" class="btn btn-warning me-2">MyPage</button> --%>
-        </c:if>
-        </div>
-      </div>
+          <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/mypage'">MyPage</button>
+          <button type="button" class="btn btn-outline-primary" onclick="location.href='${CP}/logout'" style="margin-right: 50px;">LogOut</button>
+        </c:if>        
+      </form>
     </div>
-  </header>
+  </div>
+</nav>
   <body class="d-flex flex-column min-vh-100">
   <c:if test="${user ne null }"> <!--  유저 정보O -->
   <h2 style="text-align: center; margin-top: 100px; margin-bottom: 80px;">${user.rid}의 마이페이지</h2>
@@ -88,7 +93,7 @@
 	<c:if test="${user eq null}">  <!-- 유저 정보X -->
     <div style="text-align: center; margin:80px auto;">
         <h4>로그인 이후 진행해주세요.</h4><p/>
-        <img alt="ddd" src="../resources/img/infinite.gif" loop = 1 >
+          <img alt="ddd" src="../resources/img/infinite.gif" loop = 1 >
         <h4><a href="${CP}/login">Go To 로그인</a></h4>
     </div>            
     </c:if> <!-- 유저 정보X-end -->
@@ -145,7 +150,6 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
    
    $("#withdraw").on("click", function(){
 	      
-	    alert("탈퇴페이지 이동");
 	    window.location.href="${CP}/withdraw";
 	    
 	  });   // $("#withdraw") click 
