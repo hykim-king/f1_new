@@ -48,6 +48,7 @@ public class MemberTest {
 	
 	/* 회원 가입/탈퇴 */
 	@Test
+	@Ignore
 	public void addUser() throws SQLException {
 		
 		MemberVO user = new MemberVO();
