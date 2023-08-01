@@ -15,4 +15,8 @@ public interface PostDAO {
     void deletePost(Long id);
 
     int updatePost(Posts post);
+
+    // 조회수 증가
+    void incrementViewCount(Long id);
+
 }

@@ -102,4 +102,18 @@ public class PostDAOTest {
         assertEquals("테스트 제목 - 수정됨", updatePost.getTitle());
         assertEquals("테스트 내용 - 수정됨", updatePost.getContent());
     }
+
+    @DisplayName("게시판 조회수 증가")
+    @Test
+    void incrementViewCount() {
+        // Given
+        Posts originalPost = postDAO.getPostById(id);
+
+        // When
+        postDAO.incrementViewCount(id);
+
+        // Then
+        Posts updatePost = postDAO.getPostById(id);
+        assertEquals(originalPost.getViews()+ 1, updatePost.getViews());
+    }
 }

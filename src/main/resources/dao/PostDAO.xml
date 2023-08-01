@@ -24,4 +24,10 @@
         SET category=#{category}, title=#{title}, content=#{content}, author=#{author}, updated_date=#{updatedDate}
         WHERE id=#{id}
     </update>
+
+    <update id="incrementViewCount">
+        UPDATE post
+        SET views = views + 1
+        WHERE id = #{id}
+    </update>
 </mapper>
