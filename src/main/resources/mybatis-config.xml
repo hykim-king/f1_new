@@ -8,6 +8,6 @@
         <setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
     <typeAliases>
-          <typeAlias type="com.roadscanner.domain.FileUploadVO" alias="FileUploadVO"/>
+          <typeAlias type="com.roadscanner.upload.domain.FileUploadVO" alias="FileUploadVO"/>
     </typeAliases>
   </configuration>
