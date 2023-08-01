@@ -64,7 +64,6 @@ public class FileUploadDaoImpl implements PcwkLogger {
 	
 	// 사진 업로드
 	public int doSave(final FileUploadVO inVO) throws SQLException {
-		
 		LOG.debug("┌────────────────────────┐");
 		LOG.debug("│        doSave()        │");
 		LOG.debug("│          inVO          │" + inVO);

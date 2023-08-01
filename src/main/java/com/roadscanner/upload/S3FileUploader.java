@@ -14,15 +14,17 @@ import java.util.Properties;
 
 import org.apache.ibatis.io.Resources;
 
+import com.roadscanner.cmn.PcwkLogger;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class S3FileUploader {
+public class S3FileUploader implements PcwkLogger {
 
     public static void uploadFile(File fileToUpload, String fileKey) throws IOException {
-    	System.out.println("┌────────────────────┐");
-    	System.out.println("│UploadFile to Bucket│");
-    	System.out.println("└────────────────────┘");
+    	LOG.debug("┌────────────────────┐");
+    	LOG.debug("│UploadFile to Bucket│");
+    	LOG.debug("└────────────────────┘");
     	
     	String accessKey;
     	String secretKey;
@@ -64,9 +66,9 @@ public class S3FileUploader {
         	        .build();
 
         	s3Client.putObject(request, fileToUpload.toPath());
-        	System.out.println("**********************");
-        	System.out.println("*File upload Success!*");
-        	System.out.println("**********************");
+        	LOG.debug("**********************");
+        	LOG.debug("*File upload Success!*");
+        	LOG.debug("**********************");
         } catch (S3Exception e) {
         	System.err.println("Error: " + e.getMessage());
         	throw e; // 업로드 실패 시 예외를 발생시킵니다. 이후 컨트롤러에서 예외 처리 가능

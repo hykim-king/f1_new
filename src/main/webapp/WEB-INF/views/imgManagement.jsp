@@ -93,7 +93,7 @@
   }
   .modal-delete-save-button {
     gap: 15px;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
     cursor: pointer;
   }
   
@@ -171,15 +171,15 @@
   <div class="image-modal" id="imageModal">
 	  <div class="sort-horizon">
 	    <div class="left">
-		    <img src="" id="modalImage">
+		    <img src="" id="modalImage" style="max-width: 900px; max-height: 800px;">
 		    <span class="image-modal-close" onclick="hideImageModal()">&times;</span>
 	    </div>
 	    <div class="divider"/>
 	    <div class="right">
 	      <p style="height: 650px;">이곳에 파일 정보를 입력하세요.</p>
 	      <div class="modal-delete-save-button">
-	        <button type="button" id="deleteButton2" class="btn btn-outline-danger" style="margin-left: 4px;" onclick="detailDelete()">DELETE</button>
-	        <button type="button" id="saveButton2" class="btn btn-dark" style="width: 250px;" onclick="detailSave()">SAVE</button>
+	        <button type="button" id="deleteButton2" class="btn btn-outline-danger" style="margin-left: 4px; height: 45px;" onclick="detailDelete()">DELETE</button>
+	        <button type="button" id="saveButton2" class="btn btn-dark" style="width: 250px; height: 45px;" onclick="detailSave()">SAVE</button>
 	      </div>
 	    </div>
 	  </div>
