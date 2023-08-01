@@ -114,16 +114,8 @@
     SET r_id      = #{rid},  
         r_password        = #{rpassword},
         r_email     = #{remail}
-    WHERE r_id = #{rid}
+    WHERE r_number = #{rnumber}
   </update>
-  
-   <!-- 주소 즐겨찾기 delete:1로  update-->
-  <!-- <update id="updateDel" parameterType="int">
-    UPDATE road_member
-    SET del = '1'
-    WHERE no = #{no}
-  </update>  -->
-
 
   
   <!-- 유저 삭제 -->
