@@ -13,4 +13,6 @@ public interface PostDAO {
     Posts getPostById(Long id);
 
     void deletePost(Long id);
+
+    int updatePost(Posts post);
 }

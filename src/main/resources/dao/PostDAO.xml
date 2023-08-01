@@ -14,9 +14,14 @@
         INSERT INTO post (category, title, content, author, created_date, updated_date)
         VALUES (#{category}, #{title}, #{content}, #{author}, #{createdDate}, #{updatedDate})
     </insert>
-
-
+    
     <delete id="deletePost" parameterType="Long">
         DELETE FROM POST WHERE id=#{id}
     </delete>
+    
+    <update id="updatePost" parameterType="com.roadscanner.dto.Posts">
+        UPDATE POST
+        SET category=#{category}, title=#{title}, content=#{content}, author=#{author}, updated_date=#{updatedDate}
+        WHERE id=#{id}
+    </update>
 </mapper>

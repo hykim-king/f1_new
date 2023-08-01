@@ -76,4 +76,30 @@ public class PostDAOTest {
         assertEquals("테스트 내용", actualPost.getContent());
         assertEquals("admin", actualPost.getAuthor());
     }
+
+    @DisplayName("게시물 업데이트")
+    @Test
+    public void updatePost() {
+        // Given
+        Posts originalPost = postDAO.getPostById(id);
+
+        Posts updatedPost = Posts.builder()
+                .id(originalPost.getId())
+                .category("공지")
+                .title("테스트 제목 - 수정됨")
+                .content("테스트 내용 - 수정됨")
+                .author("admin")
+                .createdDate(originalPost.getCreatedDate())
+                .updatedDate(LocalDateTime.now())
+                .build();
+
+        // When
+        int updateOK = postDAO.updatePost(updatedPost);
+
+        // Then
+        assertEquals(1, updateOK);
+        Posts updatePost = postDAO.getPostById(id);
+        assertEquals("테스트 제목 - 수정됨", updatePost.getTitle());
+        assertEquals("테스트 내용 - 수정됨", updatePost.getContent());
+    }
 }
