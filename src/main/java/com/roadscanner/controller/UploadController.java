@@ -7,16 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import com.roadscanner.cmn.PcwkLogger;
 import com.roadscanner.upload.FileUtil;
 import com.roadscanner.upload.S3FileUploader;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-public class UploadController {
-	final Logger LOG = LogManager.getLogger(getClass());
+public class UploadController implements PcwkLogger {
 	
 	@RequestMapping(value = "/feedback")
 	public String feedback() {

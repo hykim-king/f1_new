@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="CP" value="${pageContext.request.contextPath }"/>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%
+    Date currentDate = new Date();
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+    String formattedDate = dateFormat.format(currentDate);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -269,49 +276,87 @@
   </script>
   
   <script>
-    // "Run" 버튼 클릭 시 호출되는 함수
+    // 화면 오른쪽에 결과창 띄우는 함수
     function showRightContent() {
       let rightDiv = document.getElementById('rightContent');
       rightDiv.style.display = 'block';
     }
-  
-    // 파일 업로드 요청을 처리하는 함수
-    function uploadFileToS3() {
-      const fileInput = document.getElementById('fileUpload');
-      const file = fileInput.files[0];
-  
-      if (file) {
-        const formData = new FormData();
-        formData.append('file', file);
-  
-        // AWS S3로 파일 업로드 요청 보내기
-        fetch('/roadscanner/fileUploaded', {
-          method: 'POST',
-          body: formData
-        })
-        .then(response => {
-          if (response.ok) {
-            alert('파일 업로드가 완료되었습니다.');
-            showRightContent(); // 파일 업로드가 완료되면 rightContent 보이기
-          } else {
-            alert('파일 업로드에 실패하였습니다.');
-          }
-        })
-        .catch(error => {
-          console.error('파일 업로드 오류:', error);
-          alert('파일 업로드에 실패하였습니다.');
+    
+    $("#runButton").on("click",function(){
+    	console.log('runButton click');
+    	
+    	let fileInput = $("#fileUpload").val();
+    	let file = fileInput.files[0];
+    	
+    	if (file) {
+    		let formData = new FormData();
+    		formData.append('file', file);
+    		
+        $.ajax({
+          type: "POST",
+          url:"/roadscanner/fileUploaded",
+          asyn:"true",
+          dataType:"html",
+          data:{
+          	file: file,
+          },
+          success:function(data){//통신 성공
+        	    let currentDate = new Date();
+        	    let formattedDate = `${currentDate.getFullYear()}${(currentDate.getMonth() + 1).toString().padStart(2, '0')}${currentDate.getDate().toString().padStart(2, '0')}`;
+        	    let formattedTime = `${currentDate.getHours().toString().padStart(2, '0')}${currentDate.getMinutes().toString().padStart(2, '0')}${currentDate.getSeconds().toString().padStart(2, '0')}`;
+        	    let sysdateFormatted = `${formattedDate}${formattedTime}`;
+        	    let uName = `${sysdateFormatted}_${fileName}`;
+        	    let uUrl = `"https://roadscanner-test-bucket.s3.ap-northeast-2.amazonaws.com/"+${fileName}`;
+        	    alert("파일 업로드가 완료되었습니다.");
+        	    showRightContent();
+          },
+          error:function(data){//실패시 처리
+        	    console.error("파일 업로드 오류:", data);
+        	    alert("파일 업로드에 실패하였습니다.");
+          },
         });
-      } else {
-        alert('파일을 선택해주세요.');
-      }
-      
-      console.log(`uploadFileToS3`);
+        
+        // doSave 요청에 사용할 데이터 설정
+        let postData = {
+          "uId": $("#name").val(),
+          "uName": uName,
+          "uUrl": uUrl,
+          "uSize": file.fileSizeInKb
+        };
+        console.log(postData);
+        
+        /*$.ajax({
+            type: "POST",
+            url:"com/roadscanner/upload/doSave",
+            asyn:"true",
+            dataType:"html",   
+            data:{
+              "uId" : $("#name").val(),
+              "uName" : ,
+              "uUrl" : ,
+              "uSize" : file.fileSizeInKb
+            },
+            success:function(data){//통신 성공
+                console.log("success data:"+data);
+                let parsedJson = JSON.parse(data);
+                if("1" == parsedJson.msgId){
+                  alert(parsedJson.msgContents);
+                  doRetrieve();
+                }else{
+                  alert(parsedJson.msgContents);
+                }
+            
+            },
+            error:function(data){//실패시 처리
+                console.log("error:"+data);
+            }
+          });*/
+        
+	    } else {
+	        alert('파일을 선택해주세요.');
+	    }
     }
-  
-    // "Run" 버튼 클릭 이벤트에 파일 업로드 함수를 연결
-    let runButton = document.getElementById('runButton');
-    runButton.addEventListener('click', uploadFileToS3);
-  
+
   </script>
 </body>
 </html>
