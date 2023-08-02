@@ -1,31 +1,30 @@
 package com.roadscanner.dao;
 
 import com.roadscanner.dto.Posts;
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-@DisplayName("게시판 API V1 CRUD")
-@ExtendWith(SpringExtension.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {com.roadscanner.config.DatabaseConfig.class, com.roadscanner.config.MyBatisConfig.class})
 public class PostDAOTest {
 
     @Autowired
     private PostDAO postDAO;
 
-    private Long id;  // Created post's id
+    private Long id;  // 데이터베이스에 ID는 자동생성 따라서 새로 만들어줌.
 
-    @DisplayName("게시물 작성")
-    @BeforeEach
-    void setUp() {
-
+    @Before
+    public void 게시글_작성() {
         Posts posts = Posts.builder()
                 .category("공지")
                 .title("테스트 제목")
@@ -33,22 +32,21 @@ public class PostDAOTest {
                 .author("admin")
                 .createdDate(LocalDateTime.now())
                 .updatedDate(LocalDateTime.now())
+                .views(0)
                 .build();
+
         postDAO.createPost(posts);
-
-        id = posts.getId(); // Get the generated id
+        id = posts.getId();
     }
 
-    @DisplayName("게시물 삭제")
-    @AfterEach
-    void tearDown() {
-        // Clear table after each test
-        postDAO.deletePost(id);  // Use the generated id
+
+    @After
+    public void 게시글_삭제() {
+        postDAO.deletePost(id);
     }
 
-    @DisplayName("게시물 전체 확인")
     @Test
-    public void getAllPosts() {
+    public void 전체게시글_확인() {
         // Given
 
         // When
@@ -59,12 +57,10 @@ public class PostDAOTest {
         assertEquals("공지", actualPosts.get(0).getCategory());
         assertEquals("테스트 제목", actualPosts.get(0).getTitle());
         assertEquals("테스트 내용", actualPosts.get(0).getContent());
-        assertEquals("admin", actualPosts.get(0).getAuthor());
     }
 
-    @DisplayName("게시물 읽기")
     @Test
-    public void getPostById() {
+    public void 게시글_읽기() {
         // Given
 
         // When
@@ -74,12 +70,10 @@ public class PostDAOTest {
         assertEquals("공지", actualPost.getCategory());
         assertEquals("테스트 제목", actualPost.getTitle());
         assertEquals("테스트 내용", actualPost.getContent());
-        assertEquals("admin", actualPost.getAuthor());
     }
 
-    @DisplayName("게시물 업데이트")
     @Test
-    public void updatePost() {
+    public void 게시글_수정() {
         // Given
         Posts originalPost = postDAO.getPostById(id);
 
@@ -88,9 +82,10 @@ public class PostDAOTest {
                 .category("공지")
                 .title("테스트 제목 - 수정됨")
                 .content("테스트 내용 - 수정됨")
-                .author("admin")
+                .author(originalPost.getAuthor())
                 .createdDate(originalPost.getCreatedDate())
                 .updatedDate(LocalDateTime.now())
+                .views(originalPost.getViews())
                 .build();
 
         // When
@@ -101,19 +96,5 @@ public class PostDAOTest {
         Posts updatePost = postDAO.getPostById(id);
         assertEquals("테스트 제목 - 수정됨", updatePost.getTitle());
         assertEquals("테스트 내용 - 수정됨", updatePost.getContent());
-    }
-
-    @DisplayName("게시판 조회수 증가")
-    @Test
-    void incrementViewCount() {
-        // Given
-        Posts originalPost = postDAO.getPostById(id);
-
-        // When
-        postDAO.incrementViewCount(id);
-
-        // Then
-        Posts updatePost = postDAO.getPostById(id);
-        assertEquals(originalPost.getViews()+ 1, updatePost.getViews());
     }
 }

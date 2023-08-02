@@ -3,31 +3,29 @@
 
 <mapper namespace="com.roadscanner.dao.PostDAO">
     <select id="getAllPosts" resultType="com.roadscanner.dto.Posts">
-        SELECT * FROM POST
+        SELECT * FROM POSTS
     </select>
 
     <select id="getPostById" parameterType="Long" resultType="com.roadscanner.dto.Posts">
-        SELECT * FROM POST WHERE id=#{id}
+        SELECT * FROM POSTS WHERE ID=#{id}
     </select>
 
-    <insert id="createPost" parameterType="com.roadscanner.dto.Posts" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO post (category, title, content, author, created_date, updated_date)
-        VALUES (#{category}, #{title}, #{content}, #{author}, #{createdDate}, #{updatedDate})
+    <insert id="createPost" parameterType="com.roadscanner.dto.Posts">
+        INSERT INTO POSTS (CATEGORY, TITLE, CONTENT, AUTHOR, CREATED_DATE, UPDATED_DATE, VIEWS)
+        VALUES (#{category}, #{title}, #{content}, #{author}, #{createdDate}, #{updatedDate}, #{views})
+        <selectKey keyProperty="id" resultType="Long" order="AFTER">
+            SELECT POST_SEQ.CURRVAL FROM DUAL
+        </selectKey>
     </insert>
-    
-    <delete id="deletePost" parameterType="Long">
-        DELETE FROM POST WHERE id=#{id}
-    </delete>
-    
-    <update id="updatePost" parameterType="com.roadscanner.dto.Posts">
-        UPDATE POST
-        SET category=#{category}, title=#{title}, content=#{content}, author=#{author}, updated_date=#{updatedDate}
-        WHERE id=#{id}
-    </update>
 
-    <update id="incrementViewCount">
-        UPDATE post
-        SET views = views + 1
-        WHERE id = #{id}
+
+    <delete id="deletePost" parameterType="Long">
+        DELETE FROM POSTS WHERE ID=#{id}
+    </delete>
+
+    <update id="updatePost" parameterType="com.roadscanner.dto.Posts">
+        UPDATE POSTS
+        SET CATEGORY=#{category}, TITLE=#{title}, CONTENT=#{content}, AUTHOR=#{author}, UPDATED_DATE=#{updatedDate}, VIEWS=#{views}
+        WHERE ID=#{id}
     </update>
 </mapper>
