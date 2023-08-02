@@ -3,57 +3,42 @@ package com.roadscanner.upload.domain;
 import com.roadscanner.cmn.DTO;
 
 public class FileUploadVO extends DTO {
-	private int uIdx; // 이미지 ID
+	private int idx; // 이미지 ID : upload_seq.NEXTVAL
 	private String id; // 사용자 ID
-	private int uDiv; // 구분 : 기본(10), 좋아요(20), 싫어요(30), 문의사항(40)
-	private String uDate; // 등록일
-	private String uName; // 저장파일명 : YYMMDDHH24MISS_원본파일명
-	private String uUrl; // URL : S3 저장 링크
-	private int uSize; // 파일크기 (kb로 저장)
+	private int category; // 구분 : 기본(10), 좋아요(20), 싫어요(30), 문의사항(40)
+	private String uploadDate; // 등록일
+	private String name; // 저장파일명 : YYMMDDHH24MISS_원본파일명
+	private String url; // URL : S3 저장 링크
+	private int fileSize; // 파일크기
+	private int checked; // 검토여부
 	private int u1; // 싫어요 이유1
 	private int u2; // 싫어요 이유2
-	private int uCheck; // 검토완료
 
 	// Default 생성자
 	public FileUploadVO() {
 	}
 
-	// 모든 인자 있는 생성자
-	public FileUploadVO(int uIdx, String id, int uDiv, String uDate, String uName, String uUrl, int uSize, int u1,
-			int u2, int uCheck) {
+	public FileUploadVO(int idx, String id, int category, String uploadDate, String name, String url, int fileSize,
+			int checked, int u1, int u2) {
 		super();
-		this.uIdx = uIdx;
+		this.idx = idx;
 		this.id = id;
-		this.uDiv = uDiv;
-		this.uDate = uDate;
-		this.uName = uName;
-		this.uUrl = uUrl;
-		this.uSize = uSize;
+		this.category = category;
+		this.uploadDate = uploadDate;
+		this.name = name;
+		this.url = url;
+		this.fileSize = fileSize;
+		this.checked = checked;
 		this.u1 = u1;
 		this.u2 = u2;
-		this.uCheck = uCheck;
 	}
 
-	// Not Null인 인자만 있는 생성자
-	public FileUploadVO(int uIdx, String id, int uDiv, String uDate, String uName, String uUrl, int uSize, int uCheck) {
-		super();
-		this.uIdx = uIdx;
-		this.id = id;
-		this.uDiv = uDiv;
-		this.uDate = uDate;
-		this.uName = uName;
-		this.uUrl = uUrl;
-		this.uSize = uSize;
-		this.uCheck = uCheck;
+	public int getIdx() {
+		return idx;
 	}
 
-	// Getter, Setter
-	public int getuIdx() {
-		return uIdx;
-	}
-
-	public void setuIdx(int uIdx) {
-		this.uIdx = uIdx;
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 
 	public String getId() {
@@ -64,44 +49,52 @@ public class FileUploadVO extends DTO {
 		this.id = id;
 	}
 
-	public int getuDiv() {
-		return uDiv;
+	public int getCategory() {
+		return category;
 	}
 
-	public void setuDiv(int uDiv) {
-		this.uDiv = uDiv;
+	public void setCategory(int category) {
+		this.category = category;
 	}
 
-	public String getuDate() {
-		return uDate;
+	public String getUploadDate() {
+		return uploadDate;
 	}
 
-	public void setuDate(String uDate) {
-		this.uDate = uDate;
+	public void setUploadDate(String uploadDate) {
+		this.uploadDate = uploadDate;
 	}
 
-	public String getuName() {
-		return uName;
+	public String getName() {
+		return name;
 	}
 
-	public void setuName(String uName) {
-		this.uName = uName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getuUrl() {
-		return uUrl;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setuUrl(String uUrl) {
-		this.uUrl = uUrl;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
-	public int getuSize() {
-		return uSize;
+	public int getFileSize() {
+		return fileSize;
 	}
 
-	public void setuSize(int uSize) {
-		this.uSize = uSize;
+	public void setFileSize(int fileSize) {
+		this.fileSize = fileSize;
+	}
+
+	public int getChecked() {
+		return checked;
+	}
+
+	public void setChecked(int checked) {
+		this.checked = checked;
 	}
 
 	public int getU1() {
@@ -120,21 +113,11 @@ public class FileUploadVO extends DTO {
 		this.u2 = u2;
 	}
 
-	public int getuCheck() {
-		return uCheck;
-	}
-
-	public void setuCheck(int uCheck) {
-		this.uCheck = uCheck;
-	}
-
-	// toString()
 	@Override
 	public String toString() {
-
-		return "FileUploadVO [uIdx=" + uIdx + ", id=" + id + ", uDiv=" + uDiv + ", uDate=" + uDate + ", uName=" + uName
-				+ ", uUrl=" + uUrl + ", uSize=" + uSize + ", u1=" + u1 + ", u2=" + u2 + ", uCheck=" + uCheck
-				+ ", toString()=" + super.toString() + "]";
+		return "FileUploadVO [idx=" + idx + ", id=" + id + ", category=" + category + ", uploadDate=" + uploadDate
+				+ ", name=" + name + ", url=" + url + ", fileSize=" + fileSize + ", checked=" + checked + ", u1=" + u1
+				+ ", u2=" + u2 + ", toString()=" + super.toString() + "]";
 	}
-
+	
 }
