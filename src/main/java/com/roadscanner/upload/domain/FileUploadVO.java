@@ -2,13 +2,9 @@ package com.roadscanner.upload.domain;
 
 import com.roadscanner.cmn.DTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 public class FileUploadVO extends DTO {
 	private int uIdx; // 이미지 ID
-	private String uId; // 사용자 ID
+	private String id; // 사용자 ID
 	private int uDiv; // 구분 : 기본(10), 좋아요(20), 싫어요(30), 문의사항(40)
 	private String uDate; // 등록일
 	private String uName; // 저장파일명 : YYMMDDHH24MISS_원본파일명
@@ -20,14 +16,14 @@ public class FileUploadVO extends DTO {
 
 	// Default 생성자
 	public FileUploadVO() {
-		// TODO Auto-generated constructor stub
 	}
 
 	// 모든 인자 있는 생성자
-	public FileUploadVO(int uIdx, String uId, int uDiv, String uDate, String uName, String uUrl, int uSize, int u1, int u2, int uCheck) {
+	public FileUploadVO(int uIdx, String id, int uDiv, String uDate, String uName, String uUrl, int uSize, int u1,
+			int u2, int uCheck) {
 		super();
 		this.uIdx = uIdx;
-		this.uId = uId;
+		this.id = id;
 		this.uDiv = uDiv;
 		this.uDate = uDate;
 		this.uName = uName;
@@ -39,10 +35,10 @@ public class FileUploadVO extends DTO {
 	}
 
 	// Not Null인 인자만 있는 생성자
-	public FileUploadVO(int uIdx, String uId, int uDiv, String uDate, String uName, String uUrl, int uSize, int uCheck) {
+	public FileUploadVO(int uIdx, String id, int uDiv, String uDate, String uName, String uUrl, int uSize, int uCheck) {
 		super();
 		this.uIdx = uIdx;
-		this.uId = uId;
+		this.id = id;
 		this.uDiv = uDiv;
 		this.uDate = uDate;
 		this.uName = uName;
@@ -50,7 +46,7 @@ public class FileUploadVO extends DTO {
 		this.uSize = uSize;
 		this.uCheck = uCheck;
 	}
-	
+
 	// Getter, Setter
 	public int getuIdx() {
 		return uIdx;
@@ -60,12 +56,12 @@ public class FileUploadVO extends DTO {
 		this.uIdx = uIdx;
 	}
 
-	public String getuId() {
-		return uId;
+	public String getId() {
+		return id;
 	}
 
-	public void setuId(String uId) {
-		this.uId = uId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public int getuDiv() {
@@ -131,12 +127,13 @@ public class FileUploadVO extends DTO {
 	public void setuCheck(int uCheck) {
 		this.uCheck = uCheck;
 	}
-	
+
 	// toString()
 	@Override
 	public String toString() {
-		return "FileUploadVO [uIdx=" + uIdx + ", uId=" + uId + ", uDiv=" + uDiv + ", uDate=" + uDate + ", uName="
-				+ uName + ", uUrl=" + uUrl + ", uSize=" + uSize + ", u1=" + u1 + ", u2=" + u2 + ", uCheck=" + uCheck
+
+		return "FileUploadVO [uIdx=" + uIdx + ", id=" + id + ", uDiv=" + uDiv + ", uDate=" + uDate + ", uName=" + uName
+				+ ", uUrl=" + uUrl + ", uSize=" + uSize + ", u1=" + u1 + ", u2=" + u2 + ", uCheck=" + uCheck
 				+ ", toString()=" + super.toString() + "]";
 	}
 

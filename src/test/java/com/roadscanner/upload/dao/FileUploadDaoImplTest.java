@@ -3,6 +3,7 @@ package com.roadscanner.upload.dao;
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
+
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -23,11 +24,11 @@ import com.roadscanner.upload.domain.FileUploadVO;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/root-context.xml"
-                                  ,"file:src/main/webapp/WEB-INF/servlet-context.xml"})
-@FixMethodOrder(MethodSorters.NAME_ASCENDING) 
+@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/root-context.xml",
+		"file:src/main/webapp/WEB-INF/servlet-context.xml" })
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FileUploadDaoImplTest implements PcwkLogger {
-	
+
 	@Autowired
 	ApplicationContext context;
 
@@ -39,7 +40,7 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	FileUploadVO uploadVO1;
 	FileUploadVO uploadVO2;
 	FileUploadVO uploadVO3;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		LOG.debug("┌────────────────────────┐");
@@ -49,24 +50,135 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 		// null이 아니면 성공
 		assertNotNull(context);
 		assertNotNull(dao);
-		
+
 		uploadVO = new FileUploadVO(11, "a", 10, "20230731", "230731095807_dog.jpg", "url01", 700, 0);
-		
+
 		uploadVO1 = new FileUploadVO(11, "a", 10, "20230731", "230731095807_dog.jpg", "url01", 700, 0);
-		uploadVO2 = new FileUploadVO(12, "a", 20, "20230731", "230731095807_cat.jpg", "url02", 800, 0);
-		uploadVO3 = new FileUploadVO(13, "a", 30, "20230731", "230731095807_cow.jpg", "url03", 900, 0);
+		uploadVO2 = new FileUploadVO(12, "a", 10, "20230731", "230731095807_cat.jpg", "url02", 800, 0);
+		uploadVO3 = new FileUploadVO(13, "a", 10, "20230731", "230731095807_cow.jpg", "url03", 900, 0);
 	}
-	
+
 	@Test
-	public void doDelete() throws ClassNotFoundException, SQLException {
+	@Ignore
+	public void update() throws SQLException {
+		LOG.debug("┌───────────────────────┐");
+		LOG.debug("│        update()       │");
+		LOG.debug("└───────────────────────┘");
+
+		// 삭제
+		dao.doDelete(uploadVO1);
+		dao.doDelete(uploadVO2);
+		dao.doDelete(uploadVO3);
+
+		// 등록
+		dao.doSave(uploadVO1);
+		dao.doSave(uploadVO2);
+		dao.doSave(uploadVO3);
+
+		// 조회
+		FileUploadVO outVO1 = dao.doSelectOne(uploadVO1);
+		FileUploadVO outVO2 = dao.doSelectOne(uploadVO2);
+		FileUploadVO outVO3 = dao.doSelectOne(uploadVO3);
+
+		// 조회 데이터 한 건 수정
+		outVO1.setuDiv(20);
+		outVO1.setU1(1);
+		outVO1.setU2(1);
+		outVO1.setuCheck(1);
+
+		int flag = dao.doUpdate(outVO1);
+		assertEquals(flag, 1);
+
+		// 수정 데이터 조회
+		FileUploadVO upVO1 = dao.doSelectOne(outVO1);
+
+		// 조회 데이터 비교
+		isSameData(upVO1, outVO1);
+	}
+
+	@Test
+	@Ignore
+	public void addAndGet() throws SQLException {
+		LOG.debug("┌────────────────────────┐");
+		LOG.debug("│       addAndGet()      │");
+		LOG.debug("└────────────────────────┘");
+
+		// 삭제
+		dao.doDelete(uploadVO1);
+		dao.doDelete(uploadVO2);
+		dao.doDelete(uploadVO3);
+
+		// 등록
+		dao.doSave(uploadVO1);
+		dao.doSave(uploadVO2);
+		dao.doSave(uploadVO3);
+
+		// 조회
+		FileUploadVO outVO1 = dao.doSelectOne(uploadVO1);
+		FileUploadVO outVO2 = dao.doSelectOne(uploadVO2);
+		FileUploadVO outVO3 = dao.doSelectOne(uploadVO3);
+
+		// 조회 데이터 비교
+		isSameData(outVO1, uploadVO1);
+		isSameData(outVO2, uploadVO2);
+		isSameData(outVO3, uploadVO3);
+
+	}
+
+	@Test
+	@Ignore
+	public void doSelectOne() throws SQLException {
+		LOG.debug("┌────────────────────────┐");
+		LOG.debug("│      doSelectOne()     │");
+		LOG.debug("└────────────────────────┘");
+
+		FileUploadVO outVO1 = dao.doSelectOne(uploadVO1);
+		FileUploadVO outVO2 = dao.doSelectOne(uploadVO2);
+		FileUploadVO outVO3 = dao.doSelectOne(uploadVO3);
+
+		isSameData(outVO1, uploadVO1);
+		isSameData(outVO2, uploadVO2);
+		isSameData(outVO3, uploadVO3);
+	}
+
+	@Test
+	@Ignore
+	public void doDelete() throws SQLException {
 		LOG.debug("┌────────────────────────┐");
 		LOG.debug("│       doDelete()       │");
 		LOG.debug("└────────────────────────┘");
-		
-		// 추가
-		dao.doSave(uploadVO1);
+
+		dao.doDelete(uploadVO1);
+		dao.doDelete(uploadVO2);
+		dao.doDelete(uploadVO3);
+
 	}
-	
+
+	@Test
+	@Ignore
+	public void doSave() throws SQLException {
+		LOG.debug("┌────────────────────────┐");
+		LOG.debug("│        doSave()        │");
+		LOG.debug("└────────────────────────┘");
+
+		dao.doSave(uploadVO1);
+		dao.doSave(uploadVO2);
+		dao.doSave(uploadVO3);
+
+	}
+
+	// 테스트 검증 자동화
+	public void isSameData(FileUploadVO outVO, FileUploadVO inVO) {
+		assertEquals(outVO.getuIdx(), inVO.getuIdx());
+		assertEquals(outVO.getId(), inVO.getId());
+		assertEquals(outVO.getuDiv(), inVO.getuDiv());
+		assertEquals(outVO.getuName(), inVO.getuName());
+		assertEquals(outVO.getuUrl(), inVO.getuUrl());
+//		assertEquals(outVO.getuDate(), inVO.getuDate());
+		assertEquals(outVO.getuSize(), inVO.getuSize());
+		assertEquals(outVO.getuCheck(), inVO.getuCheck());
+	}
+
 	@Test
 	@Ignore
 	public void bean() {
@@ -74,8 +186,7 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 		LOG.debug("│          bean          │");
 		LOG.debug("│          dao           │" + dao);
 		LOG.debug("└────────────────────────┘");
-		
+
 		assertNotNull(dao); // dao 객체가 잘 만들어졌는지 확인
 	}
-
 }

@@ -18,6 +18,9 @@ public interface FileUploadDao {
 
 	// 사진 상세 조회
 	FileUploadVO doSelectOne(FileUploadVO inVO) throws SQLException;
+	
+	// 사진 구분, 싫어요 이유, 검토 여부 수정
+	int doUpdate(FileUploadVO inVO) throws SQLException;
 
 	// 사진 삭제
 	int doDelete(FileUploadVO inVO) throws SQLException;

@@ -53,9 +53,9 @@
   <select id="doSelectOne" parameterType="FileUploadVO" resultType="FileUploadVO">
     SELECT
         u_idx AS uIdx,
-        u_id AS uId,
+        u_id AS id,
         u_div AS uDiv,
-        TO_CHAR(u_date, 'YYYY-MM-DD') AS uDate,
+        TO_CHAR(u_date, 'YYYY-MM-DD HH24:MI:SS') AS uDate,
         u_name AS uName,
         u_url AS uUrl,
         u_size AS uSize,
@@ -65,6 +65,18 @@
     WHERE
         u_idx = #{uIdx}
   </select>
+  
+  <!-- 사진 구분, 싫어요 이유, 검토 여부 수정 -->
+  <update id="doUpdate" parameterType="FileUploadVO">
+	  UPDATE upload_image
+		SET
+		  u_div   = #{uDiv},
+		  u_1     = #{u1},
+		  u_2     = #{u2},
+		  u_check = #{uCheck}
+		WHERE
+		  u_idx = #{uIdx}
+  </update>
   
   <!-- 사진 삭제 -->
   <delete id="doDelete" parameterType="FileUploadVO">
@@ -85,7 +97,7 @@
         u_check
     ) VALUES (
         #{uIdx},
-        #{uId},
+        #{id},
         10,
         SYSDATE,
         #{uName},
