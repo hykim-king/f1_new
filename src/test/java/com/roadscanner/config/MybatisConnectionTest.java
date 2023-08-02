@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {DatabaseConfig.class, MyBatisConfig.class})
+@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/root-context.xml", "file:src/main/resources/mybatis-config.xml"})
 public class MybatisConnectionTest {
 
     @Autowired

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!-- 기본 설정 -->
+    <settings>
+        <setting name="logImpl" value="LOG4J2"/>
+        <setting name="jdbcTypeForNull" value="NULL"/>
+    </settings>
+
+    <!-- 팀별 추가 설정 -->
+    <typeAliases>
+        <typeAlias type="com.roadscanner.dto.Posts" alias="Posts"/>
+    </typeAliases>
+</configuration>

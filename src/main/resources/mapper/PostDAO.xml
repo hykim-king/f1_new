@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.roadscanner.dao.PostDAO">
-    <select id="getAllPosts" resultType="com.roadscanner.dto.Posts">
+    <select id="getAllPosts" resultType="Posts">
         SELECT * FROM POSTS
     </select>
 
-    <select id="getPostById" parameterType="Long" resultType="com.roadscanner.dto.Posts">
+    <select id="getPostById" parameterType="Long" resultType="Posts">
         SELECT * FROM POSTS WHERE ID=#{id}
     </select>
 
-    <insert id="createPost" parameterType="com.roadscanner.dto.Posts">
+    <insert id="createPost" parameterType="Posts">
         INSERT INTO POSTS (CATEGORY, TITLE, CONTENT, AUTHOR, CREATED_DATE, UPDATED_DATE, VIEWS)
         VALUES (#{category}, #{title}, #{content}, #{author}, #{createdDate}, #{updatedDate}, #{views})
         <selectKey keyProperty="id" resultType="Long" order="AFTER">
@@ -23,7 +23,7 @@
         DELETE FROM POSTS WHERE ID=#{id}
     </delete>
 
-    <update id="updatePost" parameterType="com.roadscanner.dto.Posts">
+    <update id="updatePost" parameterType="Posts">
         UPDATE POSTS
         SET CATEGORY=#{category}, TITLE=#{title}, CONTENT=#{content}, AUTHOR=#{author}, UPDATED_DATE=#{updatedDate}, VIEWS=#{views}
         WHERE ID=#{id}

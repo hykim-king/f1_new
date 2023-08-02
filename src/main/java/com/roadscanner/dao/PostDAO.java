@@ -1,9 +1,11 @@
 package com.roadscanner.dao;
 
 import com.roadscanner.dto.Posts;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface PostDAO {
 
     List<Posts> getAllPosts();
