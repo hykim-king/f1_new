@@ -15,5 +15,5 @@ public class Posts {
     private final String author; // a_id -> author
     private final LocalDateTime createdDate; // q_reg_date -> createdDate
     private final LocalDateTime updatedDate; // q_mod_date -> updatedDate
-    private final Integer views; // q_read_cnt -> views
+    private final int views; // q_read_cnt -> views
 }

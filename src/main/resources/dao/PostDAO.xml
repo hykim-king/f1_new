@@ -28,4 +28,11 @@
         SET CATEGORY=#{category}, TITLE=#{title}, CONTENT=#{content}, AUTHOR=#{author}, UPDATED_DATE=#{updatedDate}, VIEWS=#{views}
         WHERE ID=#{id}
     </update>
+
+    <update id="incrementViewCount" parameterType="Long">
+        UPDATE POSTS
+        SET VIEWS = VIEWS + 1
+        WHERE ID=#{id}
+    </update>
+
 </mapper>
