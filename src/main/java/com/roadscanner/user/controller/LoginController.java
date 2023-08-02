@@ -224,12 +224,12 @@ public class LoginController {
         int result = 0;
         result = this.userService.doIdDuplCheck(user);
         
-        if(20 == result) {
-        	message.setMsgId("20");
-        	message.setMsgContents("사용할 수있는 ID입니다.");
-        } else if(10 == result) {
+        if(10 == result) {
         	message.setMsgId("10");
         	message.setMsgContents("해당 ID는 사용할 수 없습니다");
+        } else if(20 == result) {
+        	message.setMsgId("20");
+        	message.setMsgContents("사용할 수 있는 ID입니다");
         } 
         
        jsonString = new Gson().toJson(message);
