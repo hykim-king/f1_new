@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.roadscanner.cmn.MessageVO;
 import com.roadscanner.domain.MemberVO;
 import com.google.gson.Gson;
+import com.roadscanner.user.service.MailSendService;
 import com.roadscanner.user.service.UserService;
 
 
@@ -30,6 +31,9 @@ public class LoginController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	MailSendService mailSend;
 	
 	/**
 	 * 로그인 화면에 처음 접근할때 호출 하는 함수
@@ -117,6 +121,15 @@ public class LoginController {
 		session.invalidate();
 		return "/login";	
 	}
+    
+    @GetMapping("/**/mailCheck")
+	@ResponseBody
+	public String mailCheck(String email) {
+		System.out.println("이메일 인증 요청이 들어옴!");
+		System.out.println("이메일 인증 이메일 : " + email);
+		return mailSend.joinEmail(email);
+	}
+
 
     /**
      * 아이디/비밀번호 찾기 화면

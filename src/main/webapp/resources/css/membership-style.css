@@ -36,7 +36,9 @@
            margin-top:20px;
            font-weight: bold;
   
-         }  
+         } 
+         
+         
          
          #id_form, #pw_form, #pw2_form, #name_form, #phone_num {
            font-size: 12pt;

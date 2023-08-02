@@ -99,19 +99,40 @@
 		                style="margin-left: 15px;">
 		               </div>
 		             </div>
-	             </li>         
+	             </li>
+	             
+	             
+
+	             <li class="cc">
+	              
+		            <label for= "mail-Check-Btn" style="float: left">E-mail 인증번호 입력</label><br/>
+		            <div style="display: flex">
+		             <input type="button" class = "btn btn-outline-dark nest1" 
+                           id="mail-Check-Btn" value="인증번호 전송 "
+                           class="nest1" >
+                           
+	                  <input type="text" class="emailcheck" name="checkInput" id="checkInput"
+	                   placeholder="인증번호 6자리를 입력해주세요" maxlength="6" required
+	                   style="margin-left: 16px;"><br/>
+	                   <span id="mail-check-warn"></span>
+		          </div> 
+		         </li>        
 	           </ul>
+	      
 	       <div style="margin-top: 40px; margin-left: -50px;">
 		        <input type="button" class="btn btn-outline-dark nest1" id="register" value="회원가입">
 		        <input type="button" class="btn btn-outline-dark nest2" id="noneRegister" value="취소" onclick="firstForm()">
          </div>
      </form>
+    
 	<form method="POST" name="register_form">
 	      <input type="hidden" name="grade" id="grade" value="1">
 	      <input type="hidden" name="id" id="id">
 	      <input type="hidden" name="pw" id="pw">
 	      <input type="hidden" name="email" id="email">         
 	</form>
+	<input type="hidden" name="emailok" id="emailok"> 
+	<input type="hidden" name="idok" id="idok"> 
 </div>    
 </body>
 <footer class="py-3 my-4 mt-auto">
@@ -217,6 +238,11 @@
                 return false;
             }
             
+            if("ok" != document.getElementById('idok').value) {
+                alert("아이디 인증을 진해하십시오.");
+                return false;
+            }
+            
             if("" == document.getElementById('pw_form').value || "" == document.getElementById('pw2_form').value) {
                 alert("비밀번호를 입력하세요");
                 return false;
@@ -224,6 +250,15 @@
                   
             if("" == document.getElementById('email_front').value || "" == document.getElementById('email_back').value) {
                 alert("이메일을 입력하세요");
+                return false;
+            }
+            if("" == document.getElementById('checkInput').value){
+            	alert("이메일 인증을 진행해 주십시오.");
+                return false;
+            }
+            
+            if( document.getElementById('checkInput').value != code){
+                alert("이메일 인증번호가 다릅니다.");
                 return false;
             }
                       
@@ -304,6 +339,7 @@
                     
                     if("20" == parsedJSON.msgId){//로그인 성공
                       alert(parsedJSON.msgContents);
+                      $('#idok').attr('value',"ok");
                       return;
                     }
                     
@@ -360,8 +396,11 @@
                     $("#email_front").focus();
                   } 
                   
-                  if("20" == parsedJSON.msgId){//로그인 성공
+                  if("20" == parsedJSON.msgId){//
                     alert(parsedJSON.msgContents);
+                    $('#emailDulpCheckbool').attr('value',$('#email').val());
+                    $('#emailDulpCheckbool').attr('value',$('#email').val());
+                    $('#emailok').attr('value',"ok");
                     return;
                   }
                   
@@ -375,9 +414,59 @@
             
             
         });  // #idDulpCheck end
-       
-       
-        
+ 
      }); 
-     </script>
+</script>
+<script>
+$('#mail-Check-Btn').click(function() {
+    const email = $('#email_front').val()+"@"+ $('#email_back').val() // 이메일 주소값 얻어오기!
+    console.log($('#email').val());
+    const checkInput = $('#checkInput'); // 인증번호 입력하는곳
+    if ("" == document.getElementById('email_front').value || "" == document.getElementById('email_back').value) {
+        alert('이메일을 입력하십시오.');
+        email_Check = false;
+        $("#email").focus();
+    }else if("ok" != document.getElementById('emailok').value){
+    	alert('이메일을 중복확인후에 진행하시오.');
+    }else {
+        $.ajax({
+            type : 'get',
+            url : "mailCheck?email=" + email, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
+            success : function(data) {
+
+                console.log("data : " + data);
+                $('#checkInput').attr('disabled', false);
+                code = data;
+                alert('인증번호가 전송되었습니다.')
+            }
+        }); // end ajax
+    }
+
+}); // end send eamil
+
+// 인증번호 비교
+// blur -> focus가 벗어나는 경우 발생
+$('#checkInput').blur(function() {
+    const inputCode = $(this).val();
+    const $resultMsg = $('#mail-check-warn');
+
+    if (inputCode == code) {
+        $resultMsg.html('인증번호가 일치합니다.');
+        $resultMsg.css('color', 'green');
+        $resultMsg.css('display', 'block');
+        $resultMsg.css('font-size', '13px');
+        $('#mail-Check-Btn').attr('disabled', true);
+        $('#email').attr('readonly', true);
+        $('#register').attr('disabled', false);
+        certified_Email = true;
+    } else {
+        certified_Email = false;
+        $resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!');
+        $resultMsg.css('color', 'red');
+        $resultMsg.css('display', 'block');
+        $resultMsg.css('font-size', '13px');
+    }
+});
+
+</script>
 </html>
