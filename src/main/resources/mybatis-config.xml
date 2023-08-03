@@ -9,5 +9,6 @@
     </settings>
     <typeAliases>
           <typeAlias type="com.roadscanner.upload.domain.FileUploadVO" alias="FileUploadVO"/>
+          <typeAlias type="com.roadscanner.result.domain.ResultVO" alias="ResultVO"/>
     </typeAliases>
   </configuration>
