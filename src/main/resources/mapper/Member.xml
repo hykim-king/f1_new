@@ -14,7 +14,7 @@
     <select id="selectOne" parameterType="MemberVO"  resultMap="MemberMap" >
         SELECT *
         FROM road_member
-        WHERE r_id = #{rid} A
+        WHERE r_id = #{rid} 
     </select>
     
     

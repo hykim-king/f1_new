@@ -128,16 +128,15 @@
                       $('#email2').attr('value',$('#email').val());
                       $('#email').val('');
                       $('#userId').focus();
+
+                      const finid = id[1]
                     }
                   },
                   error:function(data){//실패시 처리
                     console.log("error:"+data);
                   }
             }); //  $.ajax End --------------------------     
-          
-          
-        }); // $("#findId").on("click") End --------------------------
-        
+  
         
         
         $("#findPw").on("click",function(){  
