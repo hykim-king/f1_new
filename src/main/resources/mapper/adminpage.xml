@@ -45,7 +45,7 @@
 	    FROM(
           SELECT row_number() OVER(ORDER BY road.r_number) AS roadnum, road.*
            FROM road_member road
-           WHERE 1=1
+           WHERE r_grade = 1
            <if test="keyword !=null and keyword !=''">
                          AND r_id LIKE '%'||#{keyword}||'%' 
            </if> 
@@ -54,13 +54,44 @@
 	    WHERE roadnum BETWEEN #{displayPost} AND #{postNum}+ #{displayPost}-1         
 	    ORDER BY road2.r_number
      </select>
-     
+
+     <!-- 검색  카운팅 -->
       <select id="searchCountBox" parameterType="hashMap" resultType="int">
 	      SELECT COUNT(r_id) cnt
 	      FROM road_member
-	      WHERE 1=1
+	      WHERE 1=1 
+	      AND r_grade = 1
            <if test="keyword !=null and keyword !=''">
                          AND r_id LIKE '%'||#{keyword}||'%' 
            </if> 
      </select>
+     
+     <!-- 페이징 + 검색 -->
+     <select id="listPageSearchBox2" parameterType="hashMap" resultMap="MemberMap">
+        SELECT roadnum,road2.*
+        FROM(
+          SELECT row_number() OVER(ORDER BY road.r_number) AS roadnum, road.*
+           FROM road_member road
+           WHERE r_grade = 2
+           <if test="keyword2 !=null and keyword2 !=''">
+                         AND r_id LIKE '%'||#{keyword2}||'%' 
+           </if> 
+          ORDER BY road.r_number
+          ) road2
+        WHERE roadnum BETWEEN #{displayPost2} AND #{postNum2}+ #{displayPost2}-1         
+        ORDER BY road2.r_number
+     </select>
+
+     <!-- 검색  카운팅 -->
+      <select id="searchCountBox2" parameterType="hashMap" resultType="int">
+          SELECT COUNT(r_id) cnt
+          FROM road_member
+          WHERE 1=1 
+          AND r_grade = 2
+           <if test="keyword2 !=null and keyword2 !=''">
+                         AND r_id LIKE '%'||#{keyword2}||'%' 
+           </if> 
+     </select>
+     
+
 </mapper>

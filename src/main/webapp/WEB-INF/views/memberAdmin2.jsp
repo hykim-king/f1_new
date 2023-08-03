@@ -17,14 +17,13 @@
     <title>회원 관리</title>
 </head>
 <body>
-    <div class="container">
-    
-   
-  <!-- 일반회원 --------------------------------------------------------------->
-<form>    
+<!-- 관리자 리스트  ---------------------------------------------------------------> 
+
+<div class="container"> 
+    <form>  
         <!-- 제목 -->
         <div class="page-header">
-            <h2 class="text-center">회원 관리</h2>
+            <h2 class="text-center">관리자 리스트</h2>
         </div>
         <!-- 제목 end --------------------------------------------------------------->
 
@@ -39,12 +38,12 @@
                 </tr>
             </thead>
             <tbody>   
-                <c:forEach var="list" items="${list}">
+                <c:forEach var="list2" items="${list2}">
                     <c:set var="i" value="${i+1}"></c:set>
                     <tr>
                         <td class="text-center col-sm-1">${i}</td>
-                        <td class="text-center col-sm-5">${list.rid}</td>
-                        <td class="text-center col-sm-6">${list.remail}</td>
+                        <td class="text-center col-sm-5">${list2.rid}</td>
+                        <td class="text-center col-sm-6">${list2.remail}</td>
                     </tr>
                 </c:forEach>   
             </tbody>
@@ -55,9 +54,9 @@
         <div class="row mb-3">
             <div class="col">
                     <div class="form-group">
-                        <input type="text" id="searchid" name="keyword" class="form-control" placeholder="아이디 검색">
+                        <input type="text" id ="searchid2" name="keyword2" class="form-control" placeholder="아이디 검색">
                     </div>
-                    <button type="submit" id= "searchidbtn" class="btn btn-primary ml-2">검색</button>
+                    <button type="submit" id ="searchidbtn2" class="btn btn-primary ml-2">검색</button>
             </div>
         </div>
         <!-- 검색 폼 end ------------------------------------------------------------>
@@ -65,42 +64,39 @@
         <!-- pagination -->
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
-	            <c:if test="${page.prev}">
-		            <li class="page-item"><a class="page-link" aria-label="Previous" href="/memberAdmin?num=${page.startPageNum - 5}">이전</a></li>
-		        </c:if>
-		        
-		        <c:forEach begin="${page.startPageNum}" end="${page.endPageNum}" var="num">      
-		              <c:if test="${select != num}">
-		                <li class="page-item"><a class="page-link" href="/memberAdmin?num=${num}">${num}</a></li>
-		              </c:if>
-		              
-		              <c:if test="${select == num}">
-		                <li class="page-item"><a class="page-link" href="/memberAdmin?num=${num}">${num}</a></li>
-		              </c:if>
-		        </c:forEach>
-		        
-		        <c:if test="${page.next}">  
-		            <li class="page-item"><a class="page-link" href="/memberAdmin?num=${page.endPageNum + 1}">다음</a></li>
-		        </c:if>
+                <c:if test="${page2.prev2}">
+                    <li class="page-item"><a class="page-link" aria-label="Previous" href="/memberAdmin2?num2=${page2.startPageNum2 - 5}">이전</a></li>
+                </c:if>
+                
+                <c:forEach begin="${page2.startPageNum2}" end="${page2.endPageNum2}" var="num2">      
+                      <c:if test="${select != num2}">
+                        <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${num2}">${num2}</a></li>
+                      </c:if>
+                      
+                      <c:if test="${select == num2}">
+                        <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${num2}">${num2}</a></li>
+                      </c:if>
+                </c:forEach>
+                
+                <c:if test="${page2.next2}">  
+                    <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${page2.endPageNum2 + 1}">다음</a></li>
+                </c:if>
                 
             </ul>
         </nav>
-        <!-- pagination end ------------------------------------------------------->
-  </form>
-   <!-- 일반회원 end--------------------------------------------------------------->    
-     
-        
-  
-<!-- container end ------------------------------------------------------------------->
-    </div>
+<!-- pagination end ------------------------------------------------------->
+     </form> 
+</div>     
+<!-- 관리자 리스트 end --------------------------------------------------------------->    
+<!-- container end --------------------------------------------------------------->    
+
 </body>
 <script>
-$("#searchidbtn").on("click",function(){
-	let keyword = $("#searchid").value();
-	console.log(keyword);
-
-	location.href = "/memberAdmin?num=1"+ "&keyword=" + keyword;
-	});
+$("#searchidbtn2").on("click",function(){
+	let keyword2 = $("#searchid2").value();
+	console.log(keyword2);
+	
+	location.href = "/memberAdmin2?num=1"+ "&keyword2=" + keyword2;
+});
 </script>
-                        
 </html>

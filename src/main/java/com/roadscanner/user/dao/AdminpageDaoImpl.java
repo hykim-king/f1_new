@@ -59,16 +59,28 @@ public class AdminpageDaoImpl implements AdminpageDao {
 		 	data.put("keyword", keyword);	
 		  return sqlSessionTemplate.selectOne(namespace + ".searchCountBox", data);
 	}
-
+	
 	@Override
-	public List<MemberVO> detaillist(String keyword) throws Exception {
-		HashMap<String, Object> data = new HashMap<String, Object>();
-		data.put("keyword", keyword);
-		return sqlSessionTemplate.selectList(namespace +".detaillist", data);
+	public List<MemberVO> listPageSearchBox2(
+			int displayPost2, int postNum2, String keyword2) throws Exception {
+		 HashMap<String, Object> data2 = new HashMap<String, Object>();
+		  
+		  data2.put("displayPost2", displayPost2);
+		  data2.put("postNum2", postNum2);
+		  data2.put("keyword2", keyword2);
+		
+		return sqlSessionTemplate.selectList(namespace + ".listPageSearchBox2", data2);
 	}
 
-	
+	@Override
+	public int searchCountBox2(String keyword2) throws Exception {
+		 	HashMap<String, Object> data2 = new HashMap<String, Object>();
 		 	
-		 
+		 	System.out.println("keyword2:"+keyword2);
+		 	
+		 	data2.put("keyword2", keyword2);	
+		  return sqlSessionTemplate.selectOne(namespace + ".searchCountBox2", data2);
+	}
 	
+
 }

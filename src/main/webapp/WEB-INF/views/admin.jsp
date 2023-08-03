@@ -7,48 +7,32 @@
 <head>
 <meta charset="UTF-8">
 <!-- CSS -->
-<link  href="${CP}/resources/css/admin.css" rel="stylesheet">
-<link  href="${CP}/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
-<script src="${CP}/resources/js/bootstrap/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
-<script src="${CP}/resources/js/jquery-3.7.0.js"></script>
+    <link  rel="stylesheet" href="${CP}/resources/css/admin.css" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <title>관리자 페이지</title>
 </head>
 <body>
+
 <div class ="admin_container">
-<h1>여기는 관리자전용이다</h1>    
-        <c:forEach var="list" items="${list}">
-                <ul style="list-style: none; 
-                     text-align: left; padding-left: 0; margin-top: 10px; height: 200px;">
-                    <li>no:<span>${list.rnumber}</span></li>
-                    <li>id:<span>${list.rid}</span></li>
-                    <li>id:<span>${list.rpassword}</span></li>
-                    <li>email:<span>${list.remail}</span></li>
-                    <li>보관방법:<span>${list.rdate}</span></li>
-                </ul>           
-        </c:forEach>
-    <div>
-        <nav aria-label="Page navigation example">
-		  <ul class="pagination admin_paging">
-		  <c:if test="${page.prev}">
-		    <li class="page-item"><a class="page-link" href="/admin?num=${page.startPageNum - 1}">이전</a></li>
-		  </c:if>
-		  <c:forEach begin="${page.startPageNum}" end="${page.endPageNum}" var="num">
-		      
-		      <c:if test="${select != num}">
-	            <li class="page-item"><a class="page-link" href="/admin?num=${num}">${num}</a></li>
-	          </c:if>
-	          
-	          <c:if test="${select == num}">
-		        <li class="page-item"><a class="page-link" href="/admin?num=${num}">${num}</a></li>
-		      </c:if>
-		  
-		  </c:forEach>
-		  <c:if test="${page.next}">  
-		    <li class="page-item"><a class="page-link" href="/admin?num=${page.endPageNum + 1}">다음</a></li>
-		  </c:if>
-		  </ul>
-		</nav>   
-	</div>	
-</div>	
+    <h1 style="margin: auto; text-align:cneter;">여기는 관리자전용이다</h1>   
+    <iframe src="http://localhost:8080/memberAdmin"
+    style="margin: 50px auto; height: 500px;"></iframe>
+
+
+<br/>
+
+
+    <h1 style="margin: auto; text-align:cneter;">여기는 관리자전용이다</h1>   
+    <iframe src="http://localhost:8080/memberAdmin2"
+    style="margin: 50px auto; height: 400px;"></iframe>
+</div>
+
+
 </body>
 </html>

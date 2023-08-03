@@ -9,6 +9,7 @@
     justify-content: center;
 }
 
-li {
+iframe {
 	text-align: center;
+	width: 1000px;
 }

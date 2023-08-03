@@ -38,21 +38,28 @@ public class AdminServiceImpl implements AdminService{
 												keyword
 								);
 	}
-
+	
 	@Override
 	public int searchCountBox(String keyword) throws Exception {
 		
 		return adminpageDao.searchCountBox(
 				keyword);
 	}
-
+	
 	@Override
-	public List<MemberVO> detaillist(String keyword) throws Exception {
-		return adminpageDao.detaillist(keyword);
+	public List<MemberVO> listPageSearchBox2(int displayPost2, int postNum2,String keyword2) throws Exception {
+		
+		return adminpageDao.listPageSearchBox2(displayPost2, postNum2,
+												keyword2
+								);
+	}
+	
+	@Override
+	public int searchCountBox2(String keyword2) throws Exception {
+		
+		return adminpageDao.searchCountBox2(
+				keyword2);
 	}
 
 
-
-	
-	
 }

@@ -46,6 +46,12 @@ public class LoginController {
 		return "login";
 	}
 	
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public String admin(@ModelAttribute("user") MemberVO vo) {
+		System.out.println("관리자 화면으로 이동...");
+		return "admin";
+	}
+	
 	@RequestMapping("/registerpage")
     public String registerpage() {
         return "registerpage";
