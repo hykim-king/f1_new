@@ -1,6 +1,7 @@
 package com.roadscanner.user.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -208,6 +209,12 @@ public class UserDaoImpl implements UserDao {
 	    flag = this.sqlSessionTemplate.delete(statement, user);
 
 	    return flag;
+	}
+
+	// -------------로그인 관리자페이지------------------------
+	@Override
+	public List<MemberVO> getAllMembers() {
+		return null;
 	}
 	
 }
