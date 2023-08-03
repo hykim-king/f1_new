@@ -45,8 +45,8 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	public void setUp() throws Exception {
 
 		uploadVO1 = new FileUploadVO(11, "a", 10, "20230802", "230731095807_dog.jpg", "url01", 700, 0, 0, 0);
-		uploadVO2 = new FileUploadVO(12, "a", 10, "20230802", "230731095807_cat.jpg", "url02", 800, 0, 0, 0);
-		uploadVO3 = new FileUploadVO(13, "a", 10, "20230802", "230731095807_cow.jpg", "url03", 900, 0, 0, 0);
+		uploadVO2 = new FileUploadVO(12, "a", 10, "20230202", "230731095807_cat.jpg", "url02", 800, 0, 0, 0);
+		uploadVO3 = new FileUploadVO(13, "a", 10, "20230402", "230731095807_cow.jpg", "url03", 900, 0, 0, 0);
 
 		search = new FileUploadVO(10, "a", 10, "20230802", "230731095807_dog.jpg", "url01", 700, 0, 0, 0);
 	}
@@ -62,11 +62,12 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 		LOG.debug("└───────────────────────┘");
 
 		List<FileUploadVO> list = dao.quarterlyFeedback(uploadVO1);
-
+		
+		LOG.debug("------------------------------");
 		for (FileUploadVO vo : list) {
 			LOG.debug("분기: " + vo.getUploadDate() + ", 인식오류: " + vo.getU1() + ", 결과오류: " + vo.getU2());
 		}
-
+		LOG.debug("------------------------------");
 	}
 
 	/*
@@ -84,15 +85,17 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 		assertNotNull(outVO1); // 반환된 객체가 null이 아닌지 확인
 
 		// 결과 출력
-		LOG.debug("인식오류: " + outVO1.getU1());
-		LOG.debug("결과오류: " + outVO1.getU2());
+		LOG.debug("------------------------------");
+		LOG.debug("누적인식오류: " + outVO1.getU1());
+		LOG.debug("누적결과오류: " + outVO1.getU2());
+		LOG.debug("------------------------------");
 	}
 
 	/*
 	 * 수정
 	 */
 	@Test
-	//@Ignore
+	@Ignore
 	public void update() throws SQLException {
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│        update()       │");
@@ -129,11 +132,11 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 		// 수정 데이터 조회
 		FileUploadVO upVO1 = dao.doSelectOne(outVO1);
 		
-		System.out.println(upVO1);
-		System.out.println(outVO1);
-		
 		// 조회 데이터 비교
-		//isSameData(upVO1, outVO1);
+		isSameData(upVO1, outVO1);
+		LOG.debug(upVO1);
+		LOG.debug(outVO1);
+		
 		
 	}
 

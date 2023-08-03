@@ -60,7 +60,9 @@
         name,
         url,
         file_size AS fileSize,
-       checked
+        checked,
+        u1,
+        u2
     FROM
         upload_image
     WHERE
