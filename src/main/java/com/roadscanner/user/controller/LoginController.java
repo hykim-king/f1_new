@@ -135,14 +135,6 @@ public class LoginController {
 		System.out.println("이메일 인증 이메일 : " + email);
 		return mailSend.joinEmail(email);
 	}
-    
-    @GetMapping("/**/mailCheck2")
-	@ResponseBody
-	public String mailCheck2(String email, String id) {
-		System.out.println("이메일 인증 요청이 들어옴!");
-		System.out.println("이메일 인증 이메일 : " + email);
-		return mailSend.findEmail(email,id);
-	}
 
 
     /**
