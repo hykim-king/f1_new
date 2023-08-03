@@ -99,7 +99,7 @@
         file_size,
         checked
     ) VALUES (
-        #{idx}, <!-- upload_seq.NEXTVAL -->
+        upload_seq.NEXTVAL, <!-- upload_seq.NEXTVAL -->
         #{id},
         10,
         SYSDATE,

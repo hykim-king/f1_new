@@ -1,13 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="CP" value="${pageContext.request.contextPath }"/>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.util.Date" %>
-<%
-    Date currentDate = new Date();
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-    String formattedDate = dateFormat.format(currentDate);
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -274,89 +267,52 @@
     });
     // 선택 상자 End-----------------------------------------------------------------
   </script>
-  
-  <script>
-    // 화면 오른쪽에 결과창 띄우는 함수
-    function showRightContent() {
-      let rightDiv = document.getElementById('rightContent');
-      rightDiv.style.display = 'block';
-    }
-    
-    $("#runButton").on("click",function(){
-    	console.log('runButton click');
-    	
-    	let fileInput = $("#fileUpload").val();
-    	let file = fileInput.files[0];
-    	
-    	if (file) {
-    		let formData = new FormData();
-    		formData.append('file', file);
-    		
-        $.ajax({
-          type: "POST",
-          url:"/roadscanner/fileUploaded",
-          asyn:"true",
-          dataType:"html",
-          data:{
-          	file: file,
-          },
-          success:function(data){//통신 성공
-        	    let currentDate = new Date();
-        	    let formattedDate = `${currentDate.getFullYear()}${(currentDate.getMonth() + 1).toString().padStart(2, '0')}${currentDate.getDate().toString().padStart(2, '0')}`;
-        	    let formattedTime = `${currentDate.getHours().toString().padStart(2, '0')}${currentDate.getMinutes().toString().padStart(2, '0')}${currentDate.getSeconds().toString().padStart(2, '0')}`;
-        	    let sysdateFormatted = `${formattedDate}${formattedTime}`;
-        	    let uName = `${sysdateFormatted}_${fileName}`;
-        	    let uUrl = `"https://roadscanner-test-bucket.s3.ap-northeast-2.amazonaws.com/"+${fileName}`;
-        	    alert("파일 업로드가 완료되었습니다.");
-        	    showRightContent();
-          },
-          error:function(data){//실패시 처리
-        	    console.error("파일 업로드 오류:", data);
-        	    alert("파일 업로드에 실패하였습니다.");
-          },
-        });
-        
-        // doSave 요청에 사용할 데이터 설정
-        let postData = {
-          "uId": $("#name").val(),
-          "uName": uName,
-          "uUrl": uUrl,
-          "uSize": file.fileSizeInKb
-        };
-        console.log(postData);
-        
-        /*$.ajax({
-            type: "POST",
-            url:"com/roadscanner/upload/doSave",
-            asyn:"true",
-            dataType:"html",   
-            data:{
-              "uId" : $("#name").val(),
-              "uName" : ,
-              "uUrl" : ,
-              "uSize" : file.fileSizeInKb
-            },
-            success:function(data){//통신 성공
-                console.log("success data:"+data);
-                let parsedJson = JSON.parse(data);
-                if("1" == parsedJson.msgId){
-                  alert(parsedJson.msgContents);
-                  doRetrieve();
-                }else{
-                  alert(parsedJson.msgContents);
-                }
-            
-            },
-            error:function(data){//실패시 처리
-                console.log("error:"+data);
-            }
-          });*/
-        
-	    } else {
-	        alert('파일을 선택해주세요.');
-	    }
-    }
 
+  <script>
+	  // 화면 오른쪽에 결과창 띄우는 함수
+	  function showRightContent() {
+	    let rightDiv = document.getElementById('rightContent');
+	    rightDiv.style.display = 'block';
+	  }
+
+	  
+	  $("#runButton").on("click", function(){
+		  //console.log('runButton click');
+	    
+			let formData = new FormData();
+			  formData.append("fileUpload", $("#fileUpload")[0].files[0]);
+			  formData.append("idx", 1);
+			  formData.append("id", "testid");
+			  formData.append("category", 10);
+			  formData.append("name", "testname");
+			  formData.append("url", "testurl");
+			  formData.append("fileSize", 0);
+			  formData.append("checked", 0);
+			  formData.append("u1", 0);
+			  formData.append("u2", 0);
+		  
+			$.ajax({
+			    type: "POST",
+			    url:"/roadscanner/fileUploaded",
+			    processData: false,
+			    contentType: false,
+			    data: formData,
+			    success:function(data){ //통신 성공
+		    	  console.log("파일 업로드 성공:", data);
+		    	  let parsedJson = JSON.parse(data);
+            if("1" == data.msgId){
+            	  alert(data.msgContents);
+                showRightContent();
+            }else{
+            	  alert(data.msgContents);
+            }
+			    },
+			    error:function(data){   //실패시 처리
+             console.error("파일 업로드 오류:", data);
+			    }
+			});
+			
+	  });
   </script>
 </body>
 </html>
