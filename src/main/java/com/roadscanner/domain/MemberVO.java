@@ -4,9 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter 
-@Setter
-@ToString
 
 public class MemberVO {
 	private String rid; // 회원 아이디
@@ -24,5 +21,61 @@ public class MemberVO {
 		this.rpassword = rpassword;
 		
 	}
+
+	public String getRid() {
+		return rid;
+	}
+
+	public void setRid(String rid) {
+		this.rid = rid;
+	}
+
+	public String getRpassword() {
+		return rpassword;
+	}
+
+	public void setRpassword(String rpassword) {
+		this.rpassword = rpassword;
+	}
+
+	public String getRemail() {
+		return remail;
+	}
+
+	public void setRemail(String remail) {
+		this.remail = remail;
+	}
+
+	public int getRgrade() {
+		return rgrade;
+	}
+
+	public void setRgrade(int rgrade) {
+		this.rgrade = rgrade;
+	}
+
+	public String getRdate() {
+		return rdate;
+	}
+
+	public void setRdate(String rdate) {
+		this.rdate = rdate;
+	}
+
+	public int getRnumber() {
+		return rnumber;
+	}
+
+	public void setRnumber(int rnumber) {
+		this.rnumber = rnumber;
+	}
+
+	@Override
+	public String toString() {
+		return "MemberVO [rid=" + rid + ", rpassword=" + rpassword + ", remail=" + remail + ", rgrade=" + rgrade
+				+ ", rdate=" + rdate + ", rnumber=" + rnumber + "]";
+	}
 	
+	
+
 }
