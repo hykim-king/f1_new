@@ -1,6 +1,7 @@
 package com.roadscanner.user.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.roadscanner.domain.MemberVO;
 
@@ -88,5 +89,8 @@ public interface UserService {
 
 
 	public int doWithdraw(MemberVO user) throws SQLException;
+
+
+	public List<MemberVO> getAllMembers() throws SQLException;
 	
 }

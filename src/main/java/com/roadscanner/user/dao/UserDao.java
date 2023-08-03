@@ -1,6 +1,7 @@
 package com.roadscanner.user.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.roadscanner.domain.MemberVO;
 
@@ -107,4 +108,7 @@ public interface UserDao {
 	 * @throws SQLException
 	 */
 	public int updateUser(MemberVO user) throws SQLException;
+
+
+	public List<MemberVO> getAllMembers();
 }

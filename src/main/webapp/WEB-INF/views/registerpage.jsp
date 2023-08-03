@@ -181,7 +181,6 @@
            ele.value = ele.value.replace(hangul,'');
          }
        }
-       
       
       /* 취소 버튼 클릭 시 첫 화면으로 이동 / href="메인페이지 주소 입력하기" */
       /* function goFirstForm() {
