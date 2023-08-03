@@ -39,18 +39,4 @@ public class MailSendService {
 		return Integer.toString(authNumber);
 	}
 	
-	public String findEmail(String email) {
-		makeRandomNumber();
-		
-		SimpleMailMessage message = new SimpleMailMessage();
-		
-		message.setFrom("dh103504@naver.com"); // email-config에 설정한 자신의 이메일 주소를 입력
-		message.setTo(email);
-		message.setSubject("비밀번호 변경을 위한 인증 이메일 입니다.");// 이메일 제목
-		message.setText("비밀번호 변경을 위한" 
-				 + "인증 번호는 " + authNumber + "입니다." 
-				+ "해당 인증번호를 인증번호 확인란에 기입하여 주세요."); // 이메일 내용 삽입
-		this.mailSender.send(message);
-		return Integer.toString(authNumber);
-	}
 }

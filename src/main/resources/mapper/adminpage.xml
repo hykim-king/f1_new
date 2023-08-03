@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminpage">
+	<resultMap id="MemberMap" type="MemberVO">
+	        <result column="r_id"            property="rid"   />
+	        <result column="r_password"      property="rpassword"  />
+	        <result column="r_email"         property="remail"/>
+	        <result column="r_grade"         property="rgrade"/>  
+	        <result column="r_date"          property="rdate"/> 
+	        <result column="r_number"        property="rnumber"/>   
+	</resultMap>    
+    <select id="detaillist" parameterType="hashMap" resultMap="MemberMap">
+            SELECT *
+            FROM road_member
+            WHERE r_id = #{rid}
+            ORDER BY r_number
+    </select>
+    
+    <select id="list" resultMap="MemberMap">
+			SELECT *
+			FROM road_member
+			ORDER BY r_number
+    </select>
+		
+	<select id="count" resultType="int">
+	  SELECT COUNT(r_id) cnt
+      FROM road_member
+	</select>
+	
+    <!-- 게시물 목록 + 페이징 -->
+     <select id="listPage" parameterType="hashMap" resultMap="MemberMap">
+      SELECT roadnum,road2.*
+      FROM(
+          SELECT row_number() OVER(ORDER BY road.r_number) AS roadnum, road.*
+           FROM road_member road
+          ORDER BY road.r_number
+          ) road2
+      WHERE roadnum BETWEEN #{displayPost} AND #{postNum}+ #{displayPost}-1         
+      ORDER BY road2.r_number
+    </select> 
+             
+    <!-- 페이징 + 검색 -->
+     <select id="listPageSearchBox" parameterType="hashMap" resultMap="MemberMap">
+        SELECT roadnum,road2.*
+	    FROM(
+          SELECT row_number() OVER(ORDER BY road.r_number) AS roadnum, road.*
+           FROM road_member road
+           WHERE 1=1
+           <if test="keyword !=null and keyword !=''">
+                         AND r_id LIKE '%'||#{keyword}||'%' 
+           </if> 
+          ORDER BY road.r_number
+          ) road2
+	    WHERE roadnum BETWEEN #{displayPost} AND #{postNum}+ #{displayPost}-1         
+	    ORDER BY road2.r_number
+     </select>
+     
+      <select id="searchCountBox" parameterType="hashMap" resultType="int">
+	      SELECT COUNT(r_id) cnt
+	      FROM road_member
+	      WHERE 1=1
+           <if test="keyword !=null and keyword !=''">
+                         AND r_id LIKE '%'||#{keyword}||'%' 
+           </if> 
+     </select>
+</mapper>

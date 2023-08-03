@@ -1,0 +1,14 @@
+@charset "UTF-8";
+.admin_container{
+	margin:auto;
+	text-align: center;
+}
+
+.admin_paging{
+    margin: auto;
+    justify-content: center;
+}
+
+li {
+	text-align: center;
+}

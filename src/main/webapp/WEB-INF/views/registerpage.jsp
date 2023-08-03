@@ -140,7 +140,6 @@
   </ul>
   <p class="text-center text-body-secondary">&copy; 2023 F1 RoadScanner Project, All rights reserved.</p>
 </footer>
-    <script src="${CP}/resources/js/jquery-3.7.0.js"></script>
     <script>
        
         function check_pw() {
@@ -324,7 +323,7 @@
                 /* asyn:"true", */
                 dataType:"html",
                 data:{
-                	uid: $("#id_form").val()
+                	rid: $("#id_form").val()
                 },
                 success:function(data){//통신 성공
                     //console.log("success data:"+data);
@@ -383,7 +382,7 @@
               /* asyn:"true", */
               dataType:"html",
               data:{
-            	  uemail: emial_str
+            	  remail: emial_str
               },
               success:function(data){//통신 성공
                   //console.log("success data:"+data);

@@ -1,0 +1,74 @@
+package com.roadscanner.user.dao;
+
+import java.util.HashMap;
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.roadscanner.domain.MemberVO;
+
+@Repository
+public class AdminpageDaoImpl implements AdminpageDao {
+	@Inject
+	private SqlSessionTemplate sqlSessionTemplate ;
+	private static String namespace = "adminpage";
+	
+	@Override
+	public List<MemberVO> list() throws Exception {
+		return sqlSessionTemplate.selectList(namespace +".list");
+	}
+	
+	//게시물 총 갯수
+	@Override
+	public int count() throws Exception {
+		return sqlSessionTemplate.selectOne(namespace +".count");
+	}
+	
+	@Override
+	public List<MemberVO> listPage(int displayPost, int postNum) throws Exception {
+
+	 HashMap<String,Integer> data = new HashMap<String,Integer>();
+	  
+	 data.put("displayPost", displayPost);
+	 data.put("postNum", postNum);
+	  
+	 return sqlSessionTemplate.selectList(namespace + ".listPage", data);
+	}
+
+	@Override
+	public List<MemberVO> listPageSearchBox(
+			int displayPost, int postNum, String keyword) throws Exception {
+		 HashMap<String, Object> data = new HashMap<String, Object>();
+		  
+		  data.put("displayPost", displayPost);
+		  data.put("postNum", postNum);
+		  data.put("keyword", keyword);
+		
+		return sqlSessionTemplate.selectList(namespace + ".listPageSearchBox", data);
+	}
+
+	@Override
+	public int searchCountBox(String keyword) throws Exception {
+		 	HashMap<String, Object> data = new HashMap<String, Object>();
+		 	
+		 	System.out.println("keyword:"+keyword);
+		 	
+		 	data.put("keyword", keyword);	
+		  return sqlSessionTemplate.selectOne(namespace + ".searchCountBox", data);
+	}
+
+	@Override
+	public List<MemberVO> detaillist(String keyword) throws Exception {
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("keyword", keyword);
+		return sqlSessionTemplate.selectList(namespace +".detaillist", data);
+	}
+
+	
+		 	
+		 
+	
+}
