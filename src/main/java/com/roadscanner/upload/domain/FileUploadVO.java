@@ -1,7 +1,10 @@
 package com.roadscanner.upload.domain;
 
+import org.springframework.stereotype.Component;
+
 import com.roadscanner.cmn.DTO;
 
+@Component
 public class FileUploadVO extends DTO {
 	private int idx; // 이미지 ID : upload_seq.NEXTVAL
 	private String id; // 사용자 ID
