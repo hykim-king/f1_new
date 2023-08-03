@@ -5,11 +5,7 @@ import java.util.List;
 
 import com.roadscanner.domain.MemberVO;
 
-
-
 public interface UserService {
-	// CRUD 기능의 메소드 구현
-
 	
 	/**
 	 * id를 사용하여 회원정보 출력
@@ -29,6 +25,7 @@ public interface UserService {
 	 * @throws SQLException
 	 */
 	public int doLogin(MemberVO user) throws SQLException;
+	
 	public int doPwCheck(MemberVO user) throws SQLException;
 	
 	/**
@@ -92,5 +89,7 @@ public interface UserService {
 
 
 	public List<MemberVO> getAllMembers() throws SQLException;
+	
+	
 	
 }

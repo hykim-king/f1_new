@@ -59,6 +59,7 @@
         <form  class = "formabc" onsubmit="return false;">
                 이메일<br/>
           <input type="email" class = "findinput" id="email" name= "email" placeholder="이메일"><br/>
+          <input type="hidden" id="set_id">
           <button type="button" class= "findbtn" id="findId" name="findId">아이디 찾기</button>
         </form>
         <input type ="hidden" id ="id" name ="id">
@@ -72,6 +73,7 @@
           id="userId" name="userId" placeholder="아이디"><br/>
           이메일<br/>
           <input type="email" class="findinput"  id="email2" name= "email2" placeholder="이메일"><br/>
+          <input type="hidden" id="set_pw">
           <button type="button" class= "findbtn" id="findPw" name="findPw">비밀번호 찾기</button>
         </form>
         
@@ -121,14 +123,11 @@
                       return;
                     }
                     if("30"==paredJSON.msgId){ //서치 성공
-                      alert(paredJSON.msgContents);
-                      const id = paredJSON.msgContents.split(' ');
-                      console.log("id:"+id[1]);
-                      $('#userId').attr('value',id[1]);
-                      $('#email2').attr('value',$('#email').val());
-                      $('#email').val('');
-                      $('#userId').focus();
+                      $('#set_id').attr('value',paredJSON.msgContents);
+                      email_id_find();
+                      
                     }
+                    
                   },
                   error:function(data){//실패시 처리
                     console.log("error:"+data);
@@ -176,10 +175,9 @@
                         return;
                       }
                       if("30"==paredJSON.msgId){//로그인 성공
-                        alert(paredJSON.msgContents);
-                        $('#userId').val('');
-                        $('#email2').val('');
-                        
+                    	$('#set_pw').attr('value',paredJSON.msgContents);
+                    	email_pw_find();
+                    	
                       }
                     },
                     error:function(data){//실패시 처리
@@ -188,6 +186,35 @@
               }); //  $.ajax End --------------------------       
           }); // $("#findPw").on("click") End --------------------------             
       }); // $(document).ready End --------------------------
+      
+      function email_id_find() {
+    	  
+    	   const email = $("#email").val();
+    	   const id = $("#set_id").val();
+    	  
+    	  $.ajax({
+              type : 'POST',
+              url : "toEmailFindId?email=" + email + "&id=" + id 
+              
+          }); // end ajax
+          alert('요청하신 이메일로 아이디를 보내드렸습니다.');
+    	  $('#email').val('');
+      }
+      
+      function email_pw_find() {
+          
+          const email = $("#email2").val();
+          const pw = $("#set_pw").val();
+         
+         $.ajax({
+             type : 'POST',
+             url : "toEmailFindPw?email=" + email + "&pw=" + pw 
+             
+         }); // end ajax
+         alert('요청하신 이메일로 비밀번호를 보내드렸습니다.');
+         $('#userId').val('');
+         $('#email2').val('');
+     }
     
     </script>
 </html>
