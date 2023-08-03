@@ -38,6 +38,27 @@
             <property name="url" value="jdbc:oracle:thin:@192.168.0.123:1521:XE"></property>
             <property name="username" value="f1"></property>
             <property name="password" value="4444"></property>
-        </bean>     
+        </bean>
+        
+         <!-- JavaMailSenderImpl -->
+		  <bean id="mailSenderImpl"
+		    class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		    <property name="host" value="smtp.naver.com" />
+		    <property name="port" value="465" />
+		    <property name="username" value="dh103504@naver.com" />
+		    <property name="password" value="dhehd125%" />
+		    <property name="defaultEncoding" value="utf-8" />
+		    <property name="javaMailProperties">
+		      <props>
+		        <prop key="mail.smtp.host">smtp.naver.com</prop>
+		        <prop key="mail.smtp.port">465</prop>
+		        <prop key="mail.smtp.auth">true</prop>
+		        <prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+		        <prop key="mail.smtp.ssl.enable">true</prop>
+		        <prop key="mail.smtp.ssl.trust">smtp.naver.com</prop>
+		        <prop key="mail.debug">true</prop>
+		      </props>
+		    </property>
+  </bean>     
 
 </beans>

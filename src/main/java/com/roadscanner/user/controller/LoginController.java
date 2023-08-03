@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.roadscanner.cmn.MessageVO;
 import com.roadscanner.domain.MemberVO;
 import com.google.gson.Gson;
+import com.roadscanner.user.service.MailSendService;
 import com.roadscanner.user.service.UserService;
 
 
@@ -30,6 +31,9 @@ public class LoginController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	MailSendService mailSend;
 	
 	/**
 	 * 로그인 화면에 처음 접근할때 호출 하는 함수
@@ -117,6 +121,15 @@ public class LoginController {
 		session.invalidate();
 		return "/login";	
 	}
+    
+    @GetMapping("/**/mailCheck")
+	@ResponseBody
+	public String mailCheck(String email) {
+		System.out.println("이메일 인증 요청이 들어옴!");
+		System.out.println("이메일 인증 이메일 : " + email);
+		return mailSend.joinEmail(email);
+	}
+
 
     /**
      * 아이디/비밀번호 찾기 화면
@@ -211,12 +224,12 @@ public class LoginController {
         int result = 0;
         result = this.userService.doIdDuplCheck(user);
         
-        if(20 == result) {
-        	message.setMsgId("20");
-        	message.setMsgContents("사용할 수있는 ID입니다.");
-        } else if(10 == result) {
+        if(10 == result) {
         	message.setMsgId("10");
         	message.setMsgContents("해당 ID는 사용할 수 없습니다");
+        } else if(20 == result) {
+        	message.setMsgId("20");
+        	message.setMsgContents("사용할 수 있는 ID입니다");
         } 
         
        jsonString = new Gson().toJson(message);
