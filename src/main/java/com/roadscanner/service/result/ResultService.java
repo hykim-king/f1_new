@@ -1,8 +1,8 @@
-package com.roadscanner.result.service;
+package com.roadscanner.service.result;
 
 import java.sql.SQLException;
 
-import com.roadscanner.result.domain.ResultVO;
+import com.roadscanner.domain.result.ResultVO;
 
 public interface ResultService {
 

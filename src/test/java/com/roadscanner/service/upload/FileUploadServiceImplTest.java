@@ -1,4 +1,4 @@
-package com.roadscanner.upload.service;
+package com.roadscanner.service.upload;
 
 import static org.junit.Assert.*;
 
@@ -21,8 +21,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.roadscanner.cmn.PcwkLogger;
-import com.roadscanner.upload.dao.FileUploadDao;
-import com.roadscanner.upload.domain.FileUploadVO;
+import com.roadscanner.dao.upload.FileUploadDao;
+import com.roadscanner.domain.upload.FileUploadVO;
+import com.roadscanner.service.upload.FileUploadService;
 
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;

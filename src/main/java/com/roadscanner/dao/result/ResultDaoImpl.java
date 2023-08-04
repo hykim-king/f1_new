@@ -1,4 +1,4 @@
-package com.roadscanner.result.dao;
+package com.roadscanner.dao.result;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.roadscanner.cmn.PcwkLogger;
-import com.roadscanner.result.domain.ResultVO;
+import com.roadscanner.domain.result.ResultVO;
 
 @Repository
 public class ResultDaoImpl implements PcwkLogger, ResultDao {

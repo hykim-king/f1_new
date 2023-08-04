@@ -1,4 +1,4 @@
-package com.roadscanner.upload.dao;
+package com.roadscanner.dao.upload;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -19,7 +19,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.roadscanner.cmn.PcwkLogger;
-import com.roadscanner.upload.domain.FileUploadVO;
+import com.roadscanner.dao.upload.FileUploadDao;
+import com.roadscanner.domain.upload.FileUploadVO;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)

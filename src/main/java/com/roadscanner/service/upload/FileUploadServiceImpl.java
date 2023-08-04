@@ -1,4 +1,4 @@
-package com.roadscanner.upload.service;
+package com.roadscanner.service.upload;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.roadscanner.cmn.PcwkLogger;
-import com.roadscanner.upload.dao.FileUploadDao;
-import com.roadscanner.upload.domain.FileUploadVO;
+import com.roadscanner.dao.upload.FileUploadDao;
+import com.roadscanner.domain.upload.FileUploadVO;
 
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
@@ -102,7 +102,7 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 		
 		String datestr  = dateFormat.format(currentDate);
 		String fileName = datestr+"_"+file.getOriginalFilename();
-		String url      = "https://"+bucketName+".S3."+region+".amazonaws.com/"+file.getOriginalFilename();
+		String url      = "https://"+bucketName+".S3."+region+".amazonaws.com/"+fileName;
 		int    fileSize = (int) (file.getSize() / 1024);
 		
         File convertedFile = new File(file.getOriginalFilename());

@@ -1,4 +1,4 @@
-package com.roadscanner.result.service;
+package com.roadscanner.service.result;
 
 import java.sql.SQLException;
 
@@ -6,17 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.roadscanner.cmn.PcwkLogger;
-import com.roadscanner.result.dao.ResultDao;
-import com.roadscanner.result.domain.ResultVO;
+import com.roadscanner.dao.result.ResultDao;
+import com.roadscanner.domain.result.ResultVO;
 
 @Service
 public class ResultServiceImpl implements PcwkLogger, ResultService {
 
 	@Autowired
 	ResultDao dao;
-
-	@Autowired
-	ResultVO resultVO;
 
 	// 결과 이미지 상세 조회
 	@Override

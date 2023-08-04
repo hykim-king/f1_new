@@ -1,4 +1,4 @@
-package com.roadscanner.upload.domain;
+package com.roadscanner.domain.upload;
 
 import org.springframework.stereotype.Component;
 

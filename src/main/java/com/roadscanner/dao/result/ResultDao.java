@@ -1,9 +1,9 @@
-package com.roadscanner.result.dao;
+package com.roadscanner.dao.result;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import com.roadscanner.result.domain.ResultVO;
+import com.roadscanner.domain.result.ResultVO;
 
 public interface ResultDao {
 

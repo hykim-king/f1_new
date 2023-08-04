@@ -1,4 +1,4 @@
-package com.roadscanner.upload.dao;
+package com.roadscanner.dao.upload;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.roadscanner.cmn.PcwkLogger;
-import com.roadscanner.upload.domain.FileUploadVO;
+import com.roadscanner.domain.upload.FileUploadVO;
 
 @Repository
 public class FileUploadDaoImpl implements PcwkLogger, FileUploadDao {

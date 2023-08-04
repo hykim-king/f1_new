@@ -1,4 +1,4 @@
-package com.roadscanner.controller;
+package com.roadscanner.controller.upload;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -15,19 +15,18 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 import com.roadscanner.cmn.MessageVO;
 import com.roadscanner.cmn.PcwkLogger;
-import com.roadscanner.upload.domain.FileUploadVO;
-import com.roadscanner.upload.service.FileUploadService;
+import com.roadscanner.domain.upload.FileUploadVO;
+import com.roadscanner.service.upload.FileUploadService;
 
 @Controller
 public class UploadController implements PcwkLogger {
 	
+	@Autowired
 	FileUploadService service;
 	
 	@Autowired
 	MessageVO messageVO;
-	
-	FileUploadService fileUploadService;
-	
+
 	// default 생성자
 	public UploadController() {
 		LOG.debug("┌────────────────────────────┐");
@@ -35,44 +34,10 @@ public class UploadController implements PcwkLogger {
         LOG.debug("└────────────────────────────┘");
 	}
 	
-	// feedback 화면
-	@RequestMapping(value = "/feedback")
-	public String feedback() throws SQLException  {
-		return "feedback";
-	}
-	
 	// upload 화면
 	@RequestMapping(value = "/upload")
 	public String upload() throws SQLException  {
 		return "upload";
-	}
-	
-	// 분기별 피드백
-	@RequestMapping(value = "/quarterlyFeedback", method = RequestMethod.GET
-			,produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public String quarterlyFeedback(FileUploadVO inVO) throws SQLException {
-		String jsonString = "";
-		
-		List<FileUploadVO> outVO = this.fileUploadService.quarterlyFeedback(inVO);
-		
-		jsonString = new Gson().toJson(outVO);
-		
-		return jsonString;
-	}
-	
-	// 누적 피드백 
-	@RequestMapping(value = "/totalFeedback", method = RequestMethod.GET
-			,produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public String totalFeedback(FileUploadVO inVO) throws SQLException {
-		String jsonString = "";
-		
-		FileUploadVO outVO = this.fileUploadService.totalFeedback(inVO);
-		
-		jsonString = new Gson().toJson(outVO);
-		
-		return jsonString;
 	}
 	
     // 파일 업로드 처리

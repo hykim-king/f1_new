@@ -1,4 +1,4 @@
-package com.roadscanner.result.domain;
+package com.roadscanner.domain.result;
 
 public class ResultVO {
 	private int no; // 표지판 번호
