@@ -2,17 +2,49 @@
 <html>
 <head>
     <title>로드스캐너</title>
-    <style>
-        .center {
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
-<h1 class="center">태초마을</h1>
-    <div class="center">
-        <img src="https://fileserviceuploadsperm.blob.core.windows.net/files/f434bbea-f988-4844-b370-7ae42acf18a6?se=2023-07-28T15%3A42%3A21Z&sp=r&sv=2021-08-06&sr=b&rscd=attachment%3B%20filename%3D202f9052-9575-4609-8c2d-c33ac9a0daef&sig=/fbhNSFzw%2BYYLox8llWnLB6tdyrZt9d1c/zBlu2QYVQ%3D"></img>
-        <h2>안녕하세요. 이곳은 태초마을입니다. 새롭게 시작해보세요!</h2>
-    </div>
+<div>
+    <img src="https://r2.jjalbot.com/2023/03/EZSzTAXQJR.jpeg" alt="포기하면편해">
+    <h2>우리 팀이 해야 할 일: 추가 사항있으면 작성해주세요. + 공유!</h2>
+    <ul>
+        <li><h3>게시판 CRUD</h3></strong>
+            <ul>
+                <li><a href="/qna">전체 게시글 출력 R</a></li>
+                <li><a href="/qna/create">게시글 작성 C</a></li>
+                <li><a href="/board/{id}">게시글 조회 R</a></li>
+                <li><a href="#">게시글 수정 U</a></li>
+                <li><a href="#">게시물 삭제 D</a></li>
+            </ul>
+        </li>
+        <li><h4>etc</h4>
+            <ul>
+                <li><a href="#">페이징</a></li>
+                <li><a href="#">게시물 검색 - 어떤 기준으로 할 지 정해야함</a></li>
+                <li><a href="#">조회수 증가</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div>
+    <h2>댓글</h2>
+    <ul>
+        <li>댓글 CRUD
+            <ul>
+                <li><a href="#"></a></li>
+                <li><a href="#"></a></li>
+                <li><a href="#"></a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<h3>다른팀과의 연동</h3>
+<div>
+    <ul>
+        <li>너무많아서 생략...</li>
+    </ul>
+</div>
 </body>
 </html>
