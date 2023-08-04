@@ -11,6 +11,13 @@
 
     <!-- 팀별 추가 설정 -->
     <typeAliases>
-        <typeAlias type="com.roadscanner.dto.Posts" alias="Posts"/>
+        <typeAlias type="com.roadscanner.domain.board.QuestionVO" alias="QuestionVO" />
     </typeAliases>
+
+    <!-- 날짜타입 핸들러 추가 -->
+    <typeHandlers>
+        <typeHandler handler="org.apache.ibatis.type.LocalDateTimeTypeHandler" />
+        <typeHandler handler="org.apache.ibatis.type.LocalDateTypeHandler" />
+        <typeHandler handler="org.apache.ibatis.type.LocalTimeTypeHandler" />
+    </typeHandlers>
 </configuration>
