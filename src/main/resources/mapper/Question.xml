@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.roadscanner.dao.QuestionDAO">
+<mapper namespace="com.roadscanner.dao.qna.QuestionDAO">
 
 <!--    <select id="getAllQuestions" resultType="QuestionVO">-->
 <!--        SELECT * FROM QUESTION-->
@@ -19,5 +19,12 @@
             update_date AS updateDate
         FROM QUESTION
     </select>
+
+    <insert id="createQuestion" parameterType="QuestionVO">
+        INSERT INTO QUESTION
+            (category, id, idx, title, content)
+        VALUES
+            (#{category}, #{id}, #{idx}, #{title}, #{content})
+    </insert>
 
 </mapper>

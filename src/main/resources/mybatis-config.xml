@@ -11,7 +11,7 @@
 
     <!-- 팀별 추가 설정 -->
     <typeAliases>
-        <typeAlias type="com.roadscanner.domain.board.QuestionVO" alias="QuestionVO" />
+        <typeAlias type="com.roadscanner.domain.qna.QuestionVO" alias="QuestionVO" />
     </typeAliases>
 
     <!-- 날짜타입 핸들러 추가 -->
