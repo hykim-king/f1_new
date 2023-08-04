@@ -63,46 +63,64 @@
   
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1"></script>
 <script>
-new Chart(document.getElementById("feedback_barchart"), {
-    type: 'bar',
-    data: {
-      labels: ['인식 오류', '결과 오류', '기타 등등'],
-      datasets: [{
-        data: [20, 15, 8],
-        label: 'feedback',
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-        ],
-        barThickness: 80
-      }]
-    },
-    options: {
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          mode: 'index',
-          intersect: false,
-        },
-        interaction: {
-          mode: 'nearest',
-          intersect: true
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          display: true,
-          ticks: {
-            callback: function(value) {
-              return value + '건';
-            }
-          }
-        }
-      }
-    }
-  }); // feedback_barchart
+$.ajax({
+  type: "GET",
+  url:"/roadscanner/totalFeedback",
+  asyn:"true",
+  dataType:"html",
+  data:{ 
+  },
+  success:function(data){//통신 성공
+	  console.log("success data:"+data);
+	  
+	  // feedback_barchart
+	  new Chart(document.getElementById("feedback_barchart"), {
+		    type: 'bar',
+		    data: {
+		      labels: ['인식 오류', '결과 오류', '기타 등등'],
+		      datasets: [{
+		        data: [20, 15, 8],
+		        label: 'feedback',
+		        backgroundColor: [
+		          'rgba(255, 99, 132, 0.2)',
+		          'rgba(54, 162, 235, 0.2)',
+		          'rgba(255, 206, 86, 0.2)',
+		        ],
+		        barThickness: 80
+		      }]
+		    },
+		    options: {
+		      plugins: {
+		        legend: { display: false },
+		        tooltip: {
+		          mode: 'index',
+		          intersect: false,
+		        },
+		        interaction: {
+		          mode: 'nearest',
+		          intersect: true
+		        }
+		      },
+		      scales: {
+		        y: {
+		          beginAtZero: true,
+		          display: true,
+		          ticks: {
+		            callback: function(value) {
+		              return value + '건';
+		            }
+		          }
+		        }
+		      }
+		    }
+		  }); // feedback_barchart
+  },
+  error:function(data){//실패시 처리
+	  console.log("error:"+data);
+  }
+}); // ajax
+
+
   
 
 new Chart(document.getElementById("feedback_linechart"), {

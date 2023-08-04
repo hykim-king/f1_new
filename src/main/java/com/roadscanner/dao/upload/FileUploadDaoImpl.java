@@ -1,4 +1,4 @@
-package com.roadscanner.upload.dao;
+package com.roadscanner.dao.upload;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.roadscanner.cmn.PcwkLogger;
-import com.roadscanner.upload.domain.FileUploadVO;
+import com.roadscanner.domain.upload.FileUploadVO;
 
 @Repository
 public class FileUploadDaoImpl implements PcwkLogger, FileUploadDao {
@@ -72,7 +72,7 @@ public class FileUploadDaoImpl implements PcwkLogger, FileUploadDao {
 		return sqlSessionTemplate.selectOne(NAMESPACE + DOT + "doSelectOne", inVO);
 	}
 	
-	// 사진 구분, 싫어요 이유, 검토 여부 수정
+	// 사진 수정
 	@Override
 	public int doUpdate(FileUploadVO inVO) throws SQLException {
 		LOG.debug("┌────────────────────────┐");
@@ -81,7 +81,7 @@ public class FileUploadDaoImpl implements PcwkLogger, FileUploadDao {
 		LOG.debug("│        statement       │" + NAMESPACE + DOT + "doUpdate");
 		LOG.debug("└────────────────────────┘");
 		
-		return sqlSessionTemplate.delete(NAMESPACE + DOT + "doUpdate", inVO);
+		return sqlSessionTemplate.update(NAMESPACE + DOT + "doUpdate", inVO);
 	}
 	
 	// 사진 삭제

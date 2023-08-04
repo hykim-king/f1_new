@@ -1,9 +1,9 @@
-package com.roadscanner.upload.dao;
+package com.roadscanner.dao.upload;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import com.roadscanner.upload.domain.FileUploadVO;
+import com.roadscanner.domain.upload.FileUploadVO;
 
 public interface FileUploadDao {
 
@@ -19,7 +19,7 @@ public interface FileUploadDao {
 	// 사진 상세 조회
 	FileUploadVO doSelectOne(FileUploadVO inVO) throws SQLException;
 	
-	// 사진 구분, 싫어요 이유, 검토 여부 수정
+	// 사진 수정
 	int doUpdate(FileUploadVO inVO) throws SQLException;
 
 	// 사진 삭제
