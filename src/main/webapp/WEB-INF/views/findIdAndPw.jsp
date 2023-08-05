@@ -74,7 +74,7 @@
         <form class = "formabc" onsubmit="return false;">
           아이디<br/>
           <input type="text" class="findinput" style="margin-bottom: 20px;"
-          id="userId" name="userId" placeholder="아이디"><br/>
+          id="userId" name="userId" onkeyup="id_form_check(event)" placeholder="아이디"><br/>
           이메일<br/>
           <input type="email" class="findinput"  id="email2" name= "email2" placeholder="이메일"><br/>
           <input type="hidden" id="set_pw">
@@ -96,7 +96,19 @@
     <p class="text-center text-body-secondary">&copy; 2023 F1 RoadScanner Project, All rights reserved.</p>
   </footer>
    <script>
+   
+   function id_form_check(event) {
+       const reg_id = /[^0-9a-z]/g;
+       const ele = event.target; 
+       
+       if(reg_id.test(ele.value)) {
+         ele.value = ele.value.replace(reg_id,'');
+       }
+       
+     }   
+   
     $(document).ready(function(){ //모든 화면이 다 로딩이 되면 실행하는 영역
+    	   	
         $("#findId").on("click",function(){ 
           
           console.log("email : "+$("#email").val());

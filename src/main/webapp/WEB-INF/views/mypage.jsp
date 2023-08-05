@@ -85,6 +85,7 @@
 					      <input class="form-control" type="text" id="remail" readonly="readonly" value="${user.email}">
 					    </li>
 				    </ul>
+				    <input type="hidden" id="upw"  value="${user.password}">
 			    </fieldset>
 			  </form>
 			</div>
@@ -122,7 +123,13 @@ function check_pw() {
     var num = pw.search(/[0-9]/g);
     var eng = pw.search(/[a-z]/ig);
     var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
-
+    
+    if(document.getElementById('rpassword').value == document.getElementById('upw').value) {
+    	window.alert('현재 사용중인 비밀번호 입니다.');
+        document.getElementById('rpassword').value='';
+        document.getElementById('rpassword2').value='';
+    }
+    
     if(pw.length<8 || pw.length>20) {
        window.alert('비밀번호는 8글자 이상, 20글자 이하만 이용 가능합니다.');
        document.getElementById('rpassword').value='';

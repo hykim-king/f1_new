@@ -53,14 +53,16 @@
             </thead>
             <tbody>   
                 <c:forEach var="list2" items="${list2}">
-                    <c:set var="i" value="${i+1}"></c:set>
-                    <c:set var="j" value="${(select2-1)*5+i}"></c:set>    
-                    <tr>
-                        <td><input type="checkbox" name="delcheckbox2" value ="${list2.id}"></td>
-                        <td class="text-center col-sm-1">${j}</td>
-                        <td class="text-center col-sm-5">${list2.id}</td>
-                        <td class="text-center col-sm-6">${list2.email}</td>
-                    </tr>
+                 <c:set var="i" value="${i+1}"></c:set>
+                 <c:set var="j" value="${(select2-1)*5+i}"></c:set>
+	                <c:if test="${user.id ne list2.id} ">    
+	                    <tr>
+	                        <td><input type="checkbox" name="delcheckbox2" value ="${list2.id}"></td>
+	                        <td class="text-center col-sm-1">${j}</td>
+	                        <td class="text-center col-sm-5">${list2.id}</td>
+	                        <td class="text-center col-sm-6">${list2.email}</td>
+	                    </tr>
+	                </c:if>    
                 </c:forEach>   
             </tbody>
         </table>
@@ -83,21 +85,21 @@
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
                 <c:if test="${page2.prev2}">
-                    <li class="page-item"><a class="page-link" aria-label="Previous" href="/memberAdmin2?num2=${page2.startPageNum2 - 5}">이전</a></li>
+                    <li class="page-item"><a class="page-link" aria-label="Previous" href="/memberAdmin2?num2=${page2.startPageNum2 - 5}&keyword=${page.keyword}">이전</a></li>
                 </c:if>
                 
                 <c:forEach begin="${page2.startPageNum2}" end="${page2.endPageNum2}" var="num2">      
                       <c:if test="${select != num2}">
-                        <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${num2}">${num2}</a></li>
+                        <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${num2}&keyword=${page.keyword}">${num2}</a></li>
                       </c:if>
                       
                       <c:if test="${select == num2}">
-                        <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${num2}">${num2}</a></li>
+                        <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${num2}&keyword=${page.keyword}">${num2}</a></li>
                       </c:if>
                 </c:forEach>
                 
                 <c:if test="${page2.next2}">  
-                    <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${page2.endPageNum2 + 1}">다음</a></li>
+                    <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${page2.endPageNum2 + 1}&keyword=${page.keyword}">다음</a></li>
                 </c:if>
                 
             </ul>
@@ -126,6 +128,8 @@ $("#deletebtn2").on("click",function(){
         if( $(this).is(":checked") == true ){
           var tmpVal2 = $(this).val();
           console.log(tmpVal2);
+        
+          
           
               // AJAX 요청을 보냅니다.
                   $.ajax({

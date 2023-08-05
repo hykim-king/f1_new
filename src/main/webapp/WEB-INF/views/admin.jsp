@@ -43,7 +43,7 @@
 
     <h1 style="margin: auto; text-align:cneter;">여기는 관리자전용이다</h1>   
     <iframe src="http://localhost:8080/memberAdmin2"
-    style="margin: 50px auto; height: 400px;"></iframe>
+    style="margin: 50px auto; height: 500px;"></iframe>
 </div>
 </c:if>
 
