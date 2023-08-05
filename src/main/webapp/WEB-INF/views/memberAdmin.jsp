@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="CP" value="${pageContext.request.contextPath }"/>
 
-<%-- <%
+<%
  String strReferer = request.getHeader("referer");
  if(strReferer == null){
 %>
@@ -13,7 +13,7 @@
 <%
  return;
  }
-%> --%>
+%>
 
 <!DOCTYPE html>
 <html>
@@ -66,8 +66,6 @@
                 </c:forEach>
             </tbody>
         </table>
-        <input type="hidden" id="messagebox">
-        <input type="hidden" id = "numckeckin" value="${(select-1)*5 +i}">
         <!-- 회원 정보 테이블 end ------------------------------------------------------------>
         
         <!-- 검색 폼 -->
@@ -77,8 +75,7 @@
                         <input type="text" id="searchid" name="keyword" class="form-control" placeholder="아이디 검색">
                     </div>
                     <button type="submit" id= "searchidbtn" class="btn btn-primary ml-2">검색</button>
-                    <button type="button" id= "deletebtn" class="btn btn-primary ml-2">삭제</button>
-                    <button type="button" id= "numcheck" class="btn btn-primary ml-2">페이지</button>
+                    <button type="button" id= "deletebtn" class="btn btn-primary ml-2">삭제</button>        
             </div>
         </div>
         <!-- 검색 폼 end ------------------------------------------------------------>
@@ -163,13 +160,5 @@ $("#deletebtn").on("click",function(){
 	  }); //--체크박스 체크
 	location.reload();
 });
-</script>
-
-<script>
-$("#numcheck").on("click",function(){
-    let numcheck = $("#numckeckin").val();
-    console.log(numcheck);
-});
-</script>
-                        
+</script>          
 </html>

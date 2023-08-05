@@ -31,6 +31,7 @@
 </head>
 <body>
 
+<c:if  test="${user ne null}">
 <div class ="admin_container">
     <h1 style="margin: auto; text-align:cneter;">여기는 관리자전용이다</h1>   
     <iframe src="http://localhost:8080/memberAdmin"
@@ -44,6 +45,15 @@
     <iframe src="http://localhost:8080/memberAdmin2"
     style="margin: 50px auto; height: 400px;"></iframe>
 </div>
+</c:if>
+
+<c:if test="${user eq null}">  <!-- 유저 정보X -->
+    <div style="text-align: center; margin:80px auto;">
+        <h4>로그인 이후 진행해주세요.</h4><p/>
+          <img alt="ddd" src="../resources/img/infinite.gif" loop = 1 >
+        <h4><a href="${CP}/login">Go To 로그인</a></h4>
+    </div>            
+</c:if> <!-- 유저 정보X-end -->
 
 
 </body>

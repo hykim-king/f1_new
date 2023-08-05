@@ -54,7 +54,7 @@
             <tbody>   
                 <c:forEach var="list2" items="${list2}">
                     <c:set var="i" value="${i+1}"></c:set>
-                    <c:set var="j" value="${(select-1)*5+i}"></c:set>    
+                    <c:set var="j" value="${(select2-1)*5+i}"></c:set>    
                     <tr>
                         <td><input type="checkbox" name="delcheckbox2" value ="${list2.rid}"></td>
                         <td class="text-center col-sm-1">${j}</td>
