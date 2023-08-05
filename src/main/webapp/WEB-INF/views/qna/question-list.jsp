@@ -28,7 +28,7 @@
             <tr>
                 <td>777</td>
                 <td>공지</td>
-                <td>와! 로드스캐너 런칭합니다.</td>
+                <td><a href="/qna/${question.id}">와! 로드스캐너 런칭합니다.</a></td>
                 <td>admin</td>
                 <td>23/08/29</td>
                 <td>8</td>

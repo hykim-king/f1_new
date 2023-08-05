@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -13,7 +15,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/qna")
 @Controller
-// 게시판 페이지 URL 요청을 담당하는 컨트롤러
 public class QuestionController {
 
     private final QuestionService questionService;
@@ -28,6 +29,12 @@ public class QuestionController {
     @GetMapping("/create")
     public String createQuestion() {
         return "qna/question-create";
+    }
+
+    @GetMapping("/{no}")
+    public String detail(@PathVariable Long no) {
+        System.out.println(no);
+        return "qna/question-detail";
     }
 
 }

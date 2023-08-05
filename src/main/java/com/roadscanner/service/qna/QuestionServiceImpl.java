@@ -19,8 +19,17 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public List<QuestionListDTO> getAllQuestions() {
-        return null;
+
+        List<QuestionVO> questions = questionDAO.getAllQuestions();
+
+        // QuestionVO를 QeustuonListDTO로 변환
+        List<QuestionListDTO> questionListDTOs = new ArrayList<>();
+        for (QuestionVO question : questions) {
+            questionListDTOs.add(QuestionListDTO.of(question));
+        }
+        return questionListDTOs;
     }
+
 
     @Override
     public void createQuestion(QuestionCreateDTO dto) {
