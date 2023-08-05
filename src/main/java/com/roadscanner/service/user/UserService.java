@@ -90,6 +90,12 @@ public interface UserService {
 
 	public List<MemberVO> getAllMembers() throws SQLException;
 	
-	
-	
+	/**
+	 * 등급 변경
+	 * @param user
+	 * @return 등급 3으로 변경 -> 아이디 정지 
+	 * @throws SQLException
+	 */
+	public int updateGrade(MemberVO user) throws SQLException;
+		
 }

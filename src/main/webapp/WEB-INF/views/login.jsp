@@ -146,6 +146,11 @@
                   //javascript 내장객체 : url
                   window.location.href="${CP}/mypage";
                 }
+                if("40"==paredJSON.msgId) {
+                	alert(paredJSON.msgContents);
+                	document.getElementById('id').value='';
+                	document.getElementById('pw').value='';
+                }
               },
               error:function(data){//실패시 처리
                 console.log("error:"+data);

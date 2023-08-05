@@ -32,7 +32,6 @@
 <body>
     <div class="container">
     
-   
   <!-- 일반회원 --------------------------------------------------------------->
 <form>    
         <!-- 제목 -->
@@ -56,7 +55,7 @@
                 
                 <c:forEach var="list" items="${list}">
                 <c:set var="i" value="${1+i}"></c:set> 
-                <c:set var="j" value="${(select-1)*5+i}"></c:set>    
+                <c:set var="j" value="${(select-1)*5+i}"></c:set>
                     <tr>
                         <td><input type="checkbox" name="delcheckbox" value ="${list.id}"></td>
                         <td class="text-center col-sm-1">${j}</td>
@@ -75,7 +74,7 @@
                         <input type="text" id="searchid" name="keyword" class="form-control" placeholder="아이디 검색">
                     </div>
                     <button type="submit" id= "searchidbtn" class="btn btn-primary ml-2">검색</button>
-                    <button type="button" id= "deletebtn" class="btn btn-primary ml-2">삭제</button>        
+                    <button type="button" id= "deletebtn" class="btn btn-primary ml-2">정지</button>        
             </div>
         </div>
         <!-- 검색 폼 end ------------------------------------------------------------>
@@ -135,7 +134,7 @@ $("#deletebtn").on("click",function(){
 		      // AJAX 요청을 보냅니다.
 		          $.ajax({
 		              type: "POST",
-		              url:"${CP}/withdraw",
+		              url:"${CP}/forbidden",
 		              dataType:"html",
 		              data: {
 		              id: tmpVal

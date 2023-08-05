@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    // 서버 측에서 사용자 세션을 확인하고, 세션이 없으면 기본 페이지로 리다이렉트합니다.
+    if (session.getAttribute("user") == null) {
+      response.sendRedirect("/login");
+    }
+%>
 <c:set var="CP" value="${pageContext.request.contextPath}"/> 
 <!DOCTYPE html>
 <html>
@@ -43,7 +49,7 @@
         <!-- 로그인 세션 O -->
         <c:if test="${user ne null}">
           <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/logout'">LogOut</button>
-            <!-- 관린자 -->
+            <!-- 관리자 -->
             <c:if test="${user.grade ==2}">
                 <button type="button" class="btn btn-outline-primary" onclick="location.href='${CP}/admin'" style="margin-right: 50px;">관리자</button>
             </c:if>
@@ -52,8 +58,8 @@
     </div>
   </div>
 </nav>
-  <body class="d-flex flex-column min-vh-100">
 
+  <body class="d-flex flex-column min-vh-100">
   <!-- 일반 -->
   <c:if  test="${user ne null}">
   <c:if test="${user.grade ==1}">
@@ -102,13 +108,9 @@
 	    </div>
 	</c:if>
 	
-	<c:if test="${user eq null}">  <!-- 유저 정보X -->
-    <div style="text-align: center; margin:80px auto;">
-        <h4>로그인 이후 진행해주세요.</h4><p/>
-          <img alt="ddd" src="../resources/img/infinite.gif" loop = 1 >
-        <h4><a href="${CP}/login">Go To 로그인</a></h4>
-    </div>            
-    </c:if> <!-- 유저 정보X-end -->
+	<c:if test="${user eq null}">
+    <p>세션이 없습니다. 기본 페이지로 리다이렉트합니다.</p>
+  </c:if>
 	</body>
 
   <footer class="py-3 my-4 mt-auto">

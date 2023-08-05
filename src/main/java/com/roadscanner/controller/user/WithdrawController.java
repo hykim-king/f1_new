@@ -61,4 +61,34 @@ public class WithdrawController {
         jsonString = new Gson().toJson(message);
         return jsonString;
     }
+    
+    /**
+     * 회원 정지 처리
+     * @param user 회원 정보 (비밀번호가 담긴 객체)
+     * @return JSON 형태의 응답 데이터
+     * @throws SQLException 
+     */
+    @RequestMapping(value = "/forbidden", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String forbidden(MemberVO user) throws SQLException {
+        System.out.println("┌────────────────────────────────────────────────────────┐");
+        System.out.println("│ forbidden()                                            │");
+        System.out.println("└────────────────────────────────────────────────────────┘");
+        
+        String jsonString = "";
+        MessageVO message = new MessageVO();
+
+        int updateGrade = userService.updateGrade(user);
+        
+        if (updateGrade == 1) {
+                message.setMsgId("10");
+                message.setMsgContents("회원이 정지되었습니다.");
+        } else {
+                message.setMsgId("20");
+                message.setMsgContents("회원정지 처리에 실패했습니다.");
+        }
+        
+        jsonString = new Gson().toJson(message);
+        return jsonString;
+    }
 }

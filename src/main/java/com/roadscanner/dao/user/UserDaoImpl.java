@@ -216,5 +216,28 @@ public class UserDaoImpl implements UserDao {
 	public List<MemberVO> getAllMembers() {
 		return null;
 	}
+
+	@Override
+	public MemberVO gradeCheck(MemberVO user) throws SQLException {
+		String statement = this.NAMESPACE + DOT + "gradeCheck";
+		LOG.debug("┌────────────────────────────────────────────────────────┐");
+		LOG.debug("│ statement " + statement);
+		LOG.debug("└────────────────────────────────────────────────────────┘");
+		MemberVO outVO = this.sqlSessionTemplate.selectOne(statement, user);
+
+		return outVO;
+	}
+
+	@Override
+	public int updateGrade(MemberVO user) throws SQLException {
+		int flag = 0;
+		String statement = this.NAMESPACE + DOT + "forbiddenUser";
+		LOG.debug("┌────────────────────────────────────────────────────────┐");
+		LOG.debug("│ statement " + statement);
+		LOG.debug("└────────────────────────────────────────────────────────┘");
+		flag = this.sqlSessionTemplate.update(statement, user);
+
+		return flag;
+	}
 	
 }

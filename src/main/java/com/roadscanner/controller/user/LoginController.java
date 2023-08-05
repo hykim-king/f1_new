@@ -109,6 +109,9 @@ public class LoginController {
             if(null!=userInfo) {
                 httpSession.setAttribute("user", userInfo);
             }
+        }else if(40==status) {
+        	message.setMsgId("40");
+            message.setMsgContents(user.getId()+"가 정지되었습니다.");
         }else {
             message.setMsgId("99");
             message.setMsgContents("알수 없는 오류");            

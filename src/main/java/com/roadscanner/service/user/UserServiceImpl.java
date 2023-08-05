@@ -129,17 +129,24 @@ public class UserServiceImpl implements UserService {
 		LOG.debug("└────────────────────────────────────────────────────────┘");
 		int checkStatus = 0; 		// 10(id 없음)/20(비밀번호 오류),30(성공) 
 		int status = this.userDao.idCheck(user);
+		int grade = this.userDao.gradeCheck(user).getGrade();
 		
 		if(1==status) {
-			status = userDao.passCheck(user);
-			if(1==status) {
-				checkStatus = 30; 	// 로그인 성공 
-			}else {
-				checkStatus = 20; 	// 비밀번호 오류
+			if(1 == grade || 2 == grade) {
+				status = userDao.passCheck(user);
+				if(1==status) {
+					checkStatus = 30; 	// 로그인 성공 
+				}else {
+					checkStatus = 20; 	// 비밀번호 오류
+				}				
+			} else {
+				checkStatus = 40;
 			}
+			
 		} else {
 			checkStatus = 10; 		// id없음
 		}
+		
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
 		LOG.debug("│ checkStatus : "+ checkStatus);
 		LOG.debug("└────────────────────────────────────────────────────────┘");
@@ -220,4 +227,17 @@ public class UserServiceImpl implements UserService {
 		// 데이터베이스에서 모든 회원 목록을 가져오는 로직을 구현
 		return userDao.getAllMembers(); // 예시로 userDao.getAllMembers() 메서드를 호출하는 것으로 가정
 	}
+
+	@Override
+	public int updateGrade(MemberVO user) throws SQLException {
+		int checkGrade = -1;
+		
+        checkGrade = this.userDao.updateGrade(user);
+        if(0==checkGrade) {
+            checkGrade = -1; // 회원정보가 변경되지 않음
+        } 
+        LOG.debug("checkGrade: " + checkGrade);
+        return checkGrade;
+	}
+	
 }

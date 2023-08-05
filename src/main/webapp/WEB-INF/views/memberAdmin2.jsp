@@ -31,7 +31,6 @@
 </head>
 <body>
 <!-- 관리자 리스트  ---------------------------------------------------------------> 
-
 <div class="container"> 
     <form>  
         <!-- 제목 -->
@@ -39,7 +38,6 @@
             <h2 class="text-center">관리자 리스트</h2>
         </div>
         <!-- 제목 end --------------------------------------------------------------->
-
 
         <!-- 회원 정보 테이블 -->
         <table class="table table-hover" id="memberTable">
@@ -54,15 +52,15 @@
             <tbody>   
                 <c:forEach var="list2" items="${list2}">
                  <c:set var="i" value="${i+1}"></c:set>
-                 <c:set var="j" value="${(select2-1)*5+i}"></c:set>
-	                <c:if test="${user.id ne list2.id} ">    
+                 <c:set var="j" value="${(select2-1)*5+i}"></c:set>  
+                  <c:if test="${user.id ne list2.id}">
 	                    <tr>
 	                        <td><input type="checkbox" name="delcheckbox2" value ="${list2.id}"></td>
 	                        <td class="text-center col-sm-1">${j}</td>
 	                        <td class="text-center col-sm-5">${list2.id}</td>
 	                        <td class="text-center col-sm-6">${list2.email}</td>
 	                    </tr>
-	                </c:if>    
+	                </c:if>
                 </c:forEach>   
             </tbody>
         </table>
