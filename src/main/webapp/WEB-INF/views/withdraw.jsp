@@ -54,8 +54,8 @@
           <label for="password"></label>
           <input type="password" id="upassword"  placeholder="비밀번호를 입력하세요">
         </form>
-        <input type="hidden" id="uid"  value="${user.rid}">
-        <input type="hidden" id="upw"  value="${user.rpassword}">
+        <input type="hidden" id="uid"  value="${user.id}">
+        <input type="hidden" id="upw"  value="${user.password}">
         <div class="wbut">
 	       <input type="button" class="btn btn-outline-dark" id="withdraw" value="회원 탈퇴하기">
 	    </div>
