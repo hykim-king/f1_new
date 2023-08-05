@@ -33,11 +33,12 @@
       </ul>
       <form class="d-flex" role="search">
         <!-- 로그인 세션 X -->
-        <c:if test="${user eq null}">
-          <button type="button" id="login" onclick="location.href='${CP}/login'" class="btn btn-outline-primary me-2">Login</button>
-        </c:if>
-        <!-- 로그인 세션 O -->
         <c:if test="${user ne null}">
+          <button type="button" id="login" onClick="window.location.reload()" class="btn btn-outline-primary me-2">Login</button>
+        </c:if>
+        
+        <!-- 로그인 세션 O -->
+        <c:if test="${user eq null}">
           <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/mypage'">MyPage</button>
           <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/logout'">LogOut</button>
         </c:if>
@@ -91,7 +92,10 @@
 <script>
   $(document).ready(function(){ //모든 화면이 다 로딩이 되면 실행하는 영역
     console.log("$document.ready");
-
+    if(window.location.href == "http://localhost:8080/logout"){
+    	 window.location.href="${CP}/login";
+    }
+   
     //jquery 이벤트 감지 (#은 id를 감지한는것이다.)
     $("#doLogin").on("click",function(){
       console.log("doLogin");
@@ -117,8 +121,8 @@
             /* asyn:"true", */
             dataType:"html",
             data:{
-              rid: $("#id").val(),
-              rpassword: $("#pw").val()
+              id: $("#id").val(),
+              password: $("#pw").val()
             },
             success:function(data){//통신 성공
                 //console.log("success data:"+data);

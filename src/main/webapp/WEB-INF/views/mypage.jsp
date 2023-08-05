@@ -42,10 +42,9 @@
         </c:if>
         <!-- 로그인 세션 O -->
         <c:if test="${user ne null}">
-          <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/mypage'">MyPage</button>
           <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/logout'">LogOut</button>
             <!-- 관린자 -->
-            <c:if test="${user.rgrade ==2}">
+            <c:if test="${user.grade ==2}">
                 <button type="button" class="btn btn-outline-primary" onclick="location.href='${CP}/admin'" style="margin-right: 50px;">관리자</button>
             </c:if>
         </c:if>        
@@ -57,12 +56,12 @@
 
   <!-- 일반 -->
   <c:if  test="${user ne null}">
-  <c:if test="${user.rgrade ==1}">
-     <h2 style="text-align: center; margin-top: 100px; margin-bottom: 80px;">${user.rid}님 의 마이페이지</h2>
+  <c:if test="${user.grade ==1}">
+     <h2 style="text-align: center; margin-top: 100px; margin-bottom: 80px;">${user.id}님 의 마이페이지</h2>
   </c:if>
   <!-- 관리자 -->
-  <c:if test="${user.rgrade ==2}">
-     <h2 style="text-align: center; margin-top: 100px; margin-bottom: 80px;">관리자 ${user.rid}님 의 마이페이지</h2>
+  <c:if test="${user.grade ==2}">
+     <h2 style="text-align: center; margin-top: 100px; margin-bottom: 80px;">관리자 ${user.id}님 의 마이페이지</h2>
   </c:if>
 	  <div id="container">
 			  <form>
@@ -70,7 +69,7 @@
 			      <ul class="list-group" style="list-style: none;">
 				      <li>
 					      <label>아이디</label><br/>
-					      <input class="form-control" type="text" id="rid" readonly="readonly" value="${user.rid}">
+					      <input class="form-control" type="text" id="rid" readonly="readonly" value="${user.id}">
 					    </li>
 					    <li>
 					      <label>비밀번호 수정</label><br/>
@@ -83,7 +82,7 @@
 					    </li>
 					    <li>
 					      <label>이메일</label><br/>
-					      <input class="form-control" type="text" id="remail" readonly="readonly" value="${user.remail}">
+					      <input class="form-control" type="text" id="remail" readonly="readonly" value="${user.email}">
 					    </li>
 				    </ul>
 			    </fieldset>
@@ -181,9 +180,9 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
 	        asyn:"true",
 	        dataType:"html",
 	        data:{
-	        	rid: $("#rid").val(),
-	        	rpassword: $("#rpassword").val(),
-	        	remail: $("#remail").val()
+	        	id: $("#rid").val(),
+	        	password: $("#rpassword").val(),
+	        	email: $("#remail").val()
 	        },
 	        success:function(data){//통신 성공
 	        	  let parsedJSON = JSON.parse(data);

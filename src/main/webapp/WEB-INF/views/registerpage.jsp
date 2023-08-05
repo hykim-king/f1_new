@@ -267,10 +267,10 @@
                 /* asyn:"true", */
                 dataType:"html",
                 data:{
-                	  rgrade: $("#grade").val(),
-                    rid: $("#id").val(),
-                    rpassword: $("#pw").val(),
-                    remail: $("#email").val()
+                	grade: $("#grade").val(),
+                    id: $("#id").val(),
+                    password: $("#pw").val(),
+                    email: $("#email").val()
                 },
                 success:function(data){//통신 성공
                     //console.log("success data:"+data);
@@ -322,7 +322,7 @@
                 /* asyn:"true", */
                 dataType:"html",
                 data:{
-                	rid: $("#id_form").val()
+                	id: $("#id_form").val()
                 },
                 success:function(data){//통신 성공
                     //console.log("success data:"+data);
@@ -381,7 +381,7 @@
               /* asyn:"true", */
               dataType:"html",
               data:{
-            	  remail: emial_str
+            	  email: emial_str
               },
               success:function(data){//통신 성공
                   //console.log("success data:"+data);

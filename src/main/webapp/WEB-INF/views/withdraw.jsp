@@ -102,7 +102,7 @@
 	               url:"${CP}/withdraw",
 	               dataType:"html",
 	               data: {
-	                rid: $("#uid").val()
+	                id: $("#uid").val()
 	               },
 	               success:function(data) {
 	                let parsedJSON = JSON.parse(data);

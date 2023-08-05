@@ -114,7 +114,7 @@
                 /* asyn:"true", */
                 dataType:"html",
                 data:{
-                    remail: $("#email").val()
+                    email: $("#email").val()
                 },
                 success:function(data){//통신 성공
                     //console.log("success data:"+data);
@@ -164,8 +164,8 @@
                   /* asyn:"true", */
                   dataType:"html",
                   data:{
-                    rid   : $("#userId").val(),
-                    remail : $("#email2").val(),
+                    id   : $("#userId").val(),
+                    email : $("#email2").val(),
                     
                   },
                   success:function(data){//통신 성공
