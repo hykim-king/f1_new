@@ -38,10 +38,10 @@ public class MemberTest {
 	@Ignore
 	public void selectOneUser() throws SQLException {
 		MemberVO inVO = new MemberVO();
-		inVO.setRid("admin");
+		inVO.setId("admin");
 		MemberVO outVO = userService.selectUser(inVO);
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
-		LOG.debug("│ "+inVO.getRid()+"회원의 정보  : \n"+ outVO.toString()); 	// 회원 정보
+		LOG.debug("│ "+inVO.getId()+"회원의 정보  : \n"+ outVO.toString()); 	// 회원 정보
 		LOG.debug("└────────────────────────────────────────────────────────┘");
 	}
 	
@@ -51,11 +51,11 @@ public class MemberTest {
 	public void addUser() throws SQLException {
 		
 		MemberVO user = new MemberVO();
-		user.setRgrade(1);
-		user.setRid("admin");
-		user.setRpassword("123123");
-		user.setRemail("test@naver.com");
-		user.setRdate("sysdate");
+		user.setGrade(1);
+		user.setId("admin");
+		user.setPassword("123123");
+		user.setEmail("test@naver.com");
+		user.setRegdate("sysdate");
 
 
 //		int result = userService.deleteOne(user); 	//**** 회원 삭제 서비스 호출 ****//
@@ -74,7 +74,7 @@ public class MemberTest {
 	@Ignore
 	public void idCheck() throws SQLException {
 		MemberVO inVO = new MemberVO();
-		inVO.setRid("ss");
+		inVO.setId("ss");
 		int result = userService.doIdDuplCheck(inVO); 	//**** 회원 로그인 서비스 호출 ****//
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
 		LOG.debug("│ 아이디 중복 여부  : "+ result); //10: 이미 id 있음, 20: 없음
@@ -86,7 +86,7 @@ public class MemberTest {
 	@Ignore
 	public void searchId() throws SQLException {
 		MemberVO user = new MemberVO();
-		user.setRemail("test@naver.com");
+		user.setEmail("test@naver.com");
         
         String result = "-1";
         result = userService.doSearchId(user);     
@@ -107,8 +107,8 @@ public class MemberTest {
 	@Ignore
 	public void searchPw() throws SQLException {
 		MemberVO user = new MemberVO();
-		user.setRid("admin");
-		user.setRemail("test@naver.com");
+		user.setId("admin");
+		user.setEmail("test@naver.com");
 		String result = userService.doSearchPw(user); 	
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
 		LOG.debug("│ 비밀번호 수정 여부   : "+ result); 	
@@ -122,8 +122,8 @@ public class MemberTest {
 	@Ignore
 	public void login() throws SQLException{
 		MemberVO inVO = new MemberVO();
-		inVO.setRid("admin");
-		inVO.setRpassword("123123");
+		inVO.setId("admin");
+		inVO.setPassword("123123");
 		int result = userService.doLogin(inVO); 	
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
 		LOG.debug("│ 로그인 여부  : "+ result); //10: id 없음, 20: 비밀번호 오류, 30: 로그인 성공 
@@ -137,12 +137,12 @@ public class MemberTest {
 	public void changeInfo() throws SQLException{
 
 		MemberVO inVO = new MemberVO();
-		inVO.setRid("admin");
+		inVO.setId("admin");
 		MemberVO outVO = userService.selectUser(inVO);
 		
 		MemberVO inVO2 = outVO;
-		inVO2.setRid("ohdoho");
-		inVO2.setRemail("test@naver.com");
+		inVO2.setId("ohdoho");
+		inVO2.setEmail("test@naver.com");
 		LOG.debug("│ inVO2  : "+ inVO2.toString()); 
 		
 		int result = userService.doChangeInfo(inVO2); 	//**** 회원 정보 수정 서비스 호출 ****//
