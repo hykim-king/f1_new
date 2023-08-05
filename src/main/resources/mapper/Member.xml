@@ -2,125 +2,125 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.Member">
 	<resultMap id="MemberMap" type="MemberVO">
-        <result column="r_id"            property="rid"   />
-        <result column="r_password"      property="rpassword"  />
-        <result column="r_email"         property="remail"/>
-        <result column="r_grade"         property="rgrade"/>  
-        <result column="r_date"          property="rdate"/> 
-        <result column="r_number"        property="rnumber"/>   
+        <result column="id"            property="id"   />
+        <result column="password"      property="password"  />
+        <result column="email"         property="email"/>
+        <result column="grade"         property="grade"/>  
+        <result column="reg_date"          property="regdate"/> 
+        <result column="no"        property="no"/>   
     </resultMap>    
     
     <!-- 아이디로 회원정보 반환 -->
     <select id="selectOne" parameterType="MemberVO"  resultMap="MemberMap" >
         SELECT *
-        FROM road_member
-        WHERE r_id = #{rid}
+        FROM member
+        WHERE id = #{id}
     </select>
     
     
     <select id="selectOneMypage" parameterType="MemberVO"  resultMap="MemberMap" >
-        SELECT  r_grade, r_id, r_password,
+        SELECT  grade, id, password,
         SUBSTR(email, 1, INSTR(email, '@')-1)AS emailFront,
         SUBSTR(email, INSTR(email, '@') + 1) AS emailBack
-        FROM road_member
-        WHERE r_id = #{rid} 
+        FROM member
+        WHERE id = #{id} 
     </select>
     
     <!-- 아이디 체크 -->
     <select id="idCheck" parameterType="MemberVO" resultType="int">
       SELECT COUNT(*) cnt
-      FROM road_member
-      WHERE r_id = #{rid}
+      FROM member
+      WHERE id = #{id}
     </select>
     
     
     <!-- 이메일 체크 -->
     <select id="emailCheck" parameterType="MemberVO" resultType="int">
       SELECT COUNT(*) cnt
-      FROM road_member
-      WHERE r_email = #{remail}
+      FROM member
+      WHERE email = #{email}
     </select>
     
     <!-- 아이디 + 패스워드 체크 -->
     <select id="passCheck" parameterType="MemberVO" resultType="int">
       SELECT COUNT(*) cnt
-      FROM road_member
-      WHERE r_id = #{rid}
-      AND r_password = #{rpassword}
+      FROM member
+      WHERE id = #{id}
+      AND password = #{password}
     </select>
     
   <!-- 이메일로  아이디 존재 여부 검색 -->
   <select id="searchIdCheck" parameterType="MemberVO" resultType="int">
     SELECT COUNT(*) cnt
-    FROM road_member
-    WHERE r_email  = #{remail}
+    FROM member
+    WHERE email  = #{remail}
     </select>    
     
     <!-- 이메일로  아이디 검색 -->
     <select id="searchId" parameterType="MemberVO" resultMap="MemberMap">
-      SELECT r_id
-      FROM road_member
-      WHERE r_email  = #{remail}
+      SELECT id
+      FROM member
+      WHERE email  = #{email}
     </select>
         
     <!-- id + 이메일  비밀번호 여부 검색 -->
     <select id="searchPwCheck" parameterType="MemberVO" resultType="int">
       SELECT COUNT(*) cnt
-      FROM road_member
-      WHERE r_email = #{remail}
-      AND r_id     = #{rid}
+      FROM member
+      WHERE email = #remail}
+      AND id     = #{id}
     </select>
     
      <!-- id + 이메일로  비밀번호 검색 -->
     <select id="searchPw" parameterType="MemberVO" resultMap="MemberMap">
-      SELECT r_password
-      FROM road_member
-      WHERE r_email = #{remail}
-      AND r_id  = #{rid}
+      SELECT password
+      FROM member
+      WHERE email = #{email}
+      AND id  = #{id}
     </select>
     
     
     
     <!-- 회원가입  -->
     <insert id="insertOne" parameterType="MemberVO" >
-    INSERT INTO road_member (    
-		        r_grade,     
-                r_id,       
-                r_password, 
-                r_email,
-                r_date,
-                r_number
+    INSERT INTO member (    
+		        grade,     
+                id,       
+                password, 
+                email,
+                reg_date,
+                no
      ) VALUES (
-        #{rgrade},    
-        #{rid},       
-        #{rpassword},        
-        #{remail},
+        #{grade},    
+        #{id},       
+        #{password},        
+        #{email},
         SYSDATE,
-        R_NUMBER_SEQ.NEXTVAL
+        MEMBER_SEQ.NEXTVAL
      )      
   </insert>  
     
   <!-- 사용자 비밀번호 변경 -->
   <update id="updatepassword" parameterType="MemberVO">
-    UPDATE road_member         
-    SET  r_password = #{rpassword}   
-    WHERE r_id = #{rid}
-    AND r_email  = #{remail}
+    UPDATE member         
+    SET  password = #{password}   
+    WHERE id = #{id}
+    AND email  = #{email}
   </update>
   
   <!-- 사용자 정보 변경 -->
   <update id="updateUser" parameterType="MemberVO">
-    UPDATE road_member         
-    SET r_id      = #{rid},  
-        r_password        = #{rpassword},
-        r_email     = #{remail}
-    WHERE r_number = #{rnumber}
+    UPDATE member         
+    SET id      = #{id},  
+        password        = #{password},
+        email     = #{email}
+    WHERE no = #{no}
   </update>
 
   
   <!-- 유저 삭제 -->
   <delete id="deleteOne" parameterType="MemberVO">
-    DELETE FROM road_member
-    WHERE r_id = #{rid}
+    DELETE FROM member
+    WHERE id = #{id}
   </delete>
 </mapper>

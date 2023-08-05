@@ -56,10 +56,10 @@
                     <c:set var="i" value="${i+1}"></c:set>
                     <c:set var="j" value="${(select2-1)*5+i}"></c:set>    
                     <tr>
-                        <td><input type="checkbox" name="delcheckbox2" value ="${list2.rid}"></td>
+                        <td><input type="checkbox" name="delcheckbox2" value ="${list2.id}"></td>
                         <td class="text-center col-sm-1">${j}</td>
-                        <td class="text-center col-sm-5">${list2.rid}</td>
-                        <td class="text-center col-sm-6">${list2.remail}</td>
+                        <td class="text-center col-sm-5">${list2.id}</td>
+                        <td class="text-center col-sm-6">${list2.email}</td>
                     </tr>
                 </c:forEach>   
             </tbody>
@@ -133,17 +133,19 @@ $("#deletebtn2").on("click",function(){
                       url:"${CP}/withdraw",
                       dataType:"html",
                       data: {
-                       rid: tmpVal2
+                       id: tmpVal2
                       },
                       success:function(data) {
                        let parsedJSON = JSON.parse(data);
                          
                            if("10" == parsedJSON.msgId){
                               $('#messagebox').attr('value', parsedJSON.msgContents);
+                              location.reload();
                           } 
                                                 
                           if("20" == parsedJSON.msgId){
                               $('#messagebox').attr('value',parsedJSON.msgContents);
+                              location.reload();
                           }
                       },
                       error: function(data) {

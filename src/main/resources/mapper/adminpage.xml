@@ -2,38 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="adminpage">
 	<resultMap id="MemberMap" type="MemberVO">
-	        <result column="r_id"            property="rid"   />
-	        <result column="r_password"      property="rpassword"  />
-	        <result column="r_email"         property="remail"/>
-	        <result column="r_grade"         property="rgrade"/>  
-	        <result column="r_date"          property="rdate"/> 
-	        <result column="r_number"        property="rnumber"/>   
+	        <result column="id"            property="id"   />
+	        <result column="password"      property="password"  />
+	        <result column="email"         property="email"/>
+	        <result column="grade"         property="grade"/>  
+	        <result column="reg_date"          property="regdate"/> 
+	        <result column="no"        property="no"/>   
 	</resultMap>    
       
     <!-- 페이징 + 검색 -->
      <select id="listPageSearchBox" parameterType="hashMap" resultMap="MemberMap">
         SELECT roadnum,road2.*
 	    FROM(
-          SELECT row_number() OVER(ORDER BY road.r_number) AS roadnum, road.*
-           FROM road_member road
-           WHERE r_grade = 1
+          SELECT row_number() OVER(ORDER BY road.no) AS roadnum, road.*
+           FROM member road
+           WHERE grade = 1
            <if test="keyword !=null and keyword !=''">
-                         AND r_id LIKE '%'||#{keyword}||'%' 
+                         AND id LIKE '%'||#{keyword}||'%' 
            </if> 
-          ORDER BY road.r_number
+          ORDER BY road.no
           ) road2
 	    WHERE roadnum BETWEEN #{displayPost} AND #{postNum}+ #{displayPost}-1         
-	    ORDER BY road2.r_number
+	    ORDER BY road2.no
      </select>
 
      <!-- 검색  카운팅 -->
       <select id="searchCountBox" parameterType="hashMap" resultType="int">
-	      SELECT COUNT(r_id) cnt
-	      FROM road_member
+	      SELECT COUNT(id) cnt
+	      FROM member
 	      WHERE 1=1 
-	      AND r_grade = 1
+	      AND grade = 1
            <if test="keyword !=null and keyword !=''">
-                         AND r_id LIKE '%'||#{keyword}||'%' 
+                         AND id LIKE '%'||#{keyword}||'%' 
            </if> 
      </select>
      
@@ -41,26 +41,26 @@
      <select id="listPageSearchBox2" parameterType="hashMap" resultMap="MemberMap">
         SELECT roadnum,road2.*
         FROM(
-          SELECT row_number() OVER(ORDER BY road.r_number) AS roadnum, road.*
-           FROM road_member road
-           WHERE r_grade = 2
+          SELECT row_number() OVER(ORDER BY road.no) AS roadnum, road.*
+           FROM member road
+           WHERE grade = 2
            <if test="keyword2 !=null and keyword2 !=''">
-                         AND r_id LIKE '%'||#{keyword2}||'%' 
+                         AND id LIKE '%'||#{keyword2}||'%' 
            </if> 
-          ORDER BY road.r_number
+          ORDER BY road.no
           ) road2
         WHERE roadnum BETWEEN #{displayPost2} AND #{postNum2}+ #{displayPost2}-1         
-        ORDER BY road2.r_number
+        ORDER BY road2.no
      </select>
 
      <!-- 검색  카운팅 -->
       <select id="searchCountBox2" parameterType="hashMap" resultType="int">
-          SELECT COUNT(r_id) cnt
-          FROM road_member
+          SELECT COUNT(id) cnt
+          FROM member
           WHERE 1=1 
-          AND r_grade = 2
+          AND grade = 2
            <if test="keyword2 !=null and keyword2 !=''">
-                         AND r_id LIKE '%'||#{keyword2}||'%' 
+                         AND id LIKE '%'||#{keyword2}||'%' 
            </if> 
      </select>
      
