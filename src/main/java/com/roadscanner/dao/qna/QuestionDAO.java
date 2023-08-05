@@ -15,7 +15,7 @@ public interface QuestionDAO {
     QuestionVO getQuestionById();
 
     // 게시글 작성
-    void create(QuestionVO vo);
+    Long save(QuestionVO vo);
 
     void update(QuestionVO vo);
 

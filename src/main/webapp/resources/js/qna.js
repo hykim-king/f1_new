@@ -18,7 +18,7 @@ const main = {
 
         $.ajax({
             type: 'POST',
-            url: '/api/qna/create',
+            url: '/api/qna/save',
             dataType: 'json',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(data)
@@ -27,7 +27,7 @@ const main = {
             window.location.href = '/qna';
         }).fail(function (error) {
             alert("등록 실패했습니다.");
-            console.log(error);
+            console.error(error);
             // alert(JSON.stringify(error));
         });
     }

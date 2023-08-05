@@ -20,11 +20,16 @@
         FROM QUESTION
     </select>
 
-    <insert id="createQuestion" parameterType="QuestionVO">
-        INSERT INTO QUESTION
-            (category, id, idx, title, content)
-        VALUES
-            (#{category}, #{id}, #{idx}, #{title}, #{content})
+<!--    <insert id="createQuestion" parameterType="QuestionVO">-->
+<!--        INSERT INTO QUESTION-->
+<!--            (category, id, idx, title, content)-->
+<!--        VALUES-->
+<!--            (#{category}, #{id}, #{idx}, #{title}, #{content})-->
+<!--    </insert>-->
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="no">
+        INSERT INTO QUESTION (category, id, title, content)
+        VALUES (#{category}, #{id}, #{title}, #{content})
     </insert>
 
 </mapper>

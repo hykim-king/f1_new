@@ -2,7 +2,7 @@ package com.roadscanner.service.qna;
 
 import com.roadscanner.dao.qna.QuestionDAO;
 import com.roadscanner.domain.qna.QuestionVO;
-import com.roadscanner.dto.QuestionCreateDTO;
+import com.roadscanner.dto.QuestionSaveRequestDto;
 import com.roadscanner.dto.QuestionListDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,14 +30,15 @@ public class QuestionServiceImpl implements QuestionService {
         return questionListDTOs;
     }
 
-
     @Override
-    public void createQuestion(QuestionCreateDTO dto) {
-        QuestionVO vo = dto.toEntity();
-        vo.setCreateDate(LocalDate.now());
-        vo.setCreateDate(LocalDate.now());
-        vo.setViews(0);
-        questionDAO.create(vo);
+    public Long save(QuestionSaveRequestDto dto) {
+
+        // DTO(사용자가 제공한 정보를 통해) 질문 VO 객체 생성
+//        QuestionVO vo = new QuestionVO(dto.getCategory().getValue(), dto.getId(), dto.getTitle(), dto.getContent());
+        QuestionVO vo = new QuestionVO(dto.getCategory(), dto.getId(), dto.getTitle(), dto.getContent());
+        // DAO를 통해 데이터베이스에 질문 등록 잘지내시나요?
+        return questionDAO.save(vo);
     }
+
 
 }
