@@ -2,6 +2,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="CP" value="${pageContext.request.contextPath }"/>
 
+<%-- <%
+ String strReferer = request.getHeader("referer");
+ if(strReferer == null){
+%>
+ <script language="javascript">
+  alert("접속을 차단합니다.");
+  document.location.href="${CP}/login";
+ </script>
+<%
+ return;
+ }
+%> --%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,22 +46,28 @@
         <table class="table table-hover" id="memberTable">
             <thead class="table-light">
                 <tr>
+                    <th class="text-center"></th>
                     <th class="text-center">NO</th>
                     <th class="text-center">아이디</th>
                     <th class="text-center">이메일</th>
                 </tr>
             </thead>
-            <tbody>   
+            <tbody> 
+                
                 <c:forEach var="list" items="${list}">
-                    <c:set var="i" value="${i+1}"></c:set>
+                <c:set var="i" value="${1+i}"></c:set> 
+                <c:set var="j" value="${(select-1)*5+i}"></c:set>    
                     <tr>
-                        <td class="text-center col-sm-1">${i}</td>
+                        <td><input type="checkbox" name="delcheckbox" value ="${list.rid}"></td>
+                        <td class="text-center col-sm-1">${j}</td>
                         <td class="text-center col-sm-5">${list.rid}</td>
                         <td class="text-center col-sm-6">${list.remail}</td>
                     </tr>
-                </c:forEach>   
+                </c:forEach>
             </tbody>
         </table>
+        <input type="hidden" id="messagebox">
+        <input type="hidden" id = "numckeckin" value="${(select-1)*5 +i}">
         <!-- 회원 정보 테이블 end ------------------------------------------------------------>
         
         <!-- 검색 폼 -->
@@ -58,6 +77,8 @@
                         <input type="text" id="searchid" name="keyword" class="form-control" placeholder="아이디 검색">
                     </div>
                     <button type="submit" id= "searchidbtn" class="btn btn-primary ml-2">검색</button>
+                    <button type="button" id= "deletebtn" class="btn btn-primary ml-2">삭제</button>
+                    <button type="button" id= "numcheck" class="btn btn-primary ml-2">페이지</button>
             </div>
         </div>
         <!-- 검색 폼 end ------------------------------------------------------------>
@@ -86,7 +107,9 @@
             </ul>
         </nav>
         <!-- pagination end ------------------------------------------------------->
+    
   </form>
+ 
    <!-- 일반회원 end--------------------------------------------------------------->    
      
         
@@ -96,11 +119,57 @@
 </body>
 <script>
 $("#searchidbtn").on("click",function(){
-	let keyword = $("#searchid").value();
+	let keyword = $("#searchid").val();
 	console.log(keyword);
 
 	location.href = "/memberAdmin?num=1"+ "&keyword=" + keyword;
 	});
+</script>
+
+<script>
+$("#deletebtn").on("click",function(){
+	console.log("haha");
+	
+	$("input[name='delcheckbox']").each(function(){
+	    if( $(this).is(":checked") == true ){
+	      var tmpVal = $(this).val();
+	      console.log(tmpVal);
+	      
+		      // AJAX 요청을 보냅니다.
+		          $.ajax({
+		              type: "POST",
+		              url:"${CP}/withdraw",
+		              dataType:"html",
+		              data: {
+		               rid: tmpVal
+		              },
+		              success:function(data) {
+		               let parsedJSON = JSON.parse(data);
+		                 
+		                   if("10" == parsedJSON.msgId){
+		                	  $('#messagebox').attr('value', parsedJSON.msgContents);
+		                  } 
+		                                        
+		                  if("20" == parsedJSON.msgId){
+		                	  $('#messagebox').attr('value',parsedJSON.msgContents);
+		                  }
+		              },
+		              error: function(data) {
+		                  console.log("error:" + data);
+	              }
+	          }); // --ajax
+	       
+	    }
+	  }); //--체크박스 체크
+	location.reload();
+});
+</script>
+
+<script>
+$("#numcheck").on("click",function(){
+    let numcheck = $("#numckeckin").val();
+    console.log(numcheck);
+});
 </script>
                         
 </html>

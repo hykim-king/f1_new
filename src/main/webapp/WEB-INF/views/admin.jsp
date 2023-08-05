@@ -1,7 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="CP" value="${pageContext.request.contextPath }"/>  
+<c:set var="CP" value="${pageContext.request.contextPath }"/>
+<%
+ String strReferer = request.getHeader("referer");
+ if(strReferer == null){
+%>
+ <script language="javascript">
+  alert("접속을 차단합니다.");
+  document.location.href="${CP}/login";
+ </script>
+<%
+ return;
+ }
+%>  
 <!DOCTYPE html>
 <html>
 <head>

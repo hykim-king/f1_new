@@ -43,15 +43,27 @@
         <!-- 로그인 세션 O -->
         <c:if test="${user ne null}">
           <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/mypage'">MyPage</button>
-          <button type="button" class="btn btn-outline-primary" onclick="location.href='${CP}/logout'" style="margin-right: 50px;">LogOut</button>
+          <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/logout'">LogOut</button>
+            <!-- 관린자 -->
+            <c:if test="${user.rgrade ==2}">
+                <button type="button" class="btn btn-outline-primary" onclick="location.href='${CP}/admin'" style="margin-right: 50px;">관리자</button>
+            </c:if>
         </c:if>        
       </form>
     </div>
   </div>
 </nav>
   <body class="d-flex flex-column min-vh-100">
-  <c:if test="${user ne null }"> <!--  유저 정보O -->
-  <h2 style="text-align: center; margin-top: 100px; margin-bottom: 80px;">${user.rid}의 마이페이지</h2>
+
+  <!-- 일반 -->
+  <c:if  test="${user ne null}">
+  <c:if test="${user.rgrade ==1}">
+     <h2 style="text-align: center; margin-top: 100px; margin-bottom: 80px;">${user.rid}님 의 마이페이지</h2>
+  </c:if>
+  <!-- 관리자 -->
+  <c:if test="${user.rgrade ==2}">
+     <h2 style="text-align: center; margin-top: 100px; margin-bottom: 80px;">관리자 ${user.rid}님 의 마이페이지</h2>
+  </c:if>
 	  <div id="container">
 			  <form>
 			    <fieldset style="border:0 solid black;">
