@@ -1,4 +1,4 @@
-package com.roadscanner.user.dao;
+package com.roadscanner.dao.user;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -160,7 +160,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int updatePw(MemberVO user) throws SQLException {
 		int flag = 0;
-		String statement = this.NAMESPACE + DOT + "updatePw";
+		String statement = this.NAMESPACE + DOT + "updatepassword";
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
 		LOG.debug("│ statement " + statement);
 		LOG.debug("└────────────────────────────────────────────────────────┘");

@@ -1,4 +1,4 @@
-package com.roadscanner.user.dao;
+package com.roadscanner.dao.user;
 
 import java.util.HashMap;
 import java.util.List;

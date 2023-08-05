@@ -1,4 +1,4 @@
-package com.roadscanner.user.controller;
+package com.roadscanner.controller.user;
 
 import java.sql.SQLException;
 
@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.roadscanner.cmn.MessageVO;
 import com.roadscanner.domain.MemberVO;
+import com.roadscanner.service.user.MailSendService;
+import com.roadscanner.service.user.UserService;
 import com.google.gson.Gson;
-import com.roadscanner.user.service.MailSendService;
-import com.roadscanner.user.service.UserService;
 
 
 /**

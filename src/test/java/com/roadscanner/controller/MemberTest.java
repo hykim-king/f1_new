@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.roadscanner.domain.MemberVO;
-import com.roadscanner.user.service.UserService;
+import com.roadscanner.service.user.UserService;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)

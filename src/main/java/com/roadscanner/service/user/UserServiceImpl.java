@@ -1,4 +1,4 @@
-package com.roadscanner.user.service;
+package com.roadscanner.service.user;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -8,10 +8,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.roadscanner.dao.user.UserDao;
+import com.roadscanner.dao.user.UserDaoImpl;
 import com.roadscanner.domain.MemberVO;
-import com.roadscanner.user.dao.UserDao;
-import com.roadscanner.user.dao.UserDaoImpl;
 
 
 @Service("userService")
@@ -188,7 +187,7 @@ public class UserServiceImpl implements UserService {
 	public int doChangeInfo(MemberVO user) throws SQLException {
 		int checkStatus = -1;
 		
-        checkStatus = this.userDao.updateUser(user);
+        checkStatus = this.userDao.updatePw(user);
         if(0==checkStatus) {
             checkStatus = -1; // 회원정보가 변경되지 않음
         } 

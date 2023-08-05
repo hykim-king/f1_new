@@ -1,4 +1,4 @@
-package com.roadscanner.user.controller;
+package com.roadscanner.controller.user;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.roadscanner.domain.Adminpage2;
 import com.roadscanner.domain.Adminpage;
 import com.roadscanner.domain.MemberVO;
-import com.roadscanner.user.service.AdminService;
+import com.roadscanner.service.user.AdminService;
 
 @Controller
 public class AdminpageController {

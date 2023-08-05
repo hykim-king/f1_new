@@ -1,4 +1,4 @@
-package com.roadscanner.user.service;
+package com.roadscanner.service.user;
 
 import java.sql.SQLException;
 import java.util.List;

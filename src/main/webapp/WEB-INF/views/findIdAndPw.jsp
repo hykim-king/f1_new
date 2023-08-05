@@ -47,7 +47,7 @@
           <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/logout'">LogOut</button>
         </c:if>
            <!-- 관린자 -->
-           <c:if test="${user.rgrade ==2}">
+           <c:if test="${user.grade ==2}">
                <button type="button" class="btn btn-outline-primary" onclick="location.href='${CP}/admin'" style="margin-right: 50px;">관리자</button>
            </c:if>
           <button type="button" onclick="location.href='${CP}/registerpage'" class="btn btn-outline-primary" style="margin-right: 50px;">Sign-up</button>

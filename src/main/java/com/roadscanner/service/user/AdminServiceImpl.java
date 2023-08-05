@@ -1,4 +1,4 @@
-package com.roadscanner.user.service;
+package com.roadscanner.service.user;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.roadscanner.dao.user.AdminpageDao;
 import com.roadscanner.domain.MemberVO;
-import com.roadscanner.user.dao.AdminpageDao;
 
 
 @Service

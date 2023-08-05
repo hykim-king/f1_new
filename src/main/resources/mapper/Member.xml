@@ -53,7 +53,7 @@
   <select id="searchIdCheck" parameterType="MemberVO" resultType="int">
     SELECT COUNT(*) cnt
     FROM member
-    WHERE email  = #{remail}
+    WHERE email  = #{email}
     </select>    
     
     <!-- 이메일로  아이디 검색 -->
@@ -67,7 +67,7 @@
     <select id="searchPwCheck" parameterType="MemberVO" resultType="int">
       SELECT COUNT(*) cnt
       FROM member
-      WHERE email = #remail}
+      WHERE email = #{email}
       AND id     = #{id}
     </select>
     

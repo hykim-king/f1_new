@@ -1,4 +1,4 @@
-package com.roadscanner.user.controller;
+package com.roadscanner.controller.user;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.roadscanner.cmn.MessageVO;
 import com.roadscanner.domain.MemberVO;
-import com.roadscanner.user.service.UserService;
+import com.roadscanner.service.user.UserService;
 
 @Controller
 public class UserInfoController {
