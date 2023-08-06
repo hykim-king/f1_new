@@ -18,9 +18,9 @@ public class QuestionServiceImpl implements QuestionService {
     private final QuestionDAO questionDAO;
 
     @Override
-    public List<QuestionListDTO> getAllQuestions() {
+    public List<QuestionListDTO> findAll() {
 
-        List<QuestionVO> questions = questionDAO.getAllQuestions();
+        List<QuestionVO> questions = questionDAO.findAll();
 
         // QuestionVO를 QeustuonListDTO로 변환
         List<QuestionListDTO> questionListDTOs = new ArrayList<>();
@@ -29,6 +29,7 @@ public class QuestionServiceImpl implements QuestionService {
         }
         return questionListDTOs;
     }
+
 
     @Override
     public Long save(QuestionSaveRequestDto dto) {
@@ -40,5 +41,18 @@ public class QuestionServiceImpl implements QuestionService {
         return questionDAO.save(vo);
     }
 
+    @Override
+    public QuestionVO findById(Long id) {
+        return null;
+    }
 
+    @Override
+    public Long update(QuestionSaveRequestDto dto) {
+        return null;
+    }
+
+    @Override
+    public Long delete(Long id) {
+        return null;
+    }
 }
