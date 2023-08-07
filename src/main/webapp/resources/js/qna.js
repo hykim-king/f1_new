@@ -1,13 +1,13 @@
 const main = {
     init: function () {
         const _this = this;
-        $('#btn-create').on('click', function (e) {
+        $('#btn-save').on('click', function (e) {
             e.preventDefault();
-            _this.create();
+            _this.save();
         });
     },
 
-    create : function () {
+    save : function () {
         const data = {
             category: $('#category').val(),
             id: $('#id').val(),

@@ -1,8 +1,9 @@
 package com.roadscanner.service.qna;
 
-import com.roadscanner.domain.qna.QuestionVO;
+import com.roadscanner.dto.QuestionResponseDTO;
 import com.roadscanner.dto.QuestionSaveRequestDto;
-import com.roadscanner.dto.QuestionListDTO;
+import com.roadscanner.dto.QuestionListResponseDTO;
+import com.roadscanner.dto.QuestionUpdateRequestDTO;
 
 import java.util.List;
 
@@ -13,12 +14,13 @@ public interface QuestionService{
      */
     Long save(QuestionSaveRequestDto dto);
 
-    QuestionVO findById(Long id);
+    QuestionResponseDTO findByNo(Long no);
 
-    List<QuestionListDTO> findAll();
+    List<QuestionListResponseDTO> findAll();
 
-    Long update(QuestionSaveRequestDto dto);
+    Long update(Long no, QuestionUpdateRequestDTO dto);
 
-    Long delete(Long id);
+    Long delete(Long no);
+
 
 }

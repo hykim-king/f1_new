@@ -11,7 +11,7 @@
         <li><h3>게시판 CRUD</h3></strong>
             <ul>
                 <li><a href="/qna">전체 게시글 출력 R</a></li>
-                <li><a href="/qna/create">게시글 작성 C</a></li>
+                <li><a href="/qna/save">게시글 작성 C</a></li>
                 <li><a href="#">게시글 조회 R</a></li>
                 <li><a href="#">게시글 수정 U</a></li>
                 <li><a href="#">게시물 삭제 D</a></li>

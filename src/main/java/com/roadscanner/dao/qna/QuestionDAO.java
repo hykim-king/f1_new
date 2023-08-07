@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface QuestionDAO extends BaseRepository {
+public interface QuestionDAO extends BaseRepository<QuestionVO> {
 
     /**
      * 게시판, 댓글 CRUD가 겹치는 것이 많음 => WorkDiv의 사용 => 재사용성을 올림

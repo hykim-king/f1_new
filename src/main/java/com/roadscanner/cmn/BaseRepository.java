@@ -15,10 +15,10 @@ public interface BaseRepository<T> {
 
     /**
      * ID로 데이터 조회(단건)
-     * @param id
+     * @param no
      * @return
      */
-    T findById(Long id);
+    T findByNo(Long no);
 
     /**
      * 모든 데이터 조회
@@ -26,7 +26,7 @@ public interface BaseRepository<T> {
      */
     List<T> findAll();
 
-    T update(T vo);
+    void update(T vo);
 
     /**
      * 데이터 삭제

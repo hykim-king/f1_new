@@ -1,14 +1,12 @@
 package com.roadscanner.controller.qna;
 
+import com.roadscanner.dto.QuestionResponseDTO;
 import com.roadscanner.dto.QuestionSaveRequestDto;
+import com.roadscanner.dto.QuestionUpdateRequestDTO;
 import com.roadscanner.service.qna.QuestionService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@Slf4j // 아파치 로거2로 써야함
 @RequiredArgsConstructor
 @RestController
 public class QuestionApiController {
@@ -18,7 +16,20 @@ public class QuestionApiController {
     // 등록
     @PostMapping("/api/qna/save")
     public Long save(@RequestBody QuestionSaveRequestDto dto) {
-        log.info(dto.toString());
         return questionService.save(dto);
     }
+
+    // 조회
+    @GetMapping("/api/qna/{no}")
+    public QuestionResponseDTO findByNo(@PathVariable Long no) {
+        return questionService.findByNo(no);
+    }
+
+    // 수정
+    @PutMapping("/api/qna/{no}")
+    public Long update(@PathVariable Long no, @RequestBody QuestionUpdateRequestDTO dto) {
+        return questionService.update(no, dto);
+    }
+
+
 }

@@ -19,4 +19,7 @@ public class QuestionSaveRequestDto {
     private String title;
     private String content;
 
+    public QuestionVO toEntity() {
+        return new QuestionVO(this.getCategory(), this.getId(), this.getTitle(), this.getContent());
+    }
 }

@@ -8,7 +8,7 @@
     <h1>Q&A 게시판</h1>
     <div>
         <div>
-            <a href="/qna/create" role="button">글쓰기</a>
+            <a href="/qna/save" role="button">글쓰기</a>
         </div>
     </div>
     <br>
@@ -28,7 +28,7 @@
             <tr>
                 <td>777</td>
                 <td>공지</td>
-                <td><a href="/qna/${question.id}">와! 로드스캐너 런칭합니다.</a></td>
+                <td><a href="/qna/${question.no}">와! 로드스캐너 런칭합니다.</a></td>
                 <td>admin</td>
                 <td>23/08/29</td>
                 <td>8</td>

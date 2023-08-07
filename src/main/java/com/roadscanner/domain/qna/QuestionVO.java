@@ -5,10 +5,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 // domain 클래스 => 데이터베이스랑 1대1 매칭
-@Getter
-@Setter
+@Getter @Setter
 @NoArgsConstructor
 public class QuestionVO {
 
@@ -19,8 +19,8 @@ public class QuestionVO {
     private String id; // 사용자 아이디 -> userId
     private String title; // 제목
     private String content; // 내용
-    private LocalDate createDate; // 작성일
-    private LocalDate updateDate; // 수정일
+    private LocalDateTime createDate; // 작성일
+    private LocalDateTime updateDate; // 수정일
 
     // no, idx, createDate, updateDate는 데이터베이스에서 값을 자동으로 주입 => 생성자로 값 주입 안함!
     // 필수로 값이 주입되야 하는 필드만 생성
@@ -30,4 +30,12 @@ public class QuestionVO {
         this.title = title;
         this.content = content;
     }
+
+    public void update(Integer category, String title, Long idx, String content) {
+        this.category = category;
+        this.title = title;
+        this.idx = idx;
+        this.content = content;
+    }
+
 }

@@ -2,7 +2,6 @@
 <html>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <title>로드스캐너 - 게시판 등록</title>
 </head>
 <body>
@@ -32,9 +31,10 @@
             <textarea id="content" class="form-control" placeholder="내용을 입력하세요"></textarea>
         </div>
         <a href="/qna" role="button" class="btn btn-secondary">취소</a>
-        <button type="submit" id="btn-create" class="btn btn-primary" value="저장">등록</button>
+        <button type="submit" id="btn-save" class="btn btn-primary" value="저장">등록</button>
     </form>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/resources/js/qna.js"></script>
 </body>
 </html>
