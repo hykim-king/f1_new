@@ -16,7 +16,7 @@ public class QuestionListResponseDTO {
     private int category;
     private String title;
     private String id; // 작성자 -> 유저 아이디
-    private LocalDateTime createDate;
+    private String createDate;
     private int views;
 
     public QuestionListResponseDTO(QuestionVO vo) {
@@ -24,8 +24,8 @@ public class QuestionListResponseDTO {
         this.category = vo.getCategory();
         this.title = vo.getTitle();
         this.id = vo.getId();
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        this.createDate = vo.getCreateDate();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy-MM-dd");
+        this.createDate = vo.getCreateDate().format(formatter);
         this.views = vo.getViews();
     }
 }
