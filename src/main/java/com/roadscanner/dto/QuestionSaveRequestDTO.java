@@ -1,6 +1,5 @@
 package com.roadscanner.dto;
 
-import com.roadscanner.domain.qna.Category;
 import com.roadscanner.domain.qna.QuestionVO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +10,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class QuestionSaveRequestDto {
+public class QuestionSaveRequestDTO {
 
     private Integer category; // enum 적용
     private String id; // 유저 아이디로 변경될것
