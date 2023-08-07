@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="CP" value="${pageContext.request.contextPath }"/>
-
+<%-- 
 <%
  String strReferer = request.getHeader("referer");
  if(strReferer == null){
@@ -14,7 +14,7 @@
  return;
  }
 %>
-
+ --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +35,7 @@
     <form>  
         <!-- 제목 -->
         <div class="page-header">
-            <h2 class="text-center">관리자 리스트</h2>
+            <h2 class="text-center">정지회원 리스트</h2>
         </div>
         <!-- 제목 end --------------------------------------------------------------->
 
@@ -50,31 +50,31 @@
                 </tr>
             </thead>
             <tbody>   
-                <c:forEach var="list2" items="${list2}">
+                <c:forEach var="list3" items="${list3}">
                  <c:set var="i" value="${i+1}"></c:set>
-                 <c:set var="j" value="${(select2-1)*5+i}"></c:set>  
-                  <c:if test="${user.id ne list2.id}">
+                 <c:set var="j" value="${(select3-1)*5+i}"></c:set>  
+                  <c:if test="${user.id ne list3.id}">
 	                    <tr>
-	                        <td><input type="checkbox" name="delcheckbox2" value ="${list2.id}"></td>
+	                        <td><input type="checkbox" name="delcheckbox3" value ="${list3.id}"></td>
 	                        <td class="text-center col-sm-1">${j}</td>
-	                        <td class="text-center col-sm-5">${list2.id}</td>
-	                        <td class="text-center col-sm-6">${list2.email}</td>
+	                        <td class="text-center col-sm-5">${list3.id}</td>
+	                        <td class="text-center col-sm-6">${list3.email}</td>
 	                    </tr>
 	                </c:if>
                 </c:forEach>   
             </tbody>
         </table>
-        <input type="hidden" id="messagebox2">
+        <input type="hidden" id="messagebox3">
         <!-- 회원 정보 테이블 end ------------------------------------------------------------>
         
         <!-- 검색 폼 -->
         <div class="row mb-3">
             <div class="col">
                     <div class="form-group">
-                        <input type="text" id ="searchid3" name="keyword2" class="form-control" placeholder="아이디 검색">
+                        <input type="text" id ="searchid3" name="keyword3" class="form-control" placeholder="아이디 검색">
                     </div>
                     <button type="submit" id ="searchidbtn3" class="btn btn-primary ml-2">검색</button>
-                    <button type="button" id= "deletebtn3" class="btn btn-primary ml-2">미정</button>
+                    <button type="button" id= "deletebtn3" class="btn btn-primary ml-2">정지해제</button>
             </div>
         </div>
         <!-- 검색 폼 end ------------------------------------------------------------>
@@ -83,21 +83,21 @@
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
                 <c:if test="${page3.prev3}">
-                    <li class="page-item"><a class="page-link" aria-label="Previous" href="/memberAdmin2?num2=${page2.startPageNum2 - 5}&keyword=${page.keyword}">이전</a></li>
+                    <li class="page-item"><a class="page-link" aria-label="Previous" href="/memberAdmin3?num3=${page3.startPageNum3 - 5}&keyword=${page.keyword}">이전</a></li>
                 </c:if>
                 
-                <c:forEach begin="${page3.startPageNum3}" end="${page3.endPageNum3}" var="num2">      
+                <c:forEach begin="${page3.startPageNum3}" end="${page3.endPageNum3}" var="num3">      
                       <c:if test="${select != num3}">
-                        <li class="page-item"><a class="page-link" href="/memberAdmin3?num3=${num3}&keyword=${page.keyword}">${num2}</a></li>
+                        <li class="page-item"><a class="page-link" href="/memberAdmin3?num3=${num3}&keyword=${page.keyword}">${num3}</a></li>
                       </c:if>
                       
                       <c:if test="${select == num3}">
-                        <li class="page-item"><a class="page-link" href="/memberAdmin3?num3=${num3}&keyword=${page.keyword}">${num2}</a></li>
+                        <li class="page-item"><a class="page-link" href="/memberAdmin3?num3=${num3}&keyword=${page.keyword}">${num3}</a></li>
                       </c:if>
                 </c:forEach>
                 
                 <c:if test="${page3.next3}">  
-                    <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${page3.endPageNum3 + 1}&keyword=${page.keyword}">다음</a></li>
+                    <li class="page-item"><a class="page-link" href="/memberAdmin3?num3=${page3.endPageNum3 + 1}&keyword=${page.keyword}">다음</a></li>
                 </c:if>
                 
             </ul>
@@ -111,10 +111,10 @@
 </body>
 <script>
 $("#searchidbt3").on("click",function(){
-	let keyword2 = $("#searchid3").value();
-	console.log(keyword2);
+	let keyword3 = $("#searchid3").value();
+	console.log(keyword3);
 	
-	location.href = "/memberAdmin3?num=1"+ "&keyword3=" + keyword2;
+	location.href = "/memberAdmin3?num=1"+ "&keyword3=" + keyword3;
 });
 </script>
 
@@ -124,29 +124,29 @@ $("#deletebtn3").on("click",function(){
     
     $("input[name='delcheckbox3']").each(function(){
         if( $(this).is(":checked") == true ){
-          var tmpVal2 = $(this).val();
-          console.log(tmpVal2);
+          var tmpVal3 = $(this).val();
+          console.log(tmpVal3);
         
           
           
               // AJAX 요청을 보냅니다.
                   $.ajax({
                       type: "POST",
-                      url:"${CP}/withdraw",
+                      url:"${CP}/clear",
                       dataType:"html",
                       data: {
-                       id: tmpVal2
+                       id: tmpVal3
                       },
                       success:function(data) {
                        let parsedJSON = JSON.parse(data);
                          
                            if("10" == parsedJSON.msgId){
-                              $('#messagebox').attr('value', parsedJSON.msgContents);
+                              $('#messagebox3').attr('value', parsedJSON.msgContents);
                               location.reload();
                           } 
                                                 
                           if("20" == parsedJSON.msgId){
-                              $('#messagebox').attr('value',parsedJSON.msgContents);
+                              $('#messagebox3').attr('value',parsedJSON.msgContents);
                               location.reload();
                           }
                       },

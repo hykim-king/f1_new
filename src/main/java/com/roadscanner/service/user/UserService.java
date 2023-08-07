@@ -96,6 +96,14 @@ public interface UserService {
 	 * @return 등급 3으로 변경 -> 아이디 정지 
 	 * @throws SQLException
 	 */
-	public int updateGrade(MemberVO user) throws SQLException;
+	public int forbiddenGrade(MemberVO user) throws SQLException;
+	
+	/**
+	 * 등급 변경
+	 * @param user
+	 * @return 등급 1로 변경 -> 정지 해제
+	 * @throws SQLException
+	 */
+	public int clearGrade(MemberVO user) throws SQLException;
 		
 }

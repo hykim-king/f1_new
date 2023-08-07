@@ -141,12 +141,12 @@ $("#deletebtn2").on("click",function(){
                        let parsedJSON = JSON.parse(data);
                          
                            if("10" == parsedJSON.msgId){
-                              $('#messagebox').attr('value', parsedJSON.msgContents);
+                              $('#messagebox2').attr('value', parsedJSON.msgContents);
                               location.reload();
                           } 
                                                 
                           if("20" == parsedJSON.msgId){
-                              $('#messagebox').attr('value',parsedJSON.msgContents);
+                              $('#messagebox2').attr('value',parsedJSON.msgContents);
                               location.reload();
                           }
                       },

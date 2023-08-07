@@ -78,7 +78,7 @@ public class WithdrawController {
         String jsonString = "";
         MessageVO message = new MessageVO();
 
-        int updateGrade = userService.updateGrade(user);
+        int updateGrade = userService.forbiddenGrade(user);
         
         if (updateGrade == 1) {
                 message.setMsgId("10");
@@ -91,4 +91,35 @@ public class WithdrawController {
         jsonString = new Gson().toJson(message);
         return jsonString;
     }
+    
+    /**
+     * 회원 정지 해제 처리
+     * @param user
+     * @return
+     * @throws SQLException
+     */
+    @RequestMapping(value = "/clear", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String clear(MemberVO user) throws SQLException {
+        System.out.println("┌────────────────────────────────────────────────────────┐");
+        System.out.println("│ clear()                                            │");
+        System.out.println("└────────────────────────────────────────────────────────┘");
+        
+        String jsonString = "";
+        MessageVO message = new MessageVO();
+
+        int updateGrade = userService.clearGrade(user);
+        
+        if (updateGrade == 1) {
+                message.setMsgId("10");
+                message.setMsgContents("회원의 정지가 해제되었습니다.");
+        } else {
+                message.setMsgId("20");
+                message.setMsgContents("회원의 정지해제 처리가 실패했습니다.");
+        }
+        
+        jsonString = new Gson().toJson(message);
+        return jsonString;
+    }
+    
 }
