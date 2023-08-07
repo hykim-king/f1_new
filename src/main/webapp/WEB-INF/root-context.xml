@@ -37,7 +37,7 @@
     <!-- 태근 추가 설정, 프로퍼티 파일 추가 -->
     <context:property-placeholder location="classpath:application-${spring.profiles.active}.properties" />
 
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${database.driverClassName}"/>
         <property name="url" value="${database.url}"/>
         <property name="username" value="${database.username}"/>
