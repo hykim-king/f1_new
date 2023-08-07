@@ -49,9 +49,10 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public Long update(Long no, QuestionUpdateRequestDTO dto) {
         // findById 메서드를 완성 시켜야함 단건 조회후 수정
-        QuestionVO vo = (QuestionVO) questionDAO.findByNo(no);
+        QuestionVO vo = questionDAO.findByNo(no);
         vo.update(dto.getCategory(), dto.getTitle(), dto.getIdx(), dto.getContent());
         questionDAO.update(vo);
+        System.out.println(vo);
         return no;
     }
 

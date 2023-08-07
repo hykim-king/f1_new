@@ -12,13 +12,13 @@
 <body>
 
 <div class="container mt-5">
-    <h1 class="mb-4">게시글 상세보기</h1>
+    <h1 class="mb-4">Q&A 게시판</h1>
     <div class="card">
         <div class="card-header">
-            제목: ${question.title}
+            <h2 class="card-title">${question.title}</h2>
         </div>
         <div class="card-body">
-            <h5 class="card-title">작성자: ${question.id}</h5>
+            <p class="card-text">작성자: ${question.id}</p>
             <p class="card-text">
                 조회수: ${question.views}
             </p>

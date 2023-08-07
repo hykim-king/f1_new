@@ -34,4 +34,11 @@ public class QuestionController {
         return "qna/question-detail";
     }
 
+    @GetMapping("/update/{no}")
+    public String questionUpdate(@PathVariable Long no, Model model) {
+        QuestionResponseDTO dto = questionService.findByNo(no);
+        model.addAttribute("question", dto);
+        return "qna/question-update";
+    }
+
 }

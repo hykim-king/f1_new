@@ -55,11 +55,10 @@
         UPDATE QUESTION
         SET
             category = #{category},
-            id = #{id},
             idx = #{idx},
             title = #{title},
             content = #{content},
-            update_date = NOW()
+            update_date = CURRENT_TIMESTAMP
         WHERE no = #{no}
     </update>
 
