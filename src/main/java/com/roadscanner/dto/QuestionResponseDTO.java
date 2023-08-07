@@ -25,7 +25,6 @@ public class QuestionResponseDTO {
     private int views;
     private String content;
 
-
     public QuestionResponseDTO(QuestionVO vo) {
         this.no = vo.getNo();
         this.category = vo.getCategory();

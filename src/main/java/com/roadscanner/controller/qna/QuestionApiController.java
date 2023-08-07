@@ -31,5 +31,10 @@ public class QuestionApiController {
         return questionService.update(no, dto);
     }
 
+    // 삭제
+    @DeleteMapping("/api/qna/{no}")
+    public Long delete(@PathVariable Long no) {
+        return questionService.delete(no);
+    }
 
 }

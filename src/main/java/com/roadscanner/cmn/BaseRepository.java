@@ -30,9 +30,9 @@ public interface BaseRepository<T> {
 
     /**
      * 데이터 삭제
-     * @param vo
+     * @param no
      */
 
-    void delete(T vo);
+    void delete(Long no);
 
 }

@@ -9,6 +9,12 @@ const main = {
         $('#btn-update').on('click', function () {
             _this.update();
         });
+
+        $('#btn-delete').on('click', function () {
+            if (confirm('정말 삭제하시겠습니까?')) {
+                _this.delete();
+            }
+        });
     },
 
     save : function () {
@@ -58,6 +64,23 @@ const main = {
         }).fail(function (error) {
             console.error(error);
             alert(JSON.stringify(error));
+        });
+    },
+
+    delete: function () {
+        const no = $('#no').val();
+        alert(no);
+        // const no = 102;
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/qna/' + no,
+        }).done(function () {
+            alert('글이 삭제되었습니다.');
+            window.location.href = '/qna';
+        }).fail(function (error) {
+            alert('글 삭제 실패했습니다.');
+            console.error(error);
         });
     }
 };

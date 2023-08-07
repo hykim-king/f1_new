@@ -58,6 +58,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public Long delete(Long no) {
-        return null;
+        questionDAO.delete(no);
+        return no;
     }
 }
