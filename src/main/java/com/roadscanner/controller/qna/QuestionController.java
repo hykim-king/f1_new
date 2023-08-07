@@ -1,5 +1,6 @@
 package com.roadscanner.controller.qna;
 
+import com.roadscanner.dto.QuestionResponseDTO;
 import com.roadscanner.service.qna.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,6 @@ public class QuestionController {
     @GetMapping
     public String index(Model model) {
         model.addAttribute("questions", questionService.findAll());
-//        List<QuestionListDTO> questions = questionService.findAll();
         return "qna/index";
     }
 
@@ -28,8 +28,9 @@ public class QuestionController {
     }
 
     @GetMapping("/{no}")
-    public String detail(@PathVariable Long no) {
-        System.out.println(no);
+    public String detail(@PathVariable Long no, Model model) {
+        QuestionResponseDTO dto = questionService.findByNo(no);
+        model.addAttribute("question", dto);
         return "qna/question-detail";
     }
 

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @ToString
@@ -12,18 +13,19 @@ import java.time.format.DateTimeFormatter;
 public class QuestionListResponseDTO {
 
     private Long no;
-    private Integer category;
+    private int category;
     private String title;
     private String id; // 작성자 -> 유저 아이디
-    private String createDate;
-    private Integer views;
+    private LocalDateTime createDate;
+    private int views;
 
     public QuestionListResponseDTO(QuestionVO vo) {
         this.no = vo.getNo();
         this.category = vo.getCategory();
         this.title = vo.getTitle();
         this.id = vo.getId();
-        this.createDate = String.valueOf(vo.getCreateDate());
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        this.createDate = vo.getCreateDate();
         this.views = vo.getViews();
     }
 }

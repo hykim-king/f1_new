@@ -25,21 +25,12 @@
         </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>777</td>
-                <td>공지</td>
-                <td><a href="/qna/${question.no}">와! 로드스캐너 런칭합니다.</a></td>
-                <td>admin</td>
-                <td>23/08/29</td>
-                <td>8</td>
-            </tr>
-
         <%--    model을 통해 받은 데이터를 반복해서 출력 --%>
         <c:forEach items="${questions}" var="question">
             <tr>
                 <td>${question.no}</td>
                 <td>${question.category}</td>
-                <td>${question.title}</td>
+                <td><a href="/qna/${question.no}">${question.title}</a></td>
                 <td>${question.id}</td>
                 <td>${question.createDate}</td>
                 <td>${question.views}</td>

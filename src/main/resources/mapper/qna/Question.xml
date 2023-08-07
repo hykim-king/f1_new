@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.roadscanner.dao.qna.QuestionDAO">
 
-
     <!-- 질문 작성/저장 -->
 <!--    <insert id="save" useGeneratedKeys="true" keyProperty="no">-->
 <!--        INSERT INTO QUESTION (category, id, title, content)-->
@@ -16,8 +15,8 @@
     </insert>
 
 
-    <!-- no로 질문 조회 -->
-    <select id="findById" resultType="QuestionVO">
+    <!-- no로 질문 조회 오라클 O-->
+    <select id="findByNo" resultType="QuestionVO">
         SELECT
             no,
             category,
@@ -26,8 +25,9 @@
             id,
             title,
             content,
-            create_date AS createDate,
-            update_date AS updateDate
+            create_date AS "createDate(java.time.LocalDateTime)",
+            update_date AS "updateDate(java.time.LocalDateTime)"
+--         update_date AS updateDate
         FROM QUESTION
         WHERE no = #{no}
     </select>
@@ -42,8 +42,11 @@
             id,
             title,
             content,
-            create_date AS createDate,
-            update_date AS updateDate
+--             create_date AS createDate,
+--             update_date AS updateDate
+            create_date AS "createDate(java.time.LocalDateTime)"
+--             update_date AS "updateDate(java.time.LocalDateTime)"
+
         FROM QUESTION
     </select>
 

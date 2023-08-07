@@ -20,6 +20,8 @@ public class QuestionResponseDTO {
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
     private int views;
+    private String content;
+
 
     public QuestionResponseDTO(QuestionVO vo) {
         this.title = vo.getTitle();
@@ -27,8 +29,7 @@ public class QuestionResponseDTO {
         this.createDate = vo.getCreateDate();
         this.updateDate = vo.getUpdateDate();
         this.views = vo.getViews();
+        this.content = vo.getContent();
     }
 
-    public QuestionResponseDTO(Object o) {
-    }
 }
