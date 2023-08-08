@@ -23,4 +23,7 @@ public interface QuestionService{
     List<QuestionListResponseDTO> findAllWithPaging(PaginationDTO pagination);
 
     int countQuestions();
+
+    void increaseViews(Long no);
+
 }

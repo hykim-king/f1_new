@@ -21,4 +21,6 @@ public interface QuestionDAO extends BaseRepository<QuestionVO> {
 
 
     int countQuestions(); // 전체게시글 수 반환
+
+    void increaseViews(Long no); // 조회수 증가 메서드
 }

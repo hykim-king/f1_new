@@ -85,4 +85,12 @@
     <select id="countQuestions" resultType="int">
         SELECT count(*) FROM question
     </select>
+
+    <!-- 조회수 증가 -->
+    <update id="increaseViews">
+        UPDATE QUESTION
+        SET views = views + 1
+        WHERE no = #{no}
+    </update>
+
 </mapper>

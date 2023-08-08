@@ -16,6 +16,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     private final QuestionDAO questionDAO;
 
+    // 전체조회 + 페이징 추가 정리 필요
     @Override
     public List<QuestionListResponseDTO> findAllWithPaging(PaginationDTO pagination) {
         List<QuestionVO> questions = questionDAO.findAllWithPaging(pagination);
@@ -27,9 +28,16 @@ public class QuestionServiceImpl implements QuestionService {
         return dto;
     }
 
+    // 전체 게시글 반환
     @Override
     public int countQuestions() {
         return questionDAO.countQuestions();
+    }
+
+    // 조회수 증가
+    @Override
+    public void increaseViews(Long no) {
+        questionDAO.increaseViews(no);
     }
 
     @Override

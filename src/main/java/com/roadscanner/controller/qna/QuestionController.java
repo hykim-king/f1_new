@@ -55,6 +55,9 @@ public class QuestionController {
 
     @GetMapping("/{no}")
     public String detail(@PathVariable Long no, Model model) {
+        // 조회수 증가
+        questionService.increaseViews(no);
+
         QuestionResponseDTO dto = questionService.findByNo(no);
         model.addAttribute("question", dto);
         return "qna/question-detail";
