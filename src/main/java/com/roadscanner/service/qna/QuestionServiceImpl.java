@@ -2,12 +2,10 @@ package com.roadscanner.service.qna;
 
 import com.roadscanner.dao.qna.QuestionDAO;
 import com.roadscanner.domain.qna.QuestionVO;
-import com.roadscanner.dto.QuestionResponseDTO;
-import com.roadscanner.dto.QuestionSaveRequestDTO;
-import com.roadscanner.dto.QuestionListResponseDTO;
-import com.roadscanner.dto.QuestionUpdateRequestDTO;
+import com.roadscanner.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +17,22 @@ public class QuestionServiceImpl implements QuestionService {
     private final QuestionDAO questionDAO;
 
     @Override
+    public List<QuestionListResponseDTO> findAllWithPaging(PaginationDTO pagination) {
+        List<QuestionVO> questions = questionDAO.findAllWithPaging(pagination);
+        List<QuestionListResponseDTO> dto = new ArrayList<>();
+
+        for (QuestionVO question : questions) {
+            dto.add(new QuestionListResponseDTO(question));
+        }
+        return dto;
+    }
+
+    @Override
+    public int countQuestions() {
+        return questionDAO.countQuestions();
+    }
+
+    @Override
     public List<QuestionListResponseDTO> findAll() {
         List<QuestionVO> questions = questionDAO.findAll();
         List<QuestionListResponseDTO> dto = new ArrayList<>();
@@ -28,7 +42,6 @@ public class QuestionServiceImpl implements QuestionService {
         }
         return dto;
     }
-
 
     @Override
     public Long save(QuestionSaveRequestDTO dto) {

@@ -63,4 +63,26 @@
     <delete id="delete">
         DELETE FROM QUESTION WHERE no = #{no}
     </delete>
+
+    <!-- 페이징 구현 -->
+    <select id="findAllWithPaging" resultType="QuestionVO">
+        SELECT *
+        FROM (SELECT a.*, rownum rnum
+              FROM (SELECT
+                        no,
+                        category,
+                        views,
+                        title,
+                        id,
+                        create_date AS createDate,
+                        update_date AS updateDate
+                    FROM QUESTION
+                    ORDER BY no DESC
+                   ) a WHERE rownum &lt;= #{start} + #{size}
+             ) WHERE rnum &gt; #{start}
+    </select>
+
+    <select id="countQuestions" resultType="int">
+        SELECT count(*) FROM question
+    </select>
 </mapper>
