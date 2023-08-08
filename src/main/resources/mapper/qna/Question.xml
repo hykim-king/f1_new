@@ -25,8 +25,8 @@
             id,
             title,
             content,
-            create_date AS "createDate(java.time.LocalDateTime)",
-            update_date AS "updateDate(java.time.LocalDateTime)"
+            create_date AS createDate,
+            update_date AS updateDate
 --         update_date AS updateDate
         FROM QUESTION
         WHERE no = #{no}
