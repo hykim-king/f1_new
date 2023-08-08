@@ -39,6 +39,17 @@
         <li class="nav-item">
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li>
+        <c:if test="${user.grade == 2}">
+        <li class="nav-item dropdown">
+          <input type="hidden" id="nekeyword" name="nekeyword" value ="${user.id}">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">관리자 기능</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="${CP}/admin">List</a></li>
+            <li><a class="dropdown-item" href="#">None</a></li>
+            <li><a class="dropdown-item" href="#">None</a></li>
+          </ul>
+        </li>
+        </c:if>
       </ul>
       <form class="d-flex" role="search">
         <!-- 로그인 세션 X -->
@@ -49,13 +60,6 @@
         <!-- 로그인 세션 O -->
         <c:if test="${user ne null}">
           <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/logout'">LogOut</button>
-            <!-- 관리자 -->
-            <c:if test="${user.grade ==2}">
-            <form action='${CP}/memberAdmin2' method="get">
-                <input type="hidden" id="nekeyword" name="nekeyword" value ='${user.id}'>
-                <button type="button" class="btn btn-outline-primary" id="adminbtn" style="margin-right: 50px;">관리자</button>
-            </form>
-            </c:if>
         </c:if>        
       </form>
     </div>
@@ -121,13 +125,6 @@
     </ul>
     <p class="text-center text-body-secondary">&copy; 2023 F1 RoadScanner Project, All rights reserved.</p>
   </footer>
-
-<script>
-$("#adminbtn").on("click", function(){
-	console.log("leo")
-	location.href= "${CP}/admin";
-});
-</script>
 
 <script>
 function check_pw() {
