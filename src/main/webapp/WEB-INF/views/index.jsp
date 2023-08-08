@@ -32,7 +32,7 @@
     <ul>
         <li>댓글 CRUD
             <ul>
-                <li><a href="#"></a></li>
+                <li><a href="#">댓글 등록</a></li>
                 <li><a href="#"></a></li>
                 <li><a href="#"></a></li>
             </ul>

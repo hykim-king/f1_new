@@ -38,6 +38,18 @@
             </div>
         </div>
     </div>
+
+    <div class="my-4"></div>
+
+    <!-- 답변 작성 폼 -->
+    <form id="answer-form">
+        <div class="mb-3">
+            <textarea class="form-control" id="answer-content" rows="5" placeholder="답변을 입력하세요"></textarea>
+        </div>
+        <a href="/qna" role="button" class="btn btn-secondary">취소</a>
+        <button type="button" id="btn-answer-save" class="btn btn-primary">답변 등록</button>
+    </form>
+
 </div>
 
 <!-- 부트스트랩 JS 및 Popper.js 추가 -->

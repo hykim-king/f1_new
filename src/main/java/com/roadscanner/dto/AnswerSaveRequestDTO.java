@@ -11,11 +11,12 @@ import lombok.ToString;
 @NoArgsConstructor
 public class AnswerSaveRequestDTO {
 
+    private Long no;
     private String id;  // admin id
     private String content;
 
     public AnswerVO toEntity() {
-        return new AnswerVO(this.getId(), this.getContent());
+        return new AnswerVO(this.getNo(), this.getId(), this.getContent());
     }
 
 }

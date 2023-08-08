@@ -6,8 +6,8 @@
 </head>
 <body>
 <form class="container mt-5" id="question-edit-form">
-    <!-- 이 부분에 히든 필드 추가 -->
-    <input type="hidden" id="no" value="${question.no}">
+  <!-- 이 부분에 히든 필드 추가 -->
+  <input type="hidden" id="no" value="${question.no}">
 
   <div class="mb-3">
     <label for="id" class="form-label">답변상태:</label>
@@ -31,7 +31,7 @@
     <textarea id="content" class="form-control">${question.content}</textarea>
   </div>
   <a href="/qna" role="button" class="btn btn-secondary">취소</a>
-  <button type="submit" id="btn-update" class="btn btn-primary" value="수정">수정</button>
+  <button type="button" id="btn-update" class="btn btn-primary" value="수정">수정</button>
 </form>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

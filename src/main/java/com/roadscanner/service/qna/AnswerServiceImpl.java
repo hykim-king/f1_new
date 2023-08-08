@@ -1,6 +1,7 @@
 package com.roadscanner.service.qna;
 
 import com.roadscanner.dao.qna.AnswerDAO;
+import com.roadscanner.dao.qna.QuestionDAO;
 import com.roadscanner.domain.qna.AnswerVO;
 import com.roadscanner.dto.AnswerResponseDTO;
 import com.roadscanner.dto.AnswerSaveRequestDTO;
@@ -13,12 +14,14 @@ import org.springframework.stereotype.Service;
 public class AnswerServiceImpl implements AnswerService {
 
     private final AnswerDAO answerDAO;
+    private final QuestionDAO questionDAO;
 
     // 등록
     @Override
     public Long save(AnswerSaveRequestDTO dto) {
 
         AnswerVO vo = dto.toEntity();
+
         return answerDAO.save(vo);
     }
 
