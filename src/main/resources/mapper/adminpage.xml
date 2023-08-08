@@ -69,5 +69,32 @@
            </if> 
      </select>
      
+     <!-- 페이징 + 검색 -->
+     <select id="listPageSearchBox3" parameterType="hashMap" resultMap="MemberMap">
+        SELECT roadnum,road3.*
+        FROM(
+          SELECT row_number() OVER(ORDER BY road.no) AS roadnum, road.*
+           FROM member road
+           WHERE grade = 3
+           <if test="keyword3 !=null and keyword3 !=''">
+                         AND id LIKE '%'||#{keyword3}||'%' 
+           </if> 
+          ORDER BY road.no
+          ) road3
+        WHERE roadnum BETWEEN #{displayPost3} AND #{postNum3}+ #{displayPost3}-1         
+        ORDER BY road3.no
+     </select>
+
+     <!-- 검색  카운팅 -->
+      <select id="searchCountBox3" parameterType="hashMap" resultType="int">
+          SELECT COUNT(id) cnt
+          FROM member
+          WHERE 1=1 
+          AND grade = 3
+           <if test="keyword3 !=null and keyword3 !=''">
+                         AND id LIKE '%'||#{keyword3}||'%' 
+           </if> 
+     </select>
+     
 
 </mapper>

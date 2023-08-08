@@ -36,6 +36,7 @@ public class AdminpageDaoImpl implements AdminpageDao {
 	 data.put("postNum", postNum);
 	  
 	 return sqlSessionTemplate.selectList(namespace + ".listPage", data);
+	 
 	}
 
 	@Override
@@ -48,6 +49,7 @@ public class AdminpageDaoImpl implements AdminpageDao {
 		  data.put("keyword", keyword);
 		
 		return sqlSessionTemplate.selectList(namespace + ".listPageSearchBox", data);
+		
 	}
 
 	@Override
@@ -58,6 +60,7 @@ public class AdminpageDaoImpl implements AdminpageDao {
 		 	
 		 	data.put("keyword", keyword);	
 		  return sqlSessionTemplate.selectOne(namespace + ".searchCountBox", data);
+		  
 	}
 	
 	@Override
@@ -71,6 +74,7 @@ public class AdminpageDaoImpl implements AdminpageDao {
 		  data2.put("keyword2", keyword2);
 		
 		return sqlSessionTemplate.selectList(namespace + ".listPageSearchBox2", data2);
+		
 	}
 
 	@Override
@@ -81,6 +85,28 @@ public class AdminpageDaoImpl implements AdminpageDao {
 		 	data2.put("nekeyword", nekeyword);
 		 	data2.put("keyword2", keyword2);	
 		  return sqlSessionTemplate.selectOne(namespace + ".searchCountBox2", data2);
+		  
+	}
+
+	@Override
+	public List<MemberVO> listPageSearchBox3(int displayPost3, int postNum3, String keyword3) throws Exception {
+		HashMap<String, Object> data3 = new HashMap<String, Object>();
+		  
+		  data3.put("displayPost3", displayPost3);
+		  data3.put("postNum3", postNum3);
+		  data3.put("keyword3", keyword3);
+		
+		return sqlSessionTemplate.selectList(namespace + ".listPageSearchBox3", data3);
+	}
+
+	@Override
+	public int searchCountBox3(String keyword3) throws Exception {
+		HashMap<String, Object> data3 = new HashMap<String, Object>();
+	 	
+	 	System.out.println("keyword3:"+keyword3);
+	 	
+	 	data3.put("keyword3", keyword3);	
+	  return sqlSessionTemplate.selectOne(namespace + ".searchCountBox3", data3);
 	}
 	
 

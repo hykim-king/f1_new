@@ -229,10 +229,22 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int updateGrade(MemberVO user) throws SQLException {
+	public int forbiddenGrade(MemberVO user) throws SQLException {
 		int checkGrade = -1;
 		
-        checkGrade = this.userDao.updateGrade(user);
+        checkGrade = this.userDao.forbiddenGrade(user);
+        if(0==checkGrade) {
+            checkGrade = -1; // 회원정보가 변경되지 않음
+        } 
+        LOG.debug("checkGrade: " + checkGrade);
+        return checkGrade;
+	}
+
+	@Override
+	public int clearGrade(MemberVO user) throws SQLException {
+		int checkGrade = -1;
+		
+        checkGrade = this.userDao.clearGrade(user);
         if(0==checkGrade) {
             checkGrade = -1; // 회원정보가 변경되지 않음
         } 

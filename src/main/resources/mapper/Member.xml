@@ -120,17 +120,24 @@
   <update id="updateUser" parameterType="MemberVO">
     UPDATE member         
     SET id      = #{id},  
-        password        = #{password},
+        password  = #{password},
         email     = #{email}
     WHERE no = #{no}
   </update>
   
-    <!-- 등급 변경 (등급 3은 아이디가 정지되어 로그인이 불가능) -->
+    <!-- 계정 정지 (등급 3은 아이디가 정지되어 로그인이 불가능) -->
 	  <update id="forbiddenUser" parameterType="MemberVO">
 	    UPDATE member         
 	    SET grade = 3
 	    WHERE id = #{id}
 	  </update>
+	  
+	  <!-- 계정 정지 해제 (등급 3은 아이디가 정지되어 로그인이 불가능) -->
+    <update id="clearUser" parameterType="MemberVO">
+      UPDATE member         
+      SET grade = 1
+      WHERE id = #{id}
+    </update>
 
   
   <!-- 유저 삭제 -->

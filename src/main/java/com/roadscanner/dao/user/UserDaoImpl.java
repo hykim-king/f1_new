@@ -229,9 +229,21 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public int updateGrade(MemberVO user) throws SQLException {
+	public int forbiddenGrade(MemberVO user) throws SQLException {
 		int flag = 0;
 		String statement = this.NAMESPACE + DOT + "forbiddenUser";
+		LOG.debug("┌────────────────────────────────────────────────────────┐");
+		LOG.debug("│ statement " + statement);
+		LOG.debug("└────────────────────────────────────────────────────────┘");
+		flag = this.sqlSessionTemplate.update(statement, user);
+
+		return flag;
+	}
+
+	@Override
+	public int clearGrade(MemberVO user) throws SQLException {
+		int flag = 0;
+		String statement = this.NAMESPACE + DOT + "clearUser";
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
 		LOG.debug("│ statement " + statement);
 		LOG.debug("└────────────────────────────────────────────────────────┘");
