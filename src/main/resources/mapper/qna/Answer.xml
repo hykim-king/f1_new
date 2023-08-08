@@ -4,7 +4,7 @@
 
     <!-- 답변 등록 -->
     <insert id="save">
-        INSERT INTO question (
+        INSERT INTO answer (
             no,
             id,
             content
@@ -12,19 +12,20 @@
             #{no},
             #{id},
             #{content}
+        )
     </insert>
 
     <!-- 답변 삭제 -->
     <delete id="delete">
-        DELETE FROM question
+        DELETE FROM answer
         WHERE no = #{no}
     </delete>
 
     <!-- 답변 수정 -->
     <update id="update">
-        UPDATE question
+        UPDATE answer
         SET
-            content = #{content}
+            content = #{content},
             update_date = CURRENT_TIMESTAMP
         WHERE no = #{no}
     </update>
@@ -33,7 +34,6 @@
     <select id="findByNo" resultType="AnswerVO">
         SELECT
             id,
-            title,
             content,
             create_date AS "createDate(java.time.LocalDateTime)",
             CASE

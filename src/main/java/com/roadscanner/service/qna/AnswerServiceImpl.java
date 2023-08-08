@@ -19,9 +19,7 @@ public class AnswerServiceImpl implements AnswerService {
     // 등록
     @Override
     public Long save(AnswerSaveRequestDTO dto) {
-
         AnswerVO vo = dto.toEntity();
-
         return answerDAO.save(vo);
     }
 
