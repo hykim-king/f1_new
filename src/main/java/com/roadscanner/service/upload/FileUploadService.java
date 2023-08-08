@@ -22,7 +22,7 @@ public interface FileUploadService {
 	// 사진 상세 조회
 	FileUploadVO doSelectOne(FileUploadVO inVO) throws SQLException;
 	
-	// 사진 수정
+	// 사진 구분, 싫어요 이유, 검토 여부 수정
 	int doUpdate(FileUploadVO inVO) throws SQLException;
 	
 	// 사진 저장하면 checked = 1, S3 버킷 이동
@@ -32,6 +32,6 @@ public interface FileUploadService {
 	int doDelete(FileUploadVO inVO) throws SQLException, IOException;
 
 	// S3에 사진 업로드, 정보는 DAO 전송
-	int doSave(MultipartFile file, FileUploadVO inVO) throws SQLException, IOException;
+	String doSave(MultipartFile file, FileUploadVO inVO) throws SQLException, IOException;
 
 }

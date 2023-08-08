@@ -71,7 +71,7 @@
     FROM
         upload_image
     WHERE
-        idx = #{idx}
+        name = #{name}
   </select>
   
   <!-- 사진 수정 -->

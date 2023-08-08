@@ -185,10 +185,14 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 	}
 
 	@Override
-	public int doSave(MultipartFile file, FileUploadVO inVO) throws SQLException, IOException {
+	public String doSave(MultipartFile file, FileUploadVO inVO) throws SQLException, IOException {
         uploadVO = uploadFileToS3(file, inVO);
         
-		return dao.doSave(uploadVO);
+        if (1 == dao.doSave(uploadVO)) {
+        	return uploadVO.getName();
+        } else {
+        	return "0";
+        }
 	}
 	
 	private FileUploadVO uploadFileToS3(MultipartFile file, FileUploadVO uploadVO) throws IOException {
@@ -211,7 +215,7 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 		
         // 파일 이름 형식(yyyyMMddHH24MISS_원본파일명), 등록일, url, 파일 크기 설정
 		Date currentDate = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 		
 		String datestr  = dateFormat.format(currentDate);
 		String fileName = datestr+"_"+file.getOriginalFilename();
@@ -248,7 +252,7 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
         	
         	String voString = uploadVO.toString();
     		LOG.debug("┌──────────┐");
-    		LOG.debug("│uploadVO: "+voString);
+    		LOG.debug("│ uploadVO: "+voString);
     		LOG.debug("└──────────┘");
         	
         	return uploadVO;

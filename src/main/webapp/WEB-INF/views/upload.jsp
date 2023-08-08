@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.ui.Model"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="CP" value="${pageContext.request.contextPath }"/>
@@ -34,6 +35,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
   }
   
   .divider {
@@ -44,11 +46,9 @@
   
   #fileUploadLabel {
     margin-left: 20px;
-    cursor: pointer;
     display: inline-block;
     overflow: hidden;
     position: relative;
-    width: 400px;
     height: 400px;
   }
   
@@ -63,7 +63,6 @@
   }
   
   #cancelContainer {
-    display: none;
     position: relative;
   }
   
@@ -83,6 +82,10 @@
     height: 30px;
   }
   
+  #resultImg {
+    width: 300px;
+  }
+  
   #FeedbackButtons {
     width: 45%;
     display: flex;
@@ -96,13 +99,12 @@
   }
   
   #dislikeReason {
-    margin-right: 10px;
-    width: 200px;
-    height: 40px;
+    width: 220px;
     font-size: 16px;
     background-color: #f5f5f5;
     border: 1px solid #ccc;
     border-radius: 5px;
+    text-align: center;
   }
   
   #reasonForm {
@@ -139,16 +141,17 @@
 </style>
 </head>
 <body>
+<input id="thisName" type="hidden" value="${thisName}">
   <div class="left">
     <form action="fileUploaded" method="post" enctype="multipart/form-data" onsubmit="return false;">
       <div id="previewGroup" style="display: flex; flex-direction: row;">
-        <label id="fileUploadLabel" for="fileUpload" style="display: block; cursor: pointer;">
+        <label id="fileUploadLabel" for="fileUpload" style="display: none; cursor: pointer;">
           <img id="selectButtonImg" alt="SelectButton" src="${CP}/resources/img/selectButton.jpg" width="400" height="400">
         </label>
         <!-- 파일 선택 -->
         <input id=fileUpload name="fileUpload" type="file" accept=".jpg, .jpeg, .png, .bmp, .tiff, .webp, .ico, .svg" onchange="displaySelectedFile(event)" style="display: none;">
-        <div id="cancelContainer">
-          <img id="selectedImage" alt="Selected Image">
+        <div id="cancelContainer" style ="display: block;">
+          <img id="selectedImage" src="${thisUrl}" alt="Selected Image">
           <button id="cancelButton" type="button" class="btn btn-link">
             <img alt="XButton" src="${CP}/resources/img/cancel.png">
           </button>
@@ -163,11 +166,13 @@
 
   <div class="divider"></div>
 
-  <div class="right" id="rightContent" style="display: none;">
+  <div class="right" id="rightContent">
     <!-- 우측 영역의 내용을 입력 -->
     <h2>우측 영역</h2>
-    <p>임시 구분선입니다.</p>
     <!-- 세로로 긴 내용 -->
+    <label>
+      <img id="resultImg" src="${resultImg}" alt="resultImg">
+    </label>
     <p>[1]동해 물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람, 대한으로 길이 보전하세 [2]남산 위에 저 소나무, 철갑을 두른 듯 바람서리 불변함은 우리 기상일세 무궁화 삼천리 화려강산 대한 사람, 대한으로 길이 보전하세 [3]가을 하늘 공활한데 높고 구름 없이 밝은 달은 우리 가슴 일편단심일세 무궁화 삼천리 화려강산 대한 사람, 대한으로 길이 보전하세 [4]이 기상과 이 맘으로 충성을 다하여 괴로우나 즐거우나 나라 사랑하세 무궁화 삼천리 화려강산 대한 사람, 대한으로 길이 보전하세</p>
     <!-- 피드백 버튼 -->
     <div id="FeedbackButtons">
@@ -175,7 +180,23 @@
       <button id="dislikeButton" type="button" class="btn btn-link"><img src="${CP}/resources/img/thumbsdown.jpg" alt="붐따 이미지"></button>
     </div>
     <form id="reasonForm" method="post" style="display: none;">
-      <select id="dislikeReason" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+      <div id="dislikeReason" class="card">
+        <div class="card-body">
+          <c:forEach var="reason" items="${reasons}" varStatus="loop">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="reason${loop.count}" name="reason">
+              <label class="form-check-label card-text" for="reason${loop.count}">
+                ${reason}
+              </label>
+            </div>
+          </c:forEach>
+          <button id="submitButton">선택</button>
+        </div>
+      </div>
+    </form>
+    <!-- 
+    <form id="reasonForm" method="post" style="display: none;">
+      <select id="dislikeReason" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" multiple size="3">
         <option value="" disabled selected hidden>무엇이 부족한가요?</option>
         <option value="reason1">업로드 오류</option>
         <option value="reason2">결과 오류</option>
@@ -183,6 +204,7 @@
       </select>
       <button id="submitButton">선택</button>
     </form>
+     -->
   </div>
   
   <script>
@@ -199,6 +221,14 @@
     function displaySelectedFile(event) {
       const file = event.target.files[0];
       if (file) {
+        // 파일 크기 체크 (5MB)
+        const maxSize = 5 * 1024 * 1024;
+        if (file.size > maxSize) {
+            alert('최대 5MB인 이미지만 선택 가능합니다.');
+            fileUploadInput.value = '';
+            return;
+        }
+        
         const reader = new FileReader();
 
         reader.onload = function() {
@@ -218,7 +248,7 @@
         }
         
         reader.readAsDataURL(file);
-        console.log(`displaySelectedFile`);
+        //console.log(`displaySelectedFile`);
       } else {
         fileUploadLabel.style.display = 'block';      // 파일선택 버튼 이미지 보이기
         cancelContainer.style.display = 'none';       // 미리보기 숨기기
@@ -232,9 +262,51 @@
       fileUploadLabel.style.display = 'block';      // 파일선택 버튼 이미지 보이기
       cancelContainer.style.display = 'none';       // 미리보기 숨기기
       RunContainer.style.display = 'none'; // "표지판 알아보기" 버튼 숨기기
-      console.log(`displaySelectedFile: None`);
+      //console.log(`displaySelectedFile: None`);
     });
     // 선택한 이미지 미리보기로 보여주기 End----------------------------------------------------
+
+    // 파일 업로드-------------------------------------------------------------------
+    //화면 오른쪽에 결과창 띄우는 함수
+    function showRightContent() {
+      let rightDiv = document.getElementById('rightContent');
+      rightDiv.style.display = 'block';
+    }
+    
+    // '표지판 알아보기'클릭 시 파일 업로드, 결과창 나타내기
+    $("#runButton").on("click", function(){
+      //console.log('runButton click');
+      
+      let formData = new FormData();
+        formData.append("fileUpload", $("#fileUpload")[0].files[0]);
+        formData.append("idx", 1);
+        formData.append("id", "testid");
+        formData.append("category", 10);
+        formData.append("name", "testname");
+        formData.append("url", "testurl");
+        formData.append("fileSize", 0);
+        formData.append("checked", 0);
+        formData.append("u1", 0);
+        formData.append("u2", 0);
+      
+      $.ajax({
+          type: "POST",
+          url: "/roadscanner/fileUploaded",
+          processData: false,
+          contentType: false,
+          data: formData,
+          success: function(data) { // 통신 성공
+              console.log(data);
+              // 여기서 페이지 이동
+              window.location.href = "/roadscanner/upload?url=" + encodeURIComponent(data);
+          },
+          error: function(data) { // 실패시 처리
+              console.error("파일 업로드 오류:", data.msgId, data.msgContents);
+          }
+      });
+      
+    });
+    // 파일 업로드 End----------------------------------------------------------------
     
     // 선택 상자--------------------------------------------------------------------
     const dislikeButton = document.getElementById('dislikeButton');
@@ -242,77 +314,111 @@
     const reasonForm = document.getElementById('reasonForm');
     const likeButton = document.getElementById('likeButton');
     const submitButton = document.getElementById('submitButton');
-  
-    // dislikeButton에 클릭 이벤트 리스너 추가
-    dislikeButton.addEventListener('click', function() {
-    // 선택 상자 토글
-    dislikeReason.style.display = dislikeReason.style.display === 'none' ? 'block' : 'none';
-    reasonForm.style.display = dislikeReason.style.display;
-    });
     
-    // likeButton에 클릭 이벤트 리스너 추가
-    likeButton.addEventListener('click', function () {
-      // 페이지 새로고침
-      window.location.reload();
-      alert('소중한 의견 감사드립니다.');
-    });
-    
-    // submitButton에 클릭 이벤트 리스너 추가
-    submitButton.addEventListener('click', function () {
-      // 폼 제출하고 새로고침
-      event.preventDefault();
-      reasonForm.submit();
-      alert('소중한 의견 감사드립니다.');
-      window.location.reload();
-    });
-    // 선택 상자 End-----------------------------------------------------------------
-  </script>
+    // likeButton 클릭 시 category 20으로 update
+    $("#likeButton").on("click", function(){
+      if (confirm("제출하시겠습니까?")) {
 
-  <script>
-	  // 화면 오른쪽에 결과창 띄우는 함수
-	  function showRightContent() {
-	    let rightDiv = document.getElementById('rightContent');
-	    rightDiv.style.display = 'block';
-	  }
-
-	  
-	  $("#runButton").on("click", function(){
-		  //console.log('runButton click');
-	    
-			let formData = new FormData();
-			  formData.append("fileUpload", $("#fileUpload")[0].files[0]);
-			  formData.append("idx", 1);
-			  formData.append("id", "testid");
-			  formData.append("category", 10);
-			  formData.append("name", "testname");
-			  formData.append("url", "testurl");
-			  formData.append("fileSize", 0);
-			  formData.append("checked", 0);
-			  formData.append("u1", 0);
-			  formData.append("u2", 0);
-		  
-			$.ajax({
-			    type: "POST",
-			    url:"/roadscanner/fileUploaded",
-			    processData: false,
-			    contentType: false,
-			    data: formData,
-			    success:function(data){ //통신 성공
-		    	  console.log("파일 업로드 성공:", data);
-		    	  let parsedJson = JSON.parse(data);
-            if("1" == data.msgId){
-            	  alert(data.msgContents);
-                showRightContent();
-            }else{
-            	  alert(data.msgContents);
+        $.ajax({
+            type: "POST",
+            url:"/roadscanner/feedbackUpdate",
+            asyn:"true",
+            data:{
+                  "name" : $("#thisName").val(),
+                  "category" : 20,
+                  "checked" : 0,
+                  "u1" : 0,
+                  "u2" : 0
+            },
+            success:function(data){ //통신 성공
+              console.log("feedback update:", data);
+              if("1" == data.msgId){
+                  alert('소중한 의견 감사드립니다.');
+                  window.location.href = "/roadscanner/preUpload";
+              }else{
+                  alert(data.msgContents);
+                  alert("오류 발생. 다시 시도해 주세요.");
+              }
+            },
+            error:function(data){   //실패시 처리
+               console.error("feedback update error:", data);
             }
-			    },
-			    error:function(data){   //실패시 처리
-             console.error("파일 업로드 오류:", data);
-			    }
-			});
-			
-	  });
+        }); // ajax End
+          
+      } else {
+        return;
+      }// if End
+    }); // likeButton End
+    
+    // dislikeButton 클릭 시 선택 상자 토글
+    $("#dislikeButton").on("click", function(){
+      //console.log('dislikeButton click');
+      
+      // 선택 상자 토글
+      reasonForm.style.display = reasonForm.style.display === 'none' ? 'block' : 'none';
+      dislikeReason.style.display = reasonForm.style.display;
+      
+      // 선택상자의 submitButton 클릭 시 category 30으로, 싫어요 이유 update
+      $("#submitButton").on("click", function(){
+        //console.log('submitButton click');
+        // 선택상자 체크 여부를 배열로 저장
+        var isSelected = []; // 체크박스 선택 여부를 저장할 배열
+        
+        $("input[name^='reason']").each(function() {
+          if (this.checked) {
+            isSelected.push(1); // 체크가 되어있을 경우 1
+          } else {
+            isSelected.push(0); // 체크가 안되어있을 경우 0
+          }
+        });
+          
+        if (isSelected.includes(1) !== true) {
+          alert("하나 이상의 이유를 선택하세요.");
+          return;
+        }
+        
+        if (confirm("제출하시겠습니까?")) {
+
+            $.ajax({
+                type: "POST",
+                url:"/roadscanner/feedbackUpdate",
+                asyn:"true",
+                data:{
+                    "name" : $("#thisName").val(),
+                    "category" : 30,
+                    "checked" : 0,
+                    "u1" : isSelected[0],
+                    "u2" : isSelected[1]
+                },
+                success:function(data){ //통신 성공
+                  console.log("feedback update:", data);
+                  if("1" == data.msgId){
+                      alert('소중한 의견 감사드립니다.');
+                      window.location.href = "/roadscanner/preUpload";
+                  }else{
+                      alert(data.msgContents);
+                      alert("오류 발생. 다시 시도해 주세요.");
+                  }
+                },
+                error:function(data){   //실패시 처리
+                   console.error("feedback update error:", data);
+                }
+            }); // ajax End
+              
+        } else { // '아니오' 선택 시 선택상자 토글
+          reasonForm.style.display = reasonForm.style.display === 'none' ? 'block' : 'none';
+          dislikeReason.style.display = reasonForm.style.display;
+          return;
+        } // if End
+      }); // submitButton End
+    }); // dislikeButton End
+  
+    // 선택 상자 End-----------------------------------------------------------------
+        // 폼 제출하고 새로고침
+        //event.preventDefault();
+        //reasonForm.submit();
+        //alert('소중한 의견 감사드립니다.');
+        //window.location.reload();
   </script>
 </body>
 </html>
