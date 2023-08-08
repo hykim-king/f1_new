@@ -3,16 +3,16 @@
 <mapper namespace="com.roadscanner.dao.qna.QuestionDAO">
 
 <!--     질문 작성/저장 -->
-    <insert id="save" useGeneratedKeys="true" keyProperty="no">
+    <!--insert id="save" useGeneratedKeys="true" keyProperty="no">
         INSERT INTO QUESTION (category, id, title, content)
         VALUES (#{category}, #{id}, #{title}, #{content})
-    </insert>
+    </insert>-->
 
     <!-- 오라클 insert 확인 O-->
-<!--    <insert id="save">-->
-<!--        INSERT INTO QUESTION (no, category, id, title, content)-->
-<!--        VALUES (QUESTION_SEQ.NEXTVAL, #{category}, #{id}, #{title}, #{content})-->
-<!--    </insert>-->
+    <insert id="save">
+        INSERT INTO QUESTION (no, category, id, title, content)
+        VALUES (QUESTION_SEQ.NEXTVAL, #{category}, #{id}, #{title}, #{content})
+    </insert>
 
 
     <!-- no로 질문 조회 오라클 O-->

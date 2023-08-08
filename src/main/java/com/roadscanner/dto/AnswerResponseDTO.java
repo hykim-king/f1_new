@@ -20,10 +20,10 @@ public class AnswerResponseDTO {
     private LocalDateTime updateDate;
 
     public AnswerResponseDTO(AnswerVO vo) {
-        this.id = id;
-        this.content = content;
-        this.createDate = createDate;
-        this.updateDate = updateDate;
+        this.id = vo.getId();
+        this.content = vo.getContent();
+        this.createDate = vo.getCreateDate();
+        this.updateDate = vo.getUpdateDate();
     }
 
 }
