@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -34,9 +35,9 @@ public class ImgManageController implements PcwkLogger {
 	}
 
 	// feedback 화면
-	@RequestMapping(value = "/feedback")
+	@RequestMapping(value = "/graph")
 	public String feedback() throws SQLException {
-		return "feedback";
+		return "graph";
 	}
 
 	// 분기별 피드백
@@ -64,7 +65,7 @@ public class ImgManageController implements PcwkLogger {
 
 		return jsonString;
 	}
-
+	
 	// 이미지 목록 관리
 	@RequestMapping(value = "/imgManagement")
 	public String imgManagement(FileUploadVO inVO, Model model) throws SQLException {
@@ -77,7 +78,12 @@ public class ImgManageController implements PcwkLogger {
 		if (null != inVO && inVO.getPageSize() == 0) {
 			inVO.setPageSize(9);
 		}
-
+		
+		// 카테고리 초기값: 10
+		if (null != inVO) {
+			inVO.setCategory(10);
+		}
+		
 		// 목록 조회
 		List<FileUploadVO> list = this.service.doRetrieve(inVO);
 		model.addAttribute("list", list);

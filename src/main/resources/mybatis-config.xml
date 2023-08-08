@@ -8,7 +8,7 @@
         <setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
     <typeAliases>
-          <typeAlias type="com.roadscanner.upload.domain.FileUploadVO" alias="FileUploadVO"/>
-          <typeAlias type="com.roadscanner.result.domain.ResultVO" alias="ResultVO"/>
+          <typeAlias type="com.roadscanner.domain.upload.FileUploadVO" alias="FileUploadVO"/>
+          <typeAlias type="com.roadscanner.domain.result.ResultVO" alias="ResultVO"/>
     </typeAliases>
   </configuration>

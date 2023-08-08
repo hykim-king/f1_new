@@ -13,7 +13,7 @@ import com.roadscanner.domain.result.ResultVO;
 @Repository
 public class ResultDaoImpl implements PcwkLogger, ResultDao {
 	
-	final String NAMESPACE = "com.roadscanner.result";
+	final String NAMESPACE = "com.roadscanner.dao.result";
 	final String DOT = ".";
 
 	@Autowired

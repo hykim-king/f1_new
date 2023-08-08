@@ -13,7 +13,7 @@ import com.roadscanner.domain.upload.FileUploadVO;
 @Repository
 public class FileUploadDaoImpl implements PcwkLogger, FileUploadDao {
 
-	final String NAMESPACE = "com.roadscanner.upload";
+	final String NAMESPACE = "com.roadscanner.dao.upload";
 	final String DOT = ".";
 
 	@Autowired
@@ -98,7 +98,7 @@ public class FileUploadDaoImpl implements PcwkLogger, FileUploadDao {
 
 	// 사진 업로드
 	@Override
-	public int doSave(final FileUploadVO inVO) throws SQLException {
+	public int doSave(FileUploadVO inVO) throws SQLException {
 		LOG.debug("┌────────────────────────┐");
 		LOG.debug("│        doSave()        │");
 		LOG.debug("│          inVO          │" + inVO);

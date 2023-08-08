@@ -72,48 +72,6 @@ $.ajax({
   },
   success:function(data){//통신 성공
 	  console.log("success data:"+data);
-	  
-	  // feedback_barchart
-	  new Chart(document.getElementById("feedback_barchart"), {
-		    type: 'bar',
-		    data: {
-		      labels: ['인식 오류', '결과 오류', '기타 등등'],
-		      datasets: [{
-		        data: [20, 15, 8],
-		        label: 'feedback',
-		        backgroundColor: [
-		          'rgba(255, 99, 132, 0.2)',
-		          'rgba(54, 162, 235, 0.2)',
-		          'rgba(255, 206, 86, 0.2)',
-		        ],
-		        barThickness: 80
-		      }]
-		    },
-		    options: {
-		      plugins: {
-		        legend: { display: false },
-		        tooltip: {
-		          mode: 'index',
-		          intersect: false,
-		        },
-		        interaction: {
-		          mode: 'nearest',
-		          intersect: true
-		        }
-		      },
-		      scales: {
-		        y: {
-		          beginAtZero: true,
-		          display: true,
-		          ticks: {
-		            callback: function(value) {
-		              return value + '건';
-		            }
-		          }
-		        }
-		      }
-		    }
-		  }); // feedback_barchart
   },
   error:function(data){//실패시 처리
 	  console.log("error:"+data);
@@ -121,16 +79,64 @@ $.ajax({
 }); // ajax
 
 
+// feedback_barchart
+new Chart(document.getElementById("feedback_barchart"), {
+    type: 'bar',
+    data: {
+      labels: ['인식 오류', '결과 오류', '기타 등등'],
+      datasets: [{
+        data: [20, 15, 8],
+        label: 'feedback',
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+        ],
+        barThickness: 80
+      }]
+    },
+    options: {
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          mode: 'index',
+          intersect: false,
+        },
+        interaction: {
+          mode: 'nearest',
+          intersect: true
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          display: true,
+          ticks: {
+            callback: function(value) {
+              return value + '건';
+            }
+          }
+        }
+      }
+    }
+  }); // feedback_barchart
   
 
 new Chart(document.getElementById("feedback_linechart"), {
     type: 'line',
     data: {
-      labels: ['1분기', '2분기', '3분기', '4분기'],
+      labels: ['8/1', '8/2', '8/3', '8/4'],
       datasets: [{
         data: [10, 8, 6, 2],
-        label: 'feedback',
+        label: '인식오류',
         borderColor: 'rgb(75, 192, 192)',
+        fill: false,
+        tension: 0
+      },
+      {
+        data: [5, 3, 2, 1],
+        label: '결과오류',
+        borderColor: 'rgb(60, 20, 30)',
         fill: false,
         tension: 0
       }]

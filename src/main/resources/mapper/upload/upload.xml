@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.roadscanner.upload">
+<mapper namespace="com.roadscanner.dao.upload">
   
   <!-- 피드백 분기별 그래프 -->
   <select id="quarterlyFeedback" parameterType="FileUploadVO" resultType="FileUploadVO">
@@ -27,7 +27,10 @@
     SELECT A.*, B.*
     FROM(
         SELECT
+            TT1.idx,
+            TT1.id,
             TT1.category,
+            TT1.name,
             TT1.url,
             TT1.checked
         FROM(
@@ -36,7 +39,8 @@
                 SELECT *
                 FROM upload_image
                 WHERE category = #{category}
-                ORDER BY upload_date ASC
+                AND NOT(checked = 1)
+                ORDER BY upload_date DESC
             )T1
             <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} - 1) + #{pageSize} ]]>
         )TT1
@@ -47,6 +51,7 @@
         SELECT COUNT(*) AS totalCnt
         FROM upload_image
         WHERE category = #{category}
+        AND NOT(checked = 1)
     )B
   </select>
   
@@ -73,14 +78,13 @@
   <update id="doUpdate" parameterType="FileUploadVO">
 	  UPDATE upload_image
 		SET
-		  name     = #{name},
 		  url      = #{url},
 		  category = #{category},
 		  checked  = #{checked},
 		  u1       = #{u1},
 		  u2       = #{u2}
 		WHERE
-		  idx = #{idx}
+		  name = #{name}
   </update>
   
   <!-- 사진 삭제 -->
