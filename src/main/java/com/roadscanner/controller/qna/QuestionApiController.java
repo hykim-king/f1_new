@@ -1,7 +1,7 @@
 package com.roadscanner.controller.qna;
 
 import com.roadscanner.dto.QuestionResponseDTO;
-import com.roadscanner.dto.QuestionSaveRequestDto;
+import com.roadscanner.dto.QuestionSaveRequestDTO;
 import com.roadscanner.dto.QuestionUpdateRequestDTO;
 import com.roadscanner.service.qna.QuestionService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ public class QuestionApiController {
 
     // 등록
     @PostMapping("/api/qna/save")
-    public Long save(@RequestBody QuestionSaveRequestDto dto) {
+    public Long save(@RequestBody QuestionSaveRequestDTO dto) {
         return questionService.save(dto);
     }
 

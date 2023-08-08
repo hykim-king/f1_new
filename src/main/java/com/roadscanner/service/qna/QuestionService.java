@@ -1,7 +1,7 @@
 package com.roadscanner.service.qna;
 
 import com.roadscanner.dto.QuestionResponseDTO;
-import com.roadscanner.dto.QuestionSaveRequestDto;
+import com.roadscanner.dto.QuestionSaveRequestDTO;
 import com.roadscanner.dto.QuestionListResponseDTO;
 import com.roadscanner.dto.QuestionUpdateRequestDTO;
 
@@ -12,7 +12,7 @@ public interface QuestionService{
     /**
      * 게시글 작성
      */
-    Long save(QuestionSaveRequestDto dto);
+    Long save(QuestionSaveRequestDTO dto);
 
     QuestionResponseDTO findByNo(Long no);
 

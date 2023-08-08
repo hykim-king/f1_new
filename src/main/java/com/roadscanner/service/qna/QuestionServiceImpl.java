@@ -3,7 +3,7 @@ package com.roadscanner.service.qna;
 import com.roadscanner.dao.qna.QuestionDAO;
 import com.roadscanner.domain.qna.QuestionVO;
 import com.roadscanner.dto.QuestionResponseDTO;
-import com.roadscanner.dto.QuestionSaveRequestDto;
+import com.roadscanner.dto.QuestionSaveRequestDTO;
 import com.roadscanner.dto.QuestionListResponseDTO;
 import com.roadscanner.dto.QuestionUpdateRequestDTO;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -32,7 +31,7 @@ public class QuestionServiceImpl implements QuestionService {
 
 
     @Override
-    public Long save(QuestionSaveRequestDto dto) {
+    public Long save(QuestionSaveRequestDTO dto) {
 
         // DTO(사용자가 제공한 정보를 통해) 질문 VO 객체 생성
         QuestionVO vo = dto.toEntity();
