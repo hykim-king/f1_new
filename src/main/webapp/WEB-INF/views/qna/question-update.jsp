@@ -31,7 +31,7 @@
     <textarea id="content" class="form-control">${question.content}</textarea>
   </div>
   <a href="/qna" role="button" class="btn btn-secondary">취소</a>
-  <button type="submit" id="btn-update" class="btn btn-primary" value="수정">수정</button>
+  <button type="button" id="btn-update" class="btn btn-primary" value="수정">수정</button>
 </form>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

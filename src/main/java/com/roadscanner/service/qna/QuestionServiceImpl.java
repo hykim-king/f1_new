@@ -51,7 +51,6 @@ public class QuestionServiceImpl implements QuestionService {
         QuestionVO vo = questionDAO.findByNo(no);
         vo.update(dto.getCategory(), dto.getTitle(), dto.getIdx(), dto.getContent());
         questionDAO.update(vo);
-        System.out.println(vo);
         return no;
     }
 

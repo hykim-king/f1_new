@@ -6,7 +6,8 @@ const main = {
             _this.save();
         });
 
-        $('#btn-update').on('click', function () {
+        $('#btn-update').on('click', function (e) {
+            e.preventDefault();
             _this.update();
         });
 
@@ -60,9 +61,8 @@ const main = {
             data: JSON.stringify(data)
         }).done(function () {
             alert("글이 수정되었습니다.");
-            window.location.href = "/qna";
+            window.location.href = '/qna';
         }).fail(function (error) {
-            console.error(error);
             alert(JSON.stringify(error));
         });
     },
