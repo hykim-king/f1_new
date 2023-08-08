@@ -69,8 +69,6 @@ const main = {
 
     delete: function () {
         const no = $('#no').val();
-        alert(no);
-        // const no = 102;
 
         $.ajax({
             type: 'DELETE',

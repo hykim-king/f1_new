@@ -34,7 +34,7 @@
             </p>
             <div class="mt-4">
                 <a href="/qna/update/${question.no}" class="btn btn-primary">수정</a>
-                <button type="button" id="btn-delete" class="btn btn-danger">삭제${question.no}</button>
+                <button type="button" id="btn-delete" class="btn btn-danger">삭제</button>
             </div>
         </div>
     </div>
