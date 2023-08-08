@@ -44,7 +44,9 @@
           SELECT row_number() OVER(ORDER BY road.no) AS roadnum, road.*
            FROM member road
            WHERE grade = 2
-           <if test="keyword2 !=null and keyword2 !=''">
+           AND  id NOT in  #{nekeyword}
+           
+           <if test="nekeyword !=null and nekeyword !=''">
                          AND id LIKE '%'||#{keyword2}||'%' 
            </if> 
           ORDER BY road.no
@@ -59,6 +61,9 @@
           FROM member
           WHERE 1=1 
           AND grade = 2
+          AND  id NOT in  #{nekeyword}
+
+          
            <if test="keyword2 !=null and keyword2 !=''">
                          AND id LIKE '%'||#{keyword2}||'%' 
            </if> 

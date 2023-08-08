@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="CP" value="${pageContext.request.contextPath }"/>
-
+<%-- 
 <%
  String strReferer = request.getHeader("referer");
  if(strReferer == null){
@@ -13,7 +13,7 @@
 <%
  return;
  }
-%>
+%> --%>
 
 <!DOCTYPE html>
 <html>
@@ -53,18 +53,16 @@
                 <c:forEach var="list2" items="${list2}">
                  <c:set var="i" value="${i+1}"></c:set>
                  <c:set var="j" value="${(select2-1)*5+i}"></c:set>  
-                  <c:if test="${user.id ne list2.id}">
 	                    <tr>
 	                        <td><input type="checkbox" name="delcheckbox2" value ="${list2.id}"></td>
 	                        <td class="text-center col-sm-1">${j}</td>
 	                        <td class="text-center col-sm-5">${list2.id}</td>
 	                        <td class="text-center col-sm-6">${list2.email}</td>
 	                    </tr>
-	                </c:if>
                 </c:forEach>   
             </tbody>
         </table>
-        <input type="hidden" id="messagebox2">
+        <input type="hidden" id="messagebox2" value="${user.id}">
         <!-- 회원 정보 테이블 end ------------------------------------------------------------>
         
         <!-- 검색 폼 -->
@@ -72,6 +70,7 @@
             <div class="col">
                     <div class="form-group">
                         <input type="text" id ="searchid2" name="keyword2" class="form-control" placeholder="아이디 검색">
+                        <input type="hidden" id="nekeyword" name="nekeyword" value="${user.id}">
                     </div>
                     <button type="submit" id ="searchidbtn2" class="btn btn-primary ml-2">검색</button>
                     <button type="button" id= "deletebtn2" class="btn btn-primary ml-2">삭제</button>
@@ -110,11 +109,20 @@
 
 </body>
 <script>
+$(document).ready(function() {
+	console.log("$document.ready");
+    if(window.location.href == "http://localhost:8080/memberAdmin2"){
+         window.location.href="/memberAdmin2?num=1"+ '&nekeyword=' + $('nekeyword').val();
+    }
+});
+</script>
+
+<script>
 $("#searchidbtn2").on("click",function(){
-	let keyword2 = $("#searchid2").value();
+	let keyword2 = $("#searchid2").val();
 	console.log(keyword2);
 	
-	location.href = "/memberAdmin2?num=1"+ "&keyword2=" + keyword2;
+	location.href = "/memberAdmin2?num=1"+ "&nekeyword=" + $(nekeyword).val(); + "&keyword2=" + keyword2;
 });
 </script>
 

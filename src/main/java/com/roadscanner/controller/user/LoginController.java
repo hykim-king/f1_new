@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.roadscanner.cmn.MessageVO;
+import com.roadscanner.domain.Adminpage2;
 import com.roadscanner.domain.MemberVO;
 import com.roadscanner.service.user.MailSendService;
 import com.roadscanner.service.user.UserService;
@@ -69,7 +70,7 @@ public class LoginController {
 	 */
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody         //해당 내용이 화면이 아닌 데이터만 던진자고 알려주는 것임
-    public String loginButtonEvent(MemberVO user, Model model, HttpSession httpSession ) throws SQLException {        
+    public String loginButtonEvent(MemberVO user,Adminpage2 page, Model model, HttpSession httpSession ) throws SQLException {        
         LOG.debug("┌────────────────────────────────────────────────────────┐");
         System.out.println("│ loginButtonEvent()                                     │");
         LOG.debug("└────────────────────────────────────────────────────────┘");
@@ -101,7 +102,8 @@ public class LoginController {
         }else if(30==status) {                    // (30 : 성공)
             message.setMsgId("30");
             message.setMsgContents(user.getId()+"가 로그인 되었습니다.");
-            
+            page.setKeyword2(user.getId());
+           
             //----------------------------------------------------------
             //- 사용자 정보 조회 : session처리
             //----------------------------------------------------------

@@ -112,8 +112,18 @@ public class Adminpage2 {
 		}
 	
 		private String keyword2; 	
+		private String nekeyword; 	
 
-        private String pageid2;
+        public String getNekeyword() {
+			return nekeyword;
+		}
+
+
+		public void setNekeyword(String nekeyword) {
+			this.nekeyword = nekeyword;
+		}
+
+		private String pageid2;
 
 		public String getPageid2() {
 			return pageid2;

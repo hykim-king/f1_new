@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.roadscanner.domain.Adminpage2;
+import com.fasterxml.jackson.annotation.JacksonInject.Value;
 import com.roadscanner.domain.Adminpage;
 import com.roadscanner.domain.MemberVO;
 import com.roadscanner.service.user.AdminService;
@@ -61,8 +62,10 @@ AdminService service;
 public void memberAdmin2 
 		(Model model, 
 		@RequestParam(value = "num2",required = false, defaultValue = "1") int num2,
-		@RequestParam(value = "keyword2",required = false, defaultValue = "") String keyword2,	
+		@RequestParam(value = "keyword2",required = false, defaultValue = "") String keyword2,
+		@RequestParam(value = "nekeyword",required = false, defaultValue = "") String nekeyword,
 		@RequestParam(value = "pageid2",required = false, defaultValue = "") String pageid2
+		
 				) 
 		 
 		throws Exception {
@@ -72,6 +75,7 @@ Adminpage2 page2 = new Adminpage2();
 page2.setNum2(num2);
 
 page2.setCount2(service.searchCountBox2(
+		nekeyword,
 		keyword2
 		)); 
 
@@ -82,6 +86,7 @@ List<MemberVO> list2 = null;
 list2 = service.listPageSearchBox2(
 		page2.getDisplayPost2(), 
 		page2.getPostNum2(), 
+		nekeyword,
 		keyword2
 );
 

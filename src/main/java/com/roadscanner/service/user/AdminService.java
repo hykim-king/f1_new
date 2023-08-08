@@ -25,12 +25,12 @@ public interface AdminService {
 			)throws Exception;
 	
 	public List<MemberVO> listPageSearchBox2(
-			int displayPost2, int postNum2, 
+			int displayPost2, int postNum2, String nekeyword,
 			String keyword2
 			) throws Exception;
 	
 	public int searchCountBox2(
-			String keyword2
+			String nekeyword,String keyword2
 			)throws Exception;
 
 }

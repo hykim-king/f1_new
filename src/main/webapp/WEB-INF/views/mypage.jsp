@@ -51,7 +51,10 @@
           <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/logout'">LogOut</button>
             <!-- 관리자 -->
             <c:if test="${user.grade ==2}">
-                <button type="button" class="btn btn-outline-primary" onclick="location.href='${CP}/admin'" style="margin-right: 50px;">관리자</button>
+            <form action='${CP}/memberAdmin2' method="get">
+                <input type="hidden" id="nekeyword" name="nekeyword" value ='${user.id}'>
+                <button type="button" class="btn btn-outline-primary" id="adminbtn" style="margin-right: 50px;">관리자</button>
+            </form>
             </c:if>
         </c:if>        
       </form>
@@ -118,6 +121,13 @@
     </ul>
     <p class="text-center text-body-secondary">&copy; 2023 F1 RoadScanner Project, All rights reserved.</p>
   </footer>
+
+<script>
+$("#adminbtn").on("click", function(){
+	console.log("leo")
+	location.href= "${CP}/admin";
+});
+</script>
 
 <script>
 function check_pw() {
