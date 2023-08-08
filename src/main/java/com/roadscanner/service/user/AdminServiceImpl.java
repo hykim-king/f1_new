@@ -37,39 +37,22 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
-<<<<<<< HEAD
+
 	public int searchCountBox( String keyword) throws Exception {
 		
-		return adminpageDao.searchCountBox(
-				
-				keyword);
-=======
-	public int searchCountBox(String keyword) throws Exception {
 		return adminpageDao.searchCountBox(keyword);
->>>>>>> 1280a12663f30d5c08b8432821650ae9872423e3
 	}
 	
 	@Override
 	public List<MemberVO> listPageSearchBox2(int displayPost2, int postNum2,String nekeyword,String keyword2) throws Exception {
-		
-<<<<<<< HEAD
 		return adminpageDao.listPageSearchBox2(displayPost2, postNum2,nekeyword,
-												keyword2
-								);
-=======
-		return adminpageDao.listPageSearchBox2(displayPost2, postNum2, keyword2);
->>>>>>> 1280a12663f30d5c08b8432821650ae9872423e3
+												keyword2);
 	}
 	
 	@Override
 	public int searchCountBox2(String nekeyword,String keyword2) throws Exception {
-		
-<<<<<<< HEAD
 		return adminpageDao.searchCountBox2(
-				nekeyword,
-				keyword2);
-=======
-		return adminpageDao.searchCountBox2(keyword2);
+				nekeyword,keyword2);
 	}
 
 	@Override
@@ -82,7 +65,6 @@ public class AdminServiceImpl implements AdminService{
 	public int searchCountBox3(String keyword3) throws Exception {
 		
 		return adminpageDao.searchCountBox3(keyword3);
->>>>>>> 1280a12663f30d5c08b8432821650ae9872423e3
 	}
 
 

@@ -82,21 +82,21 @@
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
                 <c:if test="${page2.prev2}">
-                    <li class="page-item"><a class="page-link" aria-label="Previous" href="/memberAdmin2?num2=${page2.startPageNum2 - 5}&keyword=${page.keyword}">이전</a></li>
+                    <li class="page-item"><a class="page-link" aria-label="Previous" href="/memberAdmin2?num2=${page2.startPageNum2 - 5}&keyword=${page.keyword}&nekeyword=${user.id}">이전</a></li>
                 </c:if>
                 
                 <c:forEach begin="${page2.startPageNum2}" end="${page2.endPageNum2}" var="num2">      
                       <c:if test="${select != num2}">
-                        <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${num2}&keyword=${page.keyword}">${num2}</a></li>
+                        <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${num2}&keyword=${page.keyword}&nekeyword=${user.id}">${num2}</a></li>
                       </c:if>
                       
                       <c:if test="${select == num2}">
-                        <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${num2}&keyword=${page.keyword}">${num2}</a></li>
+                        <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${num2}&keyword=${page.keyword}&nekeyword=${user.id}">${num2}</a></li>
                       </c:if>
                 </c:forEach>
                 
                 <c:if test="${page2.next2}">  
-                    <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${page2.endPageNum2 + 1}&keyword=${page.keyword}">다음</a></li>
+                    <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${page2.endPageNum2 + 1}&keyword=${page.keyword}&nekeyword=${user.id}">다음</a></li>
                 </c:if>
                 
             </ul>
@@ -112,7 +112,7 @@
 $(document).ready(function() {
 	console.log("$document.ready");
     if(window.location.href == "http://localhost:8080/memberAdmin2"){
-         window.location.href="/memberAdmin2?num=1"+ '&nekeyword=' + $('nekeyword').val();
+         window.location.href="/memberAdmin2?num=1"+ '&nekeyword=' + $(nekeyword).val();
     }
 });
 </script>

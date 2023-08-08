@@ -19,7 +19,7 @@ public interface AdminService {
 	
 	public int searchCountBox(String keyword)throws Exception;
 	
-<<<<<<< HEAD
+
 	public List<MemberVO> listPageSearchBox2(
 			int displayPost2, int postNum2, String nekeyword,
 			String keyword2
@@ -28,16 +28,11 @@ public interface AdminService {
 	public int searchCountBox2(
 			String nekeyword,String keyword2
 			)throws Exception;
-=======
-	
-	public List<MemberVO> listPageSearchBox2(int displayPost2, int postNum2, String keyword2) throws Exception;
-	
-	public int searchCountBox2(String keyword2)throws Exception;
-	
+
 	
 	public List<MemberVO> listPageSearchBox3(int displayPost3, int postNum3, String keyword3) throws Exception;
 	
 	public int searchCountBox3(String keyword3)throws Exception;
->>>>>>> 1280a12663f30d5c08b8432821650ae9872423e3
+
 
 }

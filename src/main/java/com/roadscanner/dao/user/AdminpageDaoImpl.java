@@ -108,6 +108,7 @@ public class AdminpageDaoImpl implements AdminpageDao {
 	 	data3.put("keyword3", keyword3);	
 	  return sqlSessionTemplate.selectOne(namespace + ".searchCountBox3", data3);
 	}
+
 	
 
 }
