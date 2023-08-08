@@ -110,11 +110,22 @@
 </body>
 <script>
 $(document).ready(function() {
+	const urlParams = new URL(location.href).searchParams;
+
+	const paramnekey = urlParams.get('nekeyword');
+
+	console.log(paramnekey)
+	if(paramnekey == null){
+        window.location.href="/memberAdmin2?num=1"+ '&nekeyword=' + $(nekeyword).val();
+   }
+});
+
+/* $(document).ready(function() {
 	console.log("$document.ready");
     if(window.location.href == "http://localhost:8080/memberAdmin2"){
          window.location.href="/memberAdmin2?num=1"+ '&nekeyword=' + $(nekeyword).val();
     }
-});
+}); */
 </script>
 
 <script>
