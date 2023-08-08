@@ -1,4 +1,4 @@
-package com.roadscanner.dao.upload;
+package com.roadscanner.dao.result;
 
 import java.sql.SQLException;
 
@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.roadscanner.cmn.PcwkLogger;
-import com.roadscanner.domain.upload.ResultImgVO;
+import com.roadscanner.domain.result.ResultImgVO;
 
 @Repository
 public class ResultImgDaoImpl implements PcwkLogger, ResultImgDao {
 
-	final String NAMESPACE = "com.roadscanner.upload";
+	final String NAMESPACE = "com.roadscanner.dao.result";
 	final String DOT = ".";
 
 	@Autowired

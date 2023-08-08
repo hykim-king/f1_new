@@ -1,15 +1,19 @@
 package com.roadscanner.domain.result;
 
-public class ResultVO {
-	private int no; // 표지판 번호
-	private String name; // 표지판 이름
-	private String content; // 표지판 내용
-	private String url; // URL : S3 저장 링크
-	
-	public ResultVO() {
-	}
+import org.springframework.stereotype.Component;
 
-	public ResultVO(int no, String name, String content, String url) {
+import com.roadscanner.cmn.DTO;
+
+@Component
+public class ResultImgVO extends DTO {
+	private int no;
+	private String name;
+	private String content;
+	private String url;
+	
+	public ResultImgVO() {}
+
+	public ResultImgVO(int no, String name, String content, String url) {
 		super();
 		this.no = no;
 		this.name = name;
@@ -51,8 +55,7 @@ public class ResultVO {
 
 	@Override
 	public String toString() {
-		return "ResultVO [no=" + no + ", name=" + name + ", content=" + content + ", url=" + url + "]";
+		return "ResultImgVO [no=" + no + ", name=" + name + ", content=" + content + ", url=" + url + "]";
 	}
-
 	
 }

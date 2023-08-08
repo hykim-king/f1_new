@@ -90,7 +90,7 @@
   <!-- 사진 삭제 -->
   <delete id="doDelete" parameterType="FileUploadVO">
     DELETE FROM upload_image
-    WHERE idx = #{idx}
+    WHERE name = #{name}
   </delete>
   
   <!-- 사진 업로드 -->

@@ -1,8 +1,8 @@
-package com.roadscanner.service.upload;
+package com.roadscanner.service.result;
 
 import java.sql.SQLException;
 
-import com.roadscanner.domain.upload.ResultImgVO;
+import com.roadscanner.domain.result.ResultImgVO;
 
 public interface ResultImgService {
 

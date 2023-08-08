@@ -1,8 +1,8 @@
-package com.roadscanner.dao.upload;
+package com.roadscanner.dao.result;
 
 import java.sql.SQLException;
 
-import com.roadscanner.domain.upload.ResultImgVO;
+import com.roadscanner.domain.result.ResultImgVO;
 
 public interface ResultImgDao {
 

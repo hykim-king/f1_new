@@ -21,10 +21,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 import com.roadscanner.cmn.MessageVO;
 import com.roadscanner.cmn.PcwkLogger;
+import com.roadscanner.domain.result.ResultImgVO;
 import com.roadscanner.domain.upload.FileUploadVO;
-import com.roadscanner.domain.upload.ResultImgVO;
+import com.roadscanner.service.result.ResultImgService;
 import com.roadscanner.service.upload.FileUploadService;
-import com.roadscanner.service.upload.ResultImgService;
 
 @Controller
 public class UploadController implements PcwkLogger {

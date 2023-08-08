@@ -138,8 +138,7 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 	@Override
 	public int doDelete(FileUploadVO inVO) throws SQLException, IOException {
 		
-		FileUploadVO outVO = dao.doSelectOne(inVO);
-		uploadVO = deleteFileToS3(outVO);
+		uploadVO = deleteFileToS3(inVO);
 		
 		return dao.doDelete(uploadVO);
 	}

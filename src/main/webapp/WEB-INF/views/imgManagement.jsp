@@ -173,8 +173,8 @@
 			        <td>
 			          <div class="image-container">
 			            <div class="checkbox-local">
-			              <input type="checkbox" class="btn_check" id="${vo.idx}">
-			              <label for="${vo.idx}"></label>
+			              <input type="checkbox" class="btn_check" id="${vo.name}">
+			              <label for="${vo.name}"></label>
 			            </div>
 				          <img src="${vo.url}" alt="${vo.name}" onclick="showImageModal('${vo.url}')" style="width:300px;">
 			          </div>
@@ -240,8 +240,8 @@
 	  // 선택된 체크박스의 idx 추출
 	  let checkboxes = [];
     $(".btn_check:checked").each(function() {
-      let idx = $(this).attr("id");
-      checkboxes.push(idx);
+      let name = $(this).attr("id");
+      checkboxes.push(name);
     });
     
     console.log("checkboxes: " + checkboxes)
@@ -258,7 +258,7 @@
     		  asyn:"true",
     		  dataType:"html",
     		  data:{
-    			  idx : checkboxes
+    			  name : checkboxes
     		  },
     		  success:function(data){//통신 성공
     		    console.log("success data:"+data);
@@ -295,8 +295,8 @@
 	  // 선택된 체크박스의 idx 추출
 	  let checkboxes = [];
 	  $(".btn_check:checked").each(function() {
-	    let idx = $(this).attr("id")
-	    checkboxes.push(idx);
+	    let name = $(this).attr("id")
+	    checkboxes.push(name);
 	  });
 	  
 	  console.log("checkboxes: " + checkboxes)
@@ -313,7 +313,7 @@
 	        asyn:"true",
 	        dataType:"html",
 	        data:{
-	          idx : checkboxes
+	        	name : checkboxes
 	        },
 	        success:function(data){//통신 성공
 	          console.log("success data:"+data);

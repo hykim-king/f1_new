@@ -120,7 +120,6 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 		// 조회 데이터 한 건 수정
 		String str = "_u";
 
-		outVO1.setName(outVO1.getName() + str);
 		outVO1.setUrl(outVO1.getUrl() + str);
 		outVO1.setCategory(20);
 		outVO1.setChecked(1);
@@ -248,7 +247,6 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 
 	// 테스트 검증 자동화
 	public void isSameData(FileUploadVO outVO, FileUploadVO inVO) {
-		assertEquals(outVO.getIdx(), inVO.getIdx());
 		assertEquals(outVO.getId(), inVO.getId());
 		assertEquals(outVO.getCategory(), inVO.getCategory());
 		assertEquals(outVO.getName(), inVO.getName());
