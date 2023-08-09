@@ -33,14 +33,14 @@
 
 <c:if  test="${user ne null}">
 <div class ="admin_container">
-    <h1 style="margin: auto; text-align:cneter;">여기는 관리자전용이다</h1>   
+    <h1 style="margin: auto; text-align:center;">여기는 관리자전용이다</h1>   
     <iframe src="http://localhost:8080/memberAdmin"
     style="margin: 50px auto; height: 500px;"></iframe>
 
 
 <br/>
 
-    <h1 style="margin: auto; text-align:cneter;">여기는 관리자전용이다</h1>   
+    <h1 style="margin: auto; text-align:center;"></h1>   
     <iframe src="http://localhost:8080/memberAdmin2"
     style="margin: 50px auto; height: 500px;"></iframe>
 
@@ -48,7 +48,7 @@
 <br/>
 
 
-    <h1 style="margin: auto; text-align:cneter;">여기는 관리자전용이다</h1>   
+    <h1 style="margin: auto; text-align:center;"></h1>   
     <iframe src="http://localhost:8080/memberAdmin3"
     style="margin: 50px auto; height: 500px;"></iframe>
 </div>

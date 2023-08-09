@@ -48,16 +48,17 @@
   </div>
 </nav>
 <body class="d-flex flex-column min-vh-100" >
-    <div class = "roadscannercontainer">  
+    <div class = "roadscannercontainer">
+    <form onsubmit="return false;"> 
         <div class = "loginbox">
 
             <div class= "loginboxdiv">
-              <input class= "icon" type="image" src="${CP}/resources/img/usericon.png" readonly="readonly" >
+              <img class= "icon" src="${CP}/resources/img/usericon.png"></img>
               <input class="loginidpwbtn" type="text" id="id" name="id" placeholder="아이디"><p/>
 	        </div>
 	         
 	        <div class= "loginboxdiv" style="margin-top: 20px">
-	          <input class= "icon" type="image" src="${CP}/resources/img/passwordicon.png" readonly="readonly"> 
+	          <img class= "icon"  src="${CP}/resources/img/passwordicon.png" ></img>
 	          <input class="loginidpwbtn" type="password" id="pw" name= "pw" placeholder="비밀번호"><p/>
 	        </div>
 	          <button  type="submit" class="loginbtn" id="doLogin" name="doLogin" >로그인</button><p/>
@@ -80,6 +81,7 @@
             
             </div>
 	    </div>  <!-- class = loginbox  -->
+	  </form> 
     </div>
 </body>
 
