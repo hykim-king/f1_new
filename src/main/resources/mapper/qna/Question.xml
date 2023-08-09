@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.roadscanner.dao.qna.QuestionDAO">
+
+<!--     질문 작성/저장 -->
+<!--    <insert id="save" useGeneratedKeys="true" keyProperty="no">-->
+<!--        INSERT INTO QUESTION (category, id, title, content)-->
+<!--        VALUES (#{category}, #{id}, #{title}, #{content})-->
+<!--    </insert>-->
+
+    <!-- 오라클 insert 확인 O-->
+    <insert id="save">
+        INSERT INTO QUESTION (no, category, id, title, content)
+        VALUES (QUESTION_SEQ.NEXTVAL, #{category}, #{id}, #{title}, #{content})
+    </insert>
+
+
+    <!-- no로 질문 조회 오라클 O-->
+    <select id="findByNo" resultType="QuestionVO">
+        SELECT
+            no,
+            category,
+            views,
+            idx,
+            id,
+            title,
+            content,
+            create_date AS createDate,
+            update_date AS updateDate
+--         update_date AS updateDate
+        FROM QUESTION
+        WHERE no = #{no}
+    </select>
+
+    <!-- 모든 질문 조회 getAllQuestions에서 수정 -->
+    <select id="findAll" resultType="QuestionVO">
+        SELECT
+            no,
+            category,
+            views,
+            idx,
+            id,
+            title,
+            content,
+            create_date AS createDate,
+            update_date AS updateDate
+        FROM QUESTION
+    </select>
+
+    <!-- 질문 업데이트 -->
+    <update id="update">
+        UPDATE QUESTION
+        SET
+            category = #{category},
+            idx = #{idx},
+            title = #{title},
+            content = #{content},
+            update_date = CURRENT_TIMESTAMP
+        WHERE no = #{no}
+    </update>
+
+    <!-- 질문 삭제 -->
+    <delete id="delete">
+        DELETE FROM QUESTION WHERE no = #{no}
+    </delete>
+
+    <!-- 페이징 구현 -->
+    <select id="findAllWithPaging" resultType="QuestionVO">
+        SELECT *
+        FROM (SELECT a.*, rownum rnum
+              FROM (SELECT
+                        no,
+                        category,
+                        views,
+                        title,
+                        id,
+                        create_date AS createDate,
+                        update_date AS updateDate
+                    FROM QUESTION
+                    ORDER BY CASE WHEN category = 10 THEN 1 ELSE 2 END, no DESC
+                   ) a WHERE rownum &lt;= #{start} + #{size}
+             ) WHERE rnum &gt; #{start}
+    </select>
+
+    <select id="countQuestions" resultType="int">
+        SELECT count(*) FROM question
+    </select>
+
+    <!-- 조회수 증가 -->
+    <update id="increaseViews">
+        UPDATE QUESTION
+        SET views = views + 1
+        WHERE no = #{no}
+    </update>
+
+</mapper>

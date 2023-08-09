@@ -22,6 +22,7 @@
 		<!-- <commons-dbcp.version>1.4</commons-dbcp.version> -->
 		<junit.version>4.13.1</junit.version> <!-- junit의 버전 정보를 정의함. -->
         <javax.mail.version>1.4.7</javax.mail.version>
+		<commons-dbcp.version>1.4</commons-dbcp.version>-->
 		<org.mybatis-version>3.5.11</org.mybatis-version>  <!-- mybatis 사용 -->
 		<mybatis-spring-version>2.0.6</mybatis-spring-version>
 		<log4jdbc-version>1.16</log4jdbc-version>
@@ -86,18 +87,6 @@
 			<version>1.9.13</version>
 		</dependency>
 
-		<!-- json 파일을 보내기 위해서 사용 -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.9.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.13</version>
-		</dependency>
-
 		<!-- SQL 로그출력 -->
 		<dependency>
 			<groupId>org.bgee.log4jdbc-log4j2</groupId>
@@ -123,6 +112,15 @@
 			<artifactId>ojdbc8</artifactId>
 			<version>${ojdbc8.version}</version>
 		</dependency>
+
+		<!--	테스트 용 데이터 베이스(H2) 설정에 따른 의존성 추가 	-->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.200</version>
+			<scope>runtime</scope>
+		</dependency>
+
 		<!-- spring-context-support -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -136,11 +134,18 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		<!-- commons-dbcp -->
-		<!-- <dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>${commons-dbcp.version}</version>
-		</dependency> -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.8.0</version> <!-- 현재 가장 최신 버전을 사용하십시오 -->
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
+			<version>2.11.1</version>
+		</dependency>
+
 		<!-- spring-test -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -251,13 +256,6 @@
 			<version>1.2</version>
 		</dependency>
 
-		<!-- junit -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version> <!-- 위에서 정의한 라이브러리 버전을 가져온다. -->
-			<scope>test</scope>
-		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
