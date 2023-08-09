@@ -26,7 +26,7 @@ public interface UserDao {
 	 */
 	public MemberVO selectOne(MemberVO inVO) throws SQLException;
 	
-	public MemberVO  selectOneMypage(MemberVO inVO) throws SQLException;
+	public MemberVO selectOneMypage(MemberVO inVO) throws SQLException;
 	
 	/**
 	 * 아이디 여부  체크
@@ -35,6 +35,13 @@ public interface UserDao {
 	 * @throws SQLException
 	 */
 	public MemberVO searchId(MemberVO user) throws SQLException;
+	
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 * @throws SQLException
+	 */
 	public MemberVO searchgrade(MemberVO user) throws SQLException;
 	
 	/**
@@ -109,12 +116,6 @@ public interface UserDao {
 	 */
 	public int updateUser(MemberVO user) throws SQLException;
 	
-	/**
-	 * 등급조회
-	 * @param user
-	 * @return 1(일반), 2(관리자), 3(정지)
-	 * @throws SQLException
-	 */
 	
 	/**
 	 * 등급 변경
@@ -132,6 +133,4 @@ public interface UserDao {
 	 */
 	public int clearGrade(MemberVO user) throws SQLException;
 
-
-	public List<MemberVO> getAllMembers();
 }
