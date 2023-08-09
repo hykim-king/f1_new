@@ -107,12 +107,14 @@
 		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		    <input type="button" class="btn btn-outline-danger" id="cancel" value="취소">
 	    </div>
+	    <c:if test="${user.grade == 1}">
 	    <div class="qna_btn">
 	       <input type="button" class="btn btn-outline-dark" id="myQnAboard" value="내 QnA보기">
 	    </div>
 	    <div class="draw_btn">
 	       <input type="button" class="btn btn-outline-dark" id="withdraw" value="탈퇴">
 	    </div>
+	    </c:if>
 	</c:if>
 	
 	<c:if test="${user eq null}">

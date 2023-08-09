@@ -6,7 +6,7 @@ import com.roadscanner.domain.MemberVO;
 
 public interface AdminService {
 
-	//약품 리스팅
+	// 리스팅
 	public List<MemberVO> list() throws Exception;
 	
 	//게시물 총 갯수
