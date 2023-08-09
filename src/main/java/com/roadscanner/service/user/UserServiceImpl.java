@@ -129,34 +129,29 @@ public class UserServiceImpl implements UserService {
 		LOG.debug("└────────────────────────────────────────────────────────┘");
 		int checkStatus = 0; 		// 10(id 없음)/20(비밀번호 오류),30(성공) 
 		int status = this.userDao.idCheck(user);
-		int grade = this.userDao.gradeCheck(user).getGrade();
 		
-		if(1 == status) {
-
-			if(1 == grade || 2 == grade) {
+		if(1==status) {
+			LOG.debug("여기 까진 완료");
+			String grade = String.valueOf(this.userDao.searchgrade(user).getGrade());
+			status = userDao.passCheck(user);
 			
-				status = userDao.passCheck(user);
-				
-				if(1 == status) {
-				
-					checkStatus = 30;	// 로그인 성공
+				if(1==status){
 					
-				} else {
+					if(grade.equals("3")) {
+						checkStatus = 40; 
+						return checkStatus;
+					}
 					
-					checkStatus = 20;	// 비밀번호 오류
+					checkStatus = 30; // 로그인 성공 
+					
+				}if(0 == status){
+					checkStatus = 20; // 비밀번호 오류
 					
 				}
-			
-			} else {
 				
-				checkStatus = 40;	// 정지
-				
-			}
-			
-		} else {
+		}else {
+			checkStatus = 10; 		// id없음
 
-			checkStatus = 10;	// 아이디 오류
-			
 		}
 		
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
