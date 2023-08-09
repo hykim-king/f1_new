@@ -61,7 +61,7 @@ const main = {
             data: JSON.stringify(data)
         }).done(function () {
             alert("글이 수정되었습니다.");
-            window.location.href = '/qna';
+            window.location.href = '/qna/' + no; // 수정된 페이지로 리다이렉트
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -123,11 +123,25 @@ const answer = {
         });
     },
 
-    load: function() {
+    loadAnswers: function() {
             // Ajax 요청을 통해 댓글을 불러오고 HTML에서 댓글 섹션을 업데이트
             $.get('/api/qna/' + no + '/answer', function(data) {
                 // 데이터를 처리하고 HTML에서 댓글 섹션을 업데이트
-                $('#answer-section').html(data);
+                const answerSection = $('#answer-section');
+                answerSection.empty();  // 기존 내용 비우기
+
+                // 받아온 답변 데이터를 반복하여 화면에 추가
+                data.forEach(function(answer) {
+                    const answerHtml = `
+                         <div class="card mb-3">
+                                <div class="card-body">
+                                    <p class="card-text">작성자: ${answer.id}</p>
+                                    <p class="card-text">내용: ${answer.content}</p>
+                                </div>
+                        </div>
+                    `;
+                    answerSection.append(answerHtml);
+                });
             });
     }
 };
