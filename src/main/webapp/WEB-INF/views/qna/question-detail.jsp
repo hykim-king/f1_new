@@ -26,9 +26,11 @@
             <p class="card-text">
                 작성일: ${question.createDate}
             </p>
-            <p class="card-text">
-                수정일: ${question.updateDate}
-            </p>
+            <c:if test="${question.updateDate != null}">
+                <p class="card-text">
+                    최종 수정일: ${question.updateDate}
+                </p>
+            </c:if>
             <p class="card-text">
                 내용: ${question.content}
             </p>
