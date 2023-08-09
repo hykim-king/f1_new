@@ -2,7 +2,11 @@
 <Configuration xmlns="http://logging.apache.org/log4j/2.0/config">
   <!-- 해당 설정파일에서 사용하는 프로퍼티 -->
   <Properties>
+<<<<<<< HEAD
     <Property name="logNm">PCWK_LOG</Property>
+=======
+    <Property name="logNm">Pilldex_Log</Property>
+>>>>>>> c4e61d30204294959446c10433f9724632592f40
     <Property name="layoutPattern">[%d{yyyyMMdd HH:mm:ss}] %-5p %C{1}.%M(%F:%L) - %m%n</Property>
     
   </Properties>
@@ -37,21 +41,22 @@
     </Logger>
     
     <!-- 3rdparty Loggers -->
-	  <logger name="org.springframework.core">
-	    <level value="DEBUG" />
-	  </logger> 
-	  
-	  <logger name="org.springframework.beans">
-	    <level value="DEBUG" />
-	  </logger>
-	  
-	  <logger name="org.springframework.context">
-	    <level value="DEBUG" />
-	  </logger>
-	
-	  <logger name="org.springframework.web">
-	    <level value="DEBUG" />
-	  </logger>
+    <logger name="org.springframework.core">
+      <level value="DEBUG" />
+    </logger>
+    
+    <logger name="org.springframework.beans">
+      <level value="DEBUG" />
+    </logger>
+    
+    <logger name="org.springframework.context">
+      <level value="DEBUG" />
+    </logger>
+  
+    <logger name="org.springframework.web">
+      <level value="DEBUG" />
+    </logger>
+    
   </Loggers>
 </Configuration>
 
