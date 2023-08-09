@@ -48,8 +48,8 @@ public class UserDaoImpl implements UserDao {
 		int flag = 0;
 		String statement = this.NAMESPACE + DOT + "idCheck";
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
-		LOG.debug("│ 1. statement " + statement);
-		LOG.debug("│ 2. param=\n" + user.toString());
+		LOG.debug("│ 1. statement : " + statement);
+		LOG.debug("│ 2. param : " + user.toString());
 		LOG.debug("└────────────────────────────────────────────────────────┘");
 		flag = this.sqlSessionTemplate.selectOne(statement, user);
 
@@ -221,7 +221,8 @@ public class UserDaoImpl implements UserDao {
 	public MemberVO gradeCheck(MemberVO user) throws SQLException {
 		String statement = this.NAMESPACE + DOT + "gradeCheck";
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
-		LOG.debug("│ statement " + statement);
+		LOG.debug("│ statement : " + statement);
+		LOG.debug("│ param : " + user.toString());
 		LOG.debug("└────────────────────────────────────────────────────────┘");
 		MemberVO outVO = this.sqlSessionTemplate.selectOne(statement, user);
 

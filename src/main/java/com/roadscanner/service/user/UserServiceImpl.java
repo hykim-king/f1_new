@@ -131,20 +131,32 @@ public class UserServiceImpl implements UserService {
 		int status = this.userDao.idCheck(user);
 		int grade = this.userDao.gradeCheck(user).getGrade();
 		
-		if(1==status) {
+		if(1 == status) {
+
 			if(1 == grade || 2 == grade) {
+			
 				status = userDao.passCheck(user);
-				if(1==status) {
-					checkStatus = 30; 	// 로그인 성공 
-				}else {
-					checkStatus = 20; 	// 비밀번호 오류
-				}				
+				
+				if(1 == status) {
+				
+					checkStatus = 30;	// 로그인 성공
+					
+				} else {
+					
+					checkStatus = 20;	// 비밀번호 오류
+					
+				}
+			
 			} else {
-				checkStatus = 40;
+				
+				checkStatus = 40;	// 정지
+				
 			}
 			
 		} else {
-			checkStatus = 10; 		// id없음
+
+			checkStatus = 10;	// 아이디 오류
+			
 		}
 		
 		LOG.debug("┌────────────────────────────────────────────────────────┐");

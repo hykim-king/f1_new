@@ -59,7 +59,7 @@
         </c:if>
         <!-- 로그인 세션 O -->
         <c:if test="${user ne null}">
-          <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/logout'">LogOut</button>
+          <button type="button" class="btn btn-outline-primary" onclick="location.href='${CP}/logout'" style="margin-right: 50px;">LogOut</button>
         </c:if>        
       </form>
     </div>

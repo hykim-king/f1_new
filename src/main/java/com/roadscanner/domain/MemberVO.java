@@ -16,12 +16,17 @@ public class MemberVO {
 	private String regdate;	// 가입일
 	private int no;	//회원 번호(시퀀스)
 	
-	public MemberVO() {	}
+	public MemberVO() {}
 
-	public MemberVO(String id, String password) {
+	public MemberVO(String id, String password, String email, int grade, int no) {
 		super();
 		this.id = id;
 		this.password = password;
-		
+		this.email = email;
+		this.grade = grade;
+		this.no = no;
 	}
+
+
+	
 }
