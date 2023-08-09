@@ -39,7 +39,6 @@
         </div>
     </div>
 
-    <div class="my-4"></div>
 
     <!-- 답변 작성 폼 -->
     <div class="card">
@@ -48,8 +47,12 @@
                 <textarea class="form-control" id="answer-content" rows="5" placeholder="답변을 입력하세요"></textarea>
             </div>
             <a href="#" role="button" class="btn btn-secondary">취소</a>
-            <a href="/qna/save/${question.no}/answer" id="btn-answer-save" class="btn btn-primary">등록</button>
+            <button type="submit" id="btn-answer-save" class="btn btn-primary" value="저장">등록</button>
         </form>
+    </div>
+
+    <!-- 답변 내용 -->
+    <div id="answer-section">
     </div>
 
 </div>
