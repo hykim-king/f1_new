@@ -33,6 +33,7 @@
     <!-- 답변 조회 -->
     <select id="findByNo" resultType="AnswerVO">
         SELECT
+            no,
             id,
             content,
             create_date AS "createDate(java.time.LocalDateTime)",

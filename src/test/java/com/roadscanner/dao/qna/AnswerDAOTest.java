@@ -1,7 +1,10 @@
 package com.roadscanner.dao.qna;
 
-import com.roadscanner.domain.qna.QuestionVO;
-import org.junit.After;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -9,9 +12,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import com.roadscanner.dao.qna.AnswerDAO;
+
 import com.roadscanner.domain.qna.AnswerVO;
-import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations =
@@ -20,6 +22,7 @@ import static org.junit.Assert.*;
                 "file:src/main/resources/mybatis-config.xml"
         })
 public class AnswerDAOTest {
+    Logger LOG = LogManager.getLogger(getClass());
 
     @Autowired
     private AnswerDAO dao;
@@ -30,11 +33,7 @@ public class AnswerDAOTest {
     @Before
     public void setUp() throws Exception {
 
-        no = 101L;
-        answer = new AnswerVO(no, "tester01", "답변 등록 테스트");
-
-        // 등록
-        dao.save(answer);
+        answer = new AnswerVO(228L, "testtest", "답변 등록 테스트");
 
     } // add()
 
@@ -54,41 +53,50 @@ public class AnswerDAOTest {
     @Test
     //@Ignore
     public void update() {
-
-        no = answer.getNo();
-
+    	
+    	answer.setNo(228L); // 게시글 번호 설정
+    	
+        dao.delete(228L);
+        dao.save(answer); // 먼저 답변을 등록합니다.
+        
+        no = answer.getNo(); // no 값을 가져옵니다.
+        
         // 등록 데이터 조회
-        AnswerVO getVO = dao.findByNo(no);
-
+        AnswerVO getVO = dao.findByNo(answer.getNo());
+        
         // 데이터 비교
         isSameData(getVO, answer);
-
+        
         // 데이터 수정
         String updateStr = "_New";
         getVO.setContent(answer.getContent() + updateStr);
-
-        dao.update(getVO);
-
-//        // 다시 조회해서 비교
-//        AnswerVO resultVO = dao.findByNo(no);
-//
-//        // 수정된 데이터 비교
-//        isSameData(getVO, resultVO);
-
+        
+        dao.update(getVO); // 업데이트 실행
+        
+        // 다시 조회해서 비교
+        AnswerVO resultVO = dao.findByNo(no);
+        
+        // 수정된 데이터 비교
+        isSameData(getVO, resultVO);
+        
     } // update()
 
 
     @Test
     @Ignore
     public void findByNo() throws Exception {
-
-        // 조회
+    	
+    	dao.delete(answer.getNo());
+    	dao.save(answer);
+        
+    	// 조회
         no = answer.getNo();
+        
         AnswerVO outVO = dao.findByNo(no);
-
+        
         // 조회 데이터 비교
         isSameData(outVO, answer);
-
+        
     } // findByNo()
 
 
