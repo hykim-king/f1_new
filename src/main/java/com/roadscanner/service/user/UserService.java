@@ -87,8 +87,6 @@ public interface UserService {
 
 	public int doWithdraw(MemberVO user) throws SQLException;
 
-
-	public List<MemberVO> getAllMembers() throws SQLException;
 	
 	/**
 	 * 등급 변경
