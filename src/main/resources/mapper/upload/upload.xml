@@ -29,6 +29,7 @@
         SELECT
             TT1.idx,
             TT1.id,
+            TO_CHAR(TT1.upload_date, 'YYYY-MM-DD HH24:MI:SS') AS upload_date,
             TT1.category,
             TT1.name,
             TT1.url,
@@ -38,8 +39,7 @@
             FROM(
                 SELECT *
                 FROM upload_image
-                WHERE category = #{category}
-                AND NOT(checked = 1)
+                WHERE NOT(checked = 1)
                 ORDER BY upload_date DESC
             )T1
             <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} - 1) + #{pageSize} ]]>
@@ -50,8 +50,7 @@
     (
         SELECT COUNT(*) AS totalCnt
         FROM upload_image
-        WHERE category = #{category}
-        AND NOT(checked = 1)
+        WHERE NOT(checked = 1)
     )B
   </select>
   

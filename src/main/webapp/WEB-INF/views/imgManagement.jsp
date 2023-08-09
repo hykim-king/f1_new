@@ -9,35 +9,14 @@
 <script src="${CP}/resources/js/jquery-3.7.0.js"></script>
 <title>imgManagement</title>
 <style>
-  .grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 50px;
-    max-width: 700px;
-    margin: auto;
-    margin-top: 130px;
-    margin-bottom: 100px;
-    position: relative;
-  }
-  .grid-item {
-    width: 100%;
-    padding-top: 100%;
-    position: relative;
-    overflow: hidden;
-    padding-left: 60;
-    padding-right: 60;
-  }
-  .grid-item img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200px;
-    object-fit: cover;
-    cursor: pointer;
-  }
 	.image-container {
     position: relative;
     display: inline-block;
+	}
+	.image-container img {
+	  width:300px;
+	  object-fit: cover;
+    cursor: pointer;
 	}
   .checkbox-local {
     position: absolute;
@@ -146,67 +125,122 @@
 <body>
   <div class="container">
     <div class="">
-      <button type="button" id="deleteButton1" class="btn btn-outline-danger" onclick="selectDelete()">DELETE</button>
-      <button type="button" id="saveButton1" class="btn btn-dark" style="width: 200px;" onclick="selectSave()">SAVE</button>
+      <button type="button" id="selectDeleteBtn" class="btn btn-outline-danger" onclick="selectDelete()">DELETE</button>
+      <button type="button" id="selectSaveBtn" class="btn btn-dark" style="width: 200px;" onclick="selectSave()">SAVE</button>
     </div>
     
-    <div class="">
-      <select id="categoryDropdown" onchange="changeCategory()">
-        <option value="10">기본</option>
-        <option value="20">좋아요</option>
-        <option value="30">싫어요</option>
-      </select>
-      <input type="checkbox" id="selectAllBtn" onclick="toggleSelectAll()" style="display: none;">
-      <label for="selectAllBtn" class="btn btn-link" style="color: #212529;">SELECT_ALL</label>
+    <div>
+	    <select id="categoryDropdown" name="category">
+	      <option value="0">전체</option>
+	      <option value="10">기본</option>
+	      <option value="20">좋아요</option>
+	      <option value="30">싫어요</option>
+	    </select>
+	    <input type="checkbox" id="selectAllBtn" onclick="toggleSelectAll()" style="display: none;">
+	    <label for="selectAllBtn" class="btn btn-link" style="color: #212529;">SELECT_ALL</label>
     </div>
+    
     
     <%-- ${list} --%>
     <!-- 3*3 사진+체크박스 디스플레이 -->
-    
-		<table>
-		  <c:choose>
-		    <c:when test="${not empty list}">
-		      <c:forEach var="vo" items="${list}" varStatus="status">
-		        <c:if test="${status.index % 3 == 0}">
-		          <tr>
-		        </c:if>
-			        <td>
-			          <div class="image-container">
-			            <div class="checkbox-local">
-			              <input type="checkbox" class="btn_check" id="${vo.name}">
-			              <label for="${vo.name}"></label>
-			            </div>
-				          <img src="${vo.url}" alt="${vo.name}" onclick="showImageModal('${vo.url}')" style="width:300px;">
-			          </div>
-			        </td>
-		        <c:if test="${(status.index + 1) % 3 == 0 || status.last}">
-		          </tr>
-		        </c:if>
-		      </c:forEach>
-		    </c:when>
-		    <c:otherwise>
-		      <td rowspan="3" colspan="3">No data found</td>
-		    </c:otherwise>
-		  </c:choose>
-		</table>
+    <div class="d-flex justify-content-center">
+			<table id="photoList">
+			  <c:choose>
+			    <c:when test="${not empty list}">
+			      <c:forEach var="vo" items="${list}" varStatus="status">
+			        <c:if test="${status.index % 3 == 0}">
+			          <tr>
+			        </c:if>
+				        <td>
+				          <div class="image-container">
+				            <div class="checkbox-local">
+				              <input type="checkbox" class="btn_check" id="${vo.name}">
+				              <label for="${vo.name}"></label>
+				            </div>
+				            <div>
+					            <img src="${vo.url}" alt="${vo.name}" onclick="showImageModal('${vo.url}')">
+				            </div>
+				          </div>
+				        </td>
+			        <c:if test="${(status.index + 1) % 3 == 0 || status.last}">
+			          </tr>
+			        </c:if>
+			      </c:forEach>
+			    </c:when>
+			    <c:otherwise>
+			      <td rowspan="3" colspan="3">No data found</td>
+			    </c:otherwise>
+			  </c:choose>
+			</table>
+		</div>
 	  
+	  <!-- 페이징 -->
+		  <ul class="pagination justify-content-center">
+		    <li class="page-item">
+		      <a class="page-link" href="#" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+		    <li class="page-item"><a class="page-link" href="#">1</a></li>
+		    <li class="page-item"><a class="page-link" href="#">2</a></li>
+		    <li class="page-item"><a class="page-link" href="#">3</a></li>
+		    <li class="page-item">
+		      <a class="page-link" href="#" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span>
+		      </a>
+		    </li>
+		  </ul> <!-- 페이징 -->
 	  
-  </div> <!-- grid-container -->
+  </div> <!-- container -->
   
-  <!-- 이미지 크게 보기 창 -->
+  <!----------------------------- 이미지 크게 보기 창 ----------------------------->
   <div class="image-modal" id="imageModal">
     <div class="sort-horizon">
       <div class="left">
-        <input type="hidden" name="idx" id="idx" value="${vo.idx}">
-        <img src="${vo.url}" id="modalImage" style="max-width: 900px; max-height: 800px;">
+        <img src="" id="modalImage" style="max-width: 700px; max-height: 800px;">
         <span class="image-modal-close" onclick="hideImageModal()">&times;</span>
       </div>
-      <div class="divider"/>
+      <div class="divider"></div>
       <div class="right">
-        <p style="height: 650px;">이곳에 파일 정보를 입력하세요.</p>
+        <div style="height: 650px;">
+          <table class="table">
+            <tr>
+              <td>번호</td>
+              <td id="idx"></td>
+            </tr>
+            <tr>
+              <td>이름</td>
+              <td id="name"></td>
+            </tr>
+            <tr>
+              <td>업로더</td>
+              <td id="id"></td>
+            </tr>
+            <tr>
+              <td>날짜</td>
+              <td id="uploadDate"></td>
+            </tr>
+            <tr>
+              <td>크기</td>
+              <td id="fileSize"></td>
+            </tr>
+             <tr>
+              <td>카테고리</td>
+              <td id="category"></td>
+            </tr>
+            <tr>
+              <td>오류1</td>
+              <td id="u1"></td>
+            </tr>
+            <tr>
+              <td>오류2</td>
+              <td id="u2"></td>
+            </tr>
+          </table>
+        </div>
         <div class="modal-delete-save-button">
-          <button type="button" id="deleteButton2" class="btn btn-outline-danger" style="margin-left: 4px; height: 45px;" onclick="detailDelete()">DELETE</button>
-          <button type="button" id="saveButton2" class="btn btn-dark" style="width: 250px; height: 45px;" onclick="detailSave()">SAVE</button>
+          <button type="button" id="detailDeleteBtn" class="btn btn-outline-danger" style="margin-left: 4px; height: 45px;">DELETE</button>
+          <button type="button" id="detailSaveBtn" class="btn btn-dark" style="width: 250px; height: 45px;">SAVE</button>
         </div>
       </div>
     </div>
@@ -214,13 +248,23 @@
   
 <script>
 	// 드롭다운으로 카테고리 선택해서 카테고리에 따른 목록 조회
-	function changeCategory() {
-		let selectedCategory = document.getElementById("categoryDropdown").value;
+	$("#categoryDropdown").change(function() {
+		hideImageModal()
+		
+		let selectedCategory = $(this).val();
+		console.log(selectedCategory)
+    
+		if (selectedCategory === "0") {
+	    // 전체 카테고리 선택 시 새로고침
+	    location.reload();
+    } else {
+	    // 선택한 카테고리에 해당하는 사진만 표시
+	    
+    }
 
- 
-	}
+	}); // categoryDropdown
 
-
+	
   // SELECT_ALL 버튼 눌러 전체 선택
   function toggleSelectAll() {
     let checkboxes = document.querySelectorAll(".btn_check");
@@ -233,8 +277,7 @@
   }
   
 
-  /* DELETE 버튼 눌러 삭제 후 새로고침 */
-  //선택 삭제  
+  //선택 삭제 후 새로고침
   function selectDelete() {  
 	  
 	  // 선택된 체크박스의 idx 추출
@@ -255,7 +298,7 @@
     	
     	$.ajax({
     		  type: "POST",
-    		  url:"/roadscanner/doDelete",
+    		  url:"/roadscanner/doDeleteMultiple",
     		  asyn:"true",
     		  traditional: true, // 배열 데이터 전송을 위해 traditional 옵션을 설정
     	    data: { checkboxes: checkboxes },
@@ -275,19 +318,8 @@
     } // if
   } // selectDelete()
   
-  //상세보기 삭제
-  function detailDelete() {
-	  console.log("idx: " + $("#idx").val())
-	  
-    if (confirm("삭제하시겠습니까?")) {
-      alert("삭제되었습니다.");
-      hideImageModal();
-    }
-	} // detailDelete()
   
-  
-  /* SAVE 버튼 눌러 저장 후 새로고침 */
-  //선택 저장
+  //선택 저장 후 새로고침
   function selectSave() {
 	    
 	  // 선택된 체크박스의 idx 추출
@@ -307,7 +339,7 @@
     if (confirm("저장하시겠습니까?")) {
 	    $.ajax({
 	        type: "POST",
-	        url:"/roadscanner/checkedUpdate",
+	        url:"/roadscanner/checkedUpdateMultiple",
 	        asyn:"true",
 	        traditional: true, // 배열 데이터 전송을 위해 traditional 옵션을 설정
 	        data: { checkboxes: checkboxes },
@@ -327,19 +359,8 @@
     } // if
   } // selectSave()
   
-  //상세보기 저장
-  function detailSave() {
-	  console.log("idx: " + $("#idx").val())
-	  
-    if (confirm("저장하시겠습니까?")) {
-  	  
-      alert("저장되었습니다.");
-      hideImageModal();
-    }
-	  
-	} // detailSave()
   
-  
+////////////////////////////////////////////////////////////////////////////////
   // 이미지 크게 보기 창 보이기
   function showImageModal(imageSrc) {
     let modal = document.getElementById("imageModal");
@@ -349,13 +370,114 @@
     modalImage.src = imageSrc;
   
     modal.style.display = "block";
-  }
+    
+    // 이미지 상세 조회
+    //console.log(imageSrc);
+    let firstIdx = imageSrc.lastIndexOf('/') + 1;
+    let lastIdx = imageSrc.length;
+    let name = imageSrc.slice(firstIdx, lastIdx);
+    //console.log(name);
+    
+    $.ajax({
+    	  type: "GET",
+    	  url:"/roadscanner/doSelectOne",
+    	  asyn:"true",
+    	  dataType:"json",
+    	  data:{
+    	      name: name
+    	  },
+    	  success:function(data){//통신 성공
+    	    // console.log("success data:"+data);
+    	    
+    	    $("#idx").text(data.idx);
+          $("#name").text(data.name);
+          $("#id").text(data.id);
+          $("#uploadDate").text(data.uploadDate);
+          $("#fileSize").text(data.fileSize);
+          $("#category").text(data.category);
+          $("#u1").text((data.u1 === 0) ? "오류없음" : "오류있음");
+          $("#u2").text((data.u2 === 0) ? "오류없음" : "오류있음");
+
+    	  },
+    	  error:function(data){//실패시 처리
+    	    console.log("error:"+data);
+    	  }
+    	}); // ajax
+    	
+    	
+		//상세보기 저장
+		$('#detailSaveBtn').on('click', function(){
+			console.log("detailSaveBtn click");
+			console.log(name);
+			
+		  if (confirm("저장하시겠습니까?")) {
+ 			  $.ajax({
+	          type: "POST",
+	          url:"/roadscanner/checkedUpdate",
+	          asyn:"true",
+	          dataType:"html",
+	          data:{
+	            name : name
+	          },
+	          success:function(data){//통신 성공
+	            console.log("success data:"+data);
+	            let parsedJson = JSON.parse(data);
+	                if("1" == parsedJson.msgId) {
+	                  alert(parsedJson.msgContents);
+	                  hideImageModal();
+	                  location.reload();
+	                } else {
+	                  alert(parsedJson.msgContents);
+	                }
+	          },
+	          error:function(data){//실패시 처리
+	            console.log("error:"+data);
+	          }
+	      }); // ajax
+		  } // if
+		}); // detailSave()
+    	
+    	
+    //상세보기 삭제
+		$('#detailDeleteBtn').on('click', function(){
+			console.log("detailDeleteBtn click");
+			console.log(name);
+			
+		  if (confirm("삭제하시겠습니까?")) {
+			  $.ajax({
+	          type: "GET",
+	          url:"/roadscanner/doDelete",
+	          asyn:"true",
+	          dataType:"html",
+	          data:{
+	            name : name
+	          },
+	          success:function(data){//통신 성공
+	            console.log("success data:"+data);
+	            let parsedJson = JSON.parse(data);
+	                if("1" == parsedJson.msgId) {
+	                  alert(parsedJson.msgContents);
+	                  hideImageModal();
+	                  location.reload();
+	                } else {
+	                  alert(parsedJson.msgContents);
+	                }
+	          },
+	          error:function(data){//실패시 처리
+	            console.log("error:"+data);
+	          }
+	      }); // ajax
+		  } // if
+		}); // detailDelete()
+   	  
+  } // showImageModal
   
   // 이미지 크게 보기 창 닫기
   function hideImageModal() {
     let modal = document.getElementById("imageModal");
     modal.style.display = "none";
   }
+  
 </script>
 </body>
 </html>

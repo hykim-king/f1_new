@@ -28,7 +28,7 @@ public interface FileUploadService {
 	// 사진 저장하면 checked = 1, S3 버킷 이동
 	int checkedUpdate(FileUploadVO inVO) throws SQLException, IOException;
 	
-	// S3와 DB에서 사진 삭제
+	// S3와 DB에서 단 건 사진 삭제
 	int doDelete(FileUploadVO inVO) throws SQLException, IOException;
 
 	// S3에 사진 업로드, 정보는 DAO 전송

@@ -166,7 +166,7 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 
 		List<FileUploadVO> list = dao.doRetrieve(search);
 		for (FileUploadVO vo : list) {
-			LOG.debug("분류: " + vo.getCategory() + ", url: " + vo.getUrl() + ", 검토여부: " + vo.getChecked());
+			LOG.debug(vo);
 		}
 
 	}
