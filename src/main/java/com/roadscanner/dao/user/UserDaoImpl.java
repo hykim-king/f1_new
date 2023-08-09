@@ -222,12 +222,6 @@ public class UserDaoImpl implements UserDao {
 	    return flag;
 	}
 
-	// -------------로그인 관리자페이지------------------------
-	@Override
-	public List<MemberVO> getAllMembers() {
-		return null;
-	}
-
 	@Override
 	public int forbiddenGrade(MemberVO user) throws SQLException {
 		int flag = 0;
