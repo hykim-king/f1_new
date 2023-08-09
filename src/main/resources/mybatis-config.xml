@@ -12,6 +12,7 @@
     <typeAliases>
         <typeAlias type="com.roadscanner.domain.MemberVO" alias="MemberVO"/>
         <typeAlias type="com.roadscanner.domain.qna.QuestionVO" alias="QuestionVO" />
+        <typeAlias type="com.roadscanner.domain.qna.AnswerVO" alias="AnswerVO" />
     </typeAliases>
 
     <!-- 날짜타입 핸들러 추가 -->
