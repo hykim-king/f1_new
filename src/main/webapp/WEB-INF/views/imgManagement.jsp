@@ -131,6 +131,7 @@
     
     <div>
 	    <select id="categoryDropdown" name="category">
+	      <option selected="selected" disabled="disabled">분류</option>
 	      <option value="0">전체</option>
 	      <option value="10">기본</option>
 	      <option value="20">좋아요</option>
@@ -248,24 +249,6 @@
   
 <script>
 	
-	// 드롭다운으로 카테고리 선택해서 카테고리에 따른 목록 조회
-	$("#categoryDropdown").change(function() {
-		hideImageModal()
-		
-		let selectedCategory = $(this).val();
-		console.log(selectedCategory)
-    
-		if (selectedCategory === "0") {
-	    // 전체 카테고리 선택 시 새로고침
-	    location.reload();
-    } else {
-	    // 선택한 카테고리에 해당하는 사진만 표시
-	    
-    }
-
-	}); // categoryDropdown
-
-	
   // SELECT_ALL 버튼 눌러 전체 선택
   function toggleSelectAll() {
     let checkboxes = document.querySelectorAll(".btn_check");
@@ -362,6 +345,11 @@
   
   
 ////////////////////////////////////////////////////////////////////////////////
+// 이미지 모달 숨기기
+function hideImageModal() {
+  let modal = document.getElementById("imageModal");
+  modal.style.display = "none";
+}
 
 $(document).ready(function() {
   let name; // 클릭한 이미지의 이름을 저장하는 변수 
@@ -431,13 +419,6 @@ $(document).ready(function() {
     }); // ajax
   } // showImageModal
   
-  
-  // 이미지 모달 숨기기
-  function hideImageModal() {
-    let modal = document.getElementById("imageModal");
-    modal.style.display = "none";
-  }
-
   //상세보기 저장
   $('#detailSaveBtn').on('click', function() {
     console.log("detailSaveBtn click");
@@ -506,6 +487,14 @@ $(document).ready(function() {
 });
 
 
+// 드롭다운으로 카테고리 선택해서 카테고리에 따른 목록 조회
+$("#categoryDropdown").change(function() {
+  
+  let selectedCategory = $(this).val();
+  
+  window.location.href = "/roadscanner/imgManagement?category=" + encodeURIComponent(selectedCategory);
+
+}); // categoryDropdown
   
 </script>
 </body>

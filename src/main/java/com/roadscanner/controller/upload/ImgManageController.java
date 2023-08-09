@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -255,7 +256,8 @@ public class ImgManageController implements PcwkLogger {
 
 	// 이미지 목록 관리 화면
 	@RequestMapping(value = "/imgManagement")
-	public String imgManagement(FileUploadVO inVO, Model model) throws SQLException {
+	public String imgManagement(@RequestParam(name = "category", required = false, defaultValue = "0") String category,
+								FileUploadVO inVO, Model model) throws SQLException {
 		LOG.debug("┌────────────────┐");
 		LOG.debug("│ imgManagement  │");
 		LOG.debug("│ inVO           │" + inVO);
@@ -270,10 +272,9 @@ public class ImgManageController implements PcwkLogger {
 			inVO.setPageSize(9);
 		}
 
-//		// 카테고리 초기값: 10
-//		if (null != inVO) {
-//			inVO.setCategory(10);
-//		}
+		// 카테고리 값 주기
+		int intCategory = Integer.parseInt(category);
+		inVO.setCategory(intCategory);
 
 		// 목록 조회
 		List<FileUploadVO> list = this.service.doRetrieve(inVO);
