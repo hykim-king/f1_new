@@ -156,6 +156,17 @@ public class UserDaoImpl implements UserDao {
 
 		return outVO;
 	}
+	
+	@Override
+	public MemberVO searchgrade(MemberVO user) throws SQLException {
+		String statement = this.NAMESPACE + DOT + "searchgrade";
+		LOG.debug("┌────────────────────────────────────────────────────────┐");
+		LOG.debug("│ statement " + statement);
+		LOG.debug("└────────────────────────────────────────────────────────┘");
+		MemberVO outVO = this.sqlSessionTemplate.selectOne(statement, user);
+
+		return outVO;
+	}
 
 	@Override
 	public int updatePw(MemberVO user) throws SQLException {
@@ -217,16 +228,6 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 
-	@Override
-	public MemberVO gradeCheck(MemberVO user) throws SQLException {
-		String statement = this.NAMESPACE + DOT + "gradeCheck";
-		LOG.debug("┌────────────────────────────────────────────────────────┐");
-		LOG.debug("│ statement " + statement);
-		LOG.debug("└────────────────────────────────────────────────────────┘");
-		MemberVO outVO = this.sqlSessionTemplate.selectOne(statement, user);
-
-		return outVO;
-	}
 
 	@Override
 	public int forbiddenGrade(MemberVO user) throws SQLException {

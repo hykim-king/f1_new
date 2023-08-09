@@ -35,7 +35,7 @@ public interface UserDao {
 	 * @throws SQLException
 	 */
 	public MemberVO searchId(MemberVO user) throws SQLException;
-
+	public MemberVO searchgrade(MemberVO user) throws SQLException;
 	
 	/**
 	 * 비밀번호 여부  체크
@@ -115,7 +115,6 @@ public interface UserDao {
 	 * @return 1(일반), 2(관리자), 3(정지)
 	 * @throws SQLException
 	 */
-	public MemberVO gradeCheck(MemberVO user) throws SQLException;
 	
 	/**
 	 * 등급 변경
