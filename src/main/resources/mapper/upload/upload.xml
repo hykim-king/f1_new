@@ -16,10 +16,10 @@
   <!-- 피드백 누적 그래프, 표 -->
   <select id="totalFeedback" resultType="FileUploadVO">
     SELECT
-		    COUNT(DECODE(u1, 1, 1)) AS u1,
-		    COUNT(DECODE(u2, 1, 1)) AS u2
-		FROM
-		    upload_image
+        COUNT(DECODE(u1, 1, 1)) AS u1,
+        COUNT(DECODE(u2, 1, 1)) AS u2
+    FROM
+        upload_image
   </select>
   
   <!-- 사진 목록 조회 -->
@@ -76,15 +76,15 @@
   
   <!-- 사진 수정 -->
   <update id="doUpdate" parameterType="FileUploadVO">
-	  UPDATE upload_image
-		SET
-		  url      = #{url},
-		  category = #{category},
-		  checked  = #{checked},
-		  u1       = #{u1},
-		  u2       = #{u2}
-		WHERE
-		  name = #{name}
+    UPDATE upload_image
+    SET
+      url      = #{url},
+      category = #{category},
+      checked  = #{checked},
+      u1       = #{u1},
+      u2       = #{u2}
+    WHERE
+      name = #{name}
   </update>
   
   <!-- 사진 삭제 -->

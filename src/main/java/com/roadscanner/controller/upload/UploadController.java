@@ -53,7 +53,7 @@ public class UploadController implements PcwkLogger {
 	// upload 화면
 	@RequestMapping("/upload")
 	//@RequestMapping(value = "/upload", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	public String upload(@RequestParam(name = "url", required = false) String imageName, Model model,
+	public String upload(@RequestParam(name = "imgName", required = false) String imageName, Model model,
 					FileUploadVO inVO, ResultImgVO resultVO) throws SQLException {
 		//직전 업로드한 파일url
 		if (imageName != null) {

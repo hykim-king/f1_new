@@ -165,11 +165,13 @@
   <script>
     // 선택한 이미지 미리보기로 보여주기-------------------------------------------------------
     // 이미지 미리보기 취소
+    const fileUploadInput = document.getElementById('fileUpload');
     const fileUploadLabel = document.getElementById('fileUploadLabel');
     const selectButtonImg = document.getElementById('selectButtonImg');
     const cancelContainer = document.getElementById('cancelContainer');
     const selectedImage = document.getElementById('selectedImage');
     const cancelButton = document.getElementById('cancelButton');
+    const RunContainer = document.getElementById('RunContainer');
 
     function displaySelectedFile(event) {
       const file = event.target.files[0];
@@ -185,10 +187,10 @@
         const reader = new FileReader();
 
         reader.onload = function() {
-          fileUploadLabel.style.display = 'none';        // 파일선택 버튼 이미지 숨기기
-          cancelContainer.style.display = 'block';       // 미리보기 보이기
+          fileUploadLabel.style.display = 'none';    // 파일선택 버튼 이미지 숨기기
+          cancelContainer.style.display = 'block';   // 미리보기 보이기
           selectedImage.src = reader.result;
-          RunContainer.style.display = 'block'; // "표지판 알아보기" 버튼 보이기
+          RunContainer.style.display = 'block';      // "표지판 알아보기" 버튼 보이기
         };
         
         // 추가: 허용된 이미지 확장자 체크
@@ -203,9 +205,9 @@
         reader.readAsDataURL(file);
         //console.log(`displaySelectedFile`);
       } else {
-        fileUploadLabel.style.display = 'block';      // 파일선택 버튼 이미지 보이기
-        cancelContainer.style.display = 'none';       // 미리보기 숨기기
-        RunContainer.style.display = 'none'; // "표지판 알아보기" 버튼 숨기기
+        fileUploadLabel.style.display = 'block';    // 파일선택 버튼 이미지 보이기
+        cancelContainer.style.display = 'none';     // 미리보기 숨기기
+        RunContainer.style.display = 'none';        // "표지판 알아보기" 버튼 숨기기
       }
     }
     
@@ -214,7 +216,7 @@
       fileUploadInput.value = '';                   // 파일 선택 취소
       fileUploadLabel.style.display = 'block';      // 파일선택 버튼 이미지 보이기
       cancelContainer.style.display = 'none';       // 미리보기 숨기기
-      RunContainer.style.display = 'none'; // "표지판 알아보기" 버튼 숨기기
+      RunContainer.style.display = 'none';          // "표지판 알아보기" 버튼 숨기기
       //console.log(`displaySelectedFile: None`);
     });
     // 선택한 이미지 미리보기로 보여주기 End----------------------------------------------------
@@ -245,7 +247,7 @@
           success: function(data) { // 통신 성공
                console.log(data);
                // 여기서 페이지 이동
-               window.location.href = "/roadscanner/upload?url=" + encodeURIComponent(data);
+               window.location.href = "/roadscanner/upload?imgName=" + encodeURIComponent(data);
           },
           error: function(data) { // 실패시 처리
               console.error("파일 업로드 오류:", data.msgId, data.msgContents);

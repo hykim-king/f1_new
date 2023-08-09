@@ -65,13 +65,12 @@ public class FileUploadServiceImplTest implements PcwkLogger {
         uploadVO = new FileUploadVO(1, "admin", 10, "20000215143200", "", "", 0, 0, 0, 0);
         
         inVO = new FileUploadVO();
-        inVO.setIdx(1);
 	}
 
 	@Test
 	public void uploadAndGet() throws SQLException, IOException {
 		// 1. 파일 1건 업로드
-		// 2. 업로드 파일 개수 확인
+		// 2. 업로드 여부 확인
 		// 3. DB에 저장된 파일과 S3에 저장된 파일의 파일명 비교
 		
 		LOG.debug("┌────────────────────┐");
@@ -81,17 +80,18 @@ public class FileUploadServiceImplTest implements PcwkLogger {
 		// 1.
 		// 3.단계에 S3에서 불러올 파일명 만들어두기
 		Date currentDate = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 		String datestr  = dateFormat.format(currentDate);
 		String thisFileName = datestr+"_"+mockFile.getOriginalFilename();
 		// doSave 실행
-		int resultUpload = service.doSave(mockFile, uploadVO);
+		String resultUpload = service.doSave(mockFile, uploadVO);
 		
 		// 2.
-		assertEquals(1, resultUpload);
+		assertNotEquals("0", resultUpload);
 		
 		// 3.
 		// 3.1.이번 테스트에서 DB에 저장된 파일 outVO
+		inVO.setName(thisFileName);
 		FileUploadVO outVO = service.doSelectOne(inVO);
 		
 		// 3.2.S3에서 이번에 업로드한 파일 불러오기
@@ -104,7 +104,7 @@ public class FileUploadServiceImplTest implements PcwkLogger {
 				   properties.getProperty("cloud.aws.region.static"),
 				   properties.getProperty("cloud.aws.credentials.accessKey"),
 				   properties.getProperty("cloud.aws.credentials.secretKey"),
-				   thisFileName);
+				   resultUpload);
 		
 		// 3.1./3.2. 비교
 		assertEquals(outVO.getName(), thisUrl.substring(64));

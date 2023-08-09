@@ -190,7 +190,7 @@
               </label>
             </div>
           </c:forEach>
-          <button id="submitButton">선택</button>
+          <button id="submitButton" type="button">선택</button>
         </div>
       </div>
     </form>
@@ -298,7 +298,7 @@
           success: function(data) { // 통신 성공
               console.log(data);
               // 여기서 페이지 이동
-              window.location.href = "/roadscanner/upload?url=" + encodeURIComponent(data);
+              window.location.href = "/roadscanner/upload?imgName=" + encodeURIComponent(data);
           },
           error: function(data) { // 실패시 처리
               console.error("파일 업로드 오류:", data.msgId, data.msgContents);
@@ -352,33 +352,28 @@
     
     // dislikeButton 클릭 시 선택 상자 토글
     $("#dislikeButton").on("click", function(){
-      //console.log('dislikeButton click');
-      
-      // 선택 상자 토글
-      reasonForm.style.display = reasonForm.style.display === 'none' ? 'block' : 'none';
-      dislikeReason.style.display = reasonForm.style.display;
-      
-      // 선택상자의 submitButton 클릭 시 category 30으로, 싫어요 이유 update
-      $("#submitButton").on("click", function(){
-        //console.log('submitButton click');
-        // 선택상자 체크 여부를 배열로 저장
-        var isSelected = []; // 체크박스 선택 여부를 저장할 배열
-        
-        $("input[name^='reason']").each(function() {
-          if (this.checked) {
-            isSelected.push(1); // 체크가 되어있을 경우 1
-          } else {
-            isSelected.push(0); // 체크가 안되어있을 경우 0
-          }
-        });
-          
-        if (isSelected.includes(1) !== true) {
-          alert("하나 이상의 이유를 선택하세요.");
-          return;
-        }
-        
-        if (confirm("제출하시겠습니까?")) {
+        reasonForm.style.display = reasonForm.style.display === 'none' ? 'block' : 'none';
+        dislikeReason.style.display = reasonForm.style.display;
+    });
+    
+    // 선택상자의 submitButton 클릭 시 category 30으로, 싫어요 이유 update
+    $("#submitButton").on("click", function(){
+        var isSelected = [];
 
+        $("input[name^='reason']").each(function() {
+            if (this.checked) {
+                isSelected.push(1);
+            } else {
+                isSelected.push(0);
+            }
+        });
+
+        if (isSelected.includes(1) !== true) {
+            alert("하나 이상의 이유를 선택하세요.");
+            return;
+        }
+
+        if (confirm("제출하시겠습니까?")) {
             $.ajax({
                 type: "POST",
                 url:"/roadscanner/feedbackUpdate",
@@ -390,28 +385,22 @@
                     "u1" : isSelected[0],
                     "u2" : isSelected[1]
                 },
-                success:function(data){ //통신 성공
-                  console.log("feedback update:", data);
-                  if("1" == data.msgId){
-                      alert('소중한 의견 감사드립니다.');
-                      window.location.href = "/roadscanner/preUpload";
-                  }else{
-                      alert(data.msgContents);
-                      alert("오류 발생. 다시 시도해 주세요.");
-                  }
+                success:function(data){
+                    console.log("feedback update:", data);
+                    if("1" == data.msgId){
+                        alert('소중한 의견 감사드립니다.');
+                        window.location.href = "/roadscanner/preUpload";
+                    }else{
+                        alert(data.msgContents);
+                        alert("오류 발생. 다시 시도해 주세요.");
+                    }
                 },
-                error:function(data){   //실패시 처리
-                   console.error("feedback update error:", data);
+                error:function(data){
+                    console.error("feedback update error:", data);
                 }
-            }); // ajax End
-              
-        } else { // '아니오' 선택 시 선택상자 토글
-          reasonForm.style.display = reasonForm.style.display === 'none' ? 'block' : 'none';
-          dislikeReason.style.display = reasonForm.style.display;
-          return;
-        } // if End
-      }); // submitButton End
-    }); // dislikeButton End
+            });
+        }
+    });
   
     // 선택 상자 End-----------------------------------------------------------------
         // 폼 제출하고 새로고침
