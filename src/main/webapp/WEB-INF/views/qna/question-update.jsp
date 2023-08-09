@@ -6,8 +6,8 @@
 </head>
 <body>
 <form class="container mt-5" id="question-edit-form">
-    <!-- 이 부분에 히든 필드 추가 -->
-    <input type="hidden" id="no" value="${question.no}">
+  <!-- 이 부분에 히든 필드 추가 -->
+  <input type="hidden" id="no" value="${question.no}">
 
   <div class="mb-3">
     <label for="id" class="form-label">답변상태:</label>

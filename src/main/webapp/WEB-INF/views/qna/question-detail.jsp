@@ -40,6 +40,23 @@
             </div>
         </div>
     </div>
+
+
+    <!-- 답변 작성 폼 -->
+    <div class="card">
+        <form id="answer-form">
+            <div class="mb-3">
+                <textarea class="form-control" id="answer-content" rows="5" placeholder="답변을 입력하세요"></textarea>
+            </div>
+            <a href="#" role="button" class="btn btn-secondary">취소</a>
+            <button type="submit" id="btn-answer-save" class="btn btn-primary" value="저장">등록</button>
+        </form>
+    </div>
+
+    <!-- 답변 내용 -->
+    <div id="answer-section">
+    </div>
+
 </div>
 
 <!-- 부트스트랩 JS 및 Popper.js 추가 -->

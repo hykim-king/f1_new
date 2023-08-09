@@ -13,16 +13,16 @@
         <a href="/qna/save" class="btn btn-primary" role="button">글쓰기</a>
     </div>
     <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>번호</th>
-            <th>분류</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-            <th>조회수</th>
-        </tr>
-        </thead>
+    <thead>
+    <tr>
+        <th>번호</th>
+        <th>분류</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회수</th>
+    </tr>
+    </thead>
         <tbody>
         <c:forEach items="${questions}" var="question">
             <c:choose>
