@@ -77,7 +77,7 @@
                         create_date AS createDate,
                         update_date AS updateDate
                     FROM QUESTION
-                    ORDER BY no DESC
+                    ORDER BY CASE WHEN category = 10 THEN 1 ELSE 2 END, no DESC
                    ) a WHERE rownum &lt;= #{start} + #{size}
              ) WHERE rnum &gt; #{start}
     </select>
