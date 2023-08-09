@@ -252,23 +252,21 @@
     }
     
     if (confirm("삭제하시겠습니까?")) {
+    	
     	$.ajax({
-    		  type: "GET",
+    		  type: "POST",
     		  url:"/roadscanner/doDelete",
     		  asyn:"true",
-    		  dataType:"html",
-    		  data:{
-    			  name : checkboxes
-    		  },
+    		  traditional: true, // 배열 데이터 전송을 위해 traditional 옵션을 설정
+    	    data: { checkboxes: checkboxes },
     		  success:function(data){//통신 성공
-    		    console.log("success data:"+data);
-    		    let parsedJson = JSON.parse(data);
-    	          if("1" == parsedJson.msgId) {
-    	            alert(parsedJson.msgContents);
-    	            location.reload();
-    	          } else {
-    	            alert(parsedJson.msgContents);
-    	          }
+    			  console.log("data: " + data)
+   	          if("1" == data) {
+   	            alert("삭제되었습니다.");
+   	            location.reload();
+   	          } else {
+   	            alert("삭제를 실패했습니다.");
+   	          }
     		  },
     		  error:function(data){//실패시 처리
     		    console.log("error:"+data);
@@ -311,21 +309,18 @@
 	        type: "POST",
 	        url:"/roadscanner/checkedUpdate",
 	        asyn:"true",
-	        dataType:"html",
-	        data:{
-	        	name : checkboxes
+	        traditional: true, // 배열 데이터 전송을 위해 traditional 옵션을 설정
+	        data: { checkboxes: checkboxes },
+	        success:function(data){ //통신 성공
+	        	console.log("data: " + data)
+              if("1" == data) {
+                alert("수정되었습니다.");
+                location.reload();
+              } else {
+                alert("수정을 실패했습니다.");
+              }
 	        },
-	        success:function(data){//통신 성공
-	          console.log("success data:"+data);
-	          let parsedJson = JSON.parse(data);
-	              if("1" == parsedJson.msgId) {
-	                alert(parsedJson.msgContents);
-	                location.reload();
-	              } else {
-	                alert(parsedJson.msgContents);
-	              }
-	        },
-	        error:function(data){//실패시 처리
+	        error:function(data){ //실패시 처리
 	          console.log("error:"+data);
 	        }
 	    }); // ajax

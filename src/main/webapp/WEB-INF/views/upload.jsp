@@ -358,7 +358,7 @@
     
     // 선택상자의 submitButton 클릭 시 category 30으로, 싫어요 이유 update
     $("#submitButton").on("click", function(){
-        var isSelected = [];
+        let isSelected = [];
 
         $("input[name^='reason']").each(function() {
             if (this.checked) {

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -12,6 +14,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -79,28 +83,46 @@ public class UploadController implements PcwkLogger {
 	}
 	
 	// 사진 검토 여부 Update
-	@RequestMapping(value = "/checkedUpdate", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@PostMapping(value = "/checkedUpdate")
 	@ResponseBody
-	public String checkedUpdate(FileUploadVO inVO) throws Exception {
+	public String checkedUpdate(String[] checkboxes) throws Exception {
 		String jsonString = "";
+		int flag = 0;
+		FileUploadVO inVO = new FileUploadVO(); //checkedName에서 이름 꺼내와 넣을 빈 VO
+		HashMap<String,String> successOrNot = new HashMap<String,String>(); //수정 여부 담을 해시맵
 		LOG.debug("┌───────────────┐");
 		LOG.debug("│ checkedUpdate │");
-		LOG.debug("│ inVO          │" + inVO);
+		LOG.debug("│ checkedName   │" + checkboxes.toString());
 		LOG.debug("└───────────────┘");
 
 		try {
-			inVO = service.doSelectOne(inVO);
-			int flag = service.checkedUpdate(inVO);
+			for (String name:checkboxes) {
+				inVO.setName(name);
+				FileUploadVO resultVO = service.doSelectOne(inVO);
+				flag = service.checkedUpdate(resultVO);
+				if (1 == flag) { // 수정 성공
+					successOrNot.put(name, "1");
+				} else {
+					successOrNot.put(name, "0");
+					
+				}
+			}
 			
 			String message = "";
-			if (1 == flag) { // 삭제 성공
-				message = "수정되었습니다.";
-			} else { // 삭제 실패
+			if (successOrNot.containsValue("0")) { // 수정 실패한 이미지 있음
+				flag = 0;
 				message = "수정을 실패했습니다.";
+			} else if (successOrNot.isEmpty()) {   // 체크된 이미지 없음
+				flag = 0;
+				message = "수정을 실패했습니다.";
+			} else {                               // 체크된 이미지 전체 수정 성공
+				flag = 1;
+				message = "수정되었습니다.";
 			}
 			
 			messageVO = new MessageVO(String.valueOf(flag), message);
-			jsonString = new Gson().toJson(messageVO);
+			LOG.debug(messageVO.toString());
+			jsonString = new Gson().toJson(flag);
 			
 		} catch (SQLException | IOException e) {
 			String error = e.getMessage();
@@ -112,28 +134,46 @@ public class UploadController implements PcwkLogger {
 	}
 	
 	// 사진 삭제
-	@RequestMapping(value = "/doDelete", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@PostMapping(value = "/doDelete")
 	@ResponseBody
-	public String doDelete(FileUploadVO inVO) throws SQLException, IOException {
+	public String doDelete(String[] checkboxes) throws SQLException, IOException {
 		String jsonString = "";
-		
+		int flag = 0;
+		FileUploadVO inVO = new FileUploadVO(); //checkedName에서 이름 꺼내와 넣을 빈 VO
+		HashMap<String,String> successOrNot = new HashMap<String,String>(); //삭제 여부 담을 해시맵
 		LOG.debug("┌─────────────┐");
 		LOG.debug("│ doDelete    │");
-		LOG.debug("│ inVO        │" + inVO);
+		LOG.debug("│ checkedName │" + checkboxes.toString());
 		LOG.debug("└─────────────┘");
 		
 		try {
-			int flag = this.service.doDelete(inVO);
-			
-			String message = "";
-			if (1 == flag) { // 삭제 성공
-				message = "삭제되었습니다.";
-			} else { // 삭제 실패
-				message = "삭제를 실패했습니다.";
+			for (String name:checkboxes) {
+				inVO.setName(name);
+				FileUploadVO resultVO = service.doSelectOne(inVO);
+				flag = service.doDelete(resultVO);
+				if (1 == flag) { //삭제 성공
+					successOrNot.put(name, "1");
+				} else {
+					successOrNot.put(name, "0");
+					
+				}
 			}
 			
-			MessageVO messageVO = new MessageVO(String.valueOf(flag), message);
-			jsonString = new Gson().toJson(messageVO);
+			String message = "";
+			if (successOrNot.containsValue("0")) { // 삭제 실패한 이미지 있음
+				flag = 0;
+				message = "삭제를 실패했습니다.";
+			} else if (successOrNot.isEmpty()) {   // 체크된 이미지 없음
+				flag = 0;
+				message = "삭제를 실패했습니다.";
+			} else {                               // 체크된 이미지 전체 삭제 성공
+				flag = 1;
+				message = "삭제되었습니다.";
+			}
+			
+			messageVO = new MessageVO(String.valueOf(flag), message);
+			LOG.debug(messageVO.toString());
+			jsonString = new Gson().toJson(flag);
 			
 		} catch (SQLException | IOException e) {
 			String error = e.getMessage();
