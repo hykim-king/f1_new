@@ -228,13 +228,6 @@ public class UserServiceImpl implements UserService {
 	    return checkStatus;
 	}
 
-	// -------------로그인 관리자페이지------------------------
-	@Override
-	public List<MemberVO> getAllMembers() {
-		// 데이터베이스에서 모든 회원 목록을 가져오는 로직을 구현
-		return userDao.getAllMembers(); // 예시로 userDao.getAllMembers() 메서드를 호출하는 것으로 가정
-	}
-
 	@Override
 	public int forbiddenGrade(MemberVO user) throws SQLException {
 		int checkGrade = -1;
