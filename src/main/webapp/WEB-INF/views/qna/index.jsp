@@ -4,6 +4,7 @@
 <head>
     <title>로드스캐너</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/css/qna.css" rel="stylesheet">
 </head>
 <body>
 <div class="container mt-4">
@@ -24,14 +25,37 @@
         </thead>
         <tbody>
         <c:forEach items="${questions}" var="question">
-            <tr>
-                <td>${question.no}</td>
-                <td>${question.category}</td>
-                <td><a href="/qna/${question.no}">${question.title}</a></td>
-                <td>${question.id}</td>
-                <td>${question.createDate}</td>
-                <td>${question.views}</td>
-            </tr>
+            <c:choose>
+                <c:when test="${question.category == 10}">
+                    <tr class="table-info">
+                        <td>${question.no}</td>
+                        <td><span class="badge bg-primary">공지</span></td>
+                        <td><a href="/qna/${question.no}" class="text-dark qna-link notice-title">${question.title}</a></td>
+                        <td>${question.id}</td>
+                        <td>${question.createDate}</td>
+                        <td>${question.views}</td>
+                    </tr>
+                </c:when>
+                <c:otherwise>
+                    <tr>
+                        <td>${question.no}</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${question.category == 20}">
+                                    <span class="badge bg-success">답변완료</span>
+                                </c:when>
+                                <c:when test="${question.category == 30}">
+                                    <span class="badge bg-light text-dark">답변대기</span>
+                                </c:when>
+                            </c:choose>
+                        </td>
+                        <td><a href="/qna/${question.no}" class="text-dark qna-link">${question.title}</a></td>
+                        <td>${question.id}</td>
+                        <td>${question.createDate}</td>
+                        <td>${question.views}</td>
+                    </tr>
+                </c:otherwise>
+            </c:choose>
         </c:forEach>
         </tbody>
     </table><!-- ... -->
