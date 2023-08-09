@@ -158,9 +158,9 @@
 				              <label for="${vo.name}"></label>
 				            </div>
 				            <div>
-					            <img src="${vo.url}" alt="${vo.name}" onclick="showImageModal('${vo.url}')">
+					            <img class="uploaded-image" src="${vo.url}" alt="${vo.name}">
 				            </div>
-				          </div>
+				          </div> <!-- image-container end -->
 				        </td>
 			        <c:if test="${(status.index + 1) % 3 == 0 || status.last}">
 			          </tr>
@@ -198,7 +198,7 @@
     <div class="sort-horizon">
       <div class="left">
         <img src="" id="modalImage" style="max-width: 700px; max-height: 800px;">
-        <span class="image-modal-close" onclick="hideImageModal()">&times;</span>
+        <span class="image-modal-close">&times;</span>
       </div>
       <div class="divider"></div>
       <div class="right">
@@ -225,7 +225,7 @@
               <td id="fileSize"></td>
             </tr>
              <tr>
-              <td>카테고리</td>
+              <td>상태</td>
               <td id="category"></td>
             </tr>
             <tr>
@@ -247,6 +247,7 @@
   </div>
   
 <script>
+	
 	// 드롭다운으로 카테고리 선택해서 카테고리에 따른 목록 조회
 	$("#categoryDropdown").change(function() {
 		hideImageModal()
@@ -274,10 +275,10 @@
     for (let i = 0; i < checkboxes.length; i++) {
       checkboxes[i].checked = checked;
     }
-  }
+  } // toggleSelectAll()
   
 
-  //선택 삭제 후 새로고침
+  //선택 삭제
   function selectDelete() {  
 	  
 	  // 선택된 체크박스의 idx 추출
@@ -319,7 +320,7 @@
   } // selectDelete()
   
   
-  //선택 저장 후 새로고침
+  //선택 저장
   function selectSave() {
 	    
 	  // 선택된 체크박스의 idx 추출
@@ -361,122 +362,150 @@
   
   
 ////////////////////////////////////////////////////////////////////////////////
+
+$(document).ready(function() {
+  let name; // 클릭한 이미지의 이름을 저장하는 변수 
+
+  // 이미지 모달 창 클릭 시 호출될 함수 등록
+  $(document).on('click', '.uploaded-image', showModalOnClick);
+  
+  // 모달 창 닫기 클릭 시 호출될 함수 등록
+  $(document).on('click', '.image-modal-close', hideImageModal);
+  
+  // 이미지 모달 창 클릭 시 호출될 함수
+  function showModalOnClick() {
+    let imageSrc = $(this).attr('src');
+    showImageModal(imageSrc);
+  }
+
   // 이미지 크게 보기 창 보이기
   function showImageModal(imageSrc) {
     let modal = document.getElementById("imageModal");
     let modalImage = document.getElementById("modalImage");
-  
+
     // 이미지 경로 설정에 context path 추가
     modalImage.src = imageSrc;
-  
+
     modal.style.display = "block";
-    
+
     // 이미지 상세 조회
     //console.log(imageSrc);
     let firstIdx = imageSrc.lastIndexOf('/') + 1;
     let lastIdx = imageSrc.length;
-    let name = imageSrc.slice(firstIdx, lastIdx);
+    name = imageSrc.slice(firstIdx, lastIdx);
     //console.log(name);
-    
-    $.ajax({
-    	  type: "GET",
-    	  url:"/roadscanner/doSelectOne",
-    	  asyn:"true",
-    	  dataType:"json",
-    	  data:{
-    	      name: name
-    	  },
-    	  success:function(data){//통신 성공
-    	    // console.log("success data:"+data);
-    	    
-    	    $("#idx").text(data.idx);
-          $("#name").text(data.name);
-          $("#id").text(data.id);
-          $("#uploadDate").text(data.uploadDate);
-          $("#fileSize").text(data.fileSize);
-          $("#category").text(data.category);
-          $("#u1").text((data.u1 === 0) ? "오류없음" : "오류있음");
-          $("#u2").text((data.u2 === 0) ? "오류없음" : "오류있음");
 
-    	  },
-    	  error:function(data){//실패시 처리
-    	    console.log("error:"+data);
+    $.ajax({
+      type: "GET",
+      url: "/roadscanner/doSelectOne",
+      asyn: "true",
+      dataType: "json",
+      data: {
+        name: name
+      },
+      success: function(data) { //통신 성공
+        // console.log("success data:"+data);
+    	  
+    	  let category_val;
+    	  if (data.category === 10) {
+    		  category_val = "기본"
+    	  } else if (data.category === 20) {
+    		  category_val = "좋아요"
+    	  } else if (data.category === 30) {
+          category_val = "싫어요"
     	  }
-    	}); // ajax
-    	
-    	
-		//상세보기 저장
-		$('#detailSaveBtn').on('click', function(){
-			console.log("detailSaveBtn click");
-			console.log(name);
-			
-		  if (confirm("저장하시겠습니까?")) {
- 			  $.ajax({
-	          type: "POST",
-	          url:"/roadscanner/checkedUpdate",
-	          asyn:"true",
-	          dataType:"html",
-	          data:{
-	            name : name
-	          },
-	          success:function(data){//통신 성공
-	            console.log("success data:"+data);
-	            let parsedJson = JSON.parse(data);
-	                if("1" == parsedJson.msgId) {
-	                  alert(parsedJson.msgContents);
-	                  hideImageModal();
-	                  location.reload();
-	                } else {
-	                  alert(parsedJson.msgContents);
-	                }
-	          },
-	          error:function(data){//실패시 처리
-	            console.log("error:"+data);
-	          }
-	      }); // ajax
-		  } // if
-		}); // detailSave()
-    	
-    	
-    //상세보기 삭제
-		$('#detailDeleteBtn').on('click', function(){
-			console.log("detailDeleteBtn click");
-			console.log(name);
-			
-		  if (confirm("삭제하시겠습니까?")) {
-			  $.ajax({
-	          type: "GET",
-	          url:"/roadscanner/doDelete",
-	          asyn:"true",
-	          dataType:"html",
-	          data:{
-	            name : name
-	          },
-	          success:function(data){//통신 성공
-	            console.log("success data:"+data);
-	            let parsedJson = JSON.parse(data);
-	                if("1" == parsedJson.msgId) {
-	                  alert(parsedJson.msgContents);
-	                  hideImageModal();
-	                  location.reload();
-	                } else {
-	                  alert(parsedJson.msgContents);
-	                }
-	          },
-	          error:function(data){//실패시 처리
-	            console.log("error:"+data);
-	          }
-	      }); // ajax
-		  } // if
-		}); // detailDelete()
-   	  
+    	  
+      
+        $("#idx").text(data.idx);
+        $("#name").text(data.name);
+        $("#id").text(data.id);
+        $("#uploadDate").text(data.uploadDate);
+        $("#fileSize").text(data.fileSize);
+        $("#category").text(category_val);
+        $("#u1").text((data.u1 === 0) ? "오류없음" : "오류있음");
+        $("#u2").text((data.u2 === 0) ? "오류없음" : "오류있음");
+      },
+      error: function(data) { //실패시 처리
+        console.log("error:" + data);
+      }
+    }); // ajax
   } // showImageModal
   
-  // 이미지 크게 보기 창 닫기
+  
+  // 이미지 모달 숨기기
   function hideImageModal() {
     let modal = document.getElementById("imageModal");
     modal.style.display = "none";
   }
+
+  //상세보기 저장
+  $('#detailSaveBtn').on('click', function() {
+    console.log("detailSaveBtn click");
+    console.log(name);
+
+    if (confirm("저장하시겠습니까?")) {
+      $.ajax({
+        type: "POST",
+        url: "/roadscanner/checkedUpdate",
+        asyn: "true",
+        dataType: "html",
+        data: {
+          name: name
+        },
+        success: function(data) { //통신 성공
+          console.log("success data:" + data);
+          let parsedJson = JSON.parse(data);
+          if ("1" == parsedJson.msgId) {
+            alert(parsedJson.msgContents);
+            hideImageModal();
+            location.reload();
+          } else {
+            alert(parsedJson.msgContents);
+          }
+        },
+        error: function(data) { //실패시 처리
+          console.log("error:" + data);
+        }
+      }); // ajax
+    } // if
+  }); // detailSave()
+
+  //상세보기 삭제
+  $('#detailDeleteBtn').on('click', function() {
+    console.log("detailDeleteBtn click");
+    console.log(name);
+
+    if (confirm("삭제하시겠습니까?")) {
+      $.ajax({
+        type: "GET",
+        url: "/roadscanner/doDelete",
+        asyn: "true",
+        dataType: "html",
+        data: {
+          name: name
+        },
+        success: function(data) { //통신 성공
+          console.log("success data:" + data);
+          let parsedJson = JSON.parse(data);
+          if ("1" == parsedJson.msgId) {
+            alert(parsedJson.msgContents);
+            hideImageModal();
+            location.reload();
+          } else {
+            alert(parsedJson.msgContents);
+          }
+        },
+        error: function(data) { //실패시 처리
+          console.log("error:" + data);
+        }
+      }); // ajax
+    } // if
+  }); // detailDelete()
+
+
+});
+
+
   
 </script>
 </body>
