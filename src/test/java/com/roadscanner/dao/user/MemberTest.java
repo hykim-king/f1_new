@@ -1,4 +1,4 @@
-package com.roadscanner.controller;
+package com.roadscanner.dao.user;
 
 import java.sql.SQLException;
 import java.util.List;
