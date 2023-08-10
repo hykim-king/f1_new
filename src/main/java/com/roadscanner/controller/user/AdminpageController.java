@@ -63,8 +63,8 @@ Adminpage2 page2 = new Adminpage2();
 page2.setNum2(num2);
 
 page2.setCount2(service.searchCountBox2(
-		nekeyword,
-		keyword2
+		keyword2,
+		nekeyword
 		)); 
 
 page2.setKeyword2(keyword2);
@@ -74,8 +74,9 @@ List<MemberVO> list2 = null;
 list2 = service.listPageSearchBox2(
 		page2.getDisplayPost2(), 
 		page2.getPostNum2(), 
-		nekeyword,
-		keyword2
+		keyword2,
+		nekeyword
+		
 );
 
 

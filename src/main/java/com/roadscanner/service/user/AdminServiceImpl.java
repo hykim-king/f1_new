@@ -38,21 +38,21 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Override
 
-	public int searchCountBox( String keyword) throws Exception {
+	public int searchCountBox(String keyword) throws Exception {
 		
 		return adminpageDao.searchCountBox(keyword);
 	}
 	
 	@Override
-	public List<MemberVO> listPageSearchBox2(int displayPost2, int postNum2,String nekeyword,String keyword2) throws Exception {
-		return adminpageDao.listPageSearchBox2(displayPost2, postNum2,nekeyword,
-												keyword2);
+	public List<MemberVO> listPageSearchBox2(int displayPost2, int postNum2,String keyword2,String nekeyword) throws Exception {
+		return adminpageDao.listPageSearchBox2(displayPost2, postNum2,keyword2,nekeyword
+												);
 	}
 	
 	@Override
-	public int searchCountBox2(String nekeyword,String keyword2) throws Exception {
+	public int searchCountBox2(String keyword2,String nekeyword) throws Exception {
 		return adminpageDao.searchCountBox2(
-				nekeyword,keyword2);
+				keyword2,nekeyword);
 	}
 
 	@Override
