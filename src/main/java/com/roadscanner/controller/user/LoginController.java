@@ -102,7 +102,7 @@ public class LoginController {
         }else if(30==status) {                    // (30 : 성공)
             message.setMsgId("30");
             message.setMsgContents(user.getId()+"가 로그인 되었습니다.");
-            page.setKeyword2(user.getId());
+            page.setkeyword(user.getId());
            
             //----------------------------------------------------------
             //- 사용자 정보 조회 : session처리
