@@ -1,29 +1,30 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="CP" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<<<<<<< HEAD
-<title>Insert title here</title>
-</head>
-<body>
-
-=======
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script src="${CP}/resources/js/jquery-3.7.0.js"></script>
 <title>Feedback</title>
 <style>
-  .barchart {
-    width: 60%
-  }
-  .linechart {
-    width: 60%
-  }
-  .feedback_table {
-    width: 60%;
-  }
-  table, th, td {
-    border: 1px solid #ccc;
-    border-collapse: collapse;
-    text-align: center;
-  }
+	.barchart {
+	  width: 60%
+	}
+	.linechart {
+	  width: 60%
+	}
+	.feedback_table {
+	  width: 60%;
+	}
+	table, th, td {
+	  border: 1px solid #ccc;
+	  border-collapse: collapse;
+	  text-align: center;
+	}
 </style>
 </head>
 <body>
@@ -62,6 +63,23 @@
   
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1"></script>
 <script>
+$.ajax({
+  type: "GET",
+  url:"/roadscanner/totalFeedback",
+  asyn:"true",
+  dataType:"html",
+  data:{ 
+  },
+  success:function(data){//통신 성공
+	  console.log("success data:"+data);
+  },
+  error:function(data){//실패시 처리
+	  console.log("error:"+data);
+  }
+}); // ajax
+
+
+// feedback_barchart
 new Chart(document.getElementById("feedback_barchart"), {
     type: 'bar',
     data: {
@@ -70,7 +88,7 @@ new Chart(document.getElementById("feedback_barchart"), {
         data: [20, 15, 8],
         label: 'feedback',
         backgroundColor: [
-        	'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
           'rgba(255, 206, 86, 0.2)',
         ],
@@ -91,7 +109,7 @@ new Chart(document.getElementById("feedback_barchart"), {
       },
       scales: {
         y: {
-        	beginAtZero: true,
+          beginAtZero: true,
           display: true,
           ticks: {
             callback: function(value) {
@@ -107,11 +125,18 @@ new Chart(document.getElementById("feedback_barchart"), {
 new Chart(document.getElementById("feedback_linechart"), {
     type: 'line',
     data: {
-      labels: ['1분기', '2분기', '3분기', '4분기'],
+      labels: ['8/1', '8/2', '8/3', '8/4'],
       datasets: [{
         data: [10, 8, 6, 2],
-        label: 'feedback',
+        label: '인식오류',
         borderColor: 'rgb(75, 192, 192)',
+        fill: false,
+        tension: 0
+      },
+      {
+        data: [5, 3, 2, 1],
+        label: '결과오류',
+        borderColor: 'rgb(60, 20, 30)',
         fill: false,
         tension: 0
       }]
@@ -142,6 +167,5 @@ new Chart(document.getElementById("feedback_linechart"), {
   }); // feedback_linechart
 
 </script>
->>>>>>> feature/upload
 </body>
 </html>
