@@ -36,15 +36,14 @@ public class MemberDaoTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		vo01 = new MemberVO("DaoTest01", "password01", "test01@gmail.com", 1, 141);
-		vo02 = new MemberVO("DaoTest02", "password02", "test02@gmail.com", 1, 142);
-		vo03 = new MemberVO("DaoTest03", "password03", "test03@gmail.com", 1, 143);
+		vo01 = new MemberVO("DaoTest01", "password01", "test01@gmail.com", 1, 181);
+		vo02 = new MemberVO("DaoTest02", "password02", "test02@gmail.com", 1, 182);
+		vo03 = new MemberVO("DaoTest03", "password03", "test03@gmail.com", 1, 183);
 		
 	}
 	
 	
 	@Test
-	@Ignore
 	public void daoTest() throws SQLException {
 		
 		// Delete
