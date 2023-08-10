@@ -16,7 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.roadscanner.dao.user.UserDao;
-import com.roadscanner.domain.MemberVO;
+import com.roadscanner.domain.user.MemberVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)												//스프링 테스트 컨텍스 프레임워크의 JUnit 확장 기능 지정
 @ContextConfiguration(locations = {

@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.roadscanner.cmn.MessageVO;
-import com.roadscanner.domain.list_admin;
-import com.roadscanner.domain.MemberVO;
+import com.roadscanner.domain.user.MemberVO;
+import com.roadscanner.domain.user.list_admin;
 import com.roadscanner.service.user.MailSendService;
 import com.roadscanner.service.user.UserService;
 import com.google.gson.Gson;

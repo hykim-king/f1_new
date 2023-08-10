@@ -1,4 +1,4 @@
-package com.roadscanner.domain;
+package com.roadscanner.domain.user;
 
 import java.util.Random;
 

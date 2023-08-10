@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.roadscanner.dao.user.AdminpageDao;
-import com.roadscanner.domain.MemberVO;
+import com.roadscanner.domain.user.MemberVO;
 
 
 @Service

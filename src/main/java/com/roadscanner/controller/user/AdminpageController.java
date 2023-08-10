@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.roadscanner.domain.list_member;
-import com.roadscanner.domain.list_admin;
-import com.roadscanner.domain.list_banned;
-import com.roadscanner.domain.MemberVO;
+import com.roadscanner.domain.user.MemberVO;
+import com.roadscanner.domain.user.list_admin;
+import com.roadscanner.domain.user.list_banned;
+import com.roadscanner.domain.user.list_member;
 import com.roadscanner.service.user.AdminService;
 
 @Controller

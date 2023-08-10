@@ -1,7 +1,7 @@
-package com.roadscanner.domain;
+package com.roadscanner.domain.user;
 
 
-public class list_banned {
+public class list_member {
 	// 현재 페이지 번호
 	private int num;
 	
@@ -9,10 +9,10 @@ public class list_banned {
 	private int count;
 
 	// 한 페이지에 출력할 게시물 갯수
-	private int postnum = 5;
+	private int postNum = 5;
 
 	// 하단 페이징 번호 ([ 게시물 총 갯수 ÷ 한 페이지에 출력할 갯수 ]의 올림)
-	private int pagenum;
+	private int pageNum;
 
 	// 출력할 게시물
 	private int dpPost;
@@ -21,82 +21,82 @@ public class list_banned {
 	private int pageNumCnt = 5;
 
 	// 표시되는 페이지 번호 중 마지막 번호
-	private int endPagenum;
+	private int endPageNum;
 
 	// 표시되는 페이지 번호 중 첫번째 번호
-	private int startPagenum;
+	private int startPageNum;
 
 	// 다음/이전 표시 여부
 	private boolean prev;
 	private boolean next;
 	
-	public void setnum(int num) {
+	public void setNum(int num) {
 	 this.num = num;
 	}
 
 
-	public int getPostnum() {
-	 return postnum;
+	public int getPostNum() {
+	 return postNum;
 	}
 	
 	
 	
-	public int getPagenum() {
-	 return pagenum;
+	public int getPageNum() {
+	 return pageNum;
 	}
 
 	public int getdpPost() {
 	 return dpPost;
 	}
 
-	public int getpageNumCnt() {
+	public int getPageNumCnt() {
 	 return pageNumCnt;
 	}
 
-	public int getEndPagenum() {
-	 return endPagenum;
+	public int getEndPageNum() {
+	 return endPageNum;
 	}
 
-	public int getStartPagenum() {
-	 return startPagenum;
+	public int getStartPageNum() {
+	 return startPageNum;
 	}
 
-	public boolean getprev() {
+	public boolean getPrev() {
 	 return prev;
 	} 
 
-	public boolean getnext() {
+	public boolean getNext() {
 	 return next;
 	}
 	
 
-	public void setcount(int count) {
+	public void setCount(int count) {
 	 this.count = count;
 	 dataCalc();
 	}
 	
-	public int getcount() {
+	public int getCount() {
 		 return count;
 		}
 	
 	private void dataCalc() {
 	
-		 endPagenum = (int)(Math.ceil((double)num / (double)pageNumCnt) * pageNumCnt);
+		 endPageNum = (int)(Math.ceil((double)num / (double)pageNumCnt) * pageNumCnt);
 		 
 		 // 시작 번호
-		 startPagenum = endPagenum - (pageNumCnt - 1);
+		 startPageNum = endPageNum - (pageNumCnt - 1);
 		 
 		 // 마지막 번호 재계산
-		 int endPageNum_tmp = (int)(Math.ceil((double)count / (double)postnum));
+		 int endPageNum_tmp = (int)(Math.ceil((double)count / (double)postNum));
 		 
-		 if(endPagenum > endPageNum_tmp) {
-		  endPagenum = endPageNum_tmp;
+		 if(endPageNum > endPageNum_tmp) {
+		  endPageNum = endPageNum_tmp;
 		 }
 		 
-		 prev = startPagenum == 1 ? false : true;
-		 next = endPagenum * postnum >= count ? false : true;
+		 prev = startPageNum == 1 ? false : true;
+		 next = endPageNum * postNum >= count ? false : true;
 		 
-		 dpPost = ((num - 1) * postnum)+1;
+		 dpPost = ((num - 1) * postNum)+1;
 		 
 		}
 
@@ -125,11 +125,11 @@ public class list_banned {
 		}
 
 
-		public void setkeyword(String keyword) {
+		public void setKeyword(String keyword) {
 		 this.keyword = keyword;  
 		} 
 
-		public String getkeyword() {
+		public String getKeyword() {
 		 return keyword;
 		}
 		

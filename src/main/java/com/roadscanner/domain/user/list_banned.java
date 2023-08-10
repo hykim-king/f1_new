@@ -1,7 +1,7 @@
-package com.roadscanner.domain;
+package com.roadscanner.domain.user;
 
 
-public class list_member {
+public class list_banned {
 	// 현재 페이지 번호
 	private int num;
 	
@@ -9,10 +9,10 @@ public class list_member {
 	private int count;
 
 	// 한 페이지에 출력할 게시물 갯수
-	private int postNum = 5;
+	private int postnum = 5;
 
 	// 하단 페이징 번호 ([ 게시물 총 갯수 ÷ 한 페이지에 출력할 갯수 ]의 올림)
-	private int pageNum;
+	private int pagenum;
 
 	// 출력할 게시물
 	private int dpPost;
@@ -21,82 +21,82 @@ public class list_member {
 	private int pageNumCnt = 5;
 
 	// 표시되는 페이지 번호 중 마지막 번호
-	private int endPageNum;
+	private int endPagenum;
 
 	// 표시되는 페이지 번호 중 첫번째 번호
-	private int startPageNum;
+	private int startPagenum;
 
 	// 다음/이전 표시 여부
 	private boolean prev;
 	private boolean next;
 	
-	public void setNum(int num) {
+	public void setnum(int num) {
 	 this.num = num;
 	}
 
 
-	public int getPostNum() {
-	 return postNum;
+	public int getPostnum() {
+	 return postnum;
 	}
 	
 	
 	
-	public int getPageNum() {
-	 return pageNum;
+	public int getPagenum() {
+	 return pagenum;
 	}
 
 	public int getdpPost() {
 	 return dpPost;
 	}
 
-	public int getPageNumCnt() {
+	public int getpageNumCnt() {
 	 return pageNumCnt;
 	}
 
-	public int getEndPageNum() {
-	 return endPageNum;
+	public int getEndPagenum() {
+	 return endPagenum;
 	}
 
-	public int getStartPageNum() {
-	 return startPageNum;
+	public int getStartPagenum() {
+	 return startPagenum;
 	}
 
-	public boolean getPrev() {
+	public boolean getprev() {
 	 return prev;
 	} 
 
-	public boolean getNext() {
+	public boolean getnext() {
 	 return next;
 	}
 	
 
-	public void setCount(int count) {
+	public void setcount(int count) {
 	 this.count = count;
 	 dataCalc();
 	}
 	
-	public int getCount() {
+	public int getcount() {
 		 return count;
 		}
 	
 	private void dataCalc() {
 	
-		 endPageNum = (int)(Math.ceil((double)num / (double)pageNumCnt) * pageNumCnt);
+		 endPagenum = (int)(Math.ceil((double)num / (double)pageNumCnt) * pageNumCnt);
 		 
 		 // 시작 번호
-		 startPageNum = endPageNum - (pageNumCnt - 1);
+		 startPagenum = endPagenum - (pageNumCnt - 1);
 		 
 		 // 마지막 번호 재계산
-		 int endPageNum_tmp = (int)(Math.ceil((double)count / (double)postNum));
+		 int endPageNum_tmp = (int)(Math.ceil((double)count / (double)postnum));
 		 
-		 if(endPageNum > endPageNum_tmp) {
-		  endPageNum = endPageNum_tmp;
+		 if(endPagenum > endPageNum_tmp) {
+		  endPagenum = endPageNum_tmp;
 		 }
 		 
-		 prev = startPageNum == 1 ? false : true;
-		 next = endPageNum * postNum >= count ? false : true;
+		 prev = startPagenum == 1 ? false : true;
+		 next = endPagenum * postnum >= count ? false : true;
 		 
-		 dpPost = ((num - 1) * postNum)+1;
+		 dpPost = ((num - 1) * postnum)+1;
 		 
 		}
 
@@ -125,11 +125,11 @@ public class list_member {
 		}
 
 
-		public void setKeyword(String keyword) {
+		public void setkeyword(String keyword) {
 		 this.keyword = keyword;  
 		} 
 
-		public String getKeyword() {
+		public String getkeyword() {
 		 return keyword;
 		}
 		
