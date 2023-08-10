@@ -8,6 +8,6 @@
         <setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
     <typeAliases>
-          <typeAlias type="com.roadscanner.domain.MemberVO" alias="MemberVO"/>
+          <typeAlias type="com.roadscanner.domain.user.MemberVO" alias="MemberVO"/>
     </typeAliases>
   </configuration>
