@@ -81,7 +81,7 @@ public class AdminpageDaoImpl implements AdminpageDao {
 		 	
 		 	System.out.println("keyword : "+keyword);
 		 	data.put("exclude", exclude);
-		 	data.put("keyword2", keyword);	
+		 	data.put("keyword", keyword);	
 		 	
 		  return sqlSessionTemplate.selectOne(namespace + ".admin_searchCntBox", data);	  
 	}

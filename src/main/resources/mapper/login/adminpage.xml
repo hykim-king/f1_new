@@ -46,7 +46,7 @@
            WHERE grade = 2
            AND  id NOT in  #{exclude}
            
-           <if test="exclude !=null and exclude !=''">
+           <if test="keyword !=null and keyword !=''">
                          AND id LIKE '%'||#{keyword}||'%' 
            </if> 
           ORDER BY road.no
@@ -62,8 +62,6 @@
           WHERE 1=1 
           AND grade = 2
           AND  id NOT in #{exclude}
-
-          
            <if test="keyword !=null and keyword !=''">
                          AND id LIKE '%'||#{keyword}||'%' 
            </if> 
