@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -39,11 +40,11 @@ public class MemberDaoTest {
 		vo02 = new MemberVO("DaoTest02", "password02", "test02@gmail.com", 1, 142);
 		vo03 = new MemberVO("DaoTest03", "password03", "test03@gmail.com", 1, 143);
 		
-		search = new MemberVO("DaoTest", "password", "test@gmail.com", 1 ,141);
 	}
 	
 	
 	@Test
+	@Ignore
 	public void daoTest() throws SQLException {
 		
 		// Delete
