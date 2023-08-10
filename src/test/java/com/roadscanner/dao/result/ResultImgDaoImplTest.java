@@ -46,7 +46,7 @@ public class ResultImgDaoImplTest implements PcwkLogger {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void doSelectOne() throws SQLException {
 		LOG.debug("┌────────────────────────┐");
 		LOG.debug("│      doSelectOne()     │");

@@ -21,6 +21,7 @@ import com.roadscanner.domain.upload.FileUploadVO;
 import com.roadscanner.service.upload.FileUploadService;
 
 @Controller
+@RequestMapping("/main")
 public class ImgManageController implements PcwkLogger {
 
 	@Autowired
@@ -39,7 +40,7 @@ public class ImgManageController implements PcwkLogger {
 	// feedback 화면
 	@RequestMapping(value = "/graph")
 	public String feedback() throws SQLException {
-		return "graph";
+		return "main/graph";
 	}
 
 	// 분기별 피드백
@@ -289,7 +290,7 @@ public class ImgManageController implements PcwkLogger {
 		}
 		model.addAttribute("totalCnt", totalCnt);
 
-		return "imgManagement";
+		return "main/imgManagement";
 	}
 
 }

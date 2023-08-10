@@ -282,7 +282,7 @@
     	
     	$.ajax({
     		  type: "POST",
-    		  url:"/doDeleteMultiple",
+    		  url:"${CP}/main/doDeleteMultiple",
     		  asyn:"true",
     		  traditional: true, // 배열 데이터 전송을 위해 traditional 옵션을 설정
     	    data: { checkboxes: checkboxes },
@@ -323,7 +323,7 @@
     if (confirm("저장하시겠습니까?")) {
 	    $.ajax({
 	        type: "POST",
-	        url:"/checkedUpdateMultiple",
+	        url:"${CP}/main/checkedUpdateMultiple",
 	        asyn:"true",
 	        traditional: true, // 배열 데이터 전송을 위해 traditional 옵션을 설정
 	        data: { checkboxes: checkboxes },
@@ -385,7 +385,7 @@ $(document).ready(function() {
 
     $.ajax({
       type: "GET",
-      url: "/doSelectOne",
+      url: "${CP}/main/doSelectOne",
       asyn: "true",
       dataType: "json",
       data: {
@@ -427,7 +427,7 @@ $(document).ready(function() {
     if (confirm("저장하시겠습니까?")) {
       $.ajax({
         type: "POST",
-        url: "/checkedUpdate",
+        url: "${CP}/main/checkedUpdate",
         asyn: "true",
         dataType: "html",
         data: {
@@ -459,7 +459,7 @@ $(document).ready(function() {
     if (confirm("삭제하시겠습니까?")) {
       $.ajax({
         type: "GET",
-        url: "/doDelete",
+        url: "${CP}/main/doDelete",
         asyn: "true",
         dataType: "html",
         data: {

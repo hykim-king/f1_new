@@ -52,7 +52,7 @@ public class UploadController implements PcwkLogger {
 	
 	@RequestMapping(value = "/preUpload")
 	public String preUpload() {
-		return "preUpload";
+		return "main/preUpload";
 	}
 	
 	// upload 화면
@@ -80,7 +80,7 @@ public class UploadController implements PcwkLogger {
 		ResultImgVO resultImg = imgService.getResultImg(resultVO);
 		model.addAttribute("resultImg", resultImg.getUrl());
 		
-		return "upload";
+		return "main/upload";
 	}
 	
     // 파일 업로드 처리
