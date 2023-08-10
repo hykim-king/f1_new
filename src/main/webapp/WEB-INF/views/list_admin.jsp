@@ -50,30 +50,30 @@
                 </tr>
             </thead>
             <tbody>   
-                <c:forEach var="list2" items="${list2}">
+                <c:forEach var="list" items="${list}">
                  <c:set var="i" value="${i+1}"></c:set>
-                 <c:set var="j" value="${(select2-1)*5+i}"></c:set>  
+                 <c:set var="j" value="${(select-1)*5+i}"></c:set>  
 	                    <tr>
-	                        <td><input type="checkbox" name="delcheckbox2" value ="${list2.id}"></td>
+	                        <td><input type="checkbox" name="delcheckbox" value ="${list.id}"></td>
 	                        <td class="text-center col-sm-1">${j}</td>
-	                        <td class="text-center col-sm-5">${list2.id}</td>
-	                        <td class="text-center col-sm-6">${list2.email}</td>
+	                        <td class="text-center col-sm-5">${list.id}</td>
+	                        <td class="text-center col-sm-6">${list.email}</td>
 	                    </tr>
                 </c:forEach>   
             </tbody>
         </table>
-        <input type="hidden" id="messagebox2" value="${user.id}">
+        <input type="hidden" id="messagebox" value="${user.id}">
         <!-- 회원 정보 테이블 end ------------------------------------------------------------>
         
         <!-- 검색 폼 -->
         <div class="row mb-3">
             <div class="col">
                     <div class="form-group">
-                        <input type="text" id ="searchid2" name="keyword2" class="form-control" placeholder="아이디 검색">
-                        <input type="hidden" id="nekeyword" name="nekeyword" value="${user.id}">
+                        <input type="text" id ="searchid" name="keyword" class="form-control" placeholder="아이디 검색">
+                        <input type="hidden" id="exclude" name="exclude" value="${user.id}">
                     </div>
-                    <button type="submit" id ="searchidbtn2" class="btn btn-primary ml-2">검색</button>
-                    <button type="button" id= "deletebtn2" class="btn btn-primary ml-2">삭제</button>
+                    <button type="submit" id ="searchidbtn" class="btn btn-primary ml-2">검색</button>
+                    <button type="button" id= "deletebtn" class="btn btn-primary ml-2">삭제</button>
             </div>
         </div>
         <!-- 검색 폼 end ------------------------------------------------------------>
@@ -81,22 +81,22 @@
         <!-- pagination -->
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
-                <c:if test="${page2.prev2}">
-                    <li class="page-item"><a class="page-link" aria-label="Previous" href="/memberAdmin2?num2=${page2.startPageNum2 - 5}&keyword=${page.keyword}&nekeyword=${user.id}">이전</a></li>
+                <c:if test="${page.prev}">
+                    <li class="page-item"><a class="page-link" aria-label="Previous" href="/list_admin?num=${page.startPageNum - 5}&keyword=${page.keyword}&exclude=${user.id}">이전</a></li>
                 </c:if>
                 
-                <c:forEach begin="${page2.startPageNum2}" end="${page2.endPageNum2}" var="num2">      
-                      <c:if test="${select != num2}">
-                        <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${num2}&keyword=${page.keyword}&nekeyword=${user.id}">${num2}</a></li>
+                <c:forEach begin="${page.startPageNum}" end="${page.endPageNum}" var="num">      
+                      <c:if test="${select != num}">
+                        <li class="page-item"><a class="page-link" href="/list_admin?num=${num}&keyword=${page.keyword}&exclude=${user.id}">${num}</a></li>
                       </c:if>
                       
-                      <c:if test="${select == num2}">
-                        <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${num2}&keyword=${page.keyword}&nekeyword=${user.id}">${num2}</a></li>
+                      <c:if test="${select == num}">
+                        <li class="page-item"><a class="page-link" href="/list_admin?num=${num}&keyword=${page.keyword}&exclude=${user.id}">${num}</a></li>
                       </c:if>
                 </c:forEach>
                 
-                <c:if test="${page2.next2}">  
-                    <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${page2.endPageNum2 + 1}&keyword=${page.keyword}&nekeyword=${user.id}">다음</a></li>
+                <c:if test="${page.next}">  
+                    <li class="page-item"><a class="page-link" href="/list_admin?num=${page.endPageNum + 1}&keyword=${page.keyword}&exclude=${user.id}">다음</a></li>
                 </c:if>
                 
             </ul>
@@ -112,11 +112,11 @@
 $(document).ready(function() {
 	const urlParams = new URL(location.href).searchParams;
 
-	const paramnekey = urlParams.get('nekeyword');
+	const paramnekey = urlParams.get('exclude');
 
 	console.log(paramnekey)
 	if(paramnekey == null){
-        window.location.href="/memberAdmin2?num=1"+ '&nekeyword=' + $(nekeyword).val();
+        window.location.href="/list_admin?num=1"+ '&exclude=' + $("#exclude").val();
    }
 });
 
@@ -129,22 +129,22 @@ $(document).ready(function() {
 </script>
 
 <script>
-$("#searchidbtn2").on("click",function(){
-	let keyword2 = $("#searchid2").val();
-	console.log(keyword2);
+$("#searchidbtn").on("click",function(){
+	let keyword2 = $("#searchid").val();
+	console.log(keyword);
 	
-	location.href = "/memberAdmin2?num=1"+ "&nekeyword=" + $(nekeyword).val(); + "&keyword2=" + keyword2;
+	location.href = "/list_admin?num=1"+ "&exclude=" + $("#exclude").val(); + "&keyword=" + keyword;
 });
 </script>
 
 <script>
-$("#deletebtn2").on("click",function(){
+$("#deletebtn").on("click",function(){
     console.log("haha");
     
-    $("input[name='delcheckbox2']").each(function(){
+    $("input[name='delcheckbox']").each(function(){
         if( $(this).is(":checked") == true ){
-          var tmpVal2 = $(this).val();
-          console.log(tmpVal2);
+          var tmpVal = $(this).val();
+          console.log(tmpVal);
         
           
           
@@ -154,18 +154,18 @@ $("#deletebtn2").on("click",function(){
                       url:"${CP}/withdraw",
                       dataType:"html",
                       data: {
-                       id: tmpVal2
+                       id: tmpVal
                       },
                       success:function(data) {
                        let parsedJSON = JSON.parse(data);
                          
                            if("10" == parsedJSON.msgId){
-                              $('#messagebox2').attr('value', parsedJSON.msgContents);
+                              $('#messagebox').attr('value', parsedJSON.msgContents);
                               location.reload();
                           } 
                                                 
                           if("20" == parsedJSON.msgId){
-                              $('#messagebox2').attr('value',parsedJSON.msgContents);
+                              $('#messagebox').attr('value',parsedJSON.msgContents);
                               location.reload();
                           }
                       },

@@ -11,7 +11,7 @@
 	</resultMap>    
       
     <!-- 페이징 + 검색 -->
-     <select id="listPageSearchBox" parameterType="hashMap" resultMap="MemberMap">
+     <select id="member" parameterType="hashMap" resultMap="MemberMap">
         SELECT roadnum,road2.*
 	    FROM(
           SELECT row_number() OVER(ORDER BY road.no) AS roadnum, road.*
@@ -22,12 +22,12 @@
            </if> 
           ORDER BY road.no
           ) road2
-	    WHERE roadnum BETWEEN #{displayPost} AND #{postNum}+ #{displayPost}-1         
+	    WHERE roadnum BETWEEN #{dpPost} AND #{postNum}+ #{dpPost}-1         
 	    ORDER BY road2.no
      </select>
 
      <!-- 검색  카운팅 -->
-      <select id="searchCountBox" parameterType="hashMap" resultType="int">
+      <select id="member_searchCntBox" parameterType="hashMap" resultType="int">
 	      SELECT COUNT(id) cnt
 	      FROM member
 	      WHERE 1=1 
@@ -38,61 +38,61 @@
      </select>
      
      <!-- 페이징 + 검색 -->
-     <select id="listPageSearchBox2" parameterType="hashMap" resultMap="MemberMap">
+     <select id="admin" parameterType="hashMap" resultMap="MemberMap">
         SELECT roadnum,road2.*
         FROM(
           SELECT row_number() OVER(ORDER BY road.no) AS roadnum, road.*
            FROM member road
            WHERE grade = 2
-           AND  id NOT in  #{nekeyword}
+           AND  id NOT in  #{exclude}
            
-           <if test="nekeyword !=null and nekeyword !=''">
-                         AND id LIKE '%'||#{keyword2}||'%' 
+           <if test="exclude !=null and exclude !=''">
+                         AND id LIKE '%'||#{keyword}||'%' 
            </if> 
           ORDER BY road.no
           ) road2
-        WHERE roadnum BETWEEN #{displayPost2} AND #{postNum2}+ #{displayPost2}-1         
+        WHERE roadnum BETWEEN #{dpPost} AND #{postNum}+ #{dpPost}-1         
         ORDER BY road2.no
      </select>
 
      <!-- 검색  카운팅 -->
-      <select id="searchCountBox2" parameterType="hashMap" resultType="int">
+      <select id="admin_searchCntBox" parameterType="hashMap" resultType="int">
           SELECT COUNT(id) cnt
           FROM member
           WHERE 1=1 
           AND grade = 2
-          AND  id NOT in  #{nekeyword}
+          AND  id NOT in #{exclude}
 
           
-           <if test="keyword2 !=null and keyword2 !=''">
-                         AND id LIKE '%'||#{keyword2}||'%' 
+           <if test="keyword !=null and keyword !=''">
+                         AND id LIKE '%'||#{keyword}||'%' 
            </if> 
      </select>
      
      <!-- 페이징 + 검색 -->
-     <select id="listPageSearchBox3" parameterType="hashMap" resultMap="MemberMap">
+     <select id="banned" parameterType="hashMap" resultMap="MemberMap">
         SELECT roadnum,road3.*
         FROM(
           SELECT row_number() OVER(ORDER BY road.no) AS roadnum, road.*
            FROM member road
            WHERE grade = 3
-           <if test="keyword3 !=null and keyword3 !=''">
-                         AND id LIKE '%'||#{keyword3}||'%' 
+           <if test="keyword !=null and keyword !=''">
+                         AND id LIKE '%'||#{keyword}||'%' 
            </if> 
           ORDER BY road.no
           ) road3
-        WHERE roadnum BETWEEN #{displayPost3} AND #{postNum3}+ #{displayPost3}-1         
+        WHERE roadnum BETWEEN #{dpPost} AND #{postNum}+ #{dpPost}-1         
         ORDER BY road3.no
      </select>
 
      <!-- 검색  카운팅 -->
-      <select id="searchCountBox3" parameterType="hashMap" resultType="int">
+      <select id="banned_searchCntBox" parameterType="hashMap" resultType="int">
           SELECT COUNT(id) cnt
           FROM member
           WHERE 1=1 
           AND grade = 3
-           <if test="keyword3 !=null and keyword3 !=''">
-                         AND id LIKE '%'||#{keyword3}||'%' 
+           <if test="keyword !=null and keyword !=''">
+                         AND id LIKE '%'||#{keyword}||'%' 
            </if> 
      </select>
      

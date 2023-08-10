@@ -50,31 +50,31 @@
                 </tr>
             </thead>
             <tbody>   
-                <c:forEach var="list3" items="${list3}">
+                <c:forEach var="list" items="${list}">
                  <c:set var="i" value="${i+1}"></c:set>
-                 <c:set var="j" value="${(select3-1)*5+i}"></c:set>  
-                  <c:if test="${user.id ne list3.id}">
+                 <c:set var="j" value="${(select-1)*5+i}"></c:set>  
+                  <c:if test="${user.id ne list.id}">
 	                    <tr>
-	                        <td><input type="checkbox" name="delcheckbox3" value ="${list3.id}"></td>
+	                        <td><input type="checkbox" name="delcheckbox" value ="${list.id}"></td>
 	                        <td class="text-center col-sm-1">${j}</td>
-	                        <td class="text-center col-sm-5">${list3.id}</td>
-	                        <td class="text-center col-sm-6">${list3.email}</td>
+	                        <td class="text-center col-sm-5">${list.id}</td>
+	                        <td class="text-center col-sm-6">${list.email}</td>
 	                    </tr>
 	                </c:if>
                 </c:forEach>   
             </tbody>
         </table>
-        <input type="hidden" id="messagebox3">
+        <input type="hidden" id="messagebox">
         <!-- 회원 정보 테이블 end ------------------------------------------------------------>
         
         <!-- 검색 폼 -->
         <div class="row mb-3">
             <div class="col">
                     <div class="form-group">
-                        <input type="text" id ="searchid3" name="keyword3" class="form-control" placeholder="아이디 검색">
+                        <input type="text" id ="searchid" name="keyword" class="form-control" placeholder="아이디 검색">
                     </div>
-                    <button type="submit" id ="searchidbtn3" class="btn btn-primary ml-2">검색</button>
-                    <button type="button" id= "deletebtn3" class="btn btn-primary ml-2">정지해제</button>
+                    <button type="submit" id ="searchidbtn" class="btn btn-primary ml-2">검색</button>
+                    <button type="button" id= "deletebtn" class="btn btn-primary ml-2">정지해제</button>
             </div>
         </div>
         <!-- 검색 폼 end ------------------------------------------------------------>
@@ -82,22 +82,22 @@
         <!-- pagination -->
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
-                <c:if test="${page3.prev3}">
-                    <li class="page-item"><a class="page-link" aria-label="Previous" href="/memberAdmin3?num3=${page3.startPageNum3 - 5}&keyword=${page.keyword}">이전</a></li>
+                <c:if test="${page.prev}">
+                    <li class="page-item"><a class="page-link" aria-label="Previous" href="/list_banned?num=${page.startPageNum - 5}&keyword=${page.keyword}">이전</a></li>
                 </c:if>
                 
-                <c:forEach begin="${page3.startPageNum3}" end="${page3.endPageNum3}" var="num3">      
-                      <c:if test="${select != num3}">
-                        <li class="page-item"><a class="page-link" href="/memberAdmin3?num3=${num3}&keyword=${page.keyword}">${num3}</a></li>
+                <c:forEach begin="${page.startPageNum}" end="${page.endPageNum}" var="num">      
+                      <c:if test="${select != num}">
+                        <li class="page-item"><a class="page-link" href="/list_banned?num=${num}&keyword=${page.keyword}">${num}</a></li>
                       </c:if>
                       
-                      <c:if test="${select == num3}">
-                        <li class="page-item"><a class="page-link" href="/memberAdmin3?num3=${num3}&keyword=${page.keyword}">${num3}</a></li>
+                      <c:if test="${select == num}">
+                        <li class="page-item"><a class="page-link" href="/list_banned?num=${num}&keyword=${page.keyword}">${num}</a></li>
                       </c:if>
                 </c:forEach>
                 
-                <c:if test="${page3.next3}">  
-                    <li class="page-item"><a class="page-link" href="/memberAdmin3?num3=${page3.endPageNum3 + 1}&keyword=${page.keyword}">다음</a></li>
+                <c:if test="${page.next}">  
+                    <li class="page-item"><a class="page-link" href="/list_banned?num=${page.endPageNum + 1}&keyword=${page.keyword}">다음</a></li>
                 </c:if>
                 
             </ul>
@@ -110,22 +110,22 @@
 
 </body>
 <script>
-$("#searchidbt3").on("click",function(){
-	let keyword3 = $("#searchid3").value();
-	console.log(keyword3);
+$("#searchidbt").on("click",function(){
+	let keyword3 = $("#searchid").value();
+	console.log(keyword);
 	
-	location.href = "/memberAdmin3?num=1"+ "&keyword3=" + keyword3;
+	location.href = "/list_banned?num=1"+ "&keyword=" + keyword;
 });
 </script>
 
 <script>
-$("#deletebtn3").on("click",function(){
+$("#deletebtn").on("click",function(){
     console.log("haha");
     
-    $("input[name='delcheckbox3']").each(function(){
+    $("input[name='delcheckbox']").each(function(){
         if( $(this).is(":checked") == true ){
-          var tmpVal3 = $(this).val();
-          console.log(tmpVal3);
+          var tmpVal = $(this).val();
+          console.log(tmpVal);
         
           
           
@@ -135,7 +135,7 @@ $("#deletebtn3").on("click",function(){
                       url:"${CP}/clear",
                       dataType:"html",
                       data: {
-                       id: tmpVal3
+                       id: tmpVal
                       },
                       success:function(data) {
                        let parsedJSON = JSON.parse(data);

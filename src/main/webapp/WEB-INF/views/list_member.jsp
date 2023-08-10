@@ -83,21 +83,21 @@
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
 	            <c:if test="${page.prev}">
-		            <li class="page-item"><a class="page-link" aria-label="Previous" href="/memberAdmin?num=${page.startPageNum - 5}&keyword=${page.keyword}">이전</a></li>
+		            <li class="page-item"><a class="page-link" aria-label="Previous" href="/list_member?num=${page.startPageNum - 5}&keyword=${page.keyword}">이전</a></li>
 		        </c:if>
 		        
 		        <c:forEach begin="${page.startPageNum}" end="${page.endPageNum}" var="num">      
 		              <c:if test="${select != num}">
-		                <li class="page-item"><a class="page-link" href="/memberAdmin?num=${num}&keyword=${page.keyword}">${num}</a></li>
+		                <li class="page-item"><a class="page-link" href="/list_member?num=${num}&keyword=${page.keyword}">${num}</a></li>
 		              </c:if>
 		              
 		              <c:if test="${select == num}">
-		                <li class="page-item"><a class="page-link" href="/memberAdmin?num=${num}&keyword=${page.keyword}">${num}</a></li>
+		                <li class="page-item"><a class="page-link" href="/list_member?num=${num}&keyword=${page.keyword}">${num}</a></li>
 		              </c:if>
 		        </c:forEach>
 		        
 		        <c:if test="${page.next}">  
-		            <li class="page-item"><a class="page-link" href="/memberAdmin?num=${page.endPageNum + 1}&keyword=${page.keyword}">다음</a></li>
+		            <li class="page-item"><a class="page-link" href="/list_member?num=${page.endPageNum + 1}&keyword=${page.keyword}">다음</a></li>
 		        </c:if>
                 
             </ul>
@@ -118,7 +118,7 @@ $("#searchidbtn").on("click",function(){
 	let keyword = $("#searchid").val();
 	console.log(keyword);
 
-	location.href = "/memberAdmin?num=1"+ "&keyword=" + keyword;
+	location.href = "/list_member?num=1"+ "&keyword=" + keyword;
 	});
 </script>
 

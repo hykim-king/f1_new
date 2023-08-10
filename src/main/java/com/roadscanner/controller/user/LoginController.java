@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.roadscanner.cmn.MessageVO;
-import com.roadscanner.domain.Adminpage2;
+import com.roadscanner.domain.list_admin;
 import com.roadscanner.domain.MemberVO;
 import com.roadscanner.service.user.MailSendService;
 import com.roadscanner.service.user.UserService;
@@ -70,7 +70,7 @@ public class LoginController {
 	 */
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody         //해당 내용이 화면이 아닌 데이터만 던진자고 알려주는 것임
-    public String loginButtonEvent(MemberVO user,Adminpage2 page, Model model, HttpSession httpSession ) throws SQLException {        
+    public String loginButtonEvent(MemberVO user,list_admin page, Model model, HttpSession httpSession ) throws SQLException {        
         LOG.debug("┌────────────────────────────────────────────────────────┐");
         System.out.println("│ loginButtonEvent()                                     │");
         LOG.debug("└────────────────────────────────────────────────────────┘");
