@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.roadscanner.cmn.PcwkLogger;
 import com.roadscanner.domain.result.ResultImgVO;
 
-@Repository
+@Repository("resultImgDaoImpl")
 public class ResultImgDaoImpl implements PcwkLogger, ResultImgDao {
 
 	final String NAMESPACE = "com.roadscanner.dao.result";

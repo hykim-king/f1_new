@@ -40,7 +40,7 @@ public class UploadController implements PcwkLogger {
 	@Autowired
 	ResultImgService imgService;
 	
-	@Autowired
+	//@Autowired
 	MessageVO messageVO;
 
 	// default 생성자

@@ -26,7 +26,7 @@ public class ImgManageController implements PcwkLogger {
 	@Autowired
 	FileUploadService service;
 
-	@Autowired
+	//@Autowired
 	MessageVO messageVO;
 
 	// default 생성자

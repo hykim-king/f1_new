@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import org.apache.ibatis.io.Resources;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,6 +26,7 @@ import com.amazonaws.services.s3.model.CopyObjectRequest;
 import com.amazonaws.services.s3.model.CopyObjectResult;
 import com.roadscanner.cmn.PcwkLogger;
 import com.roadscanner.dao.upload.FileUploadDao;
+import com.roadscanner.dao.upload.FileUploadDaoImpl;
 import com.roadscanner.domain.upload.FileUploadVO;
 
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
@@ -38,9 +40,10 @@ import software.amazon.awssdk.services.s3.model.S3Exception;
 public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 
 	@Autowired
+	@Qualifier(value = "fileUploadDaoImpl")
 	FileUploadDao dao;
 
-	@Autowired
+	//@Autowired
 	FileUploadVO uploadVO;
 
 	// 사진 저장하면 checked = 1, S3 버킷 이동

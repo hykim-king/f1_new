@@ -3,6 +3,7 @@ package com.roadscanner.service.result;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.roadscanner.cmn.PcwkLogger;
@@ -13,9 +14,10 @@ import com.roadscanner.domain.result.ResultImgVO;
 public class ResultImgServiceImpl implements PcwkLogger, ResultImgService {
 	
 	@Autowired
+	@Qualifier(value = "resultImgDaoImpl")
 	ResultImgDao dao;
 	
-	@Autowired
+	//@Autowired
 	ResultImgVO resultVO;
 
 	@Override
