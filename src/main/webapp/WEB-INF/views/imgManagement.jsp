@@ -282,7 +282,7 @@
     	
     	$.ajax({
     		  type: "POST",
-    		  url:"/roadscanner/doDeleteMultiple",
+    		  url:"/doDeleteMultiple",
     		  asyn:"true",
     		  traditional: true, // 배열 데이터 전송을 위해 traditional 옵션을 설정
     	    data: { checkboxes: checkboxes },
@@ -323,7 +323,7 @@
     if (confirm("저장하시겠습니까?")) {
 	    $.ajax({
 	        type: "POST",
-	        url:"/roadscanner/checkedUpdateMultiple",
+	        url:"/checkedUpdateMultiple",
 	        asyn:"true",
 	        traditional: true, // 배열 데이터 전송을 위해 traditional 옵션을 설정
 	        data: { checkboxes: checkboxes },
@@ -385,7 +385,7 @@ $(document).ready(function() {
 
     $.ajax({
       type: "GET",
-      url: "/roadscanner/doSelectOne",
+      url: "/doSelectOne",
       asyn: "true",
       dataType: "json",
       data: {
@@ -427,7 +427,7 @@ $(document).ready(function() {
     if (confirm("저장하시겠습니까?")) {
       $.ajax({
         type: "POST",
-        url: "/roadscanner/checkedUpdate",
+        url: "/checkedUpdate",
         asyn: "true",
         dataType: "html",
         data: {
@@ -459,7 +459,7 @@ $(document).ready(function() {
     if (confirm("삭제하시겠습니까?")) {
       $.ajax({
         type: "GET",
-        url: "/roadscanner/doDelete",
+        url: "/doDelete",
         asyn: "true",
         dataType: "html",
         data: {
@@ -492,7 +492,7 @@ $("#categoryDropdown").change(function() {
   
   let selectedCategory = $(this).val();
   
-  window.location.href = "/roadscanner/imgManagement?category=" + encodeURIComponent(selectedCategory);
+  window.location.href = "/imgManagement?category=" + encodeURIComponent(selectedCategory);
 
 }); // categoryDropdown
   

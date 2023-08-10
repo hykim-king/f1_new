@@ -189,3 +189,4 @@ Servers/
 >>>>>>> ch/fileupload
 *.properties
 logs/
+.springBeans

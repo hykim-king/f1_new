@@ -31,6 +31,7 @@ import com.roadscanner.service.result.ResultImgService;
 import com.roadscanner.service.upload.FileUploadService;
 
 @Controller
+@RequestMapping("/main")
 public class UploadController implements PcwkLogger {
 	
 	@Autowired
