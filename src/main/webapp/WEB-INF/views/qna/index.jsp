@@ -7,26 +7,22 @@
     <link href="/resources/css/qna.css" rel="stylesheet">
 </head>
 <body>
-<<<<<<< HEAD
-<h1>Q&A 게시판</h1>
-<div>
-    <div>
-        <a href="/qna/save" role="button">글쓰기</a>
+<div class="container mt-4">
+    <h1>Q&A 게시판</h1>
+    <div class="mb-3">
+        <a href="/qna/save" class="btn btn-primary" role="button">글쓰기</a>
     </div>
-</div>
-<br>
-<%-- 이곳에 글목록이 나와요. 목록 출력영역 <--%>
-<table>
-    <thead>
-    <tr>
-        <th>번호</th>
-        <th>분류</th>
-        <th>제목</th>
-        <th>작성자</th>
-        <th>작성일</th>
-        <th>조회수</th>
-    </tr>
-    </thead>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>분류</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th>조회수</th>
+        </tr>
+        </thead>
         <tbody>
         <c:forEach items="${questions}" var="question">
             <c:choose>

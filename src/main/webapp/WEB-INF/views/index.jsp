@@ -12,16 +12,12 @@
             <ul>
                 <li><a href="/qna">전체 게시글 출력 R</a></li>
                 <li><a href="/qna/save">게시글 작성 C</a></li>
-                <li><a href="#">게시글 조회 R</a></li>
-                <li><a href="#">게시글 수정 U</a></li>
-                <li><a href="#">게시물 삭제 D</a></li>
             </ul>
         </li>
         <li><h4>etc</h4>
             <ul>
                 <li><a href="#">페이징</a></li>
                 <li><a href="#">게시물 검색 - 어떤 기준으로 할 지 정해야함</a></li>
-                <li><a href="#">조회수 증가</a></li>
             </ul>
         </li>
     </ul>
