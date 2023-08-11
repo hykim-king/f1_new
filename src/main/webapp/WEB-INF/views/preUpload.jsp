@@ -240,14 +240,14 @@
       
       $.ajax({
           type: "POST",
-          url: "${CP}/main/fileUploaded",
+          url: "/main/fileUploaded",
           processData: false,
           contentType: false,
           data: formData,
           success: function(data) { // 통신 성공
                console.log(data);
                // 여기서 페이지 이동
-               window.location.href = "${CP}/main/upload?imgName=" + encodeURIComponent(data);
+               window.location.href = "/main/upload?imgName=" + encodeURIComponent(data);
           },
           error: function(data) { // 실패시 처리
               console.error("파일 업로드 오류:", data.msgId, data.msgContents);

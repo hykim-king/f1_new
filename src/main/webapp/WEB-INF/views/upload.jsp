@@ -291,14 +291,14 @@
       
       $.ajax({
           type: "POST",
-          url: "${CP}/main/fileUploaded",
+          url: "/main/fileUploaded",
           processData: false,
           contentType: false,
           data: formData,
           success: function(data) { // 통신 성공
               console.log(data);
               // 여기서 페이지 이동
-              window.location.href = "${CP}/main/upload?imgName=" + encodeURIComponent(data);
+              window.location.href = "/main/upload?imgName=" + encodeURIComponent(data);
           },
           error: function(data) { // 실패시 처리
               console.error("파일 업로드 오류:", data.msgId, data.msgContents);
@@ -321,7 +321,7 @@
 
         $.ajax({
             type: "POST",
-            url:"${CP}/main/feedbackUpdate",
+            url:"/main/feedbackUpdate",
             asyn:"true",
             data:{
                   "name" : $("#thisName").val(),
@@ -376,7 +376,7 @@
         if (confirm("제출하시겠습니까?")) {
             $.ajax({
                 type: "POST",
-                url:"${CP}/main/feedbackUpdate",
+                url:"/main/feedbackUpdate",
                 asyn:"true",
                 data:{
                     "name" : $("#thisName").val(),
@@ -389,7 +389,7 @@
                     console.log("feedback update:", data);
                     if("1" == data.msgId){
                         alert('소중한 의견 감사드립니다.');
-                        window.location.href = "${CP}/main/preUpload";
+                        window.location.href = "/main/preUpload";
                     }else{
                         alert(data.msgContents);
                         alert("오류 발생. 다시 시도해 주세요.");
