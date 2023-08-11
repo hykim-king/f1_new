@@ -129,7 +129,7 @@
       <button type="button" id="selectSaveBtn" class="btn btn-dark" style="width: 200px;" onclick="selectSave()">SAVE</button>
     </div>
     
-    <div>
+    <form action="/imgManagement" method="post">
 	    <select id="categoryDropdown" name="category">
 	      <option selected="selected" disabled="disabled">분류</option>
 	      <option value="0">전체</option>
@@ -139,10 +139,8 @@
 	    </select>
 	    <input type="checkbox" id="selectAllBtn" onclick="toggleSelectAll()" style="display: none;">
 	    <label for="selectAllBtn" class="btn btn-link" style="color: #212529;">SELECT_ALL</label>
-    </div>
+    </form>
     
-    
-    <%-- ${list} --%>
     <!-- 3*3 사진+체크박스 디스플레이 -->
     <div class="d-flex justify-content-center">
 			<table id="photoList">
@@ -175,21 +173,30 @@
 			</table>
 		</div>
 	  
+	  pageNo ${pageNo}
+	  pageSize ${pageSize}
+	  category ${category}
+	  totalCnt ${totalCnt}
+	  totalPages ${totalPages}
+	  
 	  <!-- 페이징 -->
 		  <ul class="pagination justify-content-center">
-		    <li class="page-item">
-		      <a class="page-link" href="#" aria-label="Previous">
-		        <span aria-hidden="true">&laquo;</span>
-		      </a>
-		    </li>
-		    <li class="page-item"><a class="page-link" href="#">1</a></li>
-		    <li class="page-item"><a class="page-link" href="#">2</a></li>
-		    <li class="page-item"><a class="page-link" href="#">3</a></li>
-		    <li class="page-item">
-		      <a class="page-link" href="#" aria-label="Next">
-		        <span aria-hidden="true">&raquo;</span>
-		      </a>
-		    </li>
+		    <!-- 이전 페이지 버튼 -->
+	        <li class="page-item ${pageNo <= 1 ? 'disabled' : ''}">
+              <a class="page-link" href="${pageNo > 1 ? CP+'/imgManagement?pageNo='+(pageNo - 1)+'&pageSize=9' + (category ? '&category=' + category : '') : '#'}" aria-label="Previous">
+	                <span aria-hidden="true">&laquo;</span>
+	            </a>
+	        </li>
+	        <!-- 페이지 번호 -->
+	        <c:forEach begin="1" end="${totalPages}" var="pageNum">
+	            <li class="page-item"><a class="page-link" href="${CP}/imgManagement?pageNo=${pageNum}&pageSize=9${category ? '&category=' + category : ''}">${pageNum}</a></li>
+	        </c:forEach>
+	        <!-- 다음 페이지 버튼 -->
+	        <li class="page-item ${pageNo >= totalPages ? 'disabled' : ''}">
+	            <a class="page-link" href="${pageNo < totalPages ? CP+'/imgManagement?pageNo='+(pageNo + 1)+('&pageSize=9') + (category ? '&category=' + category : '') : '#'}" aria-label="Next">
+	                <span aria-hidden="true">&raquo;</span>
+	            </a>
+	        </li>
 		  </ul> <!-- 페이징 -->
 	  
   </div> <!-- container -->
@@ -345,13 +352,19 @@
   
   
 ////////////////////////////////////////////////////////////////////////////////
-// 이미지 모달 숨기기
-function hideImageModal() {
-  let modal = document.getElementById("imageModal");
-  modal.style.display = "none";
-}
 
 $(document).ready(function() {
+	
+	// 드롭다운으로 카테고리 선택해서 카테고리에 따른 목록 조회
+	$("#categoryDropdown").change(function() {
+	  
+	  let selectedCategory = $(this).val();
+	  
+	  //window.location.href = "/imgManagement?category=" + encodeURIComponent(selectedCategory);
+
+	}); // categoryDropdown
+	
+	
   let name; // 클릭한 이미지의 이름을 저장하는 변수 
 
   // 이미지 모달 창 클릭 시 호출될 함수 등록
@@ -359,6 +372,12 @@ $(document).ready(function() {
   
   // 모달 창 닫기 클릭 시 호출될 함수 등록
   $(document).on('click', '.image-modal-close', hideImageModal);
+  
+  //이미지 모달 숨기기
+  function hideImageModal() {
+    let modal = document.getElementById("imageModal");
+    modal.style.display = "none";
+  }
   
   // 이미지 모달 창 클릭 시 호출될 함수
   function showModalOnClick() {
@@ -402,7 +421,6 @@ $(document).ready(function() {
     	  } else if (data.category === 30) {
           category_val = "싫어요"
     	  }
-    	  
       
         $("#idx").text(data.idx);
         $("#name").text(data.name);
@@ -483,19 +501,7 @@ $(document).ready(function() {
     } // if
   }); // detailDelete()
 
-
-});
-
-
-// 드롭다운으로 카테고리 선택해서 카테고리에 따른 목록 조회
-$("#categoryDropdown").change(function() {
-  
-  let selectedCategory = $(this).val();
-  
-  window.location.href = "/imgManagement?category=" + encodeURIComponent(selectedCategory);
-
-}); // categoryDropdown
-  
+}); // document.ready
 </script>
 </body>
 </html>

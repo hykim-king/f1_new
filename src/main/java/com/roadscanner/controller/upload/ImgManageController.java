@@ -256,38 +256,51 @@ public class ImgManageController implements PcwkLogger {
 
 	// 이미지 목록 관리 화면
 	@RequestMapping(value = "/imgManagement")
-	public String imgManagement(@RequestParam(name = "category", required = false, defaultValue = "0") String category,
+	public String imgManagement(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
+								@RequestParam(name = "pageSize", defaultValue = "9") int pageSize,
+								@RequestParam(name = "category", required = false, defaultValue = "0") String category,
 								FileUploadVO inVO, Model model) throws SQLException {
 		LOG.debug("┌────────────────┐");
 		LOG.debug("│ imgManagement  │");
 		LOG.debug("│ inVO           │" + inVO);
 		LOG.debug("└────────────────┘");
 
-		// 페이지 번호 초기값: 1
-		if (null != inVO && inVO.getPageNo() == 0) {
-			inVO.setPageNo(1);
-		}
-		// 페이지 사이즈 초기값: 9
-		if (null != inVO && inVO.getPageSize() == 0) {
-			inVO.setPageSize(9);
-		}
-
+		// inVO 생성 및 초기값 설정
+	    if (inVO == null) {
+	        inVO = new FileUploadVO();
+	    }
+	    if (inVO.getPageNo() == 0) {
+	        inVO.setPageNo(1); // 페이지 번호
+	    }
+	    if (inVO.getPageSize() == 0) {
+	        inVO.setPageSize(9); // 페이지 사이즈
+	    }
+	    
 		// 카테고리 값 주기
+	    // 클라이언트에서 선택한 카테고리 값은 문자열로 전송됨
 		int intCategory = Integer.parseInt(category);
 		inVO.setCategory(intCategory);
 
 		// 목록 조회
-		List<FileUploadVO> list = this.service.doRetrieve(inVO);
-		model.addAttribute("list", list);
-		model.addAttribute("inVO", inVO);
+	    List<FileUploadVO> list = this.service.doRetrieve(inVO);
 
-		// 총 글 수
-		int totalCnt = 0;
-		if (null != list && list.size() > 0) {
-			totalCnt = list.get(0).getTotalCnt();
-			LOG.debug("totalCnt : " + totalCnt);
-		}
-		model.addAttribute("totalCnt", totalCnt);
+	    // 총 글 수
+	    int totalCnt = 0;
+	    if (list != null && !list.isEmpty()) {
+	        totalCnt = list.get(0).getTotalCnt();
+	    }
+	    
+	    // 총 페이지 수
+	    int totalPages = (int) Math.ceil((double) totalCnt / inVO.getPageSize());
+
+	    // 모델에 속성 추가
+	    model.addAttribute("list", list);
+	    model.addAttribute("inVO", inVO);
+	    model.addAttribute("pageNo", inVO.getPageNo());
+	    model.addAttribute("pageSize", inVO.getPageSize());
+	    model.addAttribute("category", inVO.getCategory()); 
+	    model.addAttribute("totalCnt", totalCnt);
+	    model.addAttribute("totalPages", totalPages);
 
 		return "imgManagement";
 	}
