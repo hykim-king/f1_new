@@ -54,7 +54,7 @@ AdminService service;
 		list_admin adminPage = new list_admin();
 		
 		adminPage.setnum(num);
-		adminPage.setcount(service.admin_searchCntBox(exclude, keyword)); 
+		adminPage.setcount(service.admin_searchCntBox(keyword,exclude)); 
 		adminPage.setkeyword(keyword);
 		adminPage.setexclude(exclude);
 		adminPage.setpageid(pageid);

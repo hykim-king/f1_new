@@ -83,7 +83,7 @@
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
 	            <c:if test="${memberPage.prev}">
-		            <li class="page-item"><a class="page-link" aria-label="Previous" href="/list_member?num=${memberPage.startPageNum - 5}&keyword=${page.keyword}">이전</a></li>
+		            <li class="page-item"><a class="page-link" aria-label="Previous" href="/list_member?num=${memberPage.startPageNum - 5}&keyword=${memberPage.keyword}">이전</a></li>
 		        </c:if>
 		        
 		        <c:forEach begin="${memberPage.startPageNum}" end="${memberPage.endPageNum}" var="num">      

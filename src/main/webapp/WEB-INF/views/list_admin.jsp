@@ -40,7 +40,7 @@
         <!-- 제목 end --------------------------------------------------------------->
 
         <!-- 회원 정보 테이블 -->
-        <table class="table table-hover" id="memberTable">
+        <table class="table table-hover" id="adminTable">
             <thead class="table-light">
                 <tr>
                     <th class="text-center"></th>
@@ -78,7 +78,7 @@
         </div>
         <!-- 검색 폼 end ------------------------------------------------------------>
 
-        <!-- pagination -->
+         <!-- pagination -->
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
                 <c:if test="${adminPage.prev}">
@@ -101,7 +101,7 @@
                 
             </ul>
         </nav>
-<!-- pagination end ------------------------------------------------------->
+        <!-- pagination end ------------------------------------------------------->
      </form> 
 </div>     
 <!-- 관리자 리스트 end --------------------------------------------------------------->    
