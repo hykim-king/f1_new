@@ -1,4 +1,4 @@
-package com.roadscanner.controller;
+package com.roadscanner.dao.user;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

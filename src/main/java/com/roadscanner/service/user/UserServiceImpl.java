@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
 		
 		int idCheck = this.userDao.idCheck(user);
 		int emailCheck = this.userDao.emailCheck(user);
-		int flag = this.userDao.addUser(user);
+		int flag = this.userDao.insertOne(user);
 		
 		System.out.println("MembershipServiceImpl idCheck : "+idCheck);
 		System.out.println("MembershipServiceImpl emailCheck : "+emailCheck);

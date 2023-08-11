@@ -85,11 +85,11 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int insertOne(MemberVO user) throws SQLException {
 		System.out.println("============================================");
-		System.out.println("MembershipDaoImpl addUser()");
+		System.out.println("MembershipDaoImpl insertOne()");
 		System.out.println("============================================");
 		
 		int flag = 0;
-		String statement = this.NAMESPACE + DOT + "addUser";
+		String statement = this.NAMESPACE + DOT + "insertOne";
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
 		LOG.debug("│ 1. statement " + statement);
 		LOG.debug("│ 2. param=\n" + user.toString());
