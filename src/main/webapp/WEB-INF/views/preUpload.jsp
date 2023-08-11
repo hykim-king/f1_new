@@ -2,6 +2,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="CP" value="${pageContext.request.contextPath }"/>
+
+<%
+    // 서버 측에서 사용자 세션을 확인하고, 세션이 없으면 기본 페이지로 리다이렉트합니다.
+    if (session.getAttribute("user") == null) {
+      response.sendRedirect("/login");
+    }
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -147,6 +155,7 @@
           <img id="selectButtonImg" alt="SelectButton" src="${CP}/resources/img/selectButton.jpg" width="400" height="400">
         </label>
         <!-- 파일 선택 -->
+        <input type="hidden" id="userid" value="${user.id}">
         <input id=fileUpload name="fileUpload" type="file" accept=".jpg, .jpeg, .png, .bmp, .tiff, .webp, .ico, .svg" onchange="displaySelectedFile(event)" style="display: none;">
         <div id="cancelContainer">
           <img id="selectedImage" alt="Selected Image">
@@ -225,11 +234,11 @@
     // '표지판 알아보기'클릭 시 파일 업로드, /upload로 넘어가기
     $("#runButton").on("click", function(){
       //console.log('runButton click');
-      
+      let userid = $("#userid").val();
       let formData = new FormData();
         formData.append("fileUpload", $("#fileUpload")[0].files[0]);
         formData.append("idx", 1);
-        formData.append("id", "testid");
+        formData.append("id", userid);
         formData.append("category", 10);
         formData.append("name", "testname");
         formData.append("url", "testurl");
