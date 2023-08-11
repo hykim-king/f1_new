@@ -3,9 +3,7 @@ package com.roadscanner.dao.user;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
-import com.roadscanner.domain.MemberVO;
+import com.roadscanner.domain.user.MemberVO;
 
 
 

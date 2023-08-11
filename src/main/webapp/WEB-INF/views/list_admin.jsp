@@ -13,8 +13,8 @@
 <%
  return;
  }
-%>
- --%>
+%> --%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,12 +30,12 @@
     <title>회원 관리</title>
 </head>
 <body>
-<!-- 정지회원 리스트  ---------------------------------------------------------------> 
+<!-- 관리자 리스트  ---------------------------------------------------------------> 
 <div class="container"> 
     <form>  
         <!-- 제목 -->
         <div class="page-header">
-            <h2 class="text-center">정지회원 리스트</h2>
+            <h2 class="text-center">관리자 리스트</h2>
         </div>
         <!-- 제목 end --------------------------------------------------------------->
 
@@ -50,31 +50,30 @@
                 </tr>
             </thead>
             <tbody>   
-                <c:forEach var="list3" items="${list3}">
+                <c:forEach var="list" items="${list}">
                  <c:set var="i" value="${i+1}"></c:set>
-                 <c:set var="j" value="${(select3-1)*5+i}"></c:set>  
-                  <c:if test="${user.id ne list3.id}">
+                 <c:set var="j" value="${(select-1)*5+i}"></c:set>  
 	                    <tr>
-	                        <td><input type="checkbox" name="delcheckbox3" value ="${list3.id}"></td>
+	                        <td><input type="checkbox" name="delcheckbox" value ="${list.id}"></td>
 	                        <td class="text-center col-sm-1">${j}</td>
-	                        <td class="text-center col-sm-5">${list3.id}</td>
-	                        <td class="text-center col-sm-6">${list3.email}</td>
+	                        <td class="text-center col-sm-5">${list.id}</td>
+	                        <td class="text-center col-sm-6">${list.email}</td>
 	                    </tr>
-	                </c:if>
                 </c:forEach>   
             </tbody>
         </table>
-        <input type="hidden" id="messagebox3">
+        <input type="hidden" id="messagebox" value="${user.id}">
         <!-- 회원 정보 테이블 end ------------------------------------------------------------>
         
         <!-- 검색 폼 -->
         <div class="row mb-3">
             <div class="col">
                     <div class="form-group">
-                        <input type="text" id ="searchid3" name="keyword3" class="form-control" placeholder="아이디 검색">
+                        <input type="text" id ="searchid" name="keyword" class="form-control" placeholder="아이디 검색">
+                        <input type="hidden" id="exclude" name="exclude" value="${user.id}">
                     </div>
-                    <button type="submit" id ="searchidbtn3" class="btn btn-primary ml-2">검색</button>
-                    <button type="button" id= "deletebtn3" class="btn btn-primary ml-2">정지해제</button>
+                    <button type="submit" id ="searchidbtn" class="btn btn-primary ml-2">검색</button>
+                    <button type="button" id= "deletebtn" class="btn btn-primary ml-2">삭제</button>
             </div>
         </div>
         <!-- 검색 폼 end ------------------------------------------------------------>
@@ -82,22 +81,22 @@
         <!-- pagination -->
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
-                <c:if test="${page3.prev3}">
-                    <li class="page-item"><a class="page-link" aria-label="Previous" href="/memberAdmin3?num3=${page3.startPageNum3 - 5}&keyword=${page.keyword}">이전</a></li>
+                <c:if test="${adminPage.prev}">
+                    <li class="page-item"><a class="page-link" aria-label="Previous" href="/list_admin?num=${adminPage.startPagenum - 5}&keyword=${adminPage.keyword}&exclude=${user.id}">이전</a></li>
                 </c:if>
                 
-                <c:forEach begin="${page3.startPageNum3}" end="${page3.endPageNum3}" var="num3">      
-                      <c:if test="${select != num3}">
-                        <li class="page-item"><a class="page-link" href="/memberAdmin3?num3=${num3}&keyword=${page.keyword}">${num3}</a></li>
+                <c:forEach begin="${adminPage.startPagenum}" end="${adminPage.endPagenum}" var="num">      
+                      <c:if test="${select != num}">
+                        <li class="page-item"><a class="page-link" href="/list_admin?num=${num}&keyword=${adminPage.keyword}&exclude=${user.id}">${num}</a></li>
                       </c:if>
                       
-                      <c:if test="${select == num3}">
-                        <li class="page-item"><a class="page-link" href="/memberAdmin3?num3=${num3}&keyword=${page.keyword}">${num3}</a></li>
+                      <c:if test="${select == num}">
+                        <li class="page-item"><a class="page-link" href="/list_admin?num=${num}&keyword=${adminPage.keyword}&exclude=${user.id}">${num}</a></li>
                       </c:if>
                 </c:forEach>
                 
-                <c:if test="${page3.next3}">  
-                    <li class="page-item"><a class="page-link" href="/memberAdmin3?num3=${page3.endPageNum3 + 1}&keyword=${page.keyword}">다음</a></li>
+                <c:if test="${adminPage.next}">  
+                    <li class="page-item"><a class="page-link" href="/list_admin?num=${adminPage.endPagenum + 1}&keyword=${adminPage.keyword}&exclude=${user.id}">다음</a></li>
                 </c:if>
                 
             </ul>
@@ -105,48 +104,63 @@
 <!-- pagination end ------------------------------------------------------->
      </form> 
 </div>     
-<!-- 정지회원 리스트 end --------------------------------------------------------------->    
+<!-- 관리자 리스트 end --------------------------------------------------------------->    
 <!-- container end --------------------------------------------------------------->    
 
 </body>
 <script>
-$("#searchidbt3").on("click",function(){
-	let keyword3 = $("#searchid3").value();
-	console.log(keyword3);
+$(document).ready(function() {
+	const urlParams = new URL(location.href).searchParams;
+
+	const paramnekey = urlParams.get('exclude');
+
+	console.log(paramnekey)
+	if(paramnekey == null){
+        window.location.href="/list_admin?num=1"+ '&exclude=' + $("#exclude").val();
+   }
+});
+
+
+</script>
+
+<script>
+$("#searchidbtn").on("click",function(){
+	let keyword = $("#searchid").val();
+	console.log(keyword);
 	
-	location.href = "/memberAdmin3?num=1"+ "&keyword3=" + keyword3;
+	location.href = "/list_admin?num=1"+ "&exclude=" + $("#exclude").val(); + "&keyword=" + keyword;
 });
 </script>
 
 <script>
-$("#deletebtn3").on("click",function(){
+$("#deletebtn").on("click",function(){
     console.log("haha");
     
-    $("input[name='delcheckbox3']").each(function(){
+    $("input[name='delcheckbox']").each(function(){
         if( $(this).is(":checked") == true ){
-          var tmpVal3 = $(this).val();
-          console.log(tmpVal3);
+          var tmpVal = $(this).val();
+          console.log(tmpVal);
         
           
           
               // AJAX 요청을 보냅니다.
                   $.ajax({
                       type: "POST",
-                      url:"${CP}/clear",
+                      url:"${CP}/withdraw",
                       dataType:"html",
                       data: {
-                       id: tmpVal3
+                       id: tmpVal
                       },
                       success:function(data) {
                        let parsedJSON = JSON.parse(data);
                          
                            if("10" == parsedJSON.msgId){
-                              $('#messagebox3').attr('value', parsedJSON.msgContents);
+                              $('#messagebox').attr('value', parsedJSON.msgContents);
                               location.reload();
                           } 
                                                 
                           if("20" == parsedJSON.msgId){
-                              $('#messagebox3').attr('value',parsedJSON.msgContents);
+                              $('#messagebox').attr('value',parsedJSON.msgContents);
                               location.reload();
                           }
                       },

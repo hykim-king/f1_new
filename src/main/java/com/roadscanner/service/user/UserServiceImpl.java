@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.roadscanner.dao.user.UserDao;
 import com.roadscanner.dao.user.UserDaoImpl;
-import com.roadscanner.domain.MemberVO;
+import com.roadscanner.domain.user.MemberVO;
 
 
 @Service("userService")

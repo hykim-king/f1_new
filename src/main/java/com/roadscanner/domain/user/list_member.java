@@ -1,7 +1,7 @@
-package com.roadscanner.domain;
+package com.roadscanner.domain.user;
 
 
-public class Adminpage {
+public class list_member {
 	// 현재 페이지 번호
 	private int num;
 	
@@ -15,7 +15,7 @@ public class Adminpage {
 	private int pageNum;
 
 	// 출력할 게시물
-	private int displayPost;
+	private int dpPost;
 
 	// 한번에 표시할 페이징 번호의 갯수
 	private int pageNumCnt = 5;
@@ -45,8 +45,8 @@ public class Adminpage {
 	 return pageNum;
 	}
 
-	public int getDisplayPost() {
-	 return displayPost;
+	public int getdpPost() {
+	 return dpPost;
 	}
 
 	public int getPageNumCnt() {
@@ -96,7 +96,7 @@ public class Adminpage {
 		 prev = startPageNum == 1 ? false : true;
 		 next = endPageNum * postNum >= count ? false : true;
 		 
-		 displayPost = ((num - 1) * postNum)+1;
+		 dpPost = ((num - 1) * postNum)+1;
 		 
 		}
 
@@ -111,9 +111,22 @@ public class Adminpage {
 		 	}	
 		}
 	
-		private String keyword; 	
-
+		private String keyword;
+		
         private String pageid;
+        
+        private String exclude; 
+        
+        
+		public String getExclude() {
+			return exclude;
+		}
+
+
+		public void setExclude(String exclude) {
+			this.exclude = exclude;
+		}
+
 
 		public String getPageid() {
 			return pageid;

@@ -9,7 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.roadscanner.domain.MemberVO;
+import com.roadscanner.domain.user.MemberVO;
 
 
 
@@ -85,7 +85,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int insertOne(MemberVO user) throws SQLException {
 		System.out.println("============================================");
-		System.out.println("MembershipDaoImpl insertOne()");
+		System.out.println("MembershipDaoImpl addUser()");
 		System.out.println("============================================");
 		
 		int flag = 0;

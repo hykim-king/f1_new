@@ -7,21 +7,24 @@ import java.sql.SQLException;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.roadscanner.dao.user.UserDao;
-import com.roadscanner.domain.MemberVO;
+import com.roadscanner.domain.user.MemberVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)												//스프링 테스트 컨텍스 프레임워크의 JUnit 확장 기능 지정
 @ContextConfiguration(locations = {
 		"file:src/main/webapp/WEB-INF/root-context.xml",
 		"file:src/main/resources/mybatis-config.xml"
 		})	//테스트 컨텍스트가 자동으로 만들어줄 applicationContext 위치
+@Transactional
 public class MemberDaoTest {
 	
 	@Autowired
@@ -49,12 +52,12 @@ public class MemberDaoTest {
 		dao.deleteOne(vo01);
 		dao.deleteOne(vo02);
 		dao.deleteOne(vo03);
-	
+		
 		// Create
 		dao.insertOne(vo01);
 		dao.insertOne(vo02);
 		dao.insertOne(vo03);
-
+		
 		// Retrieve
 		MemberVO out01 = dao.selectOne(vo01);
 		CompareData(out01, vo01);
@@ -69,9 +72,9 @@ public class MemberDaoTest {
 		String updatestr02 = "456";
 		String updatestr03 = "789";
 		
-		out01.setPassword(out01.getPassword()+"asdasda"); 
-		out02.setPassword(out02.getPassword()+"즐겁다");
-		out03.setPassword(out03.getPassword()+"즐겁다겁즐");
+		out01.setPassword(out01.getPassword()+updatestr01); 
+		out02.setPassword(out02.getPassword()+updatestr02);
+		out03.setPassword(out03.getPassword()+updatestr03);
 		
 		dao.updateUser(out01);
 		dao.updateUser(out02);

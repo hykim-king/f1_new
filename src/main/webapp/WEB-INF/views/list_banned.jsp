@@ -13,8 +13,8 @@
 <%
  return;
  }
-%> --%>
-
+%>
+ --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,12 +30,12 @@
     <title>회원 관리</title>
 </head>
 <body>
-<!-- 관리자 리스트  ---------------------------------------------------------------> 
+<!-- 정지회원 리스트  ---------------------------------------------------------------> 
 <div class="container"> 
     <form>  
         <!-- 제목 -->
         <div class="page-header">
-            <h2 class="text-center">관리자 리스트</h2>
+            <h2 class="text-center">정지회원 리스트</h2>
         </div>
         <!-- 제목 end --------------------------------------------------------------->
 
@@ -50,30 +50,31 @@
                 </tr>
             </thead>
             <tbody>   
-                <c:forEach var="list2" items="${list2}">
+                <c:forEach var="list" items="${list}">
                  <c:set var="i" value="${i+1}"></c:set>
-                 <c:set var="j" value="${(select2-1)*5+i}"></c:set>  
+                 <c:set var="j" value="${(select-1)*5+i}"></c:set>  
+                  <c:if test="${user.id ne list.id}">
 	                    <tr>
-	                        <td><input type="checkbox" name="delcheckbox2" value ="${list2.id}"></td>
+	                        <td><input type="checkbox" name="delcheckbox" value ="${list.id}"></td>
 	                        <td class="text-center col-sm-1">${j}</td>
-	                        <td class="text-center col-sm-5">${list2.id}</td>
-	                        <td class="text-center col-sm-6">${list2.email}</td>
+	                        <td class="text-center col-sm-5">${list.id}</td>
+	                        <td class="text-center col-sm-6">${list.email}</td>
 	                    </tr>
+	                </c:if>
                 </c:forEach>   
             </tbody>
         </table>
-        <input type="hidden" id="messagebox2" value="${user.id}">
+        <input type="hidden" id="messagebox">
         <!-- 회원 정보 테이블 end ------------------------------------------------------------>
         
         <!-- 검색 폼 -->
         <div class="row mb-3">
             <div class="col">
                     <div class="form-group">
-                        <input type="text" id ="searchid2" name="keyword2" class="form-control" placeholder="아이디 검색">
-                        <input type="hidden" id="nekeyword" name="nekeyword" value="${user.id}">
+                        <input type="text" id ="searchid" name="keyword" class="form-control" placeholder="아이디 검색">
                     </div>
-                    <button type="submit" id ="searchidbtn2" class="btn btn-primary ml-2">검색</button>
-                    <button type="button" id= "deletebtn2" class="btn btn-primary ml-2">삭제</button>
+                    <button type="submit" id ="searchidbtn" class="btn btn-primary ml-2">검색</button>
+                    <button type="button" id= "deletebtn" class="btn btn-primary ml-2">정지해제</button>
             </div>
         </div>
         <!-- 검색 폼 end ------------------------------------------------------------>
@@ -81,22 +82,22 @@
         <!-- pagination -->
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
-                <c:if test="${page2.prev2}">
-                    <li class="page-item"><a class="page-link" aria-label="Previous" href="/memberAdmin2?num2=${page2.startPageNum2 - 5}&keyword2=${page2.keyword2}&nekeyword=${user.id}">이전</a></li>
+                <c:if test="${BannedPage.prev}">
+                    <li class="page-item"><a class="page-link" aria-label="Previous" href="/list_banned?num=${BannedPage.startPagenum - 5}&keyword=${BannedPage.keyword}">이전</a></li>
                 </c:if>
                 
-                <c:forEach begin="${page2.startPageNum2}" end="${page2.endPageNum2}" var="num2">      
-                      <c:if test="${select2 != num2}">
-                        <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${num2}&keyword2=${page2.keyword2}&nekeyword=${user.id}">${num2}</a></li>
+                <c:forEach begin="${BannedPage.startPagenum}" end="${BannedPage.endPagenum}" var="num">      
+                      <c:if test="${select != num}">
+                        <li class="page-item"><a class="page-link" href="/list_banned?num=${num}&keyword=${BannedPage.keyword}">${num}</a></li>
                       </c:if>
                       
-                      <c:if test="${select2 == num2}">
-                        <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${num2}&keyword2=${page2.keyword2}&nekeyword=${user.id}">${num2}</a></li>
+                      <c:if test="${select == num}">
+                        <li class="page-item"><a class="page-link" href="/list_banned?num=${num}&keyword=${BannedPage.keyword}">${num}</a></li>
                       </c:if>
                 </c:forEach>
                 
-                <c:if test="${page2.next2}">  
-                    <li class="page-item"><a class="page-link" href="/memberAdmin2?num2=${page2.endPageNum2 + 1}&keyword2=${page2.keyword2}&nekeyword=${user.id}">다음</a></li>
+                <c:if test="${BannedPage.next}">  
+                    <li class="page-item"><a class="page-link" href="/list_banned?num=${BannedPage.endPagenum + 1}&keyword=${BannedPage.keyword}">다음</a></li>
                 </c:if>
                 
             </ul>
@@ -104,68 +105,48 @@
 <!-- pagination end ------------------------------------------------------->
      </form> 
 </div>     
-<!-- 관리자 리스트 end --------------------------------------------------------------->    
+<!-- 정지회원 리스트 end --------------------------------------------------------------->    
 <!-- container end --------------------------------------------------------------->    
 
 </body>
 <script>
-$(document).ready(function() {
-	const urlParams = new URL(location.href).searchParams;
-
-	const paramnekey = urlParams.get('nekeyword');
-
-	console.log(paramnekey)
-	if(paramnekey == null){
-        window.location.href="/memberAdmin2?num=1"+ '&nekeyword=' + $(nekeyword).val();
-   }
-});
-
-/* $(document).ready(function() {
-	console.log("$document.ready");
-    if(window.location.href == "http://localhost:8080/memberAdmin2"){
-         window.location.href="/memberAdmin2?num=1"+ '&nekeyword=' + $(nekeyword).val();
-    }
-}); */
-</script>
-
-<script>
-$("#searchidbtn2").on("click",function(){
-	let keyword2 = $("#searchid2").val();
-	console.log(keyword2);
+$("#searchidbt").on("click",function(){
+	let keyword3 = $("#searchid").value();
+	console.log(keyword);
 	
-	location.href = "/memberAdmin2?num=1"+ "&nekeyword=" + $(nekeyword).val(); + "&keyword2=" + keyword2;
+	location.href = "/list_banned?num=1"+ "&keyword=" + keyword;
 });
 </script>
 
 <script>
-$("#deletebtn2").on("click",function(){
+$("#deletebtn").on("click",function(){
     console.log("haha");
     
-    $("input[name='delcheckbox2']").each(function(){
+    $("input[name='delcheckbox']").each(function(){
         if( $(this).is(":checked") == true ){
-          var tmpVal2 = $(this).val();
-          console.log(tmpVal2);
+          var tmpVal = $(this).val();
+          console.log(tmpVal);
         
           
           
               // AJAX 요청을 보냅니다.
                   $.ajax({
                       type: "POST",
-                      url:"${CP}/withdraw",
+                      url:"${CP}/clear",
                       dataType:"html",
                       data: {
-                       id: tmpVal2
+                       id: tmpVal
                       },
                       success:function(data) {
                        let parsedJSON = JSON.parse(data);
                          
                            if("10" == parsedJSON.msgId){
-                              $('#messagebox2').attr('value', parsedJSON.msgContents);
+                              $('#messagebox3').attr('value', parsedJSON.msgContents);
                               location.reload();
                           } 
                                                 
                           if("20" == parsedJSON.msgId){
-                              $('#messagebox2').attr('value',parsedJSON.msgContents);
+                              $('#messagebox3').attr('value',parsedJSON.msgContents);
                               location.reload();
                           }
                       },
