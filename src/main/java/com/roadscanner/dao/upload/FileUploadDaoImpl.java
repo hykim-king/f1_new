@@ -14,7 +14,7 @@ import com.roadscanner.domain.upload.FileUploadVO;
 @Repository("fileUploadDaoImpl")
 public class FileUploadDaoImpl implements PcwkLogger, FileUploadDao {
 
-	final String NAMESPACE = "com.roadscanner.dao.upload";
+	final String NAMESPACE = "com.roadscanner.dao.upload.FileUploadDao";
 	final String DOT = ".";
 
 	@Autowired

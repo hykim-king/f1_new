@@ -14,15 +14,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.roadscanner.cmn.PcwkLogger;
 import com.roadscanner.domain.result.ResultImgVO;
 
-//@WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/root-context.xml",
-		"file:src/main/webapp/WEB-INF/servlet-context.xml" })
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@ContextConfiguration(locations = { 
+		"file:src/main/webapp/WEB-INF/root-context.xml",
+		"file:src/main/resources/mybatis-config.xml" 
+		})
+@Transactional
 public class ResultImgDaoImplTest implements PcwkLogger {
 	
 	@Autowired

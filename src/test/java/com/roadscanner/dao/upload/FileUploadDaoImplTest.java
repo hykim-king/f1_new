@@ -17,6 +17,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.roadscanner.cmn.PcwkLogger;
 import com.roadscanner.dao.upload.FileUploadDao;
@@ -24,9 +25,11 @@ import com.roadscanner.domain.upload.FileUploadVO;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/root-context.xml",
-		"file:src/main/webapp/WEB-INF/servlet-context.xml" })
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@ContextConfiguration(locations = { 
+		"file:src/main/webapp/WEB-INF/root-context.xml",
+		"file:src/main/resources/mybatis-config.xml"
+})
+@Transactional
 public class FileUploadDaoImplTest implements PcwkLogger {
 
 	@Autowired
@@ -56,7 +59,7 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	 * 피드백 분기별 그래프
 	 */
 	@Test
-	@Ignore
+	
 	public void quarterlyFeedback() throws SQLException {
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│  quarterlyFeedback()  │");
@@ -75,7 +78,7 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	 * 피드백 누적 그래프, 표
 	 */
 	@Test
-	@Ignore
+	
 	public void totalFeedback() throws SQLException {
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│    totalFeedback()    │");
@@ -96,7 +99,7 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	 * 수정
 	 */
 	@Test
-	@Ignore
+	
 	public void update() throws SQLException {
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│        update()       │");
@@ -144,7 +147,7 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	 * 목록 조회
 	 */
 	@Test
-	@Ignore
+	
 	public void doRetrieve() throws SQLException {
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│      doRetrieve()     │");
@@ -175,7 +178,7 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	 * 삭제, 등록, 단건조회
 	 */
 	@Test
-	@Ignore
+	
 	public void addAndGet() throws SQLException {
 		LOG.debug("┌────────────────────────┐");
 		LOG.debug("│       addAndGet()      │");
@@ -203,24 +206,9 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 
 	}
 
+	
 	@Test
-	@Ignore
-	public void doSelectOne() throws SQLException {
-		LOG.debug("┌────────────────────────┐");
-		LOG.debug("│      doSelectOne()     │");
-		LOG.debug("└────────────────────────┘");
-
-		FileUploadVO outVO1 = dao.doSelectOne(uploadVO1);
-		FileUploadVO outVO2 = dao.doSelectOne(uploadVO2);
-		FileUploadVO outVO3 = dao.doSelectOne(uploadVO3);
-
-		isSameData(outVO1, uploadVO1);
-		isSameData(outVO2, uploadVO2);
-		isSameData(outVO3, uploadVO3);
-	}
-
-	@Test
-	@Ignore
+	
 	public void doDelete() throws SQLException {
 		LOG.debug("┌────────────────────────┐");
 		LOG.debug("│       doDelete()       │");
@@ -233,7 +221,7 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	}
 
 	@Test
-	@Ignore
+
 	public void doSave() throws SQLException {
 		LOG.debug("┌────────────────────────┐");
 		LOG.debug("│        doSave()        │");
@@ -258,7 +246,7 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	}
 
 	@Test
-	@Ignore
+	
 	public void bean() {
 		LOG.debug("┌────────────────────────┐");
 		LOG.debug("│          bean          │");

@@ -12,7 +12,7 @@ import com.roadscanner.domain.result.ResultImgVO;
 @Repository("resultImgDaoImpl")
 public class ResultImgDaoImpl implements PcwkLogger, ResultImgDao {
 
-	final String NAMESPACE = "com.roadscanner.dao.result";
+	final String NAMESPACE = "com.roadscanner.dao.result.ResultImgDao";
 	final String DOT = ".";
 
 	@Autowired
