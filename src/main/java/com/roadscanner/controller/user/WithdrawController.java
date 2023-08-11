@@ -28,7 +28,7 @@ public class WithdrawController {
     @RequestMapping(value = "/withdraw", method = RequestMethod.GET)
     public String withdrawPageStart() {
         System.out.println("회원 탈퇴 페이지로 이동...");
-        return "withdraw";
+        return "/login/withdraw";
     }
 
     /**

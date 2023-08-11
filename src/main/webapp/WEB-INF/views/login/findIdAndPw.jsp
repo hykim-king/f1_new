@@ -210,7 +210,7 @@
     	  
     	  $.ajax({
               type : 'POST',
-              url : "toEmailFindId?email=" + email + "&id=" + id 
+              url : "login/toEmailFindId?email=" + email + "&id=" + id 
               
           }); // end ajax
           alert('요청하신 이메일로 아이디를 보내드렸습니다.');
@@ -224,7 +224,7 @@
          
          $.ajax({
              type : 'POST',
-             url : "toEmailFindPw?email=" + email + "&pw=" + pw 
+             url : "login/toEmailFindPw?email=" + email + "&pw=" + pw 
              
          }); // end ajax
          alert('요청하신 이메일로 비밀번호를 보내드렸습니다.');

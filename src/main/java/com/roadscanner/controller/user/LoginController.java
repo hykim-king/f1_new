@@ -45,18 +45,18 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPageStart(@ModelAttribute("user") MemberVO vo) {
 		System.out.println("로그인 화면으로 이동...");
-		return "login";
+		return "/login/login";
 	}
 	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String admin(@ModelAttribute("user") MemberVO vo) {
 		System.out.println("관리자 화면으로 이동...");
-		return "admin";
+		return "/login/admin";
 	}
 	
 	@RequestMapping("/registerpage")
     public String registerpage() {
-        return "registerpage";
+        return "/login/registerpage";
     }
 	
 	/**
@@ -133,7 +133,7 @@ public class LoginController {
     	LOG.debug("로그아웃");
 		session.invalidate();
 		LOG.debug("로그아웃 완료");
-		return "/login";	
+		return "/login/login";	
 	}
     
     @GetMapping("/**/mailCheck")
@@ -150,7 +150,7 @@ public class LoginController {
      * @param id
      * @return
      */
-    @PostMapping("/toEmailFindId")
+    @PostMapping("/**/toEmailFindId")
 	@ResponseBody
 	public String findId(String email, String id) {
 		return mailSend.findId(email, id);
@@ -162,7 +162,7 @@ public class LoginController {
      * @param pw
      * @return
      */
-    @PostMapping("/toEmailFindPw")
+    @PostMapping("/**/toEmailFindPw")
 	@ResponseBody
 	public String findPw(String email, String pw) {
 		return mailSend.findPw(email, pw);
@@ -176,7 +176,7 @@ public class LoginController {
 	@RequestMapping(value = "/findIdPw", method = RequestMethod.GET)
 	public String findIdPwStart() {
 		System.out.println("아이디/비밀번호 찾기 화면으로 이동...");
-		return "findIdAndPw";
+		return "/login/findIdAndPw";
 	}
 
     /**
