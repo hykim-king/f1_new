@@ -18,13 +18,12 @@ public class MemberVO {
 	
 	public MemberVO() {}
 
-	public MemberVO(String id, String password, String email, int grade, int no) {
+	public MemberVO(String id, String password, String email, int grade) {
 		super();
 		this.id = id;
 		this.password = password;
 		this.email = email;
 		this.grade = grade;
-		this.no = no;
 	}
 
 

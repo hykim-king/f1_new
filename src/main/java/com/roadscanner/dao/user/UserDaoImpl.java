@@ -15,7 +15,7 @@ import com.roadscanner.domain.MemberVO;
 
 @Repository("userDao")
 public class UserDaoImpl implements UserDao {
-	final String NAMESPACE = "mapper.Member";
+	final String NAMESPACE = "com.roadscanner.dao.user.UserDao";
 	final String DOT = ".";
 
 	@Autowired
@@ -83,13 +83,13 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public int addUser(MemberVO user) throws SQLException {
+	public int insertOne(MemberVO user) throws SQLException {
 		System.out.println("============================================");
 		System.out.println("MembershipDaoImpl addUser()");
 		System.out.println("============================================");
 		
 		int flag = 0;
-		String statement = this.NAMESPACE + DOT + "insertOne";
+		String statement = this.NAMESPACE + DOT + "addUser";
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
 		LOG.debug("│ 1. statement " + statement);
 		LOG.debug("│ 2. param=\n" + user.toString());
