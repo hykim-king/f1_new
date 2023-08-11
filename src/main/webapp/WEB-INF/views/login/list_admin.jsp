@@ -82,21 +82,21 @@
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
                 <c:if test="${adminPage.prev}">
-                    <li class="page-item"><a class="page-link" aria-label="Previous" href="/list_admin?num=${adminPage.startPagenum - 5}&keyword=${adminPage.keyword}&exclude=${user.id}">이전</a></li>
+                    <li class="page-item"><a class="page-link" aria-label="Previous" href="/login/list_admin?num=${adminPage.startPagenum - 5}&keyword=${adminPage.keyword}&exclude=${user.id}">이전</a></li>
                 </c:if>
                 
                 <c:forEach begin="${adminPage.startPagenum}" end="${adminPage.endPagenum}" var="num">      
                       <c:if test="${select != num}">
-                        <li class="page-item"><a class="page-link" href="/list_admin?num=${num}&keyword=${adminPage.keyword}&exclude=${user.id}">${num}</a></li>
+                        <li class="page-item"><a class="page-link" href="/login/list_admin?num=${num}&keyword=${adminPage.keyword}&exclude=${user.id}">${num}</a></li>
                       </c:if>
                       
                       <c:if test="${select == num}">
-                        <li class="page-item"><a class="page-link" href="/list_admin?num=${num}&keyword=${adminPage.keyword}&exclude=${user.id}">${num}</a></li>
+                        <li class="page-item"><a class="page-link" href="/login/list_admin?num=${num}&keyword=${adminPage.keyword}&exclude=${user.id}">${num}</a></li>
                       </c:if>
                 </c:forEach>
                 
                 <c:if test="${adminPage.next}">  
-                    <li class="page-item"><a class="page-link" href="/list_admin?num=${adminPage.endPagenum + 1}&keyword=${adminPage.keyword}&exclude=${user.id}">다음</a></li>
+                    <li class="page-item"><a class="page-link" href="/login/list_admin?num=${adminPage.endPagenum + 1}&keyword=${adminPage.keyword}&exclude=${user.id}">다음</a></li>
                 </c:if>
                 
             </ul>
@@ -116,7 +116,7 @@ $(document).ready(function() {
 
 	console.log(paramnekey)
 	if(paramnekey == null){
-        window.location.href="/list_admin?num=1"+ '&exclude=' + $("#exclude").val();
+        window.location.href="/login/list_admin?num=1"+ '&exclude=' + $("#exclude").val();
    }
 });
 

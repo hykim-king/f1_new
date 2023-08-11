@@ -17,6 +17,7 @@ import com.roadscanner.domain.user.list_member;
 import com.roadscanner.service.user.AdminService;
 
 @Controller
+@RequestMapping("/login")
 public class AdminpageController {
 
 @Inject
