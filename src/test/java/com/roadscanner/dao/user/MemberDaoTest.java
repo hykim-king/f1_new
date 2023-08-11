@@ -36,9 +36,9 @@ public class MemberDaoTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		vo01 = new MemberVO("DaoTest01", "password01", "test01@gmail.com", 1, 181);
-		vo02 = new MemberVO("DaoTest02", "password02", "test02@gmail.com", 1, 182);
-		vo03 = new MemberVO("DaoTest03", "password03", "test03@gmail.com", 1, 183);
+		vo01 = new MemberVO("DaoTest01", "password01", "test01@gmail.com", 1);
+		vo02 = new MemberVO("DaoTest02", "password02", "test02@gmail.com", 1);
+		vo03 = new MemberVO("DaoTest03", "password03", "test03@gmail.com", 1);
 		
 	}
 	
@@ -63,14 +63,36 @@ public class MemberDaoTest {
 		System.out.println("dao test vo value : "+vo01);
 		
 		// Update
+		MemberVO out02 = dao.selectOne(vo02);
+		MemberVO out03 = dao.selectOne(vo03);
 
-		String updatestr = "anotherpassword"; 
-		out01.setPassword(out01.getPassword()+updatestr); 
+		String updatestr01 = "123"; 
+		String updatestr02 = "456";
+		String updatestr03 = "789";
+		
+		out01.setPassword(out01.getPassword()+updatestr01); 
+		out02.setPassword(out02.getPassword()+updatestr02);
+		out03.setPassword(out03.getPassword()+updatestr03);
+		
 		dao.updateUser(out01);
+		dao.updateUser(out02);
+		dao.updateUser(out03);
 		
 		MemberVO update01 = dao.selectOne(vo01);
+		MemberVO update02 = dao.selectOne(vo02);
+		MemberVO update03 = dao.selectOne(vo03);
 		
 		CompareData(update01, out01);
+		CompareData(update02, out02);
+		CompareData(update03, out03);
+		
+		// Re: Retrieve	
+		MemberVO reout01 = dao.selectOne(vo01);
+		MemberVO reout02 = dao.selectOne(vo02);
+		MemberVO reout03 = dao.selectOne(vo03);
+		System.out.println("dao test reout01 value : "+reout01);
+		System.out.println("dao test reout02 value : "+reout02);
+		System.out.println("dao test reout03 value : "+reout03);
 		
 	}
 	
