@@ -22,8 +22,9 @@ import com.roadscanner.domain.user.MemberVO;
 @RunWith(SpringJUnit4ClassRunner.class)												//스프링 테스트 컨텍스 프레임워크의 JUnit 확장 기능 지정
 @ContextConfiguration(locations = {
 		"file:src/main/webapp/WEB-INF/root-context.xml",
-		"file:src/main/webapp/WEB-INF/servlet-context.xml"})	//테스트 컨텍스트가 자동으로 만들어줄 applicationContext 위치
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+		"file:src/main/resources/mybatis-config.xml"
+		})	//테스트 컨텍스트가 자동으로 만들어줄 applicationContext 위치
+@Transactional
 public class MemberDaoTest {
 	
 	@Autowired
