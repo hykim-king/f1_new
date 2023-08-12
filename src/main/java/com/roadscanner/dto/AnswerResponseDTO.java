@@ -27,11 +27,7 @@ public class AnswerResponseDTO {
         // 날짜 formatting
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd HH:mm:ss");
 
-        if (createDate != null) {
-            this.createDate = vo.getCreateDate().format(formatter);
-        } else {
-            this.createDate = null;
-        }
+        this.createDate = vo.getCreateDate().format(formatter);
 
         if (vo.getUpdateDate() != null && !vo.getUpdateDate().equals(vo.getCreateDate())) {
             this.updateDate = vo.getUpdateDate().format(formatter);

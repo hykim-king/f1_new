@@ -87,12 +87,18 @@ main.init();
 
 
 const answer = {
-
     init: function() {
         const _this = this;
         $('#btn-answer-save').on('click', function(e) {
             e.preventDefault();
             _this.save();
+        });
+
+        $('#btn-answer-delete').on('click', function() {
+            // console.log('click delete');
+           if (confirm('정말 삭제하시겠습니까?')) {
+               _this.delete();
+           }
         });
     },
 
@@ -123,14 +129,24 @@ const answer = {
         });
     },
 
-    load: function() {
-            // Ajax 요청을 통해 댓글을 불러오고 HTML에서 댓글 섹션을 업데이트
-            $.get('/api/qna/' + no + '/answer', function(data) {
-                // 데이터를 처리하고 HTML에서 댓글 섹션을 업데이트
-                $('#answer-section').html(data);
-            });
+
+    delete: function(){
+        const no = $('#no').val();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/qna/' + no + '/answer',
+        }).done(function () {
+            alert('답변이 삭제되었습니다.');
+            window.location.href = '/qna/' + no;
+        }).fail(function (error) {
+            alert('답변 삭제에 실패했습니다.');
+            console.error(error);
+        });
     }
+
 };
 
 // 초기화 함수 호출
+// main.init();
 answer.init();

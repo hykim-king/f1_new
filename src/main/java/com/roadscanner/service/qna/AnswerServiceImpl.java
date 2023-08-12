@@ -36,7 +36,6 @@ public class AnswerServiceImpl implements AnswerService {
         AnswerVO vo = answerDAO.findByNo(no);
         vo.update(dto.getContent());
         answerDAO.update(vo);
-        // System.out.println(vo);
         return no;
 
     }
