@@ -45,7 +45,13 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public AnswerResponseDTO findByNo(Long no) {
         AnswerVO vo = (AnswerVO) answerDAO.findByNo(no);
-        return new AnswerResponseDTO(vo);
+        //return new AnswerResponseDTO(vo);
+        if (vo != null) {
+            // 답변이 없는 경우 빈 객체 또는 null을 반환
+            return new AnswerResponseDTO(vo);
+        } else {
+            return null;
+        }
     }
 
 }

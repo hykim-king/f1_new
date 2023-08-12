@@ -1,7 +1,10 @@
 package com.roadscanner.controller.qna;
 
+import com.roadscanner.dto.AnswerResponseDTO;
+import com.roadscanner.dto.AnswerSaveRequestDTO;
 import com.roadscanner.dto.PaginationDTO;
 import com.roadscanner.dto.QuestionResponseDTO;
+import com.roadscanner.service.qna.AnswerService;
 import com.roadscanner.service.qna.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class QuestionController {
 
     private final QuestionService questionService;
+    private final AnswerService answerService;
+
 
     @GetMapping
     public String index(Model model,
@@ -60,6 +65,11 @@ public class QuestionController {
 
         QuestionResponseDTO dto = questionService.findByNo(no);
         model.addAttribute("question", dto);
+
+        // 답변 등록 결과를 반환값으로 받아서 이용
+        AnswerResponseDTO answerDto = answerService.findByNo(no);
+        model.addAttribute("answer", answerDto);
+
         return "qna/question-detail";
     }
 

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
@@ -16,14 +17,27 @@ public class AnswerResponseDTO {
 
     private String id;
     private String content;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
+    private String createDate;
+    private String updateDate;
 
     public AnswerResponseDTO(AnswerVO vo) {
         this.id = vo.getId();
         this.content = vo.getContent();
-        this.createDate = vo.getCreateDate();
-        this.updateDate = vo.getUpdateDate();
+
+        // 날짜 formatting
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd HH:mm:ss");
+
+        if (createDate != null) {
+            this.createDate = vo.getCreateDate().format(formatter);
+        } else {
+            this.createDate = null;
+        }
+
+        if (vo.getUpdateDate() != null && !vo.getUpdateDate().equals(vo.getCreateDate())) {
+            this.updateDate = vo.getUpdateDate().format(formatter);
+        } else {
+            this.updateDate = null; // 수정일이 없는 경우
+        }
     }
 
-}
+} // class end

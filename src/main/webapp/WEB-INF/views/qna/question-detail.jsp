@@ -41,20 +41,33 @@
         </div>
     </div>
 
-
-    <!-- 답변 작성 폼 -->
-    <div class="card">
-        <form id="answer-form">
-            <div class="mb-3">
-                <textarea class="form-control" id="answer-content" rows="5" placeholder="답변을 입력하세요"></textarea>
-            </div>
-            <a href="#" role="button" class="btn btn-secondary">취소</a>
-            <button type="submit" id="btn-answer-save" class="btn btn-primary" value="저장">등록</button>
-        </form>
-    </div>
-
     <!-- 답변 내용 -->
-    <div id="answer-section">
+    <div class="card mb-5">
+        <div class="card-body" id="answer-section">
+            <c:choose>
+                <c:when test="${answer == null}">
+                    <!-- 답변이 없을 경우 답변 등록 폼을 표시 -->
+                    <div class="mb-3">
+                        <form id="answer-form">
+                            <textarea class="form-control" id="answer-content" rows="5" placeholder="답변을 입력하세요"></textarea>
+                            <a href="#" role="button" class="btn btn-secondary">취소</a>
+                            <button type="submit" id="btn-answer-save" class="btn btn-primary" value="저장">등록</button>
+                        </form>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <!-- 답변이 있는 경우 답변 내용을 표시 -->
+                    <p class="card-text">작성자: admin</p>     <!-- 나중에 관리자 session 가져올 예정 -->
+                    <p class="card-text">작성일: ${answer.createDate}</p>
+                    <c:if test="${answer.updateDate != null}">
+                        <p class="card-text">
+                            최종 수정일: ${answer.updateDate}
+                        </p>
+                    </c:if>
+                    <p class="card-text">내용: ${answer.content}</p>
+                </c:otherwise>
+            </c:choose>
+        </div>
     </div>
 
 </div>
