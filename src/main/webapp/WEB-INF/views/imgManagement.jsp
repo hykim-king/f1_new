@@ -1,5 +1,10 @@
+<%@page import="com.roadscanner.domain.upload.FileUploadVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	FileUploadVO inVO = (FileUploadVO)request.getAttribute("inVO");
+	int category = inVO.getCategory();
+%>
 <c:set var="CP" value="${pageContext.request.contextPath }"/>
 <!DOCTYPE html>
 <html>
@@ -129,17 +134,15 @@
       <button type="button" id="selectSaveBtn" class="btn btn-dark" style="width: 200px;" onclick="selectSave()">SAVE</button>
     </div>
     
-    <form action="/imgManagement" method="post">
-	    <select id="categoryDropdown" name="category">
-	      <option selected="selected" disabled="disabled">분류</option>
-	      <option value="0">전체</option>
-	      <option value="10">기본</option>
-	      <option value="20">좋아요</option>
-	      <option value="30">싫어요</option>
-	    </select>
-	    <input type="checkbox" id="selectAllBtn" onclick="toggleSelectAll()" style="display: none;">
-	    <label for="selectAllBtn" class="btn btn-link" style="color: #212529;">SELECT_ALL</label>
-    </form>
+    <select id="categoryDropdown" name="category">
+      <option value="0" <% if(0 == category) out.print("selected"); %>>전체</option>
+      <option value="10" <% if(10 == category) out.print("selected"); %>>기본</option>
+      <option value="20" <% if(20 == category) out.print("selected"); %>>좋아요</option>
+      <option value="30" <% if(30 == category) out.print("selected"); %>>싫어요</option>
+    </select>
+
+    <input type="checkbox" id="selectAllBtn" onclick="toggleSelectAll()" style="display: none;">
+    <label for="selectAllBtn" class="btn btn-link" style="color: #212529;">SELECT_ALL</label>
     
     <!-- 3*3 사진+체크박스 디스플레이 -->
     <div class="d-flex justify-content-center">
@@ -172,32 +175,31 @@
 			  </c:choose>
 			</table>
 		</div>
-	  
-	  pageNo ${pageNo}
-	  pageSize ${pageSize}
-	  category ${category}
-	  totalCnt ${totalCnt}
-	  totalPages ${totalPages}
-	  
-	  <!-- 페이징 -->
-		  <ul class="pagination justify-content-center">
+
+		<!-- 페이징 -->
+		<ul class="pagination justify-content-center">
 		    <!-- 이전 페이지 버튼 -->
-	        <li class="page-item ${pageNo <= 1 ? 'disabled' : ''}">
-              <a class="page-link" href="${pageNo > 1 ? CP+'/imgManagement?pageNo='+(pageNo - 1)+'&pageSize=9' + (category ? '&category=' + category : '') : '#'}" aria-label="Previous">
-	                <span aria-hidden="true">&laquo;</span>
-	            </a>
-	        </li>
-	        <!-- 페이지 번호 -->
-	        <c:forEach begin="1" end="${totalPages}" var="pageNum">
-	            <li class="page-item"><a class="page-link" href="${CP}/imgManagement?pageNo=${pageNum}&pageSize=9${category ? '&category=' + category : ''}">${pageNum}</a></li>
-	        </c:forEach>
-	        <!-- 다음 페이지 버튼 -->
-	        <li class="page-item ${pageNo >= totalPages ? 'disabled' : ''}">
-	            <a class="page-link" href="${pageNo < totalPages ? CP+'/imgManagement?pageNo='+(pageNo + 1)+('&pageSize=9') + (category ? '&category=' + category : '') : '#'}" aria-label="Next">
-	                <span aria-hidden="true">&raquo;</span>
-	            </a>
-	        </li>
-		  </ul> <!-- 페이징 -->
+		    <li class="page-item ${pageNo <= 1 ? 'disabled' : ''}">
+		        <a class="page-link" href="${CP}/imgManagement?pageNo=${pageNo - 1}&category=${category}">
+		            <span>&laquo;</span>
+		        </a>
+		    </li>
+
+		    <!-- 페이지 번호 -->
+ 		    <c:forEach begin="1" end="${totalPages}" var="pageNum">
+		        <li class="page-item ${pageNo == pageNum ? 'active' : ''}">
+		            <a class="page-link" href="${CP}/imgManagement?pageNo=${pageNum}&category=${category}">${pageNum}</a>
+		        </li>
+		    </c:forEach>
+		    
+		    <!-- 다음 페이지 버튼 -->
+		    <li class="page-item ${pageNo >= totalPages ? 'disabled' : ''}">
+		        <a class="page-link" href="${CP}/imgManagement?pageNo=${pageNo + 1}&category=${category}">
+		            <span>&raquo;</span>
+		        </a>
+		    </li>
+		</ul>
+		<!-- 페이징 -->
 	  
   </div> <!-- container -->
   
@@ -255,7 +257,15 @@
   </div>
   
 <script>
+$(document).ready(function() {
 	
+	// 드롭다운으로 카테고리 선택해서 카테고리에 따른 목록 조회
+  $("#categoryDropdown").change(function() {  
+    let selectedCategory = $(this).val();   
+    window.location.href = "${CP}/imgManagement?pageNo=1&category=" + selectedCategory;
+  }); // categoryDropdown
+	
+  
   // SELECT_ALL 버튼 눌러 전체 선택
   function toggleSelectAll() {
     let checkboxes = document.querySelectorAll(".btn_check");
@@ -269,8 +279,7 @@
   
 
   //선택 삭제
-  function selectDelete() {  
-	  
+  function selectDelete() {  	  
 	  // 선택된 체크박스의 idx 추출
 	  let checkboxes = [];
     $(".btn_check:checked").each(function() {
@@ -289,7 +298,7 @@
     	
     	$.ajax({
     		  type: "POST",
-    		  url:"/doDeleteMultiple",
+    		  url:"${CP}/doDeleteMultiple",
     		  asyn:"true",
     		  traditional: true, // 배열 데이터 전송을 위해 traditional 옵션을 설정
     	    data: { checkboxes: checkboxes },
@@ -330,7 +339,7 @@
     if (confirm("저장하시겠습니까?")) {
 	    $.ajax({
 	        type: "POST",
-	        url:"/checkedUpdateMultiple",
+	        url:"${CP}/checkedUpdateMultiple",
 	        asyn:"true",
 	        traditional: true, // 배열 데이터 전송을 위해 traditional 옵션을 설정
 	        data: { checkboxes: checkboxes },
@@ -351,24 +360,9 @@
   } // selectSave()
   
   
-////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
 
-$(document).ready(function() {
-	
-	// 드롭다운으로 카테고리 선택해서 카테고리에 따른 목록 조회
-	$("#categoryDropdown").change(function() {
-	  
-	  let selectedCategory = $(this).val();
-	  
-	  //window.location.href = "/imgManagement?category=" + encodeURIComponent(selectedCategory);
-
-	}); // categoryDropdown
-	
-	
   let name; // 클릭한 이미지의 이름을 저장하는 변수 
-
-  // 이미지 모달 창 클릭 시 호출될 함수 등록
-  $(document).on('click', '.uploaded-image', showModalOnClick);
   
   // 모달 창 닫기 클릭 시 호출될 함수 등록
   $(document).on('click', '.image-modal-close', hideImageModal);
@@ -378,6 +372,9 @@ $(document).ready(function() {
     let modal = document.getElementById("imageModal");
     modal.style.display = "none";
   }
+  
+  // 이미지 모달 창 클릭 시 호출될 함수 등록
+  $(document).on('click', '.uploaded-image', showModalOnClick);
   
   // 이미지 모달 창 클릭 시 호출될 함수
   function showModalOnClick() {
@@ -404,7 +401,7 @@ $(document).ready(function() {
 
     $.ajax({
       type: "GET",
-      url: "/doSelectOne",
+      url: "${CP}/doSelectOne",
       asyn: "true",
       dataType: "json",
       data: {
@@ -445,7 +442,7 @@ $(document).ready(function() {
     if (confirm("저장하시겠습니까?")) {
       $.ajax({
         type: "POST",
-        url: "/checkedUpdate",
+        url: "${CP}/checkedUpdate",
         asyn: "true",
         dataType: "html",
         data: {
@@ -477,7 +474,7 @@ $(document).ready(function() {
     if (confirm("삭제하시겠습니까?")) {
       $.ajax({
         type: "GET",
-        url: "/doDelete",
+        url: "${CP}/doDelete",
         asyn: "true",
         dataType: "html",
         data: {

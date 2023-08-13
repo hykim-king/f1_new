@@ -43,12 +43,12 @@ public class ImgManageController implements PcwkLogger {
 	}
 
 	// 분기별 피드백
-	@RequestMapping(value = "/quarterlyFeedback", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/monthlyFeedback", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String quarterlyFeedback(FileUploadVO inVO) throws SQLException {
+	public String monthlyFeedback(FileUploadVO inVO) throws SQLException {
 		String jsonString = "";
 
-		List<FileUploadVO> outVO = this.service.quarterlyFeedback(inVO);
+		List<FileUploadVO> outVO = this.service.monthlyFeedback(inVO);
 
 		jsonString = new Gson().toJson(outVO);
 
@@ -257,7 +257,6 @@ public class ImgManageController implements PcwkLogger {
 	// 이미지 목록 관리 화면
 	@RequestMapping(value = "/imgManagement")
 	public String imgManagement(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
-								@RequestParam(name = "pageSize", defaultValue = "9") int pageSize,
 								@RequestParam(name = "category", required = false, defaultValue = "0") String category,
 								FileUploadVO inVO, Model model) throws SQLException {
 		LOG.debug("┌────────────────┐");
@@ -266,9 +265,6 @@ public class ImgManageController implements PcwkLogger {
 		LOG.debug("└────────────────┘");
 
 		// inVO 생성 및 초기값 설정
-	    if (inVO == null) {
-	        inVO = new FileUploadVO();
-	    }
 	    if (inVO.getPageNo() == 0) {
 	        inVO.setPageNo(1); // 페이지 번호
 	    }
@@ -278,11 +274,20 @@ public class ImgManageController implements PcwkLogger {
 	    
 		// 카테고리 값 주기
 	    // 클라이언트에서 선택한 카테고리 값은 문자열로 전송됨
-		int intCategory = Integer.parseInt(category);
+	    int intCategory = 0;
+		if(category != null && !category.isEmpty()) {
+			intCategory = Integer.parseInt(category);
+		}
 		inVO.setCategory(intCategory);
-
+		
 		// 목록 조회
-	    List<FileUploadVO> list = this.service.doRetrieve(inVO);
+	    List<FileUploadVO> list;
+	    
+	    if (intCategory != 0) { // 카테고리 값이 0이 아니면
+	    	list = this.service.doRetrieveByCategory(inVO);
+        } else {
+        	list = this.service.doRetrieve(inVO);
+        }
 
 	    // 총 글 수
 	    int totalCnt = 0;
@@ -297,7 +302,6 @@ public class ImgManageController implements PcwkLogger {
 	    model.addAttribute("list", list);
 	    model.addAttribute("inVO", inVO);
 	    model.addAttribute("pageNo", inVO.getPageNo());
-	    model.addAttribute("pageSize", inVO.getPageSize());
 	    model.addAttribute("category", inVO.getCategory()); 
 	    model.addAttribute("totalCnt", totalCnt);
 	    model.addAttribute("totalPages", totalPages);
