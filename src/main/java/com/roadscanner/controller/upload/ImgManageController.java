@@ -42,6 +42,7 @@ public class ImgManageController implements PcwkLogger {
 		return "graph";
 	}
 
+
 	// 월별 피드백
 	@RequestMapping(value = "/monthlyFeedback", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
