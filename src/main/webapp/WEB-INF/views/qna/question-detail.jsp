@@ -62,18 +62,31 @@
 
                 <c:otherwise>
                 <!-- 답변이 있는 경우 답변 내용을 표시 -->
-                    <p class="card-text">작성자: ${answer.id} </p>   <!-- 나중에 관리자 session 가져올 예정 -->
-                    <p class="card-text">작성일: ${answer.createDate}</p>
-                    <c:if test="${answer.updateDate != null}">
-                        <p class="card-text">
-                            최종 수정일: ${answer.updateDate}
-                        </p>
-                    </c:if>
-                    <p class="card-text">내용: ${answer.content}</p>
-                    <button type="button" id="btn-answer-update" class="btn btn-light">수정</button>
-                    <button type="button" id="btn-answer-delete" class="btn btn-light">삭제</button>
+                    <div class="mb-3" id="answer-detail">
+                        <p class="card-text">작성자: ${answer.id} </p>   <!-- 나중에 관리자 session 가져올 예정 -->
+                        <p class="card-text">작성일: ${answer.createDate}</p>
+                        <c:if test="${answer.updateDate != null}">
+                            <p class="card-text">
+                                최종 수정일: ${answer.updateDate}
+                            </p>
+                        </c:if>
+                        <p class="card-text">내용: ${answer.content}</p>
+                        <button type="button" id="btn-answer-update-form" class="btn btn-light">수정</button>
+                        <button type="button" id="btn-answer-delete" class="btn btn-light">삭제</button>
+                    </div>
                 </c:otherwise>
             </c:choose>
+
+            <!-- 답변 수정 버튼을 누를 경우 답변 수정 form 표시 -->
+            <div class="mb-3">
+                <form id="answer-update-form" style="display: none;">
+                    <label for="update-id" class="form-label">작성자:</label>
+                    <input type="text" id="update-id" class="form-control" readonly="readonly" value="${answer.id}">
+                    <textarea class="form-control" id="answer-update-content" rows="5">${answer.content}</textarea>
+                    <a href="#" role="button" class="btn btn-secondary">취소</a>
+                    <button type="submit" id="btn-answer-updated" class="btn btn-primary" value="수정">완료</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

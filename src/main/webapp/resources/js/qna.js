@@ -100,9 +100,25 @@ const answer = {
                _this.delete();
            }
         });
+
+
+        $('#btn-answer-update-form').on('click', function(e) {
+            // console.log('click update-form');
+            e.preventDefault();
+            $('#answer-update-form').css('display', 'block');
+            $('#answer-detail').css('display', 'none');
+        });
+
+
+        $('#btn-answer-updated').on('click', function(e) {
+            // console.log('click update');
+            e.preventDefault();
+            _this.update();
+        });
+
     },
 
-    save: function() {
+    save : function() {
         const no = $('#no').val();
 
         // 사용자가 입력한 답변 내용
@@ -111,6 +127,13 @@ const answer = {
             id: $('#id').val(),
             content: $('#answer-content').val()
         };
+
+        // 입력 내용 검사
+        if (!answerData.content) {
+            alert('답변 내용을 입력해주세요.');
+            $('#answer-content').focus(); // 커서를 답변 내용 입력 필드로 이동
+            return;
+        }
 
         // 답변 등록 Ajax 요청
         $.ajax({
@@ -121,7 +144,7 @@ const answer = {
             data: JSON.stringify(answerData),
         }).done(function() {
             alert('답변이 등록되었습니다.');
-            // 답변 등록 후, 답변 목록을 다시 불러와서 화면 갱신
+            // 답변 등록 후, 답변을 다시 불러와서 화면 갱신
             window.location.href = '/qna/' + no;
         }).fail(function(error) {
             alert('답변 등록에 실패했습니다.');
@@ -130,7 +153,7 @@ const answer = {
     },
 
 
-    delete: function(){
+    delete : function(){
         const no = $('#no').val();
 
         $.ajax({
@@ -143,6 +166,38 @@ const answer = {
             alert('답변 삭제에 실패했습니다.');
             console.error(error);
         });
+    },
+
+    update : function () {
+        const no = $('#no').val();
+
+        const answerData = {
+            content: $('#answer-update-content').val()
+        };
+
+        // 입력 내용 검사
+        if (!answerData.content) {
+            alert('답변 내용을 입력해주세요.');
+            $('#answer-update-content').focus(); // 커서를 답변 내용 입력 필드로 이동
+            return;
+        }
+
+        // 답변 등록 Ajax 요청
+        $.ajax({
+            type: 'PUT',
+            url: '/api/qna/' + no + '/answer', // 답변 등록 API 엔드포인트
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(answerData),
+        }).done(function() {
+            alert('답변이 수정되었습니다.');
+            // 답변 수정 후, 답변을 다시 불러와서 화면 갱신
+            window.location.href = '/qna/' + no;
+        }).fail(function(error) {
+            alert('답변 수정에 실패했습니다.');
+            console.error(error + answerData);
+        });
+
     }
 
 };
