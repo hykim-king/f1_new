@@ -42,53 +42,55 @@
     </div>
 
     <!-- 답변 내용 -->
-    <div class="card mb-5">
-        <div class="card-body" id="answer-section">
-            <c:choose>
-                <c:when test="${answer == null}">
-                    <!-- 답변이 없을 경우 답변 등록 폼을 표시 -->
-                    <div class="mb-3">
-                        <form id="answer-form">
-                            <label for="id" class="form-label">작성자:</label>
-                            <!-- 나중에 관리자 session값 주고 readonly로 변경 예정 -->
-                            <input type="text" id="id" class="form-control">
+    <c:if test="${question.category != 10}">
+        <div class="card mb-5">
+            <div class="card-body" id="answer-section">
+                <c:choose>
+                    <c:when test="${answer == null}">
+                        <!-- 답변이 없을 경우 답변 등록 폼을 표시 -->
+                        <div class="mb-3">
+                            <form id="answer-form">
+                                <label for="id" class="form-label">작성자:</label>
+                                <!-- 나중에 관리자 session값 주고 readonly로 변경 예정 -->
+                                <input type="text" id="id" class="form-control">
 
-                            <textarea class="form-control" id="answer-content" rows="5" placeholder="답변을 입력하세요"></textarea>
-                            <a href="#" role="button" class="btn btn-secondary">취소</a>
-                            <button type="submit" id="btn-answer-save" class="btn btn-primary" value="저장">등록</button>
-                        </form>
-                    </div>
-                </c:when>
+                                <textarea class="form-control" id="answer-content" rows="5" placeholder="답변을 입력하세요"></textarea>
+                                <a href="#" role="button" class="btn btn-secondary">취소</a>
+                                <button type="submit" id="btn-answer-save" class="btn btn-primary" value="저장">등록</button>
+                            </form>
+                        </div>
+                    </c:when>
 
-                <c:otherwise>
-                <!-- 답변이 있는 경우 답변 내용을 표시 -->
-                    <div class="mb-3" id="answer-detail">
-                        <p class="card-text">작성자: ${answer.id} </p>   <!-- 나중에 관리자 session 가져올 예정 -->
-                        <p class="card-text">작성일: ${answer.createDate}</p>
-                        <c:if test="${answer.updateDate != null}">
-                            <p class="card-text">
-                                최종 수정일: ${answer.updateDate}
-                            </p>
-                        </c:if>
-                        <p class="card-text">내용: ${answer.content}</p>
-                        <button type="button" id="btn-answer-update-form" class="btn btn-light">수정</button>
-                        <button type="button" id="btn-answer-delete" class="btn btn-light">삭제</button>
-                    </div>
-                </c:otherwise>
-            </c:choose>
+                    <c:otherwise>
+                    <!-- 답변이 있는 경우 답변 내용을 표시 -->
+                        <div class="mb-3" id="answer-detail">
+                            <p class="card-text">작성자: ${answer.id} </p>   <!-- 나중에 관리자 session 가져올 예정 -->
+                            <p class="card-text">작성일: ${answer.createDate}</p>
+                            <c:if test="${answer.updateDate != null}">
+                                <p class="card-text">
+                                    최종 수정일: ${answer.updateDate}
+                                </p>
+                            </c:if>
+                            <p class="card-text">내용: ${answer.content}</p>
+                            <button type="button" id="btn-answer-update-form" class="btn btn-light">수정</button>
+                            <button type="button" id="btn-answer-delete" class="btn btn-light">삭제</button>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
 
-            <!-- 답변 수정 버튼을 누를 경우 답변 수정 form 표시 -->
-            <div class="mb-3">
-                <form id="answer-update-form" style="display: none;">
-                    <label for="update-id" class="form-label">작성자:</label>
-                    <input type="text" id="update-id" class="form-control" readonly="readonly" value="${answer.id}">
-                    <textarea class="form-control" id="answer-update-content" rows="5">${answer.content}</textarea>
-                    <a href="#" role="button" class="btn btn-secondary">취소</a>
-                    <button type="submit" id="btn-answer-updated" class="btn btn-primary" value="수정">완료</button>
-                </form>
+                <!-- 답변 수정 버튼을 누를 경우 답변 수정 form 표시 -->
+                <div class="mb-3">
+                    <form id="answer-update-form" style="display: none;">
+                        <label for="update-id" class="form-label">작성자:</label>
+                        <input type="text" id="update-id" class="form-control" readonly="readonly" value="${answer.id}">
+                        <textarea class="form-control" id="answer-update-content" rows="5">${answer.content}</textarea>
+                        <a href="#" role="button" class="btn btn-secondary">취소</a>
+                        <button type="submit" id="btn-answer-updated" class="btn btn-primary" value="수정">완료</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    </c:if>
 </div>
 
 <!-- 부트스트랩 JS 및 Popper.js 추가 -->

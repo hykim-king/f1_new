@@ -197,7 +197,6 @@ const answer = {
             alert('답변 수정에 실패했습니다.');
             console.error(error + answerData);
         });
-
     }
 
 };
