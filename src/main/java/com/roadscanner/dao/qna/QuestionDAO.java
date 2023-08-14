@@ -19,8 +19,10 @@ public interface QuestionDAO extends BaseRepository<QuestionVO> {
     // findAll을 수정하면 되는거 아닌가 했지만 페이징을 위해 따로 구현하는게 더 좋은 접근방식 이라고 한다..
     List<QuestionVO> findAllWithPaging(PaginationDTO pagination);
 
-
-    int countQuestions(); // 전체게시글 수 반환
+    int countQuestions(); // 전체 게시글 수 반환
 
     void increaseViews(Long no); // 조회수 증가 메서드
+
+    void updateCategory(Long no);  // 질문글 분류 변경
+
 }

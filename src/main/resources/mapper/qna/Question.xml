@@ -98,4 +98,17 @@
         WHERE no = #{no}
     </update>
 
+    <!-- 답변 등록 시 카테고리 변경 -->
+    <update id="updateCategory">
+        UPDATE question
+        SET category = (
+            CASE
+                WHEN EXISTS (SELECT 1 FROM answer WHERE question.no = answer.no)
+                    THEN 20
+                ELSE 30
+                END
+            )
+        WHERE no = #{no}
+    </update>
+
 </mapper>

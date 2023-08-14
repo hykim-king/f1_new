@@ -37,4 +37,9 @@ public class QuestionVO {
         this.content = content;
     }
 
+    // 게시글 분류만 변경하는 메서드
+    public void updateCategory(Integer category) {
+        this.category = category;
+    }
+
 }

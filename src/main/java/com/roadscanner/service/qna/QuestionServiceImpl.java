@@ -16,6 +16,13 @@ public class QuestionServiceImpl implements QuestionService {
 
     private final QuestionDAO questionDAO;
 
+    // 게시글 분류(category) 변경
+    @Override
+    public Long updateCategory(Long no) {
+        questionDAO.updateCategory(no);
+        return no;
+    }
+
     // 전체조회 + 페이징 추가 정리 필요
     @Override
     public List<QuestionListResponseDTO> findAllWithPaging(PaginationDTO pagination) {
@@ -80,4 +87,5 @@ public class QuestionServiceImpl implements QuestionService {
         questionDAO.delete(no);
         return no;
     }
+
 }
