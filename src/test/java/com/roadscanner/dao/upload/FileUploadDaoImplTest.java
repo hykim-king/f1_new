@@ -7,11 +7,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
@@ -20,7 +17,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.roadscanner.cmn.PcwkLogger;
-import com.roadscanner.dao.upload.FileUploadDao;
 import com.roadscanner.domain.upload.FileUploadVO;
 
 @WebAppConfiguration
@@ -56,20 +52,19 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	}
 
 	/*
-	 * 피드백 분기별 그래프
+	 * 피드백 월별 그래프
 	 */
 	@Test
-	
-	public void quarterlyFeedback() throws SQLException {
-		LOG.debug("┌───────────────────────┐");
-		LOG.debug("│  quarterlyFeedback()  │");
-		LOG.debug("└───────────────────────┘");
+	public void monthlyFeedback() throws SQLException {
+		LOG.debug("┌──────────────────────┐");
+		LOG.debug("│   monthlyFeedback()  │");
+		LOG.debug("└──────────────────────┘");
 
-		List<FileUploadVO> list = dao.quarterlyFeedback(uploadVO1);
+		List<FileUploadVO> list = dao.monthlyFeedback(uploadVO1);
 		
 		LOG.debug("------------------------------");
 		for (FileUploadVO vo : list) {
-			LOG.debug("분기: " + vo.getUploadDate() + ", 인식오류: " + vo.getU1() + ", 결과오류: " + vo.getU2());
+			LOG.debug("날짜: " + vo.getUploadDate() + ", 인식오류: " + vo.getU1() + ", 결과오류: " + vo.getU2());
 		}
 		LOG.debug("------------------------------");
 	}
@@ -78,7 +73,6 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	 * 피드백 누적 그래프, 표
 	 */
 	@Test
-	
 	public void totalFeedback() throws SQLException {
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│    totalFeedback()    │");
@@ -99,7 +93,6 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	 * 수정
 	 */
 	@Test
-	
 	public void update() throws SQLException {
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│        update()       │");
@@ -140,14 +133,41 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 		LOG.debug(upVO1);
 		LOG.debug(outVO1);
 		
-		
 	}
 
+	/*
+	 * 카테고리별 목록 조회
+	 */
+	@Test
+	public void doRetrieveByCategory() throws SQLException {
+		LOG.debug("┌───────────────────────┐");
+		LOG.debug("│      doRetrieve()     │");
+		LOG.debug("└───────────────────────┘");
+
+		// 삭제
+		dao.doDelete(uploadVO1);
+		dao.doDelete(uploadVO2);
+		dao.doDelete(uploadVO3);
+
+		// 등록
+		dao.doSave(uploadVO1);
+		dao.doSave(uploadVO2);
+		dao.doSave(uploadVO3);
+
+		// 목록 조회
+		search.setPageSize(9); // 페이지 사이즈
+		search.setPageNo(1); // 페이지 번호
+		
+		List<FileUploadVO> list = dao.doRetrieveByCategory(search);
+		for (FileUploadVO vo : list) {
+			LOG.debug(vo);
+		}
+	}	
+	
 	/*
 	 * 목록 조회
 	 */
 	@Test
-	
 	public void doRetrieve() throws SQLException {
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│      doRetrieve()     │");
@@ -178,7 +198,6 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	 * 삭제, 등록, 단건조회
 	 */
 	@Test
-	
 	public void addAndGet() throws SQLException {
 		LOG.debug("┌────────────────────────┐");
 		LOG.debug("│       addAndGet()      │");
@@ -208,7 +227,6 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 
 	
 	@Test
-	
 	public void doDelete() throws SQLException {
 		LOG.debug("┌────────────────────────┐");
 		LOG.debug("│       doDelete()       │");
@@ -221,7 +239,6 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	}
 
 	@Test
-
 	public void doSave() throws SQLException {
 		LOG.debug("┌────────────────────────┐");
 		LOG.debug("│        doSave()        │");
@@ -246,7 +263,6 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	}
 
 	@Test
-	
 	public void bean() {
 		LOG.debug("┌────────────────────────┐");
 		LOG.debug("│          bean          │");
