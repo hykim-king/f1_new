@@ -2,10 +2,9 @@ package com.roadscanner.service.qna;
 
 import com.roadscanner.dao.qna.QuestionDAO;
 import com.roadscanner.domain.qna.QuestionVO;
-import com.roadscanner.dto.*;
+import com.roadscanner.dto.qna.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;

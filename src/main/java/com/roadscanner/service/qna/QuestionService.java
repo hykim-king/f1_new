@@ -1,6 +1,6 @@
 package com.roadscanner.service.qna;
 
-import com.roadscanner.dto.*;
+import com.roadscanner.dto.qna.*;
 
 import java.util.List;
 

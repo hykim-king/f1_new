@@ -1,8 +1,8 @@
 package com.roadscanner.controller.qna;
 
-import com.roadscanner.dto.AnswerResponseDTO;
-import com.roadscanner.dto.AnswerSaveRequestDTO;
-import com.roadscanner.dto.AnswerUpdateRequestDTO;
+import com.roadscanner.dto.qna.AnswerResponseDTO;
+import com.roadscanner.dto.qna.AnswerSaveRequestDTO;
+import com.roadscanner.dto.qna.AnswerUpdateRequestDTO;
 import com.roadscanner.service.qna.AnswerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
