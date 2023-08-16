@@ -23,8 +23,9 @@
         <input type="text" id="title" class="form-control">
     </div>
     <div class="mb-3">
-        <label for="idx" class="form-label">첨부파일:</label>
-        <input type="text" id="idx" class="form-control">
+        <label for="fileUpload" class="form-label">첨부파일:</label><br>
+        <input id=fileUpload type="file" accept=".jpg, .jpeg, .png, .bmp, .tiff, .webp, .ico, .svg" enctype="multipart/form-data">
+        <input type="hidden" id="idx">
     </div>
     <div class="mb-3">
         <label for="content" class="form-label">내용:</label>

@@ -3,7 +3,7 @@ const main = {
         const _this = this;
         $('#btn-save').on('click', function (e) {
             e.preventDefault();
-            _this.save();
+            _this.upload();
         });
 
         $('#btn-update').on('click', function (e) {
@@ -16,6 +16,41 @@ const main = {
                 _this.delete();
             }
         });
+    },
+    
+    upload : function () {
+    	let formData = new FormData(); // FormData 생성
+    	formData.append("fileUpload", $("#fileUpload")[0].files[0]); // 파일 파트 추가
+    	formData.append("idx", 1);
+    	formData.append("id", $("#id").val());
+    	formData.append("category", 40);
+    	formData.append("name", "testname");
+    	formData.append("url", "testurl");
+    	formData.append("fileSize", 0);
+    	formData.append("checked", 0);
+    	formData.append("u1", 0);
+    	formData.append("u2", 0);
+    	
+    	// 파일을 보내는 부분
+    	$.ajax({
+    		type: "POST",
+    		url: "/qna/fileUploaded",
+    		processData: false,
+    		contentType: false,
+    		data: formData,
+    		success: function (data) {
+    			//console.log(data);
+    			$("#idx").val(parseInt(data, 10));
+                // 파일 업로드 성공 후에 save 함수 호출
+    			main.save();
+    		},
+    		error: function (data) {
+    			console.log(data);
+    			console.error("파일 업로드 오류");
+    			return;
+    		},
+    	});
+    	
     },
 
     save : function () {

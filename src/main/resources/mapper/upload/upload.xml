@@ -142,7 +142,7 @@
     ) VALUES (
         upload_seq.NEXTVAL, <!-- upload_seq.NEXTVAL -->
         #{id},
-        10,
+        #{category},
         SYSDATE,
         #{name},
         #{url},

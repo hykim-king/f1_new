@@ -10,8 +10,8 @@
 
     <!-- 오라클 insert 확인 O-->
     <insert id="save">
-        INSERT INTO QUESTION (no, category, id, title, content)
-        VALUES (QUESTION_SEQ.NEXTVAL, #{category}, #{id}, #{title}, #{content})
+        INSERT INTO QUESTION (no, category, id, idx, title, content)
+        VALUES (QUESTION_SEQ.NEXTVAL, #{category}, #{id}, #{idx}, #{title}, #{content})
     </insert>
 
 <!--    <insert id="save">-->
