@@ -158,6 +158,7 @@ $("#deletebtn").on("click",function(){
         }
       }); //--체크박스 체크
     location.reload();
+    document.getElementById(member_iframe).contentDocument.location.reload(true);
 });
 </script>
 </html>
