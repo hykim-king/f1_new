@@ -55,7 +55,7 @@
                                 <input type="text" id="id" class="form-control">
 
                                 <textarea class="form-control" id="answer-content" rows="5" placeholder="답변을 입력하세요"></textarea>
-                                <a href="#" role="button" class="btn btn-secondary">취소</a>
+                                <button type="reset" id="btn-answer-reset" class="btn btn-secondary">취소</button>
                                 <button type="submit" id="btn-answer-save" class="btn btn-primary" value="저장">등록</button>
                             </form>
                         </div>
