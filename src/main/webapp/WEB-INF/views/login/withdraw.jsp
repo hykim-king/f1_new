@@ -33,15 +33,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
+        <c:if test="${user ne null}">
+          <li class="nav-item">
+            <a class="nav-link" href="${CP}/main/preUpload">사진 업로드</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">게시판</a>
+          </li>
+        </c:if>
       </ul>
       <form class="d-flex" role="search">
         <!-- 로그인 세션 X -->
@@ -51,9 +50,9 @@
         <!-- 로그인 세션 O -->
         <c:if test="${user ne null}">
           <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/mypage'">MyPage</button>
-          <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/logout'">LogOut</button>
+          <button type="button" class="btn btn-outline-primary" onclick="location.href='${CP}/logout'" style="margin-right: 50px;">LogOut</button>
         </c:if>
-          <button type="button" onclick="location.href='${CP}/registerpage'" class="btn btn-outline-primary" style="margin-right: 50px;">Sign-up</button>
+          <%-- <button type="button" onclick="location.href='${CP}/registerpage'" class="btn btn-outline-primary" style="margin-right: 50px;">Sign-up</button> --%>
       </form>
     </div>
   </div>

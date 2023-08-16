@@ -30,22 +30,21 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
+        <c:if test="${user ne null}">
+          <li class="nav-item">
+            <a class="nav-link" href="${CP}/main/preUpload">사진 업로드</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">게시판</a>
+          </li>
+        </c:if>
         <c:if test="${user.grade == 2}">
         <li class="nav-item dropdown">
           <input type="hidden" id="nekeyword" name="nekeyword" value ="${user.id}">
           <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">관리자 기능</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="${CP}/admin">List</a></li>
-            <li><a class="dropdown-item" href="#">None</a></li>
+            <li><a class="dropdown-item" href="#">Upload</a></li>
             <li><a class="dropdown-item" href="#">None</a></li>
           </ul>
         </li>
@@ -53,10 +52,10 @@
       </ul>
       <form class="d-flex" role="search">
         <!-- 로그인 세션 X -->
-        <c:if test="${user eq null}">
+        <%-- <c:if test="${user eq null}">
           <button type="button" id="login" onclick="location.href='${CP}/login'" class="btn btn-outline-primary me-2">Login</button>
           <button type="button" onclick="location.href='${CP}/registerpage'" class="btn btn-outline-primary" style="margin-right: 50px;">Sign-up</button>
-        </c:if>
+        </c:if> --%>
         <!-- 로그인 세션 O -->
         <c:if test="${user ne null}">
           <button type="button" class="btn btn-outline-primary" onclick="location.href='${CP}/logout'" style="margin-right: 50px;">LogOut</button>

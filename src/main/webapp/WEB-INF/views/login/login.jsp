@@ -21,24 +21,23 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
+	      <c:if test="${user ne null}">
+	        <li class="nav-item">
+	          <a class="nav-link" href="${CP}/main/preUpload">사진 업로드</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#">게시판</a>
+	        </li>
+	      </c:if>
       </ul>
       <form class="d-flex" role="search">
         <!-- 로그인 세션 X -->
-        <c:if test="${user ne null}">
+        <c:if test="${user eq null}">
           <button type="button" id="login" onClick="window.location.reload()" class="btn btn-outline-primary me-2">Login</button>
         </c:if>
         
         <!-- 로그인 세션 O -->
-        <c:if test="${user eq null}">
+        <c:if test="${user ne null}">
           <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/mypage'">MyPage</button>
           <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/logout'">LogOut</button>
         </c:if>
@@ -146,7 +145,7 @@
                   alert(paredJSON.msgContents);
                   
                   //javascript 내장객체 : url
-                  window.location.href="${CP}/mypage";
+                  window.location.href="${CP}/main/preUpload";
                 }
                 if("40"==paredJSON.msgId) {
                 	alert(paredJSON.msgContents);
