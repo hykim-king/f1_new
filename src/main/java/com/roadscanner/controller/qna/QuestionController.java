@@ -35,6 +35,7 @@ public class QuestionController implements PcwkLogger {
     
     private final FileUploadService fileUploadService;
     MessageVO messageVO;
+    
 
     @GetMapping
     public String index(Model model,
@@ -72,12 +73,30 @@ public class QuestionController implements PcwkLogger {
     }
 
     @GetMapping("/{no}")
-    public String detail(@PathVariable Long no, Model model) {
+    public String detail(@PathVariable Long no, Model model) throws SQLException {
         // 조회수 증가
         questionService.increaseViews(no);
 
         QuestionResponseDTO dto = questionService.findByNo(no);
         model.addAttribute("question", dto);
+        
+		LOG.debug("┌──────────────────────────────┐");
+        LOG.debug("│get url from FileUploadService│");
+        LOG.debug("│*****idx: "+dto.getIdx().intValue());
+        
+        FileUploadVO fileVO = new FileUploadVO();
+        fileVO.setIdx(dto.getIdx().intValue());
+        LOG.debug("│*****inVO: "+fileVO.toString());
+        
+        fileVO = fileUploadService.doSelectOne(fileVO);
+        LOG.debug("│*****outVO: "+fileVO.toString());
+        
+        String url = fileVO.getUrl();
+        LOG.debug("│*****url: "+url);
+        
+        model.addAttribute("img", url);
+        
+        LOG.debug("└──────────────────────────────┘");
         return "qna/question-detail";
     }
 

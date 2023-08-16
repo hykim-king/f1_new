@@ -34,6 +34,9 @@
             <p class="card-text">
                 내용: ${question.content}
             </p>
+            <c:if test="${question.idx != null}">
+                <input type="image" src="${img}" style="width: 500px;">
+            </c:if>
             <div class="mt-4">
                 <a href="/qna/update/${question.no}" class="btn btn-primary">수정</a>
                 <button type="button" id="btn-delete" class="btn btn-danger">삭제</button>

@@ -106,7 +106,14 @@
     FROM
         upload_image
     WHERE
+    <choose>
+      <when test="name != null">
         name = #{name}
+      </when>
+      <otherwise>
+        idx = #{idx}
+      </otherwise>
+    </choose>
   </select>
   
   <!-- 사진 수정 -->
