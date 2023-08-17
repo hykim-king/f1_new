@@ -41,7 +41,8 @@
 				<div class="col">
 					<div class="card">
 						<div class="card-body py-2">
-							<p class="card-text" style="margin-bottom: 5px;">작성일: ${question.createDate}</p>
+							<p class="card-text" style="margin-bottom: 5px;">작성일:
+								${question.createDate}</p>
 							<c:if test="${question.updateDate != null}">
 								<p class="card-text">최종 수정일: ${question.updateDate}</p>
 							</c:if>
@@ -49,38 +50,48 @@
 					</div>
 				</div>
 			</div>
-			<!-- 선 추가 -->
-			<div class="row mx-1">
+			<!-- 뱃지 추가 -->
+			<div class="row">
 				<div class="col">
-					<hr style="margin: 1;">
+					<div class="badge text-secondary mx-4"
+						style="background-color: #DCDCDC; border-radius: 5px 5px 0px 0px;">내용</div>
 				</div>
 			</div>
-			<div class="row m-2 mb-1">
+			<div class="row m-2 mt-0 mb-1">
 				<div class="col">
 					<div class="card">
 						<div class="card-body">
-							<div class="badge text-secondary mb-2" style="background-color: #DCDCDC;">내용</div>
-							<p class="card-text mt-2">${question.content}</p>
+							<p class="card-text">${question.content}</p>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="row m-2 mt-1">
 				<div class="col-auto">
-					<a href="/qna/update/${question.no}" class="btn" style="background-color: #DCDCDC;">수정</a>
-					<button type="button" id="btn-delete" class="btn" style="background-color: #DCDCDC;">삭제</button>
+					<a href="/qna/update/${question.no}" class="btn"
+						style="background-color: #DCDCDC;">수정</a>
+					<button type="button" id="btn-delete" class="btn"
+						style="background-color: #DCDCDC;">삭제</button>
 				</div>
 			</div>
 		</div>
 
 		<!-- 답변 내용 -->
 		<c:if test="${question.category != 10}">
+			<div class="row">
+				<div class="col">
+					<div class="badge text-secondary mx-2 pb-0"
+						style="background-color: #DCDCDC; border-radius: 5px 5px 0px 0px;">
+						<h4>답변</h4>
+					</div>
+				</div>
+			</div>
 			<div class="card mb-5">
 				<div class="card-body" id="answer-section">
 					<c:choose>
 						<c:when test="${answer == null}">
 							<!-- 답변이 없을 경우 답변 등록 폼을 표시 -->
-							<div class="mb-3">
+							<div class="">
 								<form id="answer-form">
 									<label for="id" class="form-label">작성자:</label>
 									<!-- 나중에 관리자 session값 주고 readonly로 변경 예정 -->
@@ -97,7 +108,7 @@
 
 						<c:otherwise>
 							<!-- 답변이 있는 경우 답변 내용을 표시 -->
-							<div class="mb-3" id="answer-detail">
+							<div class="mb-2" id="answer-detail">
 								<p class="card-text">작성자: ${answer.id}</p>
 								<!-- 나중에 관리자 session 가져올 예정 -->
 								<p class="card-text">작성일: ${answer.createDate}</p>
@@ -106,7 +117,7 @@
 								</c:if>
 								<p class="card-text">내용: ${answer.content}</p>
 								<button type="button" id="btn-answer-update-form"
-									class="btn btn-light">수정</button>
+									class="btn btn-light me-2">수정</button>
 								<button type="button" id="btn-answer-delete"
 									class="btn btn-light">삭제</button>
 							</div>
