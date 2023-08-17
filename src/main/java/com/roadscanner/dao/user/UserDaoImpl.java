@@ -191,11 +191,14 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int updatePw(MemberVO user) throws SQLException {
+		String encoder = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encoder);
 		
 		int flag = 0;
 		String statement = this.NAMESPACE + DOT + "updatepassword";
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
 		LOG.debug("│ statement " + statement);
+		LOG.debug("│ encoder " + encoder);
 		LOG.debug("└────────────────────────────────────────────────────────┘");
 		flag = this.sqlSessionTemplate.update(statement, user);
 

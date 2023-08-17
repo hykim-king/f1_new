@@ -63,6 +63,37 @@ public class WithdrawController {
     }
     
     /**
+     * 회원 탈퇴 처리
+     * @param user 회원 정보 (비밀번호가 담긴 객체)
+     * @return JSON 형태의 응답 데이터
+     * @throws SQLException 
+     */
+    @RequestMapping(value = "/delete", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String delete(MemberVO user) throws SQLException {
+        System.out.println("┌────────────────────────────────────────────────────────┐");
+        System.out.println("│ delete()                                            │");
+        System.out.println("└────────────────────────────────────────────────────────┘");
+        
+        String jsonString = "";
+        MessageVO message = new MessageVO();
+        
+        // UserService에 비밀번호가 일치하는지 확인하는 메서드가 있다
+        int withdrawStatus = userService.deleteOne(user);
+        
+        if (withdrawStatus == 1) {
+                message.setMsgId("10");
+                message.setMsgContents("회원 삭제 완료.");
+        } else {
+                message.setMsgId("20");
+                message.setMsgContents("회원 삭제 실패했습니다.");
+        }
+        
+        jsonString = new Gson().toJson(message);
+        return jsonString;
+    }
+    
+    /**
      * 회원 정지 처리
      * @param user 회원 정보 (비밀번호가 담긴 객체)
      * @return JSON 형태의 응답 데이터

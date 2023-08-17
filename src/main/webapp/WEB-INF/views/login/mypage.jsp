@@ -134,6 +134,7 @@ function check_pw() {
     var eng = pw.search(/[a-z]/ig);
     var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
     
+    
     if(document.getElementById('rpassword').value == document.getElementById('upw').value) {
     	window.alert('현재 사용중인 비밀번호 입니다.');
         document.getElementById('rpassword').value='';
@@ -190,7 +191,13 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
   });   // $("#cancel") click
   
   $("#update").on("click", function(){
-	  
+	  if(""==$("#rpassword").val() || 0==$("#rpassword").val().length){
+	        alert("비밀번호를 입력하세요");  // javascript 메시지 다이얼 로그
+	        $("#rpassword").focus();
+	        return;
+	        
+	  }else {
+
 	  $.ajax({
 	        type: "POST",
 	        url:"${CP}/update",
@@ -219,7 +226,7 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
 	            console.log("error:"+data);
 	          }
 	      });  // ajax end
-	  
+	  };  
   });   // $("#update") click
   
 });   //모든 화면이 다 로딩이 되면 실행하는 영역

@@ -3,6 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="CP" value="${pageContext.request.contextPath }"/>
 <%
+    // 서버 측에서 사용자 세션을 확인하고, 세션이 없으면 기본 페이지로 리다이렉트합니다.
+    if (session.getAttribute("user") == null) {
+      response.sendRedirect("/login");
+    }
+%>
+<%
  String strReferer = request.getHeader("referer");
  if(strReferer == null){
 %>
