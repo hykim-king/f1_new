@@ -35,7 +35,7 @@
                 내용: ${question.content}
             </p>
             <c:if test="${question.idx != null}">
-                <input type="image" src="${img}" style="width: 500px;">
+                <input type="image" id="detailImage" src="${img}" style="width: 500px;">
             </c:if>
             <div class="mt-4">
                 <a href="/qna/update/${question.no}" class="btn btn-primary">수정</a>

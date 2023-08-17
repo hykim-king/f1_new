@@ -51,7 +51,7 @@
 		    </div>
 		    <label for="fileUpload" id="uploadLabel" class="btn btn-secondary" style="display: none;">파일 선택</label>
 		    <input id=fileUpload type="file" accept=".jpg, .jpeg, .png, .bmp, .tiff, .webp, .ico, .svg" style="display: none;">
-		    <input type="hidden" id="idx">
+		    <input type="hidden" id="idx" value="${question.idx}">
 		    <input type="hidden" id="count">
       </c:otherwise>
     </c:choose>
