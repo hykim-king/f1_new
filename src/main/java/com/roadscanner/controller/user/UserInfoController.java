@@ -41,10 +41,16 @@ public class UserInfoController {
         System.out.println("│ doChangeInfo()                                   │");
         System.out.println("└────────────────────────────────────────────────────────┘");
         
+        
         int flag = this.userService.doChangeInfo(member);
         
         String jsonString = "";
         MessageVO message = new MessageVO();
+        
+        if(3 == flag) {
+        	message.setMsgId("30");
+        	message.setMsgContents("현재와 같은  비밀번호입니다.");
+        }
         
         if(1 == flag) {
         	message.setMsgId("10");

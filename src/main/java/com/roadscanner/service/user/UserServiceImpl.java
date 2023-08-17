@@ -200,11 +200,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int doChangeInfo(MemberVO user) throws SQLException {
 		int checkStatus = -1;
-		
+		int samecheck = 0;
         checkStatus = this.userDao.updatePw(user);
+        samecheck = this.userDao.passCheck(user);
         if(0==checkStatus) {
             checkStatus = -1; // 회원정보가 변경되지 않음
-        } 
+        }
+        
+        if(1==samecheck) {
+        	checkStatus = 3;
+        }
+        
         LOG.debug("checkStatus: " + checkStatus);
         return checkStatus;
 	}

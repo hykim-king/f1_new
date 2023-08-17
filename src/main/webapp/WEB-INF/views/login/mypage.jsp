@@ -134,13 +134,6 @@ function check_pw() {
     var eng = pw.search(/[a-z]/ig);
     var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
     
-    
-    if(document.getElementById('rpassword').value == document.getElementById('upw').value) {
-    	window.alert('현재 사용중인 비밀번호 입니다.');
-        document.getElementById('rpassword').value='';
-        document.getElementById('rpassword2').value='';
-    }
-    
     if(pw.length<8 || pw.length>20) {
        window.alert('비밀번호는 8글자 이상, 20글자 이하만 이용 가능합니다.');
        document.getElementById('rpassword').value='';
@@ -219,6 +212,11 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
 	        	  if("20" == parsedJSON.msgId) {
                   alert(parsedJSON.msgContents);
                   return;
+	             }
+	        	  
+	        	 if("30" == parsedJSON.msgId) {
+	                  alert(parsedJSON.msgContents);
+	                  return;
 	             }
 	        	  
 	          },
