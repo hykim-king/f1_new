@@ -31,6 +31,8 @@ const main = {
         });
         
         $('#fileUpload').on('change', function (e) {
+        	const count = document.getElementById('count');
+        	count.value = '1';
         	_this.displaySelectedFile(e);
         });
         
@@ -120,6 +122,7 @@ const main = {
     	//console.log("update_upload");
     	const fileName = document.getElementById('fileName'); //수정파일명
     	const thisName = document.getElementById('thisName'); //기존파일명
+    	const count = document.getElementById('count');
     	//console.log(thisName.value);
     	
 		if (thisName.value != null) {  // 기존 글에 파일 첨부 O
@@ -140,37 +143,42 @@ const main = {
     		});
 		}
     	
-    	if (fileName.value != null) { // 수정된 글에 파일 첨부 O
-    		//console.log("fileName.value != null");
-    		let formData = new FormData(); // FormData 생성
-    		formData.append("fileUpload", $("#fileUpload")[0].files[0]); // 파일 파트 추가
-    		formData.append("idx", 1);
-    		formData.append("id", $("#id").val());
-    		formData.append("category", 40);
-    		formData.append("name", "testname");
-    		formData.append("url", "testurl");
-    		formData.append("fileSize", 0);
-    		formData.append("checked", 0);
-    		formData.append("u1", 0);
-    		formData.append("u2", 0);
-    		
-    		// 새로운 파일 저장
-    		$.ajax({
-    			type: "POST",
-    			url: "/qna/fileUploaded",
-    			processData: false,
-    			contentType: false,
-    			data: formData,
-    			success: function (data) {
-    				//console.log("fileUploaded success");
-    				$("#idx").val(parseInt(data, 10));
-    				main.update();
-    			},
-    			error: function (data) {
-    				console.log(data);
-    				console.error("파일 업로드 오류");
-    			},
-    		});
+    	if (fileName.value != '') { // 수정된 글에 파일 첨부 O
+    		if (count.value == '1') {
+    			//console.log("fileName.value != null");
+    			let formData = new FormData(); // FormData 생성
+    			formData.append("fileUpload", $("#fileUpload")[0].files[0]); // 파일 파트 추가
+    			formData.append("idx", 1);
+    			formData.append("id", $("#id").val());
+    			formData.append("category", 40);
+    			formData.append("name", "testname");
+    			formData.append("url", "testurl");
+    			formData.append("fileSize", 0);
+    			formData.append("checked", 0);
+    			formData.append("u1", 0);
+    			formData.append("u2", 0);
+    			
+    			// 새로운 파일 저장
+    			$.ajax({
+    				type: "POST",
+    				url: "/qna/fileUploaded",
+    				processData: false,
+    				contentType: false,
+    				data: formData,
+    				success: function (data) {
+    					//console.log("fileUploaded success");
+    					$("#idx").val(parseInt(data, 10));
+    					main.update();
+    				},
+    				error: function (data) {
+    					console.log(data);
+    					console.error("파일 업로드 오류");
+    				},
+    			});
+    		} else {
+    			console.log("파일 변경 없음");
+    			main.update();
+    		}
     	} else {
     		console.log("fileName.value: "+fileName.value);
     		$("#idx").val(null);

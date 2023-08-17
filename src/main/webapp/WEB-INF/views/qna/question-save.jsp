@@ -33,6 +33,7 @@
 		    <label for="fileUpload" id="uploadLabel" class="btn btn-secondary" style=" width: 100%;">파일 선택</label>
         <input id=fileUpload type="file" accept=".jpg, .jpeg, .png, .bmp, .tiff, .webp, .ico, .svg" style="display: none;">
         <input type="hidden" id="idx">
+        <input type="hidden" id="count" value="default">
     </div>
     <div class="mb-3">
         <label for="content" class="form-label">내용:</label>
