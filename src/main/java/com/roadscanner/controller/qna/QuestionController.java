@@ -80,23 +80,26 @@ public class QuestionController implements PcwkLogger {
         QuestionResponseDTO dto = questionService.findByNo(no);
         model.addAttribute("question", dto);
         
-		LOG.debug("┌──────────────────────────────┐");
-        LOG.debug("│get url from FileUploadService│");
-        LOG.debug("│*****idx: "+dto.getIdx().intValue());
+        if (dto.getIdx() != null) {
+        	LOG.debug("┌──────────────────────────────┐");
+        	LOG.debug("│get url from FileUploadService│");
+        	LOG.debug("│*****idx: "+dto.getIdx().intValue());
+        	
+        	FileUploadVO fileVO = new FileUploadVO();
+        	fileVO.setIdx(dto.getIdx().intValue());
+        	LOG.debug("│*****inVO: "+fileVO.toString());
+        	
+        	fileVO = fileUploadService.doSelectOne(fileVO);
+        	LOG.debug("│*****outVO: "+fileVO.toString());
+        	
+        	String url = fileVO.getUrl();
+        	LOG.debug("│*****url: "+url);
+        	
+        	model.addAttribute("img", url);
+        	
+        	LOG.debug("└──────────────────────────────┘");
+        }
         
-        FileUploadVO fileVO = new FileUploadVO();
-        fileVO.setIdx(dto.getIdx().intValue());
-        LOG.debug("│*****inVO: "+fileVO.toString());
-        
-        fileVO = fileUploadService.doSelectOne(fileVO);
-        LOG.debug("│*****outVO: "+fileVO.toString());
-        
-        String url = fileVO.getUrl();
-        LOG.debug("│*****url: "+url);
-        
-        model.addAttribute("img", url);
-        
-        LOG.debug("└──────────────────────────────┘");
         return "qna/question-detail";
     }
 
@@ -105,25 +108,28 @@ public class QuestionController implements PcwkLogger {
         QuestionResponseDTO dto = questionService.findByNo(no);
         model.addAttribute("question", dto);
         
-		LOG.debug("┌──────────────────────────────┐");
-        LOG.debug("│get url from FileUploadService│");
-        LOG.debug("│*****idx: "+dto.getIdx().intValue());
+        if (dto.getIdx() != null) {
+        	LOG.debug("┌──────────────────────────────┐");
+        	LOG.debug("│get url from FileUploadService│");
+        	LOG.debug("│*****idx: "+dto.getIdx().intValue());
+        	
+        	FileUploadVO fileVO = new FileUploadVO();
+        	fileVO.setIdx(dto.getIdx().intValue());
+        	LOG.debug("│*****inVO: "+fileVO.toString());
+        	
+        	fileVO = fileUploadService.doSelectOne(fileVO);
+        	LOG.debug("│*****outVO: "+fileVO.toString());
+        	
+        	String originFileName = fileVO.getName();
+        	String fileName = originFileName.substring(18);
+        	LOG.debug("│*****fileName: "+fileName);
+        	
+        	model.addAttribute("originFileName", originFileName);
+        	model.addAttribute("fileName", fileName);
+        	
+        	LOG.debug("└──────────────────────────────┘");
+        }
         
-        FileUploadVO fileVO = new FileUploadVO();
-        fileVO.setIdx(dto.getIdx().intValue());
-        LOG.debug("│*****inVO: "+fileVO.toString());
-        
-        fileVO = fileUploadService.doSelectOne(fileVO);
-        LOG.debug("│*****outVO: "+fileVO.toString());
-        
-        String originFileName = fileVO.getName();
-        String fileName = originFileName.substring(18);
-        LOG.debug("│*****fileName: "+fileName);
-        
-        model.addAttribute("originFileName", originFileName);
-        model.addAttribute("fileName", fileName);
-        
-        LOG.debug("└──────────────────────────────┘");
         return "qna/question-update";
     }
     
