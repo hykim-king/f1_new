@@ -17,15 +17,7 @@
         WHERE id = #{id}
     </select>
     
-    
-    <select id="selectOneMypage" parameterType="MemberVO"  resultMap="MemberMap" >
-        SELECT  grade, id, password,
-        SUBSTR(email, 1, INSTR(email, '@')-1)AS emailFront,
-        SUBSTR(email, INSTR(email, '@') + 1) AS emailBack
-        FROM member
-        WHERE id = #{id} 
-    </select>
-    
+
     <!-- 아이디 체크 -->
     <select id="idCheck" parameterType="MemberVO" resultType="int">
       SELECT COUNT(*)
@@ -48,6 +40,13 @@
       WHERE id = #{id}
     </select>
     
+     <!-- 등급 체크 -->
+    <select id="encoder" parameterType="MemberVO" resultMap="MemberMap">
+      SELECT password
+      FROM member
+      WHERE id = #{id}
+    </select>
+    
     <select id="gradeCheckid" parameterType="MemberVO" resultMap="MemberMap">
       SELECT grade
       FROM member
@@ -62,14 +61,14 @@
       AND password = #{password}
     </select>
     
-  <!-- 이메일로  아이디 존재 여부 검색 -->
+  <!-- 이메일로  계정 존재 여부 검색 -->
   <select id="searchIdCheck" parameterType="MemberVO" resultType="int">
     SELECT COUNT(*) cnt
     FROM member
     WHERE email  = #{email}
     </select>    
     
-    <!-- 이메일로  아이디 검색 -->
+    <!-- 이메일로  id 검색 -->
     <select id="searchId" parameterType="MemberVO" resultMap="MemberMap">
       SELECT id
       FROM member

@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 		System.out.println("MembershipServiceImpl flag : "+flag);
 		
 		// 10 : 가입 성공 / 20 : 가입 실패
-		if(1 != idCheck) {
+		if(1 != idCheck || 1 != emailCheck) {
 			flag = 10;
 		} else {
 			flag = 20;
@@ -209,19 +209,21 @@ public class UserServiceImpl implements UserService {
         return checkStatus;
 	}
 	
-	@Override
-	public MemberVO selectOneMypage(MemberVO user) throws SQLException {
-		LOG.debug("┌────────────────────────────────────────────────────────┐");
-		LOG.debug("│ selectOneMypage()                                           │");
-		LOG.debug("└────────────────────────────────────────────────────────┘");
-		return userDao.selectOneMypage(user);
-	}
 
 	@Override
 	public int doWithdraw(MemberVO user) {
 	    int checkStatus = 0;
 	    try {
-	        checkStatus = this.userDao.withdraw(user);
+	        int flag = this.userDao.passCheck(user);      
+	       
+	        
+	        if(flag == 1) {
+	        	 checkStatus = this.userDao.withdraw(user);
+	        	 LOG.debug(checkStatus);
+	        }else {
+	    	    return checkStatus;
+	        }
+	        
 	    } catch (SQLException e) {
 	        LOG.error("Error occurred while withdrawing user: " + e.getMessage());
 	    }

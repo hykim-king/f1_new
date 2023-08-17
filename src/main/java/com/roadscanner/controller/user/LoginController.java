@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.roadscanner.cmn.DTO;
 import com.roadscanner.cmn.MessageVO;
 import com.roadscanner.domain.user.MemberVO;
 import com.roadscanner.domain.user.list_admin;
@@ -27,8 +30,11 @@ import com.google.gson.Gson;
 /**
  * Handles requests for the application home page.
  */
+
+
 @Controller
 public class LoginController {	
+	
 	final Logger LOG = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired
@@ -315,9 +321,9 @@ public class LoginController {
 		System.out.println("┌────────────────────────────────────────────────────────┐");
         System.out.println("│ membershipRegister()                                   │");
         System.out.println("└────────────────────────────────────────────────────────┘");
+        System.out.println("│ user : "+ user.getPassword());
         System.out.println("│ user : "+ user.toString());
-
-        
+       
 		int flag = this.userService.register(user);
 		
 		String jsonString = "";

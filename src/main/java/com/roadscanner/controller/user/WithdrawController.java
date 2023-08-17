@@ -48,7 +48,7 @@ public class WithdrawController {
         MessageVO message = new MessageVO();
         
         // UserService에 비밀번호가 일치하는지 확인하는 메서드가 있다
-        int withdrawStatus = userService.deleteOne(user);
+        int withdrawStatus = userService.doWithdraw(user);
         
         if (withdrawStatus == 1) {
                 message.setMsgId("10");

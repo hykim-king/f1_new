@@ -26,7 +26,6 @@ public interface UserDao {
 	 */
 	public MemberVO selectOne(MemberVO inVO) throws SQLException;
 	
-	public MemberVO selectOneMypage(MemberVO inVO) throws SQLException;
 	
 	/**
 	 * 아이디 여부  체크

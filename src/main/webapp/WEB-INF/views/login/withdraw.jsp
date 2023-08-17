@@ -44,15 +44,12 @@
       </ul>
       <form class="d-flex" role="search">
         <!-- 로그인 세션 X -->
-        <%-- <c:if test="${user eq null}">
-          <button type="button" id="login" onclick="location.href='${CP}/login'" class="btn btn-outline-primary me-2">Login</button>
-        </c:if> --%>
+
         <!-- 로그인 세션 O -->
         <c:if test="${user ne null}">
           <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/mypage'">MyPage</button>
           <button type="button" class="btn btn-outline-primary" onclick="location.href='${CP}/logout'" style="margin-right: 50px;">LogOut</button>
         </c:if>
-          <%-- <button type="button" onclick="location.href='${CP}/registerpage'" class="btn btn-outline-primary" style="margin-right: 50px;">Sign-up</button> --%>
       </form>
     </div>
   </div>
@@ -97,15 +94,8 @@
            if (!confirm('회원 탈퇴하시겠습니까?') == true) {
                return false;
            }
-           
-           if($("#upassword").val() != $("#upw").val()) {
-        	   alert("비밀번호를 다시 확인해주세요")
-        	   document.getElementById('upassword').value='';
-        	   $('#upassword').focus();
-           }
-               
+      
            else {
-
 
 	           // AJAX 요청을 보냅니다.
 	           $.ajax({
@@ -113,7 +103,8 @@
 	               url:"${CP}/withdraw",
 	               dataType:"html",
 	               data: {
-	                id: $("#uid").val()
+	                id: $("#uid").val(),
+	                password: $("#upassword").val()
 	               },
 	               success:function(data) {
 	                let parsedJSON = JSON.parse(data);

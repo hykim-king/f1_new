@@ -12,6 +12,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,7 +46,6 @@ public class MemberDaoTest {
 		
 	}
 	
-	
 	@Test
 	public void daoTest() throws SQLException {
 		
@@ -59,7 +60,9 @@ public class MemberDaoTest {
 		dao.insertOne(vo03);
 		
 		// Retrieve
+		
 		MemberVO out01 = dao.selectOne(vo01);
+		
 		CompareData(out01, vo01);
 		System.out.println("dao test out value : "+out01);
 		System.out.println("dao test vo value : "+vo01);
