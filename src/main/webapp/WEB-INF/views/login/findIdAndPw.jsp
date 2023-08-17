@@ -70,15 +70,14 @@
       </div><!-- id 찾기 -->
       <div class = "jb-division-line"></div>
 	  <div class = "roadscannercontainer"><!-- pw 찾기 -->
-	  <h4 style="text-align: center; margin-bottom:50px; font-weight: 800;">비밀번호 찾기</h4>
+	  <h4 style="text-align: center; margin-bottom:50px; font-weight: 800;">비밀번호 재설정</h4>
         <form class = "formabc" onsubmit="return false;">
           아이디<br/>
           <input type="text" class="findinput" style="margin-bottom: 20px;"
           id="userId" name="userId" onkeyup="id_form_check(event)" placeholder="아이디"><br/>
           이메일<br/>
           <input type="email" class="findinput"  id="email2" name= "email2" placeholder="이메일"><br/>
-          <input type="hidden" id="set_pw">
-          <button type="button" class= "findbtn" id="findPw" name="findPw">비밀번호 찾기</button>
+          <button type="button" class= "findbtn" id="findPw" name="findPw">비밀번호 재설정</button>
         </form>
         
         
@@ -139,8 +138,8 @@
                       return;
                     }
                     if("30"==paredJSON.msgId){ //서치 성공
-                      $('#set_id').attr('value',paredJSON.msgContents);
-                      email_id_find();
+                    	$('#set_id').attr('value', paredJSON.msgContents);
+                    	email_id_find();
                       
                     }
                     
@@ -191,9 +190,8 @@
                         return;
                       }
                       if("30"==paredJSON.msgId){//로그인 성공
-                    	$('#set_pw').attr('value',paredJSON.msgContents);
-                    	email_pw_find();
-                    	
+                    	  alert(paredJSON.msgContents);
+                    	  window.location.href="${CP}/changePw";
                       }
                     },
                     error:function(data){//실패시 처리
@@ -210,27 +208,12 @@
     	  
     	  $.ajax({
               type : 'POST',
-              url : "login/toEmailFindId?email=" + email + "&id=" + id 
+              url : "/login/toEmailFindId?email=" + email + "&id=" + id 
               
           }); // end ajax
           alert('요청하신 이메일로 아이디를 보내드렸습니다.');
     	  $('#email').val('');
       }
-      
-      function email_pw_find() {
-          
-          const email = $("#email2").val();
-          const pw = $("#set_pw").val();
-         
-         $.ajax({
-             type : 'POST',
-             url : "login/toEmailFindPw?email=" + email + "&pw=" + pw 
-             
-         }); // end ajax
-         alert('요청하신 이메일로 비밀번호를 보내드렸습니다.');
-         $('#userId').val('');
-         $('#email2').val('');
-     }
     
     </script>
 </html>

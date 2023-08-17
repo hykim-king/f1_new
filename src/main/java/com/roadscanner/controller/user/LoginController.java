@@ -161,19 +161,6 @@ public class LoginController {
 	public String findId(String email, String id) {
 		return mailSend.findId(email, id);
 	}
-    
-    /**
-     * 비밀번호 찾기 (이메일로 전송)
-     * @param email
-     * @param pw
-     * @return
-     */
-    @PostMapping("/**/toEmailFindPw")
-	@ResponseBody
-	public String findPw(String email, String pw) {
-		return mailSend.findPw(email, pw);
-	}
-
 
     /**
      * 아이디/비밀번호 찾기 화면
@@ -231,7 +218,7 @@ public class LoginController {
     public String findPw(MemberVO user, HttpSession httpSession) throws SQLException {
         System.out.println("┌────────────────────────────────────────────────────────┐");
         System.out.println("│ findPw()                                               │");
-        System.out.println("│ 비밀번호찾기 기능                                                                                     │");
+        System.out.println("│ 비밀번호찾기 기능                                                                                                │");
         System.out.println("└────────────────────────────────────────────────────────┘");
         String jsonString = "";    
         MessageVO message = new MessageVO();
@@ -245,7 +232,7 @@ public class LoginController {
             message.setMsgContents("아이디와 이메일을 확인해 주세요.");
         }else {                    
             message.setMsgId("30");
-            message.setMsgContents(pwresult);
+            message.setMsgContents("비밀번호 재설정 페이지로 이동합니다.");
         }
         jsonString = new Gson().toJson(message);        
         System.out.println("│ jsonString : "+jsonString);
@@ -341,5 +328,5 @@ public class LoginController {
 		
 		return jsonString;
 	}
-	
+		
 }

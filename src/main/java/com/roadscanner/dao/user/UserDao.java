@@ -131,5 +131,13 @@ public interface UserDao {
 	 * @throws SQLException
 	 */
 	public int clearGrade(MemberVO user) throws SQLException;
+	
+	/**
+	 * 비밀번호 재설정 페이지 전용
+	 * @param user
+	 * @return 1: 성공, 0: 실패
+	 * @throws SQLException
+	 */
+	public int changePw(MemberVO user) throws SQLException;
 
 }

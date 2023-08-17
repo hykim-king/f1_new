@@ -40,7 +40,7 @@
       WHERE id = #{id}
     </select>
     
-     <!-- 등급 체크 -->
+     <!-- 비밀번호 검사 -->
     <select id="encoder" parameterType="MemberVO" resultMap="MemberMap">
       SELECT password
       FROM member
@@ -154,4 +154,19 @@
     DELETE FROM member
     WHERE id = #{id}
   </delete>
+  
+  <!-- 비밀번호 재설정 전용 수정문 -->
+  <update id="changePw" parameterType="MemberVO">
+    UPDATE member         
+    SET password  = #{password}
+    WHERE email = #{email}
+  </update>
+  
+  <!-- 비밀번호 재설정 전용 검사문 -->
+  <select id="ChangeEncoder" parameterType="MemberVO" resultMap="MemberMap">
+    SELECT password
+    FROM member
+    WHERE email = #{email}
+  </select>
+  
 </mapper>

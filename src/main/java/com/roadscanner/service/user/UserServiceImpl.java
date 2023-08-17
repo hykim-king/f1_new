@@ -253,5 +253,17 @@ public class UserServiceImpl implements UserService {
         LOG.debug("checkGrade: " + checkGrade);
         return checkGrade;
 	}
+
+	@Override
+	public int changePw(MemberVO user) throws SQLException {
+		int checkStatus = -1;
+		
+        checkStatus = this.userDao.changePw(user);
+        if(0==checkStatus) {
+            checkStatus = -1; // 회원정보가 변경되지 않음
+        } 
+        LOG.debug("checkStatus: " + checkStatus);
+        return checkStatus;
+	}
 	
 }

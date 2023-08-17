@@ -256,5 +256,22 @@ public class UserDaoImpl implements UserDao {
 
 		return flag;
 	}
+
+	@Override
+	public int changePw(MemberVO user) throws SQLException {
+		
+		String encoder = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encoder);
+		
+		int flag = 0;
+		String statement = this.NAMESPACE + DOT + "changePw";
+		LOG.debug("┌────────────────────────────────────────────────────────┐");
+		LOG.debug("│ statement " + statement);
+		LOG.debug("│ encoder " + encoder);
+		LOG.debug("└────────────────────────────────────────────────────────┘");
+		flag = this.sqlSessionTemplate.update(statement, user);
+
+		return flag;
+	}
 	
 }
