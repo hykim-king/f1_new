@@ -101,9 +101,29 @@ public class QuestionController implements PcwkLogger {
     }
 
     @GetMapping("/update/{no}")
-    public String questionUpdate(@PathVariable Long no, Model model) {
+    public String questionUpdate(@PathVariable Long no, Model model) throws SQLException {
         QuestionResponseDTO dto = questionService.findByNo(no);
         model.addAttribute("question", dto);
+        
+		LOG.debug("┌──────────────────────────────┐");
+        LOG.debug("│get url from FileUploadService│");
+        LOG.debug("│*****idx: "+dto.getIdx().intValue());
+        
+        FileUploadVO fileVO = new FileUploadVO();
+        fileVO.setIdx(dto.getIdx().intValue());
+        LOG.debug("│*****inVO: "+fileVO.toString());
+        
+        fileVO = fileUploadService.doSelectOne(fileVO);
+        LOG.debug("│*****outVO: "+fileVO.toString());
+        
+        String originFileName = fileVO.getName();
+        String fileName = originFileName.substring(18);
+        LOG.debug("│*****fileName: "+fileName);
+        
+        model.addAttribute("originFileName", originFileName);
+        model.addAttribute("fileName", fileName);
+        
+        LOG.debug("└──────────────────────────────┘");
         return "qna/question-update";
     }
     
@@ -142,5 +162,38 @@ public class QuestionController implements PcwkLogger {
         
         return result;
     }
+	
+	// 이미지 삭제
+	@RequestMapping(value = "/fileDelete", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String deleteFile(FileUploadVO inVO) throws SQLException, IOException {
+		String jsonString = "";
+
+		LOG.debug("┌─────────────┐");
+		LOG.debug("│ doDelete    │");
+		LOG.debug("│ inVO        │" + inVO);
+		LOG.debug("└─────────────┘");
+
+		try {
+			int flag = this.fileUploadService.doDelete(inVO);
+
+			String message = "";
+			if (1 == flag) { // 삭제 성공
+				message = "삭제되었습니다.";
+			} else { // 삭제 실패
+				message = "삭제를 실패했습니다.";
+			}
+
+			MessageVO messageVO = new MessageVO(String.valueOf(flag), message);
+			jsonString = new Gson().toJson(messageVO);
+
+		} catch (SQLException | IOException e) {
+			String error = e.getMessage();
+			LOG.debug("**Failed: " + error);
+			throw e;
+		}
+
+		return jsonString;
+	}
 
 }
