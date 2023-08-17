@@ -68,12 +68,18 @@
         <!-- 검색 폼 -->
         <div class="row mb-3">
             <div class="col">
-                    <div class="form-group">
+                    <div class="form-group" style="display: flex;">
                         <input type="text" id ="searchid" name="keyword" class="form-control" placeholder="아이디 검색">
                         <input type="hidden" id="exclude" name="exclude" value="${user.id}">
+                    <div style="margin-left : 7px;">
+	                    <button type="submit" id ="searchidbtn" class="btn btn-primary ml-2"
+	                    style="width: 70px;">검색</button>
+	                </div>
+	                <div style="margin-left : 7px; ">   
+	                    <button type="button" id= "deletebtn" class="btn btn-primary ml-2"
+	                    style="width: 70px;">삭제</button>
                     </div>
-                    <button type="submit" id ="searchidbtn" class="btn btn-primary ml-2">검색</button>
-                    <button type="button" id= "deletebtn" class="btn btn-primary ml-2">삭제</button>
+                    </div>
             </div>
         </div>
         <!-- 검색 폼 end ------------------------------------------------------------>
