@@ -20,8 +20,8 @@
 	        <option value="답변완료">답변완료</option>
 	      </select>
 	    </div>
-	    <!-- 검색 셀렉트 박스 (오른쪽 정렬) -->
 	    <div class="col-auto flex-fill justify-content-end d-flex"> <!-- 검색 박스와 글쓰기 버튼을 포함한 레이아웃 -->
+	      <!-- 검색 셀렉트 박스 (오른쪽 정렬) -->
 	      <div class="col-auto"> 
 	        <select class="form-select" name="searchDiv" id="searchDiv">
 	          <option value="">--전체--</option>
@@ -31,7 +31,7 @@
 	        </select>
 	      </div>
 	      <!-- 검색 박스 (우측 마진 추가) -->
-	      <div class="col-auto"> 
+	      <div class="col-auto mx-1"> 
 	        <div class="input-group">
 	          <span class="input-group-text" id="basic-addon1">
 	            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -41,37 +41,40 @@
 	          <input type="text" class="form-control" id="searchWord" placeholder="검색어를 입력하세요.">
 	        </div>
 	      </div>
+	      <div>
+	        <a class="btn btn-primary" role="button">조회</a>
+	      </div>
 	    </div>
 	  </div>
 	</form>
     <table class="table table-hover">
-        <thead>
+        <thead class="table-group-divider" style="border-color: #DCDCDC;">
         <tr>
-            <th>번호</th>
-            <th>분류</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-            <th>조회수</th>
+            <th class="text-center">번호</th>
+            <th class="text-center">분류</th>
+            <th class="text-center">제목</th>
+            <th class="text-center">작성자</th>
+            <th class="text-center">작성일</th>
+            <th class="text-center">조회수</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody class="table-group-divider" style="border-color: #DCDCDC;">
         <c:forEach items="${questions}" var="question">
             <c:choose>
                 <c:when test="${question.category == 10}">
                     <tr class="table" style="background-color: #F0F0F0;">
-                        <td>${question.no}</td>
-                        <td><span class="badge" style="background-color: #F87217; color: white;">공지</span></td>
+                        <td class="text-center">${question.no}</td>
+                        <td class="text-center"><span class="badge" style="background-color: #F87217; color: white;">공지</span></td>
                         <td><a href="/qna/${question.no}" class="text-dark qna-link notice-title">${question.title}</a></td>
-                        <td>${question.id}</td>
-                        <td>${question.createDate}</td>
-                        <td>${question.views}</td>
+                        <td class="text-center">${question.id}</td>
+                        <td class="text-center">${question.createDate}</td>
+                        <td class="text-center">${question.views}</td>
                     </tr>
                 </c:when>
                 <c:otherwise>
                     <tr>
-                        <td>${question.no}</td>
-                        <td>
+                        <td class="text-center">${question.no}</td>
+                        <td class="text-center">
                             <c:choose>
                                 <c:when test="${question.category == 20}">
                                     <span class="badge" style="background-color: #024089; color: white;">답변완료</span>
@@ -82,9 +85,9 @@
                             </c:choose>
                         </td>
                         <td><a href="/qna/${question.no}" class="text-dark qna-link">${question.title}</a></td>
-                        <td>${question.id}</td>
-                        <td>${question.createDate}</td>
-                        <td>${question.views}</td>
+                        <td class="text-center">${question.id}</td>
+                        <td class="text-center">${question.createDate}</td>
+                        <td class="text-center">${question.views}</td>
                     </tr>
                 </c:otherwise>
             </c:choose>
@@ -93,7 +96,7 @@
     </table>
     <!-- 글쓰기 버튼 -->
     <div class="d-flex justify-content-end">
-        <a class="btn btn-outline-primary my-1" href="/qna/write">글쓰기</a>
+        <a href="/qna/save" class="btn btn-outline-primary my-1" role="button">글쓰기</a>
     </div>
     <!-- 페이징 -->
     <div class="my-2">
