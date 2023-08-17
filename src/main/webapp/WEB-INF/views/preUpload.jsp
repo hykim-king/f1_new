@@ -163,6 +163,17 @@
             <a class="nav-link" href="#">게시판</a>
           </li>
         </c:if>
+        <c:if test="${user.grade == 2}">
+        <li class="nav-item dropdown">
+          <input type="hidden" id="nekeyword" name="nekeyword" value ="${user.id}">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">관리자 기능</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="${CP}/admin">List</a></li>
+            <li><a class="dropdown-item" href="#">Upload</a></li>
+            <li><a class="dropdown-item" href="#">None</a></li>
+          </ul>
+        </li>
+        </c:if>
       </ul>
       <form class="d-flex" role="search">
         <!-- 로그인 세션 X -->

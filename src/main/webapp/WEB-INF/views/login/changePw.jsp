@@ -205,7 +205,7 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
    
   $("#cancel").on("click", function(){
     
-    window.location.href="${CP}/findIdAndPw";
+    window.location.href="${CP}/findIdPw";
     
   });   // $("#cancel") click
   

@@ -88,23 +88,23 @@ public class LoginController {
         // (1 : id 미입력)
         if(null == user.getId() || "".equals(user.getId())) {
             message.setMsgId("1");
-            message.setMsgContents("아이디를 입력 하세요.");
+            message.setMsgContents("아이디를 입력하세요.");
             return new Gson().toJson(message);        
         }
         // (2 : pass 미입력)
         if(null == user.getPassword() || "".equals(user.getPassword())) {
             message.setMsgId("2");
-            message.setMsgContents("비밀번호를 입력 하세요.");
+            message.setMsgContents("비밀번호를 입력하세요.");
             return new Gson().toJson(message);        
         }
         
         int status = this.userService.doLogin(user);        
         if(10==status) {         // (10 : id 오류)
             message.setMsgId("10");
-            message.setMsgContents("아이디를 확인 하세요.");
+            message.setMsgContents("아이디를 확인하세요.");
         }else if(20==status) {     // (20 : pass 오류)
             message.setMsgId("20");
-            message.setMsgContents("비밀번호를 확인  하세요.");
+            message.setMsgContents("비밀번호를 확인하세요.");
         }else if(30==status) {                    // (30 : 성공)
             message.setMsgId("30");
             message.setMsgContents(user.getId()+"가 로그인 되었습니다.");
@@ -195,7 +195,7 @@ public class LoginController {
         result = this.userService.doSearchId(user);        
         if("-1".equals(result)) {         // (10 : id 오류)
             message.setMsgId("10");
-            message.setMsgContents("이메일을 확인해 주세요.");
+            message.setMsgContents("이메일을 확인해주세요.");
         }else {                    
             message.setMsgId("30");
             message.setMsgContents(result);
@@ -229,7 +229,7 @@ public class LoginController {
         pwresult = this.userService.doSearchPw(user);        
         if("-1".equals(pwresult)) {         // (10 : id 오류)
             message.setMsgId("10");
-            message.setMsgContents("아이디와 이메일을 확인해 주세요.");
+            message.setMsgContents("아이디와 이메일을 확인해주세요.");
         }else {                    
             message.setMsgId("30");
             message.setMsgContents("비밀번호 재설정 페이지로 이동합니다.");
