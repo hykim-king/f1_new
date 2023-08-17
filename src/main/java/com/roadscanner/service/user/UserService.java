@@ -101,5 +101,13 @@ public interface UserService {
 	 * @throws SQLException
 	 */
 	public int clearGrade(MemberVO user) throws SQLException;
+	
+	/**
+	 * 비밀번호 재설정 전용 수정
+	 * @param user
+	 * @return 1: 성공 , -1: 실패 
+	 * @throws SQLException
+	 */
+	public int changePw(MemberVO user) throws SQLException;
 		
 }

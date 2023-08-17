@@ -26,15 +26,25 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <c:if test="${user ne null}">
+          <li class="nav-item">
+            <a class="nav-link" href="${CP}/main/preUpload">사진 업로드</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">게시판</a>
+          </li>
+        </c:if>
+        <c:if test="${user.grade == 2}">
+        <li class="nav-item dropdown">
+          <input type="hidden" id="nekeyword" name="nekeyword" value ="${user.id}">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">관리자 기능</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="${CP}/admin">List</a></li>
+            <li><a class="dropdown-item" href="#">Upload</a></li>
+            <li><a class="dropdown-item" href="#">None</a></li>
+          </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
+        </c:if>
       </ul>
       <form class="d-flex" role="search">
         <!-- 로그인 세션 X -->
@@ -44,13 +54,9 @@
         <!-- 로그인 세션 O -->
         <c:if test="${user ne null}">
           <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/mypage'">MyPage</button>
-          <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/logout'">LogOut</button>
+          <button type="button" class="btn btn-outline-primary" onclick="location.href='${CP}/logout'" style="margin-right: 50px;">LogOut</button>
         </c:if>
-           <!-- 관린자 -->
-           <c:if test="${user.grade ==2}">
-               <button type="button" class="btn btn-outline-primary" onclick="location.href='${CP}/admin'" style="margin-right: 50px;">관리자</button>
-           </c:if>
-          <button type="button" onclick="location.href='${CP}/registerpage'" class="btn btn-outline-primary" style="margin-right: 50px;">Sign-up</button>
+           <button type="button" onclick="location.href='${CP}/registerpage'" class="btn btn-outline-primary" style="margin-right: 50px;">Sign-up</button>
       </form>
     </div>
   </div>
@@ -70,15 +76,14 @@
       </div><!-- id 찾기 -->
       <div class = "jb-division-line"></div>
 	  <div class = "roadscannercontainer"><!-- pw 찾기 -->
-	  <h4 style="text-align: center; margin-bottom:50px; font-weight: 800;">비밀번호 찾기</h4>
+	  <h4 style="text-align: center; margin-bottom:50px; font-weight: 800;">비밀번호 재설정</h4>
         <form class = "formabc" onsubmit="return false;">
           아이디<br/>
           <input type="text" class="findinput" style="margin-bottom: 20px;"
           id="userId" name="userId" onkeyup="id_form_check(event)" placeholder="아이디"><br/>
           이메일<br/>
           <input type="email" class="findinput"  id="email2" name= "email2" placeholder="이메일"><br/>
-          <input type="hidden" id="set_pw">
-          <button type="button" class= "findbtn" id="findPw" name="findPw">비밀번호 찾기</button>
+          <button type="button" class= "findbtn" id="findPw" name="findPw">비밀번호 재설정</button>
         </form>
         
         
@@ -139,8 +144,8 @@
                       return;
                     }
                     if("30"==paredJSON.msgId){ //서치 성공
-                      $('#set_id').attr('value',paredJSON.msgContents);
-                      email_id_find();
+                    	$('#set_id').attr('value', paredJSON.msgContents);
+                    	email_id_find();
                       
                     }
                     
@@ -191,9 +196,8 @@
                         return;
                       }
                       if("30"==paredJSON.msgId){//로그인 성공
-                    	$('#set_pw').attr('value',paredJSON.msgContents);
-                    	email_pw_find();
-                    	
+                    	  alert(paredJSON.msgContents);
+                    	  window.location.href="${CP}/changePw";
                       }
                     },
                     error:function(data){//실패시 처리
@@ -210,27 +214,12 @@
     	  
     	  $.ajax({
               type : 'POST',
-              url : "login/toEmailFindId?email=" + email + "&id=" + id 
+              url : "/login/toEmailFindId?email=" + email + "&id=" + id 
               
           }); // end ajax
           alert('요청하신 이메일로 아이디를 보내드렸습니다.');
     	  $('#email').val('');
       }
-      
-      function email_pw_find() {
-          
-          const email = $("#email2").val();
-          const pw = $("#set_pw").val();
-         
-         $.ajax({
-             type : 'POST',
-             url : "login/toEmailFindPw?email=" + email + "&pw=" + pw 
-             
-         }); // end ajax
-         alert('요청하신 이메일로 비밀번호를 보내드렸습니다.');
-         $('#userId').val('');
-         $('#email2').val('');
-     }
     
     </script>
 </html>
