@@ -1,13 +1,65 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
+<title>로드스캐너 - 게시판 수정</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- 부트스트랩 CSS 추가 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-<title>로드스캐너 - 게시판 수정</title>
+<link  href="${c}/resources/css/membership-style.css" rel="stylesheet">
+<link  href="${c}/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
+<script src="${c}/resources/js/bootstrap/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
 </head>
+<nav class="navbar navbar-expand-md mb-4" style="background-color: white;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">RoadScanner</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <c:if test="${user ne null}">
+          <li class="nav-item">
+            <a class="nav-link" href="${c}/main/preUpload">사진 업로드</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="${c}/qna">게시판</a>
+          </li>
+        </c:if>
+        <c:if test="${user.grade == 2}">
+        <li class="nav-item dropdown">
+          <input type="hidden" id="nekeyword" name="nekeyword" value ="${user.id}">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">관리자 기능</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="${c}/admin">List</a></li>
+            <li><a class="dropdown-item" href="#">Upload</a></li>
+            <li><a class="dropdown-item" href="#">None</a></li>
+          </ul>
+        </li>
+        </c:if>
+      </ul>
+      <form class="d-flex" role="search">
+        <!-- 로그인 세션 X -->
+        <c:if test="${user eq null}">
+          <button type="button" id="login" onclick="location.href='${c}/login'" class="btn btn-outline-primary me-2">Login</button>
+          <button type="button" onclick="location.href='${c}/registerpage'" class="btn btn-outline-primary" style="margin-right: 50px;">Sign-up</button>
+        </c:if>
+        <!-- 로그인 세션 O -->
+        <c:if test="${user ne null}">
+          <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${c}/mypage'">MyPage</button>
+          <button type="button" class="btn btn-outline-primary" onclick="location.href='${c}/logout'" style="margin-right: 50px;">LogOut</button>
+        </c:if>
+      </form>
+    </div>
+  </div>
+</nav>
 <body>
-	<form class="container mt-5" id="question-edit-form">
+	<form class="container mt-4" id="question-edit-form">
+		<h1 class="mb-4">Q&A 게시판</h1>
 		<!-- 이 부분에 히든 필드 추가 -->
 		<input type="hidden" id="no" value="${question.no}">
 
@@ -67,4 +119,9 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="/resources/js/qna.js"></script>
 </body>
+<footer class="py-3 my-4 mt-auto">
+  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+  </ul>
+  <p class="text-center text-body-secondary">&copy; 2023 F1 RoadScanner Project, All rights reserved.</p>
+</footer>
 </html>
