@@ -26,7 +26,8 @@ public class QuestionController {
                         @RequestParam(defaultValue = "1") int page,
                         @RequestParam(defaultValue = "10") int size,
                         @RequestParam(defaultValue = "") String searchType,
-                        @RequestParam(defaultValue = "") String keyword) {
+                        @RequestParam(defaultValue = "") String keyword,
+                        @RequestParam(required = false) Integer category) {
         // 페이지 번호가 유효한지 확인
         if (page < 1) {
             page = 1;
@@ -35,6 +36,7 @@ public class QuestionController {
         QuestionSearchCond searchCond = new QuestionSearchCond();
         searchCond.setSearchType(searchType);
         searchCond.setKeyword(keyword);
+        searchCond.setCategory(category); // 카테고리 설정
 
         PaginationDTO pagination = new PaginationDTO(page, size);
         model.addAttribute("questions", questionService.findAll(pagination, searchCond));

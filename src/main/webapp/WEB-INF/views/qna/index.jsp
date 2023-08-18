@@ -10,17 +10,37 @@
 <div class="container mt-4">
     <h1>Q&A 게시판</h1>
 
-    <form class="mb-3">
+<%--    <form class="mb-3">--%>
+<%--        <div class="input-group">--%>
+<%--            <select name="searchType" class="form-select">--%>
+<%--                <option value="title">제목</option>--%>
+<%--                <option value="content">내용</option>--%>
+<%--                <option value="both">제목 + 내용</option>--%>
+<%--            </select>--%>
+<%--            <input type="text" name="keyword" class="form-control" placeholder="검색어를 입력하세요">--%>
+<%--            <button type="submit" class="btn btn-primary">검색</button>--%>
+<%--        </div>--%>
+<%--    </form>--%>
+
+    <form class="mb-3" action="/qna" method="get">
         <div class="input-group">
+            <select name="category" id="category" class="form-select">
+                <option value="">전체</option>
+                <option value="10" ${category == 10 ? 'selected' : ''}>공지</option>
+                <option value="20" ${category == 20 ? 'selected' : ''}>답변완료</option>
+                <option value="30" ${category == 30 ? 'selected' : ''}>답변대기</option>
+            </select>
             <select name="searchType" class="form-select">
                 <option value="title">제목</option>
                 <option value="content">내용</option>
-                <option value="both">제목 + 내용</option>
+                <option value="both">제목+내용</option>
             </select>
             <input type="text" name="keyword" class="form-control" placeholder="검색어를 입력하세요">
+            <!-- 카테고리 선택 -->
             <button type="submit" class="btn btn-primary">검색</button>
         </div>
     </form>
+
 
     <div class="mb-3">
         <a href="/qna/save" class="btn btn-primary" role="button">글쓰기</a>

@@ -57,6 +57,9 @@
             <if test="searchCond.searchType == 'both'">
                 (title LIKE '%' || #{searchCond.keyword} || '%' OR content LIKE '%' || #{searchCond.keyword} || '%')
             </if>
+            <if test="searchCond.category != null">
+                AND category = #{searchCond.category}
+            </if>
         </where>
         ORDER BY CASE WHEN category = 10 THEN 1 ELSE 2 END, no DESC
         ) a WHERE rownum &lt;= #{pagination.start} + #{pagination.size}
