@@ -2,12 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.roadscanner.dao.qna.QuestionDAO">
 
-    <!-- 질문 작성/저장 -->
-<!--    <insert id="save" useGeneratedKeys="true" keyColumn="no" keyProperty="no">-->
-<!--        INSERT INTO QUESTION (category, id, title, content)-->
-<!--        VALUES (#{category}, #{id}, #{title}, #{content})-->
-<!--    </insert>-->
-
     <!-- 오라클 insert 확인 O-->
     <insert id="save">
         INSERT INTO QUESTION (no, category, id, title, content)
@@ -18,7 +12,6 @@
         INSERT INTO QUESTION (no, category, id, title, content)
         VALUES (#{no}, #{category}, #{id}, #{title}, #{content})
     </insert>-->
-
 
     <!-- no로 질문 조회 오라클 O-->
     <select id="findByNo" resultType="QuestionVO">
@@ -37,19 +30,37 @@
         WHERE no = #{no}
     </select>
 
-    <!-- 모든 질문 조회 getAllQuestions에서 수정 -->
+    <!-- 모든 질문 조회 -->
     <select id="findAll" resultType="QuestionVO">
+        SELECT *
+        FROM (
+        SELECT a.*, rownum rnum
+        FROM (
         SELECT
-            no,
-            category,
-            views,
-            idx,
-            id,
-            title,
-            content,
-            create_date AS createDate,
-            update_date AS updateDate
+        no,
+        category,
+        views,
+        idx,
+        id,
+        title,
+        content,
+        create_date AS createDate,
+        update_date AS updateDate
         FROM QUESTION
+        <where>
+            <if test="searchCond.searchType == 'title'">
+                title LIKE '%' || #{searchCond.keyword} || '%'
+            </if>
+            <if test="searchCond.searchType == 'content'">
+                content LIKE '%' || #{searchCond.keyword} || '%'
+            </if>
+            <if test="searchCond.searchType == 'both'">
+                (title LIKE '%' || #{searchCond.keyword} || '%' OR content LIKE '%' || #{searchCond.keyword} || '%')
+            </if>
+        </where>
+        ORDER BY CASE WHEN category = 10 THEN 1 ELSE 2 END, no DESC
+        ) a WHERE rownum &lt;= #{pagination.start} + #{pagination.size}
+        ) WHERE rnum &gt; #{pagination.start}
     </select>
 
     <!-- 질문 업데이트 -->
@@ -70,25 +81,40 @@
     </delete>
 
     <!-- 페이징 구현 -->
-    <select id="findAllWithPaging" resultType="QuestionVO">
-        SELECT *
-        FROM (SELECT a.*, rownum rnum
-              FROM (SELECT
-                        no,
-                        category,
-                        views,
-                        title,
-                        id,
-                        create_date AS createDate,
-                        update_date AS updateDate
-                    FROM QUESTION
-                    ORDER BY CASE WHEN category = 10 THEN 1 ELSE 2 END, no DESC
-                   ) a WHERE rownum &lt;= #{start} + #{size}
-             ) WHERE rnum &gt; #{start}
-    </select>
+<!--    <select id="findAllWithPaging" resultType="QuestionVO">-->
+<!--        SELECT *-->
+<!--        FROM (SELECT a.*, rownum rnum-->
+<!--              FROM (SELECT-->
+<!--                        no,-->
+<!--                        category,-->
+<!--                        views,-->
+<!--                        title,-->
+<!--                        id,-->
+<!--                        create_date AS createDate,-->
+<!--                        update_date AS updateDate-->
+<!--                    FROM QUESTION-->
+<!--                    ORDER BY CASE WHEN category = 10 THEN 1 ELSE 2 END, no DESC-->
+<!--                   ) a WHERE rownum &lt;= #{start} + #{size}-->
+<!--             ) WHERE rnum &gt; #{start}-->
+<!--    </select>-->
+
+<!--    <select id="countQuestions" resultType="int">-->
+<!--        SELECT count(*) FROM question-->
+<!--    </select>-->
 
     <select id="countQuestions" resultType="int">
         SELECT count(*) FROM question
+        <where>
+            <if test="searchType == 'title'">
+                title LIKE '%' || #{keyword} || '%'
+            </if>
+            <if test="searchType == 'content'">
+                content LIKE '%' || #{keyword} || '%'
+            </if>
+            <if test="searchType == 'both'">
+                (title LIKE '%' || #{keyword} || '%' OR content LIKE '%' || #{keyword} || '%')
+            </if>
+        </where>
     </select>
 
     <!-- 조회수 증가 -->
