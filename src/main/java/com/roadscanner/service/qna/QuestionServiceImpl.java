@@ -15,45 +15,15 @@ public class QuestionServiceImpl implements QuestionService {
 
     private final QuestionDAO questionDAO;
 
-    // 게시글 분류(category) 변경
     @Override
-    public Long updateCategory(Long no) {
-        questionDAO.updateCategory(no);
-        return no;
-    }
-
-    // 전체조회 + 페이징 추가 정리 필요
-    @Override
-    public List<QuestionListResponseDTO> findAllWithPaging(PaginationDTO pagination) {
-        List<QuestionVO> questions = questionDAO.findAllWithPaging(pagination);
+    public List<QuestionListResponseDTO> findAll(PaginationDTO pagination, QuestionSearchCond questionSearch) {
+        List<QuestionVO> questionList = questionDAO.findAll(pagination, questionSearch);
         List<QuestionListResponseDTO> dto = new ArrayList<>();
 
-        for (QuestionVO question : questions) {
+        for (QuestionVO question : questionList) {
             dto.add(new QuestionListResponseDTO(question));
         }
-        return dto;
-    }
 
-    // 전체 게시글 반환
-    @Override
-    public int countQuestions() {
-        return questionDAO.countQuestions();
-    }
-
-    // 조회수 증가
-    @Override
-    public void increaseViews(Long no) {
-        questionDAO.increaseViews(no);
-    }
-
-    @Override
-    public List<QuestionListResponseDTO> findAll() {
-        List<QuestionVO> questions = questionDAO.findAll();
-        List<QuestionListResponseDTO> dto = new ArrayList<>();
-
-        for (QuestionVO question : questions) {
-            dto.add(new QuestionListResponseDTO(question));
-        }
         return dto;
     }
 
@@ -80,11 +50,26 @@ public class QuestionServiceImpl implements QuestionService {
         questionDAO.update(vo);
         return no;
     }
-
     @Override
     public Long delete(Long no) {
         questionDAO.delete(no);
         return no;
     }
 
+    @Override
+    public int countQuestions(QuestionSearchCond searchCond) {
+        return questionDAO.countQuestions(searchCond);
+    }
+
+    @Override
+    public void increaseViews(Long no) {
+        questionDAO.increaseViews(no);
+    }
+
+    // 게시글 분류(category) 변경
+    @Override
+    public Long updateCategory(Long no) {
+        questionDAO.updateCategory(no);
+        return no;
+    }
 }

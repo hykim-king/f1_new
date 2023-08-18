@@ -3,6 +3,7 @@ package com.roadscanner.controller.qna;
 import com.roadscanner.dto.qna.AnswerResponseDTO;
 import com.roadscanner.dto.qna.PaginationDTO;
 import com.roadscanner.dto.qna.QuestionResponseDTO;
+import com.roadscanner.dto.qna.QuestionSearchCond;
 import com.roadscanner.service.qna.AnswerService;
 import com.roadscanner.service.qna.QuestionService;
 import lombok.RequiredArgsConstructor;
@@ -25,16 +26,23 @@ public class QuestionController {
     @GetMapping
     public String index(Model model,
                         @RequestParam(defaultValue = "1") int page,
-                        @RequestParam(defaultValue = "10") int size) {
+                        @RequestParam(defaultValue = "10") int size,
+                        @RequestParam(defaultValue = "") String searchType,
+                        @RequestParam(defaultValue = "") String keyword) {
         // 페이지 번호가 유효한지 확인
         if (page < 1) {
             page = 1;
         }
 
-        PaginationDTO pagination = new PaginationDTO(page, size);
-        model.addAttribute("questions", questionService.findAllWithPaging(pagination));
+        QuestionSearchCond searchCond = new QuestionSearchCond();
+        searchCond.setSearchType(searchType);
+        searchCond.setKeyword(keyword);
 
-        int totalQuestions = questionService.countQuestions();
+        PaginationDTO pagination = new PaginationDTO(page, size);
+        model.addAttribute("questions", questionService.findAll(pagination, searchCond));
+//        model.addAttribute("questions", questionService.findAllWithPaging(pagination));
+
+        int totalQuestions = questionService.countQuestions(searchCond);
         int totalPages = (int) Math.ceil((double) totalQuestions / size);
 
         // 총 페이지 수가 0이면, 페이지 번호도 0으로 설정

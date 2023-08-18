@@ -9,6 +9,19 @@
 <body>
 <div class="container mt-4">
     <h1>Q&A 게시판</h1>
+
+    <form class="mb-3">
+        <div class="input-group">
+            <select name="searchType" class="form-select">
+                <option value="title">제목</option>
+                <option value="content">내용</option>
+                <option value="both">제목 + 내용</option>
+            </select>
+            <input type="text" name="keyword" class="form-control" placeholder="검색어를 입력하세요">
+            <button type="submit" class="btn btn-primary">검색</button>
+        </div>
+    </form>
+
     <div class="mb-3">
         <a href="/qna/save" class="btn btn-primary" role="button">글쓰기</a>
     </div>
