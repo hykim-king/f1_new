@@ -54,15 +54,16 @@ public class UserInfoController {
         String jsonString = "";
         MessageVO message = new MessageVO();
         
-        if(1 == flag) {
+
+        
+        if(flag == 1) {
         	message.setMsgId("10");
         	message.setMsgContents("비빌번호를 수정했습니다");
         	
-        }if(3 == flag) {
+        }if(flag == 3) {
         	message.setMsgId("30");
         	message.setMsgContents("현재와 같은  비밀번호입니다.");
-        	return jsonString;
-        	
+
         } else {
         	message.setMsgId("20");
         	message.setMsgContents("회원정보 수정에 실패했습니다.");

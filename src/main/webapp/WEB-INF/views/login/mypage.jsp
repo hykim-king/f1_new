@@ -210,14 +210,15 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
 	        	  }
 	        	  
 	        	  if("20" == parsedJSON.msgId) {
-                  alert(parsedJSON.msgContents);
-                  return;
-	             }
-	        	  
-	        	 if("30" == parsedJSON.msgId) {
 	                  alert(parsedJSON.msgContents);
 	                  return;
-	             }
+	              }
+	        	  
+	        	  if("30" == parsedJSON.msgId) {
+	                  alert(parsedJSON.msgContents);
+	                  return;
+	              }
+	        	  
 	        	  
 	          },
 	          error:function(data){//실패시 처리
