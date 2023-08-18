@@ -57,7 +57,7 @@
 
 		<div class="text-center">
 			<a href="/qna" role="button" class="btn btn-secondary">취소</a>
-			<button type="submit" id="btn-save" class="btn btn-primary"
+			<button type="button" id="btn-update" class="btn btn-primary"
 				value="수정">수정</button>
 		</div>
 
