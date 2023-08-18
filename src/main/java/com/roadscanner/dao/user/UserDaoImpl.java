@@ -191,19 +191,39 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int updatePw(MemberVO user) throws SQLException {
-		String encoder = passwordEncoder.encode(user.getPassword());
-		user.setPassword(encoder);
-		
-		int flag = 0;
+		String statementpw = this.NAMESPACE + DOT + "encoder";
+		MemberVO encoderpw = this.sqlSessionTemplate.selectOne(statementpw,user);
+
 		String statement = this.NAMESPACE + DOT + "updatepassword";
+		int flag = -1;
+		
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
 		LOG.debug("│ statement " + statement);
-		LOG.debug("│ encoder " + encoder);
+		LOG.debug("│ encoder " + encoderpw);
 		LOG.debug("└────────────────────────────────────────────────────────┘");
-		flag = this.sqlSessionTemplate.update(statement, user);
-
-		return flag;
+					
+		if(passwordEncoder.matches(user.getPassword(),encoderpw.getPassword())) {
+			LOG.debug("┌────────────────────────────────────────────────────────┐");
+			LOG.debug("│ ffffffffffffffff");
+			LOG.debug("└────────────────────────────────────────────────────────┘");
+			flag = 3;
+			return flag;
+			
+		}else{
+			LOG.debug("┌────────────────────────────────────────────────────────┐");
+			LOG.debug("│ ssssssssssssssss");
+			LOG.debug("└────────────────────────────────────────────────────────┘");
+			String encoder = passwordEncoder.encode(user.getPassword());
+			user.setPassword(encoder);
+			LOG.debug("┌────────────────────────────────────────────────────────┐");
+			LOG.debug("│ encoder::" + encoder);
+			LOG.debug("└────────────────────────────────────────────────────────┘");
+			
+			flag = this.sqlSessionTemplate.update(statement, user);
+		}
+			return flag;
 	}
+
 
 	@Override
 	public int updateUser(MemberVO user) throws SQLException {
