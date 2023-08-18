@@ -205,17 +205,19 @@
         </div>
         <!-- // 페이징 end -->
     </div>
-    <script>
-      const pagination = document.getElementById("pagination");
-      const pageButtons = pagination.querySelectorAll(".page-item");
-    
-      pageButtons.forEach(button => {
-        button.addEventListener("click", () => {
-          pageButtons.forEach(btn => btn.classList.remove("active"));
-          button.classList.add("active");
-        });
-      });
-    </script>
+	<script>
+	    const pagination = document.getElementById("pagination");
+	    const pageButtons = pagination.querySelectorAll(".page-item");
+	
+	    pageButtons.forEach(button => {
+	        button.addEventListener("click", () => {
+	            if (!button.classList.contains("disabled")) {
+	                pageButtons.forEach(btn => btn.classList.remove("active"));
+	                button.classList.add("active");
+	            }
+	        });
+	    });
+	</script>
 </body>
 <footer class="py-3 my-4 mt-auto">
   <ul class="nav justify-content-center border-bottom pb-3 mb-3">

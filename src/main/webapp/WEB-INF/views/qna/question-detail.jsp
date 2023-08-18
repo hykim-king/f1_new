@@ -64,19 +64,15 @@
             <input type="hidden" id="no" value="${question.no}">
             <div class="card-header">
                 <h2 class="card-title mb-0">${question.title}</h2>
+                <div class="col-4 d-flex justify-content-end">
+                            <p class="card-text text-end">조회수: ${question.views}</p>
+                </div>
             </div>
             <div class="row m-2 mb-0">
                 <div class="col-8">
                     <div class="card">
                         <div class="card-body py-2">
                             <p class="card-text">작성자: ${question.id}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4 d-flex justify-content-end">
-                    <div class="card">
-                        <div class="card-body py-2">
-                            <p class="card-text text-end">조회수: ${question.views}</p>
                         </div>
                     </div>
                 </div>
