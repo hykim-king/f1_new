@@ -16,7 +16,7 @@
     </div>
     <div class="mb-3">
         <label for="id" class="form-label">작성자:</label>
-        <input type="text" id="id" class="form-control">
+        <input type="text" id="id" class="form-control" value="${userId}" readonly>
     </div>
     <div class="mb-3">
         <label for="title" class="form-label">제목:</label>
