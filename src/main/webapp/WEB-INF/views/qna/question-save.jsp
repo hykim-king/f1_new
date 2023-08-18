@@ -72,8 +72,7 @@
         <div class="mb-3 row">
             <label for="id" class="col-sm-2 col-form-label">작성자</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="id">
-                <!-- value="${question.id}" readonly -->
+                <input type="text" class="form-control" id="id" value="${userId}" readonly>
             </div>
         </div>
         <div class="mb-3 row">

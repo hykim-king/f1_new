@@ -76,11 +76,11 @@
                     <!-- 검색 박스와 글쓰기 버튼을 포함한 레이아웃 -->
                     <!-- 검색 셀렉트 박스 (오른쪽 정렬) -->
                     <div class="col-auto">
-                        <select class="form-select" name="searchDiv" id="searchDiv">
+                        <select class="form-select" name="searchType" id="searchType">
                             <option value="">--전체--</option>
-                            <option value="제목">제목</option>
-                            <option value="내용">내용</option>
-                            <option value="제목+내용">제목+내용</option>
+                            <option value="title">제목</option>
+                            <option value="content">내용</option>
+                            <option value="both">제목+내용</option>
                         </select>
                     </div>
                     <!-- 검색 박스 (우측 마진 추가) -->
@@ -92,12 +92,12 @@
                                     fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                               <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
                             </svg>
-                            </span> <input type="text" class="form-control" id="searchWord"
+                            </span> <input type="text" name="keyword" class="form-control" id="keyword"
                                 placeholder="검색어를 입력하세요.">
                         </div>
                     </div>
                     <div>
-                        <a class="btn btn-primary" role="button">조회</a>
+                        <button type="submit" class="btn btn-primary">검색</button>
                     </div>
                 </div>
             </div>
