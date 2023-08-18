@@ -1,17 +1,16 @@
 package com.roadscanner.controller.qna;
 
+import com.roadscanner.domain.user.MemberVO;
 import com.roadscanner.dto.qna.AnswerResponseDTO;
 import com.roadscanner.dto.qna.PaginationDTO;
 import com.roadscanner.dto.qna.QuestionResponseDTO;
+import com.roadscanner.dto.qna.QuestionSearchCond;
 import com.roadscanner.service.qna.AnswerService;
 import com.roadscanner.service.qna.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RequestMapping("/qna")
@@ -25,16 +24,23 @@ public class QuestionController {
     @GetMapping
     public String index(Model model,
                         @RequestParam(defaultValue = "1") int page,
-                        @RequestParam(defaultValue = "10") int size) {
+                        @RequestParam(defaultValue = "10") int size,
+                        @RequestParam(defaultValue = "") String searchType,
+                        @RequestParam(defaultValue = "") String keyword) {
         // 페이지 번호가 유효한지 확인
         if (page < 1) {
             page = 1;
         }
 
-        PaginationDTO pagination = new PaginationDTO(page, size);
-        model.addAttribute("questions", questionService.findAllWithPaging(pagination));
+        QuestionSearchCond searchCond = new QuestionSearchCond();
+        searchCond.setSearchType(searchType);
+        searchCond.setKeyword(keyword);
 
-        int totalQuestions = questionService.countQuestions();
+        PaginationDTO pagination = new PaginationDTO(page, size);
+        model.addAttribute("questions", questionService.findAll(pagination, searchCond));
+//        model.addAttribute("questions", questionService.findAllWithPaging(pagination));
+
+        int totalQuestions = questionService.countQuestions(searchCond);
         int totalPages = (int) Math.ceil((double) totalQuestions / size);
 
         // 총 페이지 수가 0이면, 페이지 번호도 0으로 설정
@@ -52,8 +58,22 @@ public class QuestionController {
         return "qna/index";
     }
 
+    /**
+     * 로그인 하지 않은 유저가 글쓰기 버튼을 클릭 하면 로그인 화면으로 이동 시킨다.
+     * 로그인 한 유저는 세션에 저장되어있다. memberVO 변수로 값을 받고, 모델로 View 에 전달 시킨다.
+     * 로그인 하지 않은 유저가 접근하려고 한다면 login으로 보낸다.
+     * @param memberVO
+     * @param model
+     * @return
+     */
     @GetMapping("/save")
-    public String QuestionSave() {
+    public String QuestionSave(@SessionAttribute(value = "user", required = false) MemberVO memberVO, Model model) {
+
+        if (memberVO == null) {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("userId", memberVO.getId());
         return "qna/question-save";
     }
 
