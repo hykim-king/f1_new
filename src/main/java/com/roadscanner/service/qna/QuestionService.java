@@ -31,6 +31,6 @@ public interface QuestionService{
     void increaseViews(Long no);
 
     // 질문글 분류 변경
-    Long updateCategory(Long no);
+//    Long updateCategory(Long no);
 
 }

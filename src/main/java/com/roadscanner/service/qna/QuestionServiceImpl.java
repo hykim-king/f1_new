@@ -67,9 +67,10 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     // 게시글 분류(category) 변경
-    @Override
-    public Long updateCategory(Long no) {
-        questionDAO.updateCategory(no);
-        return no;
-    }
+//    @Override
+//    public Long updateCategory(Long no) {
+//        questionDAO.updateCategory(no);
+//        return no;
+//    }
+
 }

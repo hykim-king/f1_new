@@ -138,7 +138,7 @@ const answer = {
         // 답변 등록 Ajax 요청
         $.ajax({
             type: 'POST',
-            url: '/api/qna/' + no + '/saveAnswer', // 답변 등록 API 엔드포인트
+            url: '/api/qna/' + no + '/answer', // 답변 등록 API 엔드포인트
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(answerData),
