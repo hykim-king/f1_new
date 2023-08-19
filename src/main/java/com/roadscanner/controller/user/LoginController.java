@@ -2,6 +2,7 @@ package com.roadscanner.controller.user;
 
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -49,7 +50,7 @@ public class LoginController {
 	 * @return
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginPageStart(@ModelAttribute("user") MemberVO vo) {
+	public String loginPageStart() {
 		System.out.println("로그인 화면으로 이동...");
 		return "/login/login";
 	}
@@ -136,9 +137,10 @@ public class LoginController {
 	/* 로그아웃시에 셰션 제거 호출  */
     @GetMapping("/logout")
     public String logoutButtonEvent(HttpSession session) {
-    	LOG.debug("로그아웃");
+    	LOG.debug("┌────────────────────────────────────────────────────────┐");
+        LOG.debug("│ logoutButtonEvent()                                    │");
+        LOG.debug("└────────────────────────────────────────────────────────┘");
 		session.invalidate();
-		LOG.debug("로그아웃 완료");
 		return "/login/login";	
 	}
     

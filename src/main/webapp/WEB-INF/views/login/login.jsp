@@ -13,38 +13,9 @@
 <script src="${CP}/resources/js/jquery-3.7.0.js"></script>
 <title>로드스캐너 로그인</title>
 </head>
-<nav class="navbar navbar-expand-md mb-4" style="background-color: white;">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">RoadScanner</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav me-auto mb-2 mb-md-0">
-	      <c:if test="${user.grade ne 0}">
-	        <li class="nav-item">
-	          <a class="nav-link" href="${CP}/main/preUpload">사진 업로드</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link" href="#">게시판</a>
-	        </li>
-	      </c:if>
-      </ul>
-      <form class="d-flex" role="search">
-        <!-- 로그인 세션 O -->
-        <c:if test="${user.grade ne 0}">
-          <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/mypage'">MyPage</button>
-          <button type="button" class="btn btn-outline-primary" onclick="location.href='${CP}/logout'" style="margin-right: 50px;">LogOut</button>
-        </c:if>
-        
-        <!-- 로그인 세션 X -->
-        <c:if test="${user.grade eq 0}">
-          <button type="button" onclick="location.href='${CP}/registerpage'" class="btn btn-outline-primary" style="margin-right: 50px;">Sign-up</button>
-        </c:if>
-      </form>
-    </div>
-  </div>
-</nav>
+
+  <%@include file ="navbar.jsp" %>
+
 <body class="d-flex flex-column min-vh-100">
     <div class = "roadscannercontainer">
     <form onsubmit="return false;"> 
@@ -83,11 +54,7 @@
     </div>
 </body>
 
-<footer class="py-3 my-4 mt-auto">
-  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-  </ul>
-  <p class="text-center text-body-secondary">&copy; 2023 F1 RoadScanner Project, All rights reserved.</p>
-</footer>
+  <%@include file ="footer.jsp" %>
 
 <script>
   $(document).ready(function(){ //모든 화면이 다 로딩이 되면 실행하는 영역

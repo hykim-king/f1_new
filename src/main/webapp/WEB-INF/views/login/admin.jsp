@@ -22,60 +22,21 @@
 %>  
 <!DOCTYPE html>
 <html>
-	<head>
-	<meta charset="UTF-8">
-	<!-- CSS -->
-    <link  rel="stylesheet" href="${CP}/resources/css/admin.css" >
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <title>관리자 페이지</title>
-	</head>
+<head>
+<meta charset="UTF-8">
+<!-- CSS -->
+   <link  rel="stylesheet" href="${CP}/resources/css/admin.css" >
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!-- Bootstrap Icons -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+   <!-- CSS only -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+   <!-- JavaScript Bundle with Popper -->
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+   <title>관리자 페이지</title>
+</head>
 	
-<nav class="navbar navbar-expand-md mb-4" style="background-color: white;">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">RoadScanner</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav me-auto mb-2 mb-md-0">
-        <c:if test="${user ne null}">
-          <li class="nav-item">
-            <a class="nav-link" href="${CP}/main/preUpload">사진 업로드</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">게시판</a>
-          </li>
-        </c:if>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">관리자 기능</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="${CP}/admin">List</a></li>
-            <li><a class="dropdown-item" href="#">Upload</a></li>
-            <li><a class="dropdown-item" href="#">Board</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="d-flex" role="search">
-        <!-- 로그인 세션 X -->
-       <%-- <c:if test="${user eq null}">
-          <button type="button" id="login" onClick="window.location.reload()" class="btn btn-outline-primary me-2">Login</button>
-        </c:if> --%>
-        
-        <!-- 로그인 세션 O -->
-        <c:if test="${user ne null}">
-          <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/mypage'">MyPage</button>
-          <button type="button" class="btn btn-outline-primary" onclick="location.href='${CP}/logout'" style="margin-right: 50px;">LogOut</button>
-        </c:if>
-      </form>
-    </div>
-  </div>
-</nav>
+  <%@include file ="navbar.jsp" %>
 
 <body>
 
@@ -110,14 +71,8 @@
     </div>            
 </c:if> <!-- 유저 정보X-end -->
 
-
 </body>
 
-
-<footer class="py-3 my-4 mt-auto">
-  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-  </ul>
-  <p class="text-center text-body-secondary">&copy; 2023 F1 RoadScanner Project, All rights reserved.</p>
-</footer>
+  <%@include file ="footer.jsp" %>
 
 </html>

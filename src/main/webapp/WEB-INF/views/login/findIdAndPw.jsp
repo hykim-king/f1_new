@@ -18,49 +18,9 @@
 <link>
 <title>로드스캐너 ID & PW찾기 </title>
 </head>
-<nav class="navbar navbar-expand-md mb-4" style="background-color: white;">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">RoadScanner</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav me-auto mb-2 mb-md-0">
-        <c:if test="${user ne null}">
-          <li class="nav-item">
-            <a class="nav-link" href="${CP}/main/preUpload">사진 업로드</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">게시판</a>
-          </li>
-        </c:if>
-        <c:if test="${user.grade == 2}">
-        <li class="nav-item dropdown">
-          <input type="hidden" id="nekeyword" name="nekeyword" value ="${user.id}">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">관리자 기능</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="${CP}/admin">List</a></li>
-            <li><a class="dropdown-item" href="#">Upload</a></li>
-            <li><a class="dropdown-item" href="#">None</a></li>
-          </ul>
-        </li>
-        </c:if>
-      </ul>
-      <form class="d-flex" role="search">
-        <!-- 로그인 세션 X -->
-        <c:if test="${user eq null}">
-          <button type="button" id="login" onclick="location.href='${CP}/login'" class="btn btn-outline-primary me-2">Login</button>
-        </c:if>
-        <!-- 로그인 세션 O -->
-        <c:if test="${user ne null}">
-          <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/mypage'">MyPage</button>
-          <button type="button" class="btn btn-outline-primary" onclick="location.href='${CP}/logout'" style="margin-right: 50px;">LogOut</button>
-        </c:if>
-           <button type="button" onclick="location.href='${CP}/registerpage'" class="btn btn-outline-primary" style="margin-right: 50px;">Sign-up</button>
-      </form>
-    </div>
-  </div>
-</nav>
+
+<%@include file ="navbar.jsp" %>
+
 <body class="d-flex flex-column min-vh-100">
 <div style="margin-top: 70px;">
       <div class = "roadscannercontainer"><!-- id 찾기 -->
@@ -92,15 +52,12 @@
 	      </div>
       </div><!-- pw 찾기 -->   
 </div> <!-- container --> 
- 
 
 </body> 
-<footer class="py-3 my-4 mt-auto">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-    </ul>
-    <p class="text-center text-body-secondary">&copy; 2023 F1 RoadScanner Project, All rights reserved.</p>
-  </footer>
-   <script>
+
+  <%@include file ="footer.jsp" %>
+
+<script>
    
    function id_form_check(event) {
        const reg_id = /[^0-9a-z]/g;
@@ -221,5 +178,5 @@
     	  $('#email').val('');
       }
     
-    </script>
+</script>
 </html>
