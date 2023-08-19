@@ -149,6 +149,11 @@ const answer = {
         }).fail(function(error) {
             alert('답변 등록에 실패했습니다.');
             console.error(error + answerData);
+
+            // .fail(function(jqXHR) {
+            //     var response = JSON.parse(jqXHR.responseText);
+            //     alert(response.message); // 서버에서 보낸 메시지를 표시
+            // })
         });
     },
 
