@@ -30,7 +30,7 @@
     <label for="content" class="form-label">내용:</label>
     <textarea id="content" class="form-control">${question.content}</textarea>
   </div>
-  <a href="/qna" role="button" class="btn btn-secondary">취소</a>
+  <a href="/qna/${question.no}" role="button" class="btn btn-secondary">취소</a>
   <button type="button" id="btn-update" class="btn btn-primary" value="수정">수정</button>
 </form>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>

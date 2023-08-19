@@ -80,14 +80,13 @@ public class QuestionController {
      */
     @GetMapping("/save")
     public String QuestionSave(@SessionAttribute("user") MemberVO memberVO, Model model) {
-        //model.addAttribute("userId", memberVO.getId()); // 모델에 사용자 정보 추가
         model.addAttribute("user", memberVO); // 모델에 사용자 정보 추가
 
         return "qna/question-save";
     }
 
     @GetMapping("/{no}")
-    public String detail(@PathVariable Long no, Model model) {
+    public String detail(@PathVariable Long no, Model model, @SessionAttribute("user") MemberVO memberVO) {
         // 조회수 증가
         questionService.increaseViews(no);
 
@@ -97,6 +96,7 @@ public class QuestionController {
         // 답변 등록 결과를 반환값으로 받아서 이용
         AnswerResponseDTO answerDto = answerService.findByNo(no);
         model.addAttribute("answer", answerDto);
+        model.addAttribute("answerId", memberVO.getId());
 
         return "qna/question-detail";
     }
