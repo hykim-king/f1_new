@@ -69,13 +69,10 @@ public class QuestionController {
      * @return
      */
     @GetMapping("/save")
-    public String QuestionSave(@SessionAttribute(value = "user", required = false) MemberVO memberVO, Model model) {
+    public String QuestionSave(@SessionAttribute("user") MemberVO memberVO, Model model) {
+        //model.addAttribute("userId", memberVO.getId()); // 모델에 사용자 정보 추가
+        model.addAttribute("user", memberVO); // 모델에 사용자 정보 추가
 
-        if (memberVO == null) {
-            return "redirect:/login";
-        }
-
-        model.addAttribute("userId", memberVO.getId());
         return "qna/question-save";
     }
 
