@@ -14,7 +14,7 @@ public class AnswerApiController {
     private final AnswerService answerService;
 
     // 등록
-    @PostMapping("/api/qna/{no}/saveAnswer")
+    @PostMapping("/api/qna/{no}/answer")
     public Long save(@PathVariable Long no, @RequestBody AnswerSaveRequestDTO dto) {
         return answerService.save(dto);
     }
