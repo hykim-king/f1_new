@@ -44,6 +44,12 @@ public class LoginController {
 	@Autowired
 	MailSendService mailSend;
 	
+	@GetMapping("/main")
+	public String main() {
+		LOG.debug("MainPage start");
+		return "/login/main";
+	}
+	
 	/**
 	 * 로그인 화면에 처음 접근할때 호출 하는 함수
 	 * @param vo
