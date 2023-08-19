@@ -63,45 +63,19 @@
         <div class="card mb-5">
             <input type="hidden" id="no" value="${question.no}">
             <div class="card-header">
-                <h2 class="card-title mb-0">${question.title}</h2>
-            </div>
+			    <div class="d-flex justify-content-between align-items-center">
+			        <h2 class="card-title mb-0 me-auto">${question.title}</h2>
+			        <h6 class="card-title mb-0">조회수: ${question.views}</h6>
+			    </div>
+			</div>
             <div class="row m-2 mb-0">
-                <div class="col-8">
-                    <div class="card">
-                        <div class="card-body py-2">
-                            <p class="card-text">작성자: ${question.id}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4 d-flex justify-content-end">
-                    <div class="card">
-                        <div class="card-body py-2">
-                            <p class="card-text text-end">조회수: ${question.views}</p>
-                        </div>
-                    </div>
+                <div class="col">
+                    <p class="card-text"><b>작성자: ${question.id}</b>&emsp;( 작성일: ${question.createDate} )
+	                <c:if test="${question.updateDate != null}">&ensp;( 최종 수정일: ${question.updateDate} )</c:if>
+	                </p>
                 </div>
             </div>
             <div class="row m-2">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body py-2">
-                            <p class="card-text" style="margin-bottom: 5px;">작성일:
-                                ${question.createDate}</p>
-                            <c:if test="${question.updateDate != null}">
-                                <p class="card-text">최종 수정일: ${question.updateDate}</p>
-                            </c:if>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 뱃지 추가 -->
-            <div class="row">
-                <div class="col">
-                    <div class="badge text-secondary mx-4"
-                        style="background-color: #DCDCDC; border-radius: 5px 5px 0px 0px;">내용</div>
-                </div>
-            </div>
-            <div class="row m-2 mt-0 mb-1">
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
@@ -113,13 +87,16 @@
                     </div>
                 </div>
             </div>
-            <div class="row m-2 mt-1">
+            <div class="row mx-2 mb-2">
                 <div class="col-auto">
                     <a href="/qna/update/${question.no}" class="btn"
                         style="background-color: #DCDCDC;">수정</a>
                     <button type="button" id="btn-delete" class="btn"
                         style="background-color: #DCDCDC;">삭제</button>
                 </div>
+                <div class="col-auto ms-auto">
+			        <a href="/qna" class="btn btn-primary">목록</a>
+			    </div>
             </div>
         </div>
 
@@ -134,20 +111,16 @@
                         <c:when test="${answer == null}">
                             <!-- 답변이 없을 경우 답변 등록 폼을 표시 -->
                             <form id="answer-form" class="pb-0 mb-0">
-                                <div class="mt-2 mb-3 mx-4">
-                                    <label for="id" class="form-label">작성자:</label>
-                                    <!-- 나중에 관리자 session값 주고 readonly로 변경 예정 -->
-                                    <input type="text" id="id" class="form-control">
-                                </div>
-                                <div class="mt-2 mb-2 mx-4">
-                                    <label for="answer-content" class="form-label">답변 내용:</label>
+								<div class="d-flex align-items-center mx-4">
+								    <!-- 나중에 관리자 session값 주고 readonly로 변경 예정 -->
+								    <label for="id" class="form-label me-2 my-2">작성자: ${answer.id}</label>
+								</div>
+                                <div class="mb-2 mx-4">
                                     <textarea class="form-control" id="answer-content" rows="5"
-                                        placeholder="답변을 입력하세요"></textarea>
+                                        placeholder="답변을 입력하세요."></textarea>
                                 </div>
                             </form>
                             <div class="mb-2 mx-4">
-                                <button type="button" id="btn-answer-cancel" class="btn"
-                                    style="background-color: #DCDCDC;">취소</button>
                                 <button type="submit" id="btn-answer-save" class="btn"
                                     style="background-color: #DCDCDC;" value="저장">등록</button>
                             </div>
@@ -213,8 +186,7 @@
                         </div>
 
                         <div class="mt-2 mb-2 mx-4">
-                            <label for="answer-update-content" class="form-label">답변
-                                내용:</label>
+                            <label for="answer-update-content" class="form-label">답변 내용:</label>
                             <textarea class="form-control" id="answer-update-content"
                                 rows="5">${answer.content}</textarea>
                         </div>

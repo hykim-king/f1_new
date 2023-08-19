@@ -60,50 +60,45 @@
 <body>
     <form class="container mt-4" id="question-form">
         <h1 class="mb-4">Q&A 게시판</h1>
-        <div class="mb-3 row">
-            <label for="category" class="col-sm-2 col-form-label">카테고리:</label>
-            <div class="col-sm-10">
-                <select id="category" name="category" class="form-select">
-                    <option value="30" selected>답변 대기</option>
-                    <option value="10">공지</option>
-                </select>
-            </div>
-        </div>
-        <div class="mb-3 row">
+<div class="mb-2 row align-items-center">
+    <label for="category" class="form-label col-auto pe-1 m-0">분류</label>
+    <div class="col">
+        <select id="category" name="category" class="form-select border-0" style="width: 120px;">
+            <option value="30" selected>답변 대기</option>
+            <option value="10">공지</option>
+        </select>
+    </div>
+</div>
+        <div class="row" style="display: none;">
             <label for="id" class="col-sm-2 col-form-label">작성자</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="id">
-                <!-- value="${question.id}" readonly -->
-            </div>
-        </div>
-        <div class="mb-3 row">
-            <label for="title" class="col-sm-2 col-form-label">제목</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="title">
-            </div>
-        </div>
-        <div class="mb-3 row">
-	        <label for="thisFile" class="form-label">첨부파일:</label><br>
-	            <div id="thisFile" style="position: relative; width: 50%; display: none;">
-	              <input type="text" id="fileName" class="form-control" readonly>
-	              <button id="cancelButton" type="button" class="btn btn-link" style="position: absolute; top: 0; right: 0;">
-	                <img alt="XButton" src="${CP}/resources/img/cancel.png" style="height: 25px;">
-	              </button>
-	            </div>
-	            <label for="fileUpload" id="uploadLabel" class="btn btn-secondary" style=" width: 100%;">파일 선택</label>
-	        <input id=fileUpload type="file" accept=".jpg, .jpeg, .png, .bmp, .tiff, .webp, .ico, .svg" style="display: none;">
-	        <input type="hidden" id="idx">
-	        <input type="hidden" id="count" value="default">
-	    </div>
-        <div class="row">
-            <div class="col">
-                <div class="badge text-secondary mx-1"
-                    style="background-color: #DCDCDC; border-radius: 5px 5px 0px 0px;">내용</div>
+                <input type="text" class="form-control" id="id" value="${userId}" readonly>
             </div>
         </div>
         <div class="mb-3 row">
             <div class="col">
-                <textarea class="form-control" id="content" rows="10"></textarea>
+                <input type="text" class="form-control" id="title"
+                    value="${question.title}" placeholder="제목을 입력하세요.">
+            </div>
+        </div>
+		<div class="d-flex mb-3 row align-items-center">
+		    <label for="idx" class="form-label col-auto pe-1 m-0">첨부 파일</label>
+		    <div class="col">
+		        <label for="fileUpload" id="uploadLabel" class="btn btn-secondary py-0 px-1" style="width: 90px;">파일 선택</label>
+		        <input id="fileUpload" type="file" accept=".jpg, .jpeg, .png, .bmp, .tiff, .webp, .ico, .svg" style="display: none;">
+		        <input type="hidden" id="idx">
+		        <input type="hidden" id="count" value="default">
+		        <div id="thisFile" class="col" style="position: relative; display: none;">
+		            <input type="text" id="fileName" class="form-control" readonly>
+		            <button id="cancelButton" type="button" class="btn btn-link" style="position: absolute; top: 0; right: 5;">
+		                <img alt="XButton" src="${CP}/resources/img/cancel.png" style="height: 25px;">
+		            </button>
+		        </div>
+		    </div>
+		</div>
+        <div class="mb-3 row">
+            <div class="col">
+                <textarea class="form-control" id="content" rows="10" placeholder="내용을 입력하세요."></textarea>
             </div>
         </div>
         <div class="text-center">

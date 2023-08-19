@@ -66,7 +66,7 @@
                 <!-- 분류 셀렉트 박스 -->
                 <div class="col-auto">
                     <select class="form-select" name="category" id="category">
-                        <option value="">--분류--</option>
+                        <option value="">분류</option>
                         <option value="공지">공지</option>
                         <option value="답변대기">답변대기</option>
                         <option value="답변완료">답변완료</option>
@@ -77,10 +77,9 @@
                     <!-- 검색 셀렉트 박스 (오른쪽 정렬) -->
                     <div class="col-auto">
                         <select class="form-select" name="searchType" id="searchType">
-                            <option value="">--전체--</option>
+                            <option value="both">제목+내용</option>
                             <option value="title">제목</option>
                             <option value="content">내용</option>
-                            <option value="both">제목+내용</option>
                         </select>
                     </div>
                     <!-- 검색 박스 (우측 마진 추가) -->
