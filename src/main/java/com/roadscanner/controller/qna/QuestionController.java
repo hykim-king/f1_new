@@ -1,24 +1,30 @@
 package com.roadscanner.controller.qna;
 
+import com.roadscanner.domain.upload.FileUploadVO;
 import com.roadscanner.domain.user.MemberVO;
-import com.roadscanner.dto.qna.AnswerResponseDTO;
-import com.roadscanner.dto.qna.PaginationDTO;
-import com.roadscanner.dto.qna.QuestionResponseDTO;
-import com.roadscanner.dto.qna.QuestionSearchCond;
+import com.roadscanner.dto.qna.*;
 import com.roadscanner.service.qna.AnswerService;
 import com.roadscanner.service.qna.QuestionService;
+import com.roadscanner.service.upload.FileUploadService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
+import java.sql.SQLException;
 
 @RequiredArgsConstructor
+@Slf4j
 @RequestMapping("/qna")
 @Controller
 public class QuestionController {
 
     private final QuestionService questionService;
     private final AnswerService answerService;
+    private final FileUploadService fileUploadService;
 
 
     @GetMapping
@@ -46,7 +52,11 @@ public class QuestionController {
         int totalPages = (int) Math.ceil((double) totalQuestions / size);
 
         // 총 페이지 수가 0이면, 페이지 번호도 0으로 설정
-        if (totalPages == 0) {
+//        if (totalPages == 0) {
+//            page = 0;
+//        }
+        if (totalQuestions == 0) {
+            totalPages = 0;
             page = 0;
         }
         // 현재 페이지 번호가 총 페이지 수보다 크면, 현재 페이지 번호를 총 페이지 수로 설정
@@ -98,4 +108,17 @@ public class QuestionController {
         return "qna/question-update";
     }
 
+    @GetMapping("/acorn")
+    public String save(@ModelAttribute QuestionSaveRequestDTO requestDTO) {
+        log.info("{}", requestDTO);
+        return "qna/acorn";
+    }
+
+    @PostMapping("/acorn")
+    public String saveQuestion(@ModelAttribute QuestionSaveRequestDTO requestDTO, RedirectAttributes redirectAttributes) throws SQLException, IOException {
+//        String fileName = fileUploadService.doSave(requestDTO.getFile(), new FileUploadVO());
+        questionService.save(requestDTO);
+        redirectAttributes.addFlashAttribute("message", "게시글이 성공적으로 저장되었습니다.");
+        return "redirect:/qna";
+    }
 }
