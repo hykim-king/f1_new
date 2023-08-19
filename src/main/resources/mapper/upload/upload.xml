@@ -106,7 +106,14 @@
     FROM
         upload_image
     WHERE
+    <choose>
+      <when test="name != null">
         name = #{name}
+      </when>
+      <otherwise>
+        idx = #{idx}
+      </otherwise>
+    </choose>
   </select>
   
   <!-- 사진 수정 -->
@@ -142,7 +149,7 @@
     ) VALUES (
         upload_seq.NEXTVAL, <!-- upload_seq.NEXTVAL -->
         #{id},
-        10,
+        #{category},
         SYSDATE,
         #{name},
         #{url},

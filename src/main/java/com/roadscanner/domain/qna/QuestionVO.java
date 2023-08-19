@@ -23,9 +23,10 @@ public class QuestionVO {
 
     // no, idx, createDate, updateDate는 데이터베이스에서 값을 자동으로 주입 => 생성자로 값 주입 안함!
     // 필수로 값이 주입되야 하는 필드만 생성
-    public QuestionVO(Integer category, String id, String title, String content) {
+    public QuestionVO(Integer category, String id, Long idx, String title, String content) {
         this.category = category;
         this.id = id;
+        this.idx = idx;
         this.title = title;
         this.content = content;
     }
