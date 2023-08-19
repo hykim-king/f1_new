@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- CSS -->
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 <link rel="stylesheet" href="${CP}/resources/js/fullpage/fullPage.css" >
 <!-- JS -->
@@ -15,6 +16,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 <title>Insert title here</title>
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap');
+
+
+
 
 .intro_logo {
   position: absolute;
@@ -40,10 +47,20 @@
   cursor: pointer;
 }
 
-  .info-section {
-  padding: 20px;
-  font-size: 1.5rem;
+.info-section {
+font-family: 'Noto Sans KR', sans-serif;
+padding: 20px;
+font-size: 1.5rem;
+
 }
+
+.intro_logo {
+font-family: 'Bruno Ace', cursive;
+font-size: 70px;
+font-style: italic;
+
+}
+
 
   /* 각 섹션에 배경색 적용 */
 .section:nth-child(odd) {
@@ -52,6 +69,22 @@
 
 .section:nth-child(even) {
   background-color: #FFA500; /* 짝수 섹션 배경색 */
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Adjust the height as needed */
+    overflow: hidden;
+}
+
+.intro_video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%; /* Make sure the video covers the whole container */
+    height: auto;
 }
 		  
 </style>
@@ -64,7 +97,7 @@
   <div class="section active">
     <video class="intro_video" src="${CP}/resources/video/cat.mp4" data-autoplay loop muted></video>
     <div class="intro_logo">
-        <p>RoadScanner</p>
+        <p>Road Scanner</p>
     </div>
   </div>
   
