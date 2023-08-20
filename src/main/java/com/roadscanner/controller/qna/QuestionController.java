@@ -5,6 +5,7 @@ import com.roadscanner.cmn.MessageVO;
 import com.roadscanner.cmn.PcwkLogger;
 import com.roadscanner.domain.upload.FileUploadVO;
 import com.roadscanner.domain.user.MemberVO;
+import com.roadscanner.dto.qna.AnswerResponseDTO;
 import com.roadscanner.dto.qna.PaginationDTO;
 import com.roadscanner.dto.qna.QuestionResponseDTO;
 import com.roadscanner.dto.qna.QuestionSearchCond;
@@ -93,7 +94,7 @@ public class QuestionController implements PcwkLogger {
     }
 
     @GetMapping("/{no}")
-    public String detail(@PathVariable Long no, Model model) throws SQLException {
+    public String detail(@PathVariable Long no, Model model, @SessionAttribute("user") MemberVO memberVO) throws SQLException {
         // 조회수 증가
         questionService.increaseViews(no);
 
@@ -119,6 +120,11 @@ public class QuestionController implements PcwkLogger {
         	
         	LOG.debug("└──────────────────────────────┘");
         }
+        
+	     // 답변 등록 결과를 반환값으로 받아서 이용
+        AnswerResponseDTO answerDto = answerService.findByNo(no);
+        model.addAttribute("answer", answerDto);
+        model.addAttribute("answerId", memberVO.getId());
         
         return "qna/question-detail";
     }
