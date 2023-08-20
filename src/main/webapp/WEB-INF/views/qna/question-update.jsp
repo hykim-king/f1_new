@@ -29,28 +29,29 @@
             </div>
         </div>
 
-       <div class="mb-2 row">
-          <div class="col">
-              <input type="text" class="form-control" id="title"
-                  value="${question.title}" placeholder="제목을 입력하세요.">
-          </div>
-       </div>
+        <div class="mb-2 row">
+            <div class="col">
+                <input type="text" class="form-control" id="title"
+                    value="${question.title}" placeholder="제목을 입력하세요.">
+            </div>
+        </div>
 
-       <div class="mb-2 row align-items-center">
-        <label for="idx" class="form-label">첨부파일:</label>
-        <input type="text" id="idx" class="form-control" value="${question.idx}">
-       </div>
+        <div class="d-flex mb-3 row align-items-center">
+            <div class="col">
+                <input type="file" id="attachFile" name="attachFile" class="form-control" accept="image/*">
+            </div>
+        </div>
 
-      <div class="mb-3 row">
-          <div class="col">
-              <textarea class="form-control" id="content" placeholder="내용을 입력하세요.">${question.content}</textarea>
-          </div>
-      </div>
+        <div class="mb-3 row">
+            <div class="col">
+                <textarea class="form-control" id="content" placeholder="내용을 입력하세요.">${question.content}</textarea>
+            </div>
+        </div>
 
-      <div class="text-center">
-          <a href="/qna/${question.no}" role="button" class="btn btn-secondary">취소</a>
-          <button type="button" id="btn-update" class="btn btn-primary" value="수정">수정</button>
-      </div>
+        <div class="text-center">
+            <a href="/qna/${question.no}" role="button" class="btn btn-secondary">취소</a>
+            <button type="button" id="btn-update" class="btn btn-primary" value="수정">수정</button>
+        </div>
     </form>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
