@@ -24,8 +24,6 @@ public class QuestionController {
 
     private final QuestionService questionService;
     private final AnswerService answerService;
-    private final FileUploadService fileUploadService;
-
 
     @GetMapping
     public String index(Model model,
@@ -81,7 +79,6 @@ public class QuestionController {
     @GetMapping("/save")
     public String QuestionSave(@SessionAttribute("user") MemberVO memberVO, Model model) {
         model.addAttribute("user", memberVO); // 모델에 사용자 정보 추가
-
         return "qna/question-save";
     }
 
@@ -106,19 +103,5 @@ public class QuestionController {
         QuestionResponseDTO dto = questionService.findByNo(no);
         model.addAttribute("question", dto);
         return "qna/question-update";
-    }
-
-    @GetMapping("/acorn")
-    public String save(@ModelAttribute QuestionSaveRequestDTO requestDTO) {
-        log.info("{}", requestDTO);
-        return "qna/acorn";
-    }
-
-    @PostMapping("/acorn")
-    public String saveQuestion(@ModelAttribute QuestionSaveRequestDTO requestDTO, RedirectAttributes redirectAttributes) throws SQLException, IOException {
-//        String fileName = fileUploadService.doSave(requestDTO.getFile(), new FileUploadVO());
-        questionService.save(requestDTO);
-        redirectAttributes.addFlashAttribute("message", "게시글이 성공적으로 저장되었습니다.");
-        return "redirect:/qna";
     }
 }
