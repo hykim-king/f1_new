@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="CP" value="${pageContext.request.contextPath }"/> 
+<c:set var="CP" value="${pageContext.request.contextPath}"/> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,13 +9,14 @@
   <!-- CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   <link rel="stylesheet" href="${CP}/resources/js/fullpage/fullPage.css" >
+  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" rel="stylesheet">
   
   <!-- JS -->
   <script src="${CP}/resources/js/jquery-3.7.0.js"></script>
   <script src="${CP}/resources/js/fullpage/fullPage.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   
-  <title>Insert title here</title>
+  <title>RoadScanner</title>
   
   <style>
   
@@ -63,8 +64,8 @@
   }
   
   #third {
-    font-family: 'Noto Sans KR', sans-serif; 
-    background-color: #006F53; 
+    font-family: 'NanumSquareNeoBold';
+    /* font-family: 'Noto Sans KR', sans-serif; */
     padding: 110px; 
     border-radius: 10px; 
     border: 6px solid white;
@@ -75,7 +76,7 @@
   
   #fourth {
     list-style: none; 
-    margin: 40px 0px 0px 170px; 
+    margin: 20px 150px; 
     font-size: 20px;
   }
   
