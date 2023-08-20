@@ -63,16 +63,16 @@
         <h1 class="mb-4">Q&A 게시판</h1>
         <form name="searchFrm">
             <div class="row g-1 d-flex justify-content-between mt-3 mb-3">
-                <!-- 분류 셀렉트 박스 -->
-                <div class="col-auto">
-                    <select class="form-select" name="category" id="category">
-                        <option value="">분류</option>
-                        <option value="공지">공지</option>
-                        <option value="답변대기">답변대기</option>
-                        <option value="답변완료">답변완료</option>
-                    </select>
-                </div>
                 <div class="col-auto flex-fill justify-content-end d-flex">
+	                <!-- 분류 셀렉트 박스 -->
+	                <div class="col-auto mx-1">
+	                    <select class="form-select" name="category" id="category">
+	                        <option value="">분류</option>
+	                        <option value="공지">공지</option>
+	                        <option value="답변대기">답변대기</option>
+	                        <option value="답변완료">답변완료</option>
+	                    </select>
+	                </div>
                     <!-- 검색 박스와 글쓰기 버튼을 포함한 레이아웃 -->
                     <!-- 검색 셀렉트 박스 (오른쪽 정렬) -->
                     <div class="col-auto">

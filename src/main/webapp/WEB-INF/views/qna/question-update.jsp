@@ -128,7 +128,7 @@
         </div>
 
         <div class="text-center">
-            <a href="/qna" role="button" class="btn btn-secondary">취소</a>
+            <a href="javascript:history.back()" role="button" class="btn btn-secondary">취소</a>
             <button type="button" id="btn-update" class="btn btn-primary"
                 value="수정">수정</button>
         </div>

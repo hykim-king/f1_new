@@ -128,26 +128,11 @@
                         <c:otherwise>
                             <!-- 답변이 있는 경우 답변 내용을 표시 -->
                             <div class="row m-2">
-                                <div class="col-4">
-                                    <div class="card">
-                                        <div class="card-body py-2">
-                                            <!-- 나중에 관리자 session 가져올 예정 -->
-                                            <p class="card-text">작성자: ${answer.id}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-8 mt-2">
-                                    <p class="card-text" style="margin-bottom: 5px;">(작성일:
-                                        ${answer.createDate})</p>
-                                    <c:if test="${answer.updateDate != null}">
-                                        <p class="card-text">(최종 수정일: ${answer.updateDate})</p>
-                                    </c:if>
-                                </div>
-                            </div>
-                            <div class="row pb-0 mb-0">
                                 <div class="col">
-                                    <div class="badge text-secondary mx-4 mb-0"
-                                        style="background-color: #DCDCDC; border-radius: 5px 5px 0px 0px;">내용</div>
+	                                <!-- 나중에 관리자 session 가져올 예정 -->
+	                                <p class="card-text"><b>작성자: ${answer.id}</b>&emsp;( 작성일: ${answer.createDate} )
+                                    <c:if test="${answer.updateDate != null}">&ensp;( 최종 수정일: ${answer.updateDate} )</c:if>
+                                    </p>
                                 </div>
                             </div>
                             <div class="row mx-2 mb-1">
@@ -179,16 +164,13 @@
                         <div class="card-header">
                             <h4 class="card-title mb-0">답변</h4>
                         </div>
-                        <div class="mt-2 mb-2 mx-4">
-                            <label for="update-id" class="form-label">작성자:</label> <input
-                                type="text" id="update-id" class="form-control"
-                                readonly="readonly" value="${answer.id}">
+                        <div class="row mt-2 mx-2">
+                            <p for="update-id" class="card-text"><b>작성자: ${answer.id}</b></p> 
                         </div>
 
                         <div class="mt-2 mb-2 mx-4">
-                            <label for="answer-update-content" class="form-label">답변 내용:</label>
                             <textarea class="form-control" id="answer-update-content"
-                                rows="5">${answer.content}</textarea>
+                                rows="5" placeholder="내용을 입력하세요.">${answer.content}</textarea>
                         </div>
 
                         <div class="mb-2 mx-4">
@@ -208,7 +190,15 @@
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/resources/js/qna.js"></script>
+    
+    <!-- 버튼을 누르면 페이지 새로고침 -->
+    <script>
+    const cancelButton = document.getElementById("btn-answer-cancel-update");
 
+    cancelButton.addEventListener("click", () => {
+        location.reload(); // 페이지 새로고침
+    });
+    </script>
 </body>
 <footer class="py-3 my-4 mt-auto">
   <ul class="nav justify-content-center border-bottom pb-3 mb-3">
