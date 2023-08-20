@@ -21,7 +21,15 @@
   
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&display=swap');
   
+  .section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+  }
   
   .intro_logo {
     position: absolute;
@@ -33,51 +41,65 @@
     font-size: 70px; /* 원하는 폰트 크기로 설정해주세요 */
     font-family: 'Bruno Ace', cursive;
     font-style: italic;
+    text-shadow: 5px 5px 6px black;
   }
   
-  .section-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
-    
-  .1st {
-    background-color: #FFA500; 
-    color: white; 
-    padding: 60px; 
-    height: 100vh;
+  .intro_video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: auto;
+    z-index: -1;
   }
   
-  .2nd {
+  #second {
     border-radius: 10px; 
-    border: 2px solid black;
+    border: 2px solid black; 
+    margin: 0px 300px; 
+    height: 600px;
+  
   }
   
-  .3rd {
-    font-family: 'Noto Sans KR', sans-serif;
+  #third {
+    font-family: 'Noto Sans KR', sans-serif; 
     background-color: #006F53; 
     padding: 110px; 
     border-radius: 10px; 
     border: 6px solid white;
+    color: white; 
+    height: 600px; 
+    background-color: rgba(0, 0, 0, 0.5);
   }
   
-  .video-wrapper {
-      position: relative;
-      width: 100%;
-      height: 100vh; /* Adjust the height as needed */
-      overflow: hidden;
+  #fourth {
+    list-style: none; 
+    margin: 40px 0px 0px 170px; 
+    font-size: 20px;
   }
   
-  .intro_video {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      height: auto;
+  #section-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-image: url(resources/picture/start.jpg); 
+    background-size: cover; 
+    width: 100%; 
+    height: 100%; 
+    background-position: center;
   }
-        
+  
+  #start-button {
+    text-align:center; 
+    font-size: 150px; 
+    color: black; 
+    text-decoration: none; 
+    font-family: 'Bruno Ace SC', cursive; 
+    margin-top: 30px;
+  }
+          
   </style>
 
 </head>
@@ -89,36 +111,36 @@
   <div class="section active">
     <video class="intro_video" src="${CP}/resources/video/test02.mov" data-autoplay loop muted></video>
     <div class="intro_logo">
-        <p>Road Scanner</p>
+        <p>RoadScanner</p>
     </div>
   </div>
  
-  <div class="section" style="background-image: url(resources/picture/bg01.jpg); background-size: cover;">
-    <div class="2nd" style="border-radius: 10px; border: 2px solid black; margin: 0px 300px 0px 300px; height: 600px;">
-    
-      <div class="info-section 3rd" style="font-family: 'Noto Sans KR', sans-serif; background-color: #006F53; 
-                                           padding: 110px; border-radius: 10px; border: 6px solid white;
-                                           color: white; height: 600px;">
-        <h1 style="text-align: center;">교통표지판 인식 AI 웹 서비스</h1>
-        <br/>
-        
-        <ul style="list-style: none; margin: 40px 0px 0px 170px; font-size: 20px;">
-          <li>약 40,000개의 훈련 이미지와 13,000개의 테스트 이미지로 학습되어 교통 표지판을 식별할 수 있습니다</li>
-          <li>&nbsp;</li>
-          <li>1. 서비스를 이용하시려면 회원가입 후 사용 가능합니다</li>
-          <li>2. 회원가입 하신 계정으로 로그인합니다</li>
-          <li>3. 원하는 표지판 사진을 업로드해주세요</li>
-          <li>4. 결과를 확인하여 만족스럽다면 '좋아요'를 눌러주세요</li>
-          <li>5. 만약 만족스럽지 않다면, '싫어요'의 이유를 같이 선택해주세요</li>
-        </ul>
-      </div>
-    </div>
+  <div class="section">
+    <video class="intro_video" src="${CP}/resources/video/driving.mp4" data-autoplay loop muted></video>
+	    <div id="second">
+	    
+	      <div class="info-section" id="third">
+	        <h1 style="text-align: center;">교통표지판 인식 AI 웹 서비스</h1>
+	        <br/>
+	        
+	        <ul id="fourth">
+	          <li>약 40,000개의 훈련 이미지와 13,000개의 테스트 이미지로 학습되어 교통 표지판을 식별할 수 있습니다</li>
+	          <li>&nbsp;</li>
+	          <li>1. 서비스를 이용하시려면 회원가입 후 사용 가능합니다</li>
+	          <li>2. 회원가입 하신 계정으로 로그인합니다</li>
+	          <li>3. 원하는 표지판 사진을 업로드해주세요</li>
+	          <li>4. 결과를 확인하여 만족스럽다면 '좋아요'를 눌러주세요</li>
+	          <li>5. 만약 만족스럽지 않다면, '싫어요'의 이유를 같이 선택해주세요</li>
+	        </ul>
+	      </div>
+	      
+	    </div>
     
   </div>
   
   <div class="section">
-   <div class="section-button" style="background-image: url(resources/picture/start.jpg); background-size: cover; width: 100%; height: 100%; background-position: center;">
-    <a style="text-align:center; font-size: 150px; color: black; text-decoration: none; font-family: 'Bruno Ace', cursive; margin-top: 30px;" href="${CP}/login"><p><b>Click</b></p></a>
+   <div class="section-button" id="section-button">
+    <a id="start-button" href="${CP}/login"><b>START</b></a>
    </div>
   </div>
   
