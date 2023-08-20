@@ -20,13 +20,20 @@ public class QuestionApiController implements PcwkLogger {
     private final AmazonS3Store fileStore;
 
     // 등록
+    // 등록
     @PostMapping("/api/qna/save")
     public Long save(@ModelAttribute QuestionSaveRequestDTO dto) throws IOException {
         LOG.info("save 실행");
-        UploadFile attachFile = fileStore.storeFile(dto.getAttachFile());
+
+        UploadFile attachFile = null;
+        if (dto.getAttachFile() != null && !dto.getAttachFile().isEmpty()) {
+            attachFile = fileStore.storeFile(dto.getAttachFile());
+        }
+
         LOG.info("attachFile={}", attachFile);
         return questionService.save(dto);
     }
+
 
 
     // 조회

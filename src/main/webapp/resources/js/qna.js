@@ -24,7 +24,11 @@ const main = {
         data.append('id', $('#id').val());
         data.append('title', $('#title').val());
         data.append('content', $('#content').val());
-        data.append('attachFile', $('#attachFile')[0].files[0]); // 파일 추가
+
+        const file = $('#attachFile')[0].files[0];
+        if (file) { // 파일이 존재하는 경우에만 추가
+            data.append('attachFile', file);
+        }
 
         $.ajax({
             type: 'POST',
