@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -7,12 +8,17 @@
 <body>
 <form class="container mt-5" id="question-form">
     <div class="mb-3">
-        <label for="category" class="form-label">카테고리:</label>
-        <select id="category" name="category" class="form-select">
-            <option value="30" selected>답변 대기</option>
-            <option value="20">답변 완료</option>
-            <option value="10">공지</option>
-        </select>
+         <c:choose>
+             <c:when test="${user.grade == 2}">  <!-- 관리자 등급인 경우 -->
+                 <input type="text" id="categoryLabel" class="form-control" value="공지" readonly>
+                 <input type="hidden" id="category" name="category" value="10">
+             </c:when>
+
+             <c:otherwise>  <!-- 일반 사용자인 경우 -->
+                 <input type="text" id="categoryLabel" class="form-control" value="답변대기" readonly>
+                 <input type="hidden" id="category" name="category" value="30">
+             </c:otherwise>
+         </c:choose>
     </div>
     <div class="mb-3">
         <label for="id" class="form-label">작성자:</label>
