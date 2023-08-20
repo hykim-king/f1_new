@@ -93,7 +93,8 @@ public class QuestionController {
         // 답변 등록 결과를 반환값으로 받아서 이용
         AnswerResponseDTO answerDto = answerService.findByNo(no);
         model.addAttribute("answer", answerDto);
-        model.addAttribute("answerId", memberVO.getId());
+        model.addAttribute("user", memberVO); // 현재 로그인한 사용자 정보를 모델에 추가
+        // model.addAttribute("answerId", memberVO.getId());
 
         return "qna/question-detail";
     }

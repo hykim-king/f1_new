@@ -22,6 +22,7 @@ public class AdminInterceptor implements HandlerInterceptor {
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write("{\"message\":\"관리자만 접근할 수 있습니다.\"}");
+
             return false;
         }
 
