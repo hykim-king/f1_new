@@ -1,4 +1,4 @@
-package config;
+package com.roadscanner.config;
 
 import com.roadscanner.domain.user.MemberVO;
 import org.springframework.web.servlet.HandlerInterceptor;

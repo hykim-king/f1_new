@@ -9,8 +9,8 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- Login Interceptor bean 생성 -->
-    <beans:bean id="loginInterceptor" class="config.LoginInterceptor"/>
-    <beans:bean id="adminInterceptor" class="config.AdminInterceptor"/>
+    <beans:bean id="loginInterceptor" class="com.roadscanner.config.LoginInterceptor"/>
+    <beans:bean id="adminInterceptor" class="com.roadscanner.config.AdminInterceptor"/>
 
     <!-- Interceptor 등록/설정 -->
     <mvc:interceptors>
@@ -19,14 +19,14 @@
             <mvc:mapping path="/qna/**"/>
             <mvc:mapping path="/api/qna/**"/>
             <mvc:exclude-mapping path="/login/**"/>
-            <beans:ref bean="loginInterceptor"></beans:ref>
+            <beans:ref bean="loginInterceptor"/>
         </mvc:interceptor>
 
         <!-- 관리자 인터셉터 -->
         <mvc:interceptor>
             <mvc:mapping path="/api/qna/*/answer"/>
             <mvc:exclude-mapping path="/login/**"/>
-            <beans:ref bean="adminInterceptor"></beans:ref>
+            <beans:ref bean="adminInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
