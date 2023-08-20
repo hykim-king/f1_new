@@ -18,28 +18,31 @@ const main = {
         });
     },
 
-    save : function () {
-        const data = {
-            category: $('#category').val(),
-            id: $('#id').val(),
-            idx: $('#idx').val(),
-            title: $('#title').val(),
-            content: $('#content').val(),
-        };
+    save: function () {
+        const data = new FormData();
+        data.append('category', $('#category').val());
+        data.append('id', $('#id').val());
+        data.append('title', $('#title').val());
+        data.append('content', $('#content').val());
+
+        const file = $('#attachFile')[0].files[0];
+        if (file) { // 파일이 존재하는 경우에만 추가
+            data.append('attachFile', file);
+        }
 
         $.ajax({
             type: 'POST',
+            enctype: 'multipart/form-data', // 이 부분 추가
             url: '/api/qna/save',
-            dataType: 'json',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(data)
+            processData: false,
+            contentType: false,
+            data: data
         }).done(function () {
             alert('글이 등록되었습니다.');
             window.location.href = '/qna';
         }).fail(function (error) {
             alert("등록 실패했습니다.");
             console.error(error);
-            // alert(JSON.stringify(error));
         });
     },
 

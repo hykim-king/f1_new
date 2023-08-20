@@ -23,8 +23,8 @@
         <input type="text" id="title" class="form-control">
     </div>
     <div class="mb-3">
-        <label for="idx" class="form-label">첨부파일:</label>
-        <input type="text" id="idx" class="form-control">
+        <label for="attachFile" class="form-label">첨부파일:</label>
+        <input type="file" id="attachFile" name="attachFile" class="form-control">
     </div>
     <div class="mb-3">
         <label for="content" class="form-label">내용:</label>
