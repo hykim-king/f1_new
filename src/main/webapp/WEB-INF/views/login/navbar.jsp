@@ -17,7 +17,7 @@
 
 <nav class="navbar navbar-expand-md mb-4" style="background-color: white;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">RoadScanner</a>
+    <a class="navbar-brand" href="${CP}/main">RoadScanner</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
