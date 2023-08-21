@@ -18,32 +18,27 @@
 <script src="${CP}/resources/js/jquery-3.7.0.js"></script>
 <title>File Upload</title>
 <style>
-  body {
+  #separation {
     margin: 0;
     padding: 0;
     display: flex;
     height: 100vh;
-    overflow: hidden;
   }
-  
-  .left {
-    flex: 1;
-    border: 1px solid #ccc;
+
+  .content {
     display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .right {
     flex: 1;
-    overflow: auto;
+  }
+
+  .left, .right {
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
+    overflow-y: auto;
   }
-  
+
   .divider {
     width: 1px;
     background-color: #ccc;
@@ -146,7 +141,9 @@
   }
 </style>
 </head>
-<body>
+<header> <%@include file ="login/navbar.jsp" %> </header>
+<body>  
+<div id="separation">
 <input id="thisName" type="hidden" value="${thisName}">
   <div class="left">
     <form action="fileUploaded" method="post" enctype="multipart/form-data" onsubmit="return false;">
@@ -213,7 +210,7 @@
     </form>
      -->
   </div>
-  
+</div> 
   <script>
     // 선택한 이미지 미리보기로 보여주기-------------------------------------------------------
     // 이미지 미리보기 취소
@@ -417,4 +414,5 @@
         //window.location.reload();
   </script>
 </body>
+<footer> <%@ include file="login/footer.jsp" %> </footer>
 </html>
