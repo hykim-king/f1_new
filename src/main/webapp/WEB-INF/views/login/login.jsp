@@ -1,22 +1,16 @@
+  <%@include file ="head.jsp" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="CP" value="${pageContext.request.contextPath }"/>  
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"> 
+
 <!-- CSS -->
-<link  rel="stylesheet" href="${CP}/resources/css/default.css" >
-<link  href="${CP}/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
-<script src="${CP}/resources/js/bootstrap/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
-<script src="${CP}/resources/js/jquery-3.7.0.js"></script>
+<link  rel="stylesheet" href="${CP}/resources/css/default.css">
 <title>로드스캐너 로그인</title>
-</head>
 
   <%@include file ="navbar.jsp" %>
 
-<body class="d-flex flex-column min-vh-100">
+<body id="font-id" class="d-flex flex-column min-vh-100">
 <c:if test="${user eq null}"> 
     <div class = "roadscannercontainer">
     <form onsubmit="return false;"> 

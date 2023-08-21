@@ -1,3 +1,5 @@
+  <%@include file ="head.jsp" %>
+  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -7,25 +9,17 @@
       response.sendRedirect("/login");
     }
 %>
-<c:set var="CP" value="${pageContext.request.contextPath}"/> 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- CSS -->
 <link rel="stylesheet"  href="${CP}/resources/css/mypage.css">
-<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link  href="${CP}/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
-<script src="${CP}/resources/js/bootstrap/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
-<script src="${CP}/resources/js/jquery-3.7.0.js"></script>
+
 <title>로드스캐너 마이페이지</title>
-</head>
 
   <%@include file ="navbar.jsp" %>
 
-<body class="d-flex flex-column min-vh-100">
+<body id="font-id" class="d-flex flex-column min-vh-100">
   <!-- 일반 -->
   <c:if  test="${user ne null}">
   <c:if test="${user.grade ==1}">

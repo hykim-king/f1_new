@@ -1,7 +1,8 @@
+  <%@include file ="head.jsp" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="CP" value="${pageContext.request.contextPath}"/>
 <%
  String strReferer = request.getHeader("referer");
  if(strReferer == null){
@@ -14,21 +15,14 @@
  return;
  }
 %>    
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8"> 
-    <!-- CSS -->
-    <link href="${CP}/resources/css/withdraw.css" rel="stylesheet"> <!--.css 파일 연결 -->
-    <link href="${CP}/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <script src="${CP}/resources/js/bootstrap/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="${CP}/resources/js/jquery-3.7.0.js"></script>
-    <title>로드스캐너 탈퇴</title>
-</head>
+
+<!-- CSS -->
+<link href="${CP}/resources/css/withdraw.css" rel="stylesheet"> <!--.css 파일 연결 -->
+<title>로드스캐너 탈퇴</title>
 
   <%@include file ="navbar.jsp" %>
 
-<body class="d-flex flex-column min-vh-100">
+<body id="font-id" class="d-flex flex-column min-vh-100">
 <c:if test="${user ne null }">
     <div class="container">
         <h1 style="text-align: center; margin-top: 100px; margin-bottom: 100px;">RoadScanner</h1>
