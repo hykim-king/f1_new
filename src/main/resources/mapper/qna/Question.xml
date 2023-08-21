@@ -19,7 +19,6 @@
             no,
             category,
             views,
-            idx,
             id,
             title,
             content,
@@ -40,7 +39,6 @@
                 no,
                 category,
                 views,
-                idx,
                 id,
                 title,
                 content,
@@ -84,7 +82,7 @@
         UPDATE QUESTION
         SET
             category = #{category},
-            idx = #{idx},
+--             image_url = #{imageURL},
             title = #{title},
             content = #{content},
             update_date = CURRENT_TIMESTAMP
