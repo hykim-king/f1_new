@@ -19,6 +19,9 @@
             content,
             create_date AS createDate,
             update_date AS updateDate,
+            image_url AS imageUrl,
+            original_filename AS originalFilename,
+            store_filename AS storeFilename,
             image_url AS imageUrl
         FROM QUESTION
         WHERE no = #{no}
@@ -77,10 +80,12 @@
         UPDATE QUESTION
         SET
             category = #{category},
---             image_url = #{imageURL},
             title = #{title},
             content = #{content},
-            update_date = CURRENT_TIMESTAMP
+            update_date = CURRENT_TIMESTAMP,
+            image_url = #{imageUrl},
+            original_filename = #{originalFilename},
+            store_filename = #{storeFilename}
         WHERE no = #{no}
     </update>
 
