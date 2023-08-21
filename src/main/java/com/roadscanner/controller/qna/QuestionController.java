@@ -69,9 +69,8 @@ public class QuestionController {
     }
 
     /**
-     * 로그인 하지 않은 유저가 글쓰기 버튼을 클릭 하면 로그인 화면으로 이동 시킨다.
-     * 로그인 한 유저는 세션에 저장되어있다. memberVO 변수로 값을 받고, 모델로 View 에 전달 시킨다.
-     * 로그인 하지 않은 유저가 접근하려고 한다면 login으로 보낸다.
+     * 로그인 한 유저는 세션에 저장되어 있음.
+     * memberVO 변수로 값을 받고, 모델로 View에 전달
      * @param memberVO
      * @param model
      * @return

@@ -41,18 +41,27 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="row mx-2 mb-2">
-                <div class="col-auto">
-                    <a href="/qna/update/${question.no}" class="btn"
-                        style="background-color: #DCDCDC;">수정</a>
-                    <button type="button" id="btn-delete" class="btn"
-                        style="background-color: #DCDCDC;">삭제</button>
-                </div>
-                <div class="col-auto ms-auto">
-                    <a href="/qna" class="btn btn-primary">목록</a>
-                </div>
-            </div>
+
+            <!-- 로그인한 id와 question의 id값이 같을 때만 수정/삭제 버튼 보이기 -->
+            <c:choose>
+                <c:when test="${user.id == question.id}">
+                    <div class="row mx-2 mb-2">
+                        <div class="col-auto">
+                            <a href="/qna/update/${question.no}" class="btn"
+                                style="background-color: #DCDCDC;">수정</a>
+                            <button type="button" id="btn-delete" class="btn"
+                                style="background-color: #DCDCDC;">삭제</button>
+                        </div>
+                        <div class="col-auto ms-auto">
+                            <a href="/qna" class="btn btn-primary">목록</a>
+                        </div>
+                    </div>
+                </c:when>
+
+                <c:otherwise>
+                    <div class="mb-3"></div>
+                </c:otherwise>
+            </c:choose>
         </div>
     
 
@@ -141,6 +150,7 @@
                             <textarea class="form-control" id="answer-update-content"
                                       rows="5" placeholder="내용을 입력하세요.">${answer.content}</textarea>
                         </div>
+
                         <div class="mb-2 mx-4">
                             <a href="/qna/${question.no}" style="text-decoration: none; color: inherit;">
                               <button type="button" class="btn" style="background-color: #DCDCDC;">취소</button>
