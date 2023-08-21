@@ -98,6 +98,7 @@ public class QuestionServiceImpl implements QuestionService, PcwkLogger {
         }
 
         // 제목 및 내용 수정
+        LOG.debug("사용자 요청={}", request);
         vo.setTitle(request.getTitle());
         vo.setContent(request.getContent());
 

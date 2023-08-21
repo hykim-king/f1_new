@@ -48,10 +48,12 @@ const main = {
 
     update : function () {
         const data = new FormData();
-        data.append('category', $('#category').val());
+        data.append('no', $('#no').val());
+        // data.append('category', $('#category').val());
         data.append('title', $('#title').val());
         data.append('content', $('#content').val());
-        data.append('no', $('#no').val());
+
+        alert(data);
 
         const file = $('#attachFile')[0].files[0];
         if (file) { // 파일이 존재하는 경우에만 추가
@@ -61,8 +63,9 @@ const main = {
         const no = $('#no').val();
 
         $.ajax({
-            type: 'PUT',
+            type: 'POST',
             url: '/api/qna/' + no,
+            enctype:'multipart/form-data',
             processData: false,
             contentType: false,
             data: data
