@@ -75,13 +75,13 @@
                                 <div class="mb-2 mx-4">
                                     <textarea class="form-control" id="answer-content" rows="5" placeholder="답변을 입력하세요"></textarea>
                                 </div>
-                            </form>
 
-                            <div class="mb-2 mx-4">
-                                <button type="submit" id="btn-answer-save" class="btn"
-                                    style="background-color: #DCDCDC;" value="저장">등록</button>
-                                <button type="reset" id="btn-answer-reset" class="btn btn-secondary">취소</button>
-                            </div>
+                                <div class="mb-2 mx-4">
+                                    <button type="reset" id="btn-answer-reset" class="btn btn-secondary">취소</button>
+                                    <button type="submit" id="btn-answer-save" class="btn"
+                                        style="background-color: #DCDCDC;" value="저장">등록</button>
+                                </div>
+                            </form>
                         </c:when>
 
                         <c:otherwise>
@@ -133,10 +133,11 @@
 	                                  rows="5" placeholder="내용을 입력하세요.">${answer.content}</textarea>
 	                    </div>
 	                    <div class="mb-2 mx-4">
-                         <button type="button" id="btn-answer-cancel-update" class="btn"
-                             style="background-color: #DCDCDC;">취소</button>
-	                     <button type="submit" id="btn-answer-updated" class="btn"
-	                             style="background-color: #DCDCDC;" value="수정">완료</button>
+                            <a href="/qna/${question.no}" style="text-decoration: none; color: inherit;">
+                              <button type="button" class="btn" style="background-color: #DCDCDC;">취소</button>
+                            </a>
+                             <button type="submit" id="btn-answer-updated" class="btn"
+                                     style="background-color: #DCDCDC;" value="수정">완료</button>
 	                    </div>
 	                </div>
 	            </div>
@@ -150,13 +151,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/resources/js/qna.js"></script>
 
-<!-- 답변 취소 버튼을 누르면 페이지 새로고침 -->
-<script>
-const cancelButton = document.getElementById("btn-answer-cancel-update");
-
-cancelButton.addEventListener("click", () => {
-    location.reload(); // 페이지 새로고침
-});
-</script>
 </body>
 </html>
