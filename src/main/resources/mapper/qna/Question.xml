@@ -77,10 +77,12 @@
         UPDATE QUESTION
         SET
             category = #{category},
---             image_url = #{imageURL},
             title = #{title},
             content = #{content},
-            update_date = CURRENT_TIMESTAMP
+            update_date = CURRENT_TIMESTAMP,
+            image_url = #{imageURL},
+            original_filename = #{originalFileName},
+            store_filename = #{storeFileName}
         WHERE no = #{no}
     </update>
 
