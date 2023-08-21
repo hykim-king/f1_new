@@ -11,21 +11,18 @@
 <body>
     <form class="container mt-4" id="question-form">
         <h1 class="mb-4">Q&A 게시판</h1>
-        <div class="mb-2 row align-items-center">
-            <label for="category" class="form-label col-auto pe-1 m-0">분류</label>
-            <div class="col">
-                 <c:choose>
-                     <c:when test="${user.grade == 2}">  <!-- 관리자 등급인 경우 -->
-                         <input type="text" id="categoryLabel" class="form-control border-0" value="공지" readonly style="width: 120px;">
-                         <input type="hidden" id="category" name="category" value="10">
-                     </c:when>
-
-                     <c:otherwise>  <!-- 일반 사용자인 경우 -->
-                         <input type="text" id="categoryLabel" class="form-control" value="답변대기" readonly>
-                         <input type="hidden" id="category" name="category" value="30">
-                     </c:otherwise>
-                 </c:choose>
-             </div>
+        <div class="row align-items-center">
+	        <c:choose>
+	            <c:when test="${user.grade == 2}">  <!-- 관리자 등급인 경우 -->
+	                <p id="categoryLabel" class="categoryLabel">[공지]</p>
+	                <input type="hidden" id="category" name="category" value="10">
+	            </c:when>
+	
+	            <c:otherwise>  <!-- 일반 사용자인 경우 -->
+	                <p id="categoryLabel" class="categoryLabel">[답변 대기]</p>
+	                <input type="hidden" id="category" name="category" value="30">
+	            </c:otherwise>
+	        </c:choose>
         </div>
 
         <div class="row" style="display: none;">
@@ -50,7 +47,7 @@
 
         <div class="mb-3 row">
             <div class="col">
-                <textarea class="form-control" id="content" placeholder="내용을 입력하세요."></textarea>
+                <textarea class="form-control" id="content" rows="10" placeholder="내용을 입력하세요."></textarea>
             </div>
         </div>
         <div class="text-center">
