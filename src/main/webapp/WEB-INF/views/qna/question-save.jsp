@@ -35,24 +35,24 @@
         <div class="mb-3 row">
             <div class="col">
                 <input type="text" class="form-control" id="title"
-                    value="${question.title}" placeholder="제목을 입력하세요.">
+                    value="${question.title}" style="outline:none; box-shadow:none;" placeholder="제목을 입력하세요.">
             </div>
         </div>
 
         <div class="d-flex mb-3 row align-items-center">
             <div class="col">
-                <input type="file" id="attachFile" name="attachFile" class="form-control" accept="image/*">
+                <input type="file" id="attachFile" name="attachFile" class="form-control" style="outline:none; box-shadow:none;" accept="image/*">
             </div>
         </div>
 
         <div class="mb-3 row">
             <div class="col">
-                <textarea class="form-control" id="content" rows="10" placeholder="내용을 입력하세요."></textarea>
+                <textarea class="form-control" id="content" rows="10" style="outline:none; box-shadow:none;" placeholder="내용을 입력하세요."></textarea>
             </div>
         </div>
         <div class="text-center">
             <a href="/qna" role="button" class="btn btn-secondary">취소</a>
-            <button type="submit" id="btn-save" class="btn btn-primary"
+            <button type="submit" id="btn-save" class="btn" style="background-color: #024089; outline:none; color: white;"
                 value="저장">등록</button>
         </div>
     </form>
