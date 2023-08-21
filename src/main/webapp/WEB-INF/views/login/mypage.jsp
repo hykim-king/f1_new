@@ -14,7 +14,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"  href="${CP}/resources/css/mypage.css">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link  href="${CP}/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
@@ -38,7 +38,7 @@
 	  <div id="container">
 			  <form>
 			    <fieldset style="border:0 solid black;">
-			      <ul class="list-group" style="list-style: none;">
+			      <ul class="list-group" id="for-margin-id" style="list-style: none;">
 				      <li>
 					      <label>아이디</label><br/>
 					      <input class="form-control" type="text" id="rid" readonly="readonly" value="${user.id}">

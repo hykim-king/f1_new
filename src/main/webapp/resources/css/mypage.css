@@ -1,11 +1,8 @@
 @charset "UTF-8";
   
-  header {
-  
-  }
-  
 	#container {
-	  margin-top: 60px;
+	  font-family: 'NanumSquareNeoBold';
+	  margin-top: 40px;
 	  margin: auto;
 	  width: 800px;
 	}
@@ -18,7 +15,7 @@
 	  height: 50px;
 	}
 	
-	.margin_li {
+	#for-margin-id li {
 	  margin-top: 20px;
 	}
 	
