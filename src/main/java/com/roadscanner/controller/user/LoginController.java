@@ -147,7 +147,7 @@ public class LoginController {
         LOG.debug("│ logoutButtonEvent()                                    │");
         LOG.debug("└────────────────────────────────────────────────────────┘");
 		session.invalidate();
-		return "/login/login";	
+		return "redirect:/login";	
 	}
     
     @GetMapping("/**/mailCheck")

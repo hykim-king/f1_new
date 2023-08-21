@@ -36,15 +36,14 @@
 	    <div id="second">
 	    
 	      <div class="info-section" id="third">
-	        <h1 style="text-align: center;">교통표지판 인식 AI 웹 서비스</h1>
+	        <b style="text-align: center;">교통표지판 인식 AI 웹 서비스</b>
 	        <br/>
 	        
 	        <div id="fourth">
 	          <br/><br/>
 	          <b>'RoadScanner'는 약 40,000개의 훈련 이미지를 활용하여 학습하였고,</b><br/>
 	          <b>13,000개의 테스트 이미지를 활용하여 약 98% 정확도를 나타내는 모델을 제작했습니다</b>
-	          <br/><br/>
-	          <b>서비스 이용 : 회원가입 → 로그인 → 사진 업로드 → 결과 확인 및 피드백 선택</b>
+	          
 	        </div>
 	      </div>
 	      
