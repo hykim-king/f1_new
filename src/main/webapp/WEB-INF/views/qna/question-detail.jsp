@@ -54,13 +54,17 @@
                                 style="background-color: #DCDCDC;">삭제</button>
                         </div>
                         <div class="col-auto ms-auto">
-                            <a href="/qna" class="btn btn-primary">목록</a>
+                            <a href="/qna" class="btn btn-secondary">목록</a>
                         </div>
                     </div>
                 </c:when>
 
                 <c:otherwise>
-                    <div class="mb-3"></div>
+                    <div class="mb-3">
+                        <div class="col-auto ms-auto">
+                            <a href="/qna" class="btn btn-secondary">목록</a>
+                        </div>
+                    </div>
                 </c:otherwise>
             </c:choose>
         </div>
