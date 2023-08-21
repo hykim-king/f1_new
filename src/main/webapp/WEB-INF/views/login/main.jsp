@@ -52,7 +52,12 @@
   
   <div class="section">
    <div class="section-button" id="section-button" style="background-image: url('resources/picture/start.jpg');">
-    <a id="start-button" href="${CP}/login"><b>START</b></a>
+    <c:if test="${user eq null}">
+      <a id="start-button" href="${CP}/login"><b>START</b></a>
+    </c:if>
+    <c:if test="${user ne null}">
+      <a id="start-button" href="${CP}/main/preUpload"><b>START</b></a>
+    </c:if>
    </div>
   </div>
   
