@@ -80,12 +80,31 @@ public class QuestionServiceImpl implements QuestionService, PcwkLogger {
     }
 
     @Override
-    public Long update(Long no, QuestionUpdateRequestDTO dto) {
-        // findById 메서드를 완성 시켜야함 단건 조회후 수정
+    @Transactional
+    public Long update(Long no, QuestionUpdateRequestDTO request) throws IOException {
         QuestionVO vo = questionDAO.findByNo(no);
+
+        // 기존에 사용자가 업로드한 이미지를 삭제함
+        if (vo.getStoreFilename() != null) {
+            fileStore.deleteFile(vo.getStoreFilename());
+        }
+
+        // 새 이미지 업로드
+        if (request.getAttachFile() != null && request.getAttachFile().isEmpty()) {
+            UploadFile attachFile = fileStore.storeFile(request.getAttachFile());
+            vo.setOriginalFilename(attachFile.getUploadFileName());
+            vo.setStoreFilename(attachFile.getStoreFileName());
+            vo.setImageUrl(attachFile.getUrl());
+        }
+
+        // 제목 및 내용 수정
+        vo.setTitle(request.getTitle());
+        vo.setContent(request.getContent());
+
         questionDAO.update(vo);
         return no;
     }
+
     @Override
     public Long delete(Long no) {
         questionDAO.delete(no);

@@ -38,7 +38,7 @@ public class QuestionApiController implements PcwkLogger {
 
     // 수정
     @PutMapping("/api/qna/{no}")
-    public Long update(@PathVariable Long no, @RequestBody QuestionUpdateRequestDTO dto) {
+    public Long update(@PathVariable Long no, @RequestBody QuestionUpdateRequestDTO dto) throws IOException {
         return questionService.update(no, dto);
     }
 
