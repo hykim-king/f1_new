@@ -23,8 +23,8 @@
 
             <div class="row m-2 mb-0">
                 <div class="col">
-                    <p class="card-text"><b>작성자: ${question.id}</b>&emsp;( 작성일: ${question.createDate} )
-                        <c:if test="${question.updateDate != null}">&ensp;( 최종 수정일: ${question.updateDate} )</c:if>
+                    <p class="card-text"><b>작성자: ${question.id}</b>&emsp;작성일: ${question.createDate}
+                        <c:if test="${question.updateDate != null}">&nbsp;|&nbsp;&nbsp;최종 수정일: ${question.updateDate}</c:if>
                     </p>
                 </div>
             </div>
@@ -41,6 +41,7 @@
                     </div>
                 </div>
             </div>
+
 
             <!-- 로그인한 id와 question의 id값이 같을 때만 수정/삭제 버튼 보이기 -->
             <c:choose>
@@ -75,8 +76,8 @@
                     </div>
                     <div class="row m-2">
                         <div class="col">
-                            <p class="card-text"><b>작성자: ${user.id}</b>&emsp;( 작성일: ${answer.createDate} )
-                                <c:if test="${answer.updateDate != null}">&ensp;( 최종 수정일: ${answer.updateDate} )</c:if>
+                            <p class="card-text"><b>작성자: ${user.id}</b>&emsp;작성일: ${answer.createDate}
+                                <c:if test="${answer.updateDate != null}">&nbsp;|&nbsp;&nbsp;최종 수정일: ${answer.updateDate}</c:if>
                             </p>
                         </div>
                     </div>
@@ -120,7 +121,7 @@
                         </div>
                         <div class="mt-2 mb-2 mx-4">
                             <textarea class="form-control" id="answer-content"
-                                      rows="5" placeholder="내용을 입력하세요."></textarea>
+                                      rows="5" style="border-color:secondary; outline:none; box-shadow:none;" placeholder="내용을 입력하세요."></textarea>
                         </div>
                         <div class="mb-2 mx-4">
                             <button type="reset" id="btn-answer-reset" class="btn btn-secondary">취소</button>
@@ -148,7 +149,7 @@
 
                         <div class="mt-2 mb-2 mx-4">
                             <textarea class="form-control" id="answer-update-content"
-                                      rows="5" placeholder="내용을 입력하세요.">${answer.content}</textarea>
+                                      rows="5" style="border-color:secondary; outline:none; box-shadow:none;" placeholder="내용을 입력하세요.">${answer.content}</textarea>
                         </div>
 
                         <div class="mb-2 mx-4">
