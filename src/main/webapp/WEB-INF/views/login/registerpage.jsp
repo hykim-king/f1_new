@@ -10,8 +10,8 @@
 
   <%@include file ="navbar.jsp" %>
 
-<body id="font-id" class="d-flex flex-column min-vh-100">
-<div class ="reg_container">
+<body class="d-flex flex-column min-vh-100">
+<div class ="reg_container" id="font-id">
     <h1>RoadScanner 회원가입</h1>
     &nbsp;
 	       <form action="" method="post" name="membership" style="margin: auto;">         

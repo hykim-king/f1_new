@@ -62,7 +62,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String admin(@ModelAttribute("user") MemberVO vo) {
+	public String admin() {
 		System.out.println("관리자 화면으로 이동...");
 		return "/login/admin";
 	}
