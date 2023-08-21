@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <div class="mb-2 row">
+        <div class="mb-3 row">
             <div class="col">
                 <input type="text" class="form-control" id="title"
                     value="${question.title}" placeholder="제목을 입력하세요.">
@@ -44,7 +44,7 @@
 
         <div class="mb-3 row">
             <div class="col">
-                <textarea class="form-control" id="content" placeholder="내용을 입력하세요.">${question.content}</textarea>
+                <textarea class="form-control" id="content" rows="10" placeholder="내용을 입력하세요.">${question.content}</textarea>
             </div>
         </div>
 
