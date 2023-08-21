@@ -37,7 +37,7 @@
 	    
 	      <div class="info-section" id="third">
 	        <b style="text-align: center;">교통표지판 인식 AI 웹 서비스</b>
-	        <br/><br/>
+	        <br/>
 	        
 	        <div id="fourth">
 	          <br/><br/>
