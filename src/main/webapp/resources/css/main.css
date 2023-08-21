@@ -19,7 +19,7 @@
     transform: translate(-50%, -50%);
     text-align: center;
     color: white; /* 텍스트 색상을 원하는 대로 설정해주세요 */
-    font-size: 70px; /* 원하는 폰트 크기로 설정해주세요 */
+    font-size: 100px; /* 원하는 폰트 크기로 설정해주세요 */
     font-family: 'Bruno Ace', cursive;
     font-style: italic;
     text-shadow: 5px 5px 6px black;
@@ -45,7 +45,7 @@
   
   #third {
     font-family: 'NanumSquareNeoBold';
-    font-size: 70px;
+    font-size: 55px;
     text-align: center;
     padding: 110px; 
     border-radius: 10px; 
@@ -58,7 +58,7 @@
   #fourth {
     text-align: center;
     margin: auto; 
-    font-size: 33px;
+    font-size: 25px;
   }
   
   #section-button {
