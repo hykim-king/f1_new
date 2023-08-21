@@ -33,8 +33,8 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <c:if test="${question.idx != null}">
-                                <input type="image" id="detailImage" src="${img}" style="width: 500px;">
+                            <c:if test="${question.imageUrl != null}">
+                                <input type="image" id="detailImage" src="${question.imageUrl}" style="width: 500px;">
                             </c:if>
                             <p class="card-text">${question.content}</p>
                         </div>

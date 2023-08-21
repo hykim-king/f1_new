@@ -4,14 +4,9 @@
 
     <!-- 오라클 insert 확인 O-->
     <insert id="save">
-        INSERT INTO QUESTION (no, category, id, title, content)
-        VALUES (QUESTION_SEQ.NEXTVAL, #{category}, #{id}, #{title}, #{content})
+        insert into QUESTION(category, id, title, content, original_filename, store_filename, image_url)
+        VALUES (#{category}, #{id}, #{title}, #{content}, #{originalFilename}, #{storeFilename}, #{imageUrl})
     </insert>
-
-    <!--<insert id="save">
-        INSERT INTO QUESTION (no, category, id, title, content)
-        VALUES (#{no}, #{category}, #{id}, #{title}, #{content})
-    </insert>-->
 
     <!-- no로 질문 조회 오라클 O-->
     <select id="findByNo" resultType="QuestionVO">
@@ -23,8 +18,8 @@
             title,
             content,
             create_date AS createDate,
-            update_date AS updateDate
---         update_date AS updateDate
+            update_date AS updateDate,
+            image_url AS imageUrl
         FROM QUESTION
         WHERE no = #{no}
     </select>

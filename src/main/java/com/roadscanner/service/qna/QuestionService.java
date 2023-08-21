@@ -3,6 +3,7 @@ package com.roadscanner.service.qna;
 import com.roadscanner.domain.qna.QuestionVO;
 import com.roadscanner.dto.qna.*;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface QuestionService{
@@ -13,7 +14,7 @@ public interface QuestionService{
 
     List<QuestionListResponseDTO> findAll(PaginationDTO pagination, QuestionSearchCond questionSearch);
 
-    Long save(QuestionSaveRequestDTO dto);
+    void save(QuestionSaveRequestDTO dto) throws IOException;
 
     QuestionResponseDTO findByNo(Long no);
 
