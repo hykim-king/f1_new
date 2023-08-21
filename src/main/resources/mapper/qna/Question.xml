@@ -40,20 +40,7 @@
                 create_date AS createDate,
                 update_date AS updateDate
                 FROM QUESTION
-<!--        <where>-->
-<!--            <if test="searchCond.searchType == 'title'">-->
-<!--                title LIKE '%' || #{searchCond.keyword} || '%'-->
-<!--            </if>-->
-<!--            <if test="searchCond.searchType == 'content'">-->
-<!--                content LIKE '%' || #{searchCond.keyword} || '%'-->
-<!--            </if>-->
-<!--            <if test="searchCond.searchType == 'both'">-->
-<!--                (title LIKE '%' || #{searchCond.keyword} || '%' OR content LIKE '%' || #{searchCond.keyword} || '%')-->
-<!--            </if>-->
-<!--            <if test="searchCond.category != null">-->
-<!--                AND category = #{searchCond.category}-->
-<!--            </if>-->
-<!--        </where>-->
+
                 WHERE 1=1
                 <if test="searchCond.category != null">
                     AND category = #{searchCond.category}
@@ -137,7 +124,6 @@
 <!--                (title LIKE '%' || #{keyword} || '%' OR content LIKE '%' || #{keyword} || '%')-->
 <!--            </if>-->
 <!--        </where>-->
-
     </select>
 
     <!-- 조회수 증가 -->
