@@ -17,6 +17,7 @@
   <%@include file ="navbar.jsp" %>
 
 <body class="d-flex flex-column min-vh-100">
+<c:if test="${user eq null}"> 
     <div class = "roadscannercontainer">
     <form onsubmit="return false;"> 
         <div class = "loginbox">
@@ -52,17 +53,21 @@
 	    </div>  <!-- class = loginbox  -->
 	  </form> 
     </div>
+</c:if> <!-- 유저 정보X-end -->   
+
+<c:if test="${user ne null}">  <!-- 유저 정보O -->
+    <div style="text-align: center; margin:80px; auto;">
+        <h3>현재 로그인 상태입니다.</h3><p/>
+        <h4>로그아웃 이후 진행해주세요.</h4><p/>
+        <img alt="ddd" src="../resources/img/infinite.gif" loop = 1 >
+        <h4><a href="${CP}/logout">Go To 로그아웃</a></h4>
+    </div>            
+</c:if> <!-- 유저 정보O-end -->
 </body>
 
   <%@include file ="footer.jsp" %>
 
 <script>
-  $(document).ready(function(){ //모든 화면이 다 로딩이 되면 실행하는 영역
-    console.log("$document.ready");
-    if(window.location.href == "http://localhost:8080/logout"){
-    	 window.location.href="${CP}/login";
-    }
-   
     //jquery 이벤트 감지 (#은 id를 감지한는것이다.)
     $("#doLogin").on("click",function(){
       console.log("doLogin");
@@ -124,6 +129,5 @@
               }
           });
     });    
-  });
 </script>
 </html>
