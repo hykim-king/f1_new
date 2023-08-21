@@ -28,7 +28,7 @@
 
                 <!-- 분류 셀렉트 박스 -->
                 <div class="col-auto mx-1">
-                    <select name="category" id="category" class="form-select">
+                    <select name="category" id="category" class="form-select" style="border-color:secondary; outline:none; box-shadow:none;">
                         <option value="">전체</option>
                         <option value="10" ${category == 10 ? 'selected' : ''}>공지</option>
                         <option value="20" ${category == 20 ? 'selected' : ''}>답변완료</option>
@@ -39,7 +39,7 @@
                 <!-- 검색 박스와 글쓰기 버튼을 포함한 레이아웃 -->
                 <!-- 검색 셀렉트 박스 (오른쪽 정렬) -->
                 <div class="col-auto">
-                    <select name="searchType" class="form-select">
+                    <select name="searchType" class="form-select" style="border-color:secondary; outline:none; box-shadow:none;">
                         <option value="title" ${searchType == 'title' ? 'selected' : ''}>제목</option>
                         <option value="content" ${searchType == 'content' ? 'selected' : ''}>내용</option>
                         <option value="both" ${searchType == 'both' ? 'selected' : ''}>제목+내용</option>
@@ -56,11 +56,11 @@
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
                         </svg>
                         </span>
-                        <input type="text" name="keyword" class="form-control" placeholder="검색어를 입력하세요">
+                        <input type="text" name="keyword" class="form-control" style="border-color:secondary; outline:none; box-shadow:none;" placeholder="검색어를 입력하세요">
                     </div>
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-primary">검색</button>
+                    <button type="submit" class="btn btn-secondary">검색</button>
                 </div>
             </div>
         </div>
@@ -120,7 +120,7 @@
     </table>
     <!-- 글쓰기 버튼 -->
     <div class="d-flex justify-content-end">
-        <a href="/qna/save" class="btn btn-outline-primary my-1"
+        <a href="/qna/save" class="btn btn-outline-secondary my-1"
             role="button">글쓰기</a>
     </div>
 
