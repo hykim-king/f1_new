@@ -31,26 +31,26 @@
 
         <div class="mb-3 row">
             <div class="col">
-                <input type="text" class="form-control" id="title"
+                <input type="text" class="form-control" id="title" style="outline:none; box-shadow:none;"
                     value="${question.title}" placeholder="제목을 입력하세요.">
             </div>
         </div>
 
         <div class="d-flex mb-3 row align-items-center">
             <div class="col">
-                <input type="file" id="attachFile" name="attachFile" class="form-control" accept="image/*">
+                <input type="file" id="attachFile" name="attachFile" class="form-control" style="outline:none; box-shadow:none;" accept="image/*">
             </div>
         </div>
 
         <div class="mb-3 row">
             <div class="col">
-                <textarea class="form-control" id="content" rows="10" placeholder="내용을 입력하세요.">${question.content}</textarea>
+                <textarea class="form-control" id="content" rows="10" style="outline:none; box-shadow:none;" placeholder="내용을 입력하세요.">${question.content}</textarea>
             </div>
         </div>
 
         <div class="text-center">
             <a href="/qna/${question.no}" role="button" class="btn btn-secondary">취소</a>
-            <button type="button" id="btn-update" class="btn btn-primary" value="수정">수정</button>
+            <button type="button" id="btn-update" class="btn" style="background-color: #024089; color:white; value="수정">수정</button>
         </div>
     </form>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
