@@ -48,19 +48,19 @@
                 <c:when test="${user.id == question.id}">
                     <div class="row mx-2 mb-2">
                         <div class="col-auto">
-                            <a href="/qna/update/${question.no}" class="btn"
-                                style="background-color: #DCDCDC;">수정</a>
-                            <button type="button" id="btn-delete" class="btn"
-                                style="background-color: #DCDCDC;">삭제</button>
-                        </div>
-                        <div class="col-auto ms-auto">
-                            <a href="/qna" class="btn btn-secondary">목록</a>
-                        </div>
+		                    <a href="/qna/update/${question.no}" class="btn"
+		                        style="background-color: #DCDCDC;">수정</a>
+		                    <button type="button" id="btn-delete" class="btn"
+		                        style="background-color: #DCDCDC;">삭제</button>
+		                </div>
+		                <div class="col-auto ms-auto">
+		                    <a href="/qna" class="btn btn-secondary">목록</a>
+		                </div>
                     </div>
                 </c:when>
 
                 <c:otherwise>
-                    <div class="mb-3">
+                    <div class="row mx-2 mb-2">
                         <div class="col-auto ms-auto">
                             <a href="/qna" class="btn btn-secondary">목록</a>
                         </div>
