@@ -99,9 +99,14 @@ public class QuestionServiceImpl implements QuestionService, PcwkLogger {
 
         LOG.debug("데이터베이스에 있던 이미지 이름={}", vo.getStoreFilename());
 
-        if (vo.getStoreFilename() != null) {
-            fileStore.deleteFile(vo.getStoreFilename());
-        }
+        /**
+         * 2023.08.22(화) S3에 파일 삭제하는것에 문제가 있음 확인 필요.
+         * 주석으로 처리해둠
+         */
+
+//        if (vo.getStoreFilename() != null) {
+//            fileStore.deleteFile(vo.getStoreFilename());
+//        }
 
         // 파일을 S3에 업로드
         UploadFile attachFile = null;
@@ -112,10 +117,7 @@ public class QuestionServiceImpl implements QuestionService, PcwkLogger {
             vo.setImageUrl(attachFile.getUrl());
         }
 
-        /**
-         * 2023.08.22(화) S3에 파일 삭제하는것에 문제가 있음 확인 필요.
-         * 주석으로 처리해둠
-         */
+
 //        if (attachFile != null) {
 //            vo.setOriginalFilename(attachFile.getUploadFilename());
 //            vo.setStoreFilename(attachFile.getStoreFilename());
