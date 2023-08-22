@@ -160,7 +160,7 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
               // 업데이트 성공 : 로그인 페이지로 리턴
               if("10" == parsedJSON.msgId) {
                 alert(parsedJSON.msgContents);
-                window.location.href="${CP}/login";
+                window.location.href="${CP}/logout";
               }
               
               // 업데이트  실패 (입력값 오류)
