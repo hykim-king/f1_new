@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="container mt-4">
-        <h1 class="mb-4">Q&A 게시판</h1>
+        <h1 class="mb-4"><a href="/qna" class="qna-title-link">Q&A 게시판</a></h1>
         <div class="card mb-5">
             <input type="hidden" id="no" value="${question.no}">
             <div class="card-header">
