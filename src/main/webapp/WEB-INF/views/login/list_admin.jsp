@@ -143,7 +143,7 @@ $("#deletebtn").on("click",function(){
                          
                            if("10" == parsedJSON.msgId){
                               $('#messagebox').attr('value', parsedJSON.msgContents);
-                              location.reload();
+                              window.location.href= "/login/list_admin?num=1&keyword=${adminPage.keyword}";
                           } 
                                                 
                           if("20" == parsedJSON.msgId){

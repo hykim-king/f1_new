@@ -86,6 +86,7 @@ public interface UserService {
 	 */
 	public int doWithdraw(MemberVO user) throws SQLException;
 	
+	public int delete(MemberVO user) throws SQLException;
 	/**
 	 * 등급 변경
 	 * @param user

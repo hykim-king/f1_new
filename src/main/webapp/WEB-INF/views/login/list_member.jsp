@@ -130,7 +130,7 @@ $("#deletebtn").on("click",function(){
 		                 
 		                   if("10" == parsedJSON.msgId){
 		                	  $('#messagebox').attr('value', parsedJSON.msgContents);
-		                	  location.reload();
+		                	  window.location.href= "/login/list_member?num=1&keyword=${memberPage.keyword}";
 		                  } 
 		                                        
 		                  if("20" == parsedJSON.msgId){
