@@ -186,7 +186,7 @@
             let registerId = document.getElementById('id_form').value;
             let registerPw = document.getElementById('pw2_form').value;
             let registerEmail =  $('#email_front').val()+"@"+ $('#email_back').val()
-            console.log(registerEmail);
+          
            
             
             document.register_form.id.value = registerId;
