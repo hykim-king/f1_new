@@ -16,7 +16,7 @@
 <title>File Upload</title>
 
 <header> <%@include file ="login/navbar.jsp" %> </header>
-<body id="font-id">  
+<body id="font-id">
 <div id="separation">
 <input id="thisName" type="hidden" value="${thisName}">
   <div class="left">
@@ -46,12 +46,12 @@
 
   <div class="right" id="rightContent">
     <!-- 우측 영역의 내용을 입력 -->
-    <h2>우측 영역</h2>
+    <h2>${resultImg.name}</h2>
     <!-- 세로로 긴 내용 -->
     <label>
-      <img id="resultImg" src="${resultImg}" alt="resultImg">
+      <img id="resultImg" src="${resultImg.url}" alt="resultImg">
     </label>
-    <p>[1]동해 물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람, 대한으로 길이 보전하세 [2]남산 위에 저 소나무, 철갑을 두른 듯 바람서리 불변함은 우리 기상일세 무궁화 삼천리 화려강산 대한 사람, 대한으로 길이 보전하세 [3]가을 하늘 공활한데 높고 구름 없이 밝은 달은 우리 가슴 일편단심일세 무궁화 삼천리 화려강산 대한 사람, 대한으로 길이 보전하세 [4]이 기상과 이 맘으로 충성을 다하여 괴로우나 즐거우나 나라 사랑하세 무궁화 삼천리 화려강산 대한 사람, 대한으로 길이 보전하세</p>
+    <div>${resultImg.content}</div>
     <!-- 피드백 버튼 -->
     <div id="FeedbackButtons">
       <button id="likeButton" type="button" class="btn btn-link"><img src="${CP}/resources/img/thumbsup.jpg" alt="붐업 이미지"></button>

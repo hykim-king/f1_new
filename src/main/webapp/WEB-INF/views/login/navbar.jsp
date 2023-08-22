@@ -22,6 +22,9 @@
 
 </style>
 
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="${CP}/resources/js/jquery-3.7.0.js"></script>
 </head>
 
 <nav id="font-id" class="navbar navbar-expand-md mb-4" style="background-color: white;">
@@ -46,7 +49,8 @@
           <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">관리자 기능</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="${CP}/admin">List</a></li>
-            <li><a class="dropdown-item" href="#">Upload</a></li>
+            <li><a class="dropdown-item" href="${CP}/imgManagement">Image Management</a></li>
+            <li><a class="dropdown-item" href="${CP}/graph">graph</a></li>
             <li><a class="dropdown-item" href="#">None</a></li>
           </ul>
         </li>
