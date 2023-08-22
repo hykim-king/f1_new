@@ -102,14 +102,7 @@
     FROM
         upload_image
     WHERE
-    <choose>
-      <when test="name != null">
         name = #{name}
-      </when>
-      <otherwise>
-        idx = #{idx}
-      </otherwise>
-    </choose>
   </select>
   
   <!-- 사진 수정 -->
@@ -134,7 +127,6 @@
   <!-- 사진 업로드 -->
   <insert id="doSave" parameterType="FileUploadVO">
     INSERT INTO upload_image (
-        idx,
         id,
         category,
         upload_date,
@@ -143,10 +135,9 @@
         file_size,
         checked
     ) VALUES (
-        upload_seq.NEXTVAL, <!-- upload_seq.NEXTVAL -->
         #{id},
         #{category},
-        SYSDATE,
+        NOW(),
         #{name},
         #{url},
         #{fileSize},

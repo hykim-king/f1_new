@@ -106,15 +106,13 @@
                 id,       
                 password, 
                 email,
-                reg_date,
-                no
+                reg_date
      ) VALUES (
         #{grade},    
         #{id},       
         #{password},        
         #{email},
-        SYSDATE,
-        MEMBER_SEQ.NEXTVAL
+        NOW()
      )      
   </insert>  
     

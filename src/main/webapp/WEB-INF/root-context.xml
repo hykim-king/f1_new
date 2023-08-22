@@ -52,10 +52,10 @@
 
     <!-- 팀 기본 데이터 베이스 설정 데이터 소스 변동유무 X -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-        <property name="url" value="jdbc:oracle:thin:@192.168.0.123:1521:XE"/>
-        <property name="username" value="f1"/>
-        <property name="password" value="4444"/>
+        <property name="driverClassName" value="org.h2.Driver"/>
+        <property name="url" value="jdbc:h2:tcp://localhost/~/test"/>
+        <property name="username" value="sa"/>
+        <property name="password" value=""/>
     </bean>
 
     <!-- 매퍼 스캔할 수 있도록 지정 변동유무 O-->

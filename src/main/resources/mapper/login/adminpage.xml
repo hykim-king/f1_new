@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.roadscanner.dao.user.AdminpageDao">
-	<resultMap id="MemberMap" type="MemberVO">
-	        <result column="id"            property="id"   />
-	        <result column="password"      property="password"  />
-	        <result column="email"         property="email"/>
-	        <result column="grade"         property="grade"/>  
-	        <result column="reg_date"          property="regdate"/> 
-	        <result column="no"        property="no"/>   
-	</resultMap>    
+  <resultMap id="MemberMap" type="MemberVO">
+          <result column="id"            property="id"   />
+          <result column="password"      property="password"  />
+          <result column="email"         property="email"/>
+          <result column="grade"         property="grade"/>  
+          <result column="reg_date"          property="regdate"/> 
+          <result column="no"        property="no"/>   
+  </resultMap>    
       
     <!-- 페이징 + 검색 -->
      <select id="member" parameterType="hashMap" resultMap="MemberMap">
         SELECT roadnum,road2.*
-	    FROM(
+      FROM(
           SELECT row_number() OVER(ORDER BY road.no) AS roadnum, road.*
            FROM member road
            WHERE grade = 1
@@ -22,16 +22,16 @@
            </if> 
           ORDER BY road.no
           ) road2
-	    WHERE roadnum BETWEEN #{dpPost} AND #{postNum}+ #{dpPost}-1         
-	    ORDER BY road2.no
+      WHERE roadnum BETWEEN #{dpPost} AND #{postNum}+ #{dpPost}-1         
+      ORDER BY road2.no
      </select>
 
      <!-- 검색  카운팅 -->
       <select id="member_searchCntBox" parameterType="hashMap" resultType="int">
-	      SELECT COUNT(id) cnt
-	      FROM member
-	      WHERE 1=1 
-	      AND grade = 1
+        SELECT COUNT(id) cnt
+        FROM member
+        WHERE 1=1 
+        AND grade = 1
            <if test="keyword !=null and keyword !=''">
                          AND id LIKE '%'||#{keyword}||'%' 
            </if> 
@@ -44,7 +44,7 @@
           SELECT row_number() OVER(ORDER BY road.no) AS roadnum, road.*
            FROM member road
            WHERE grade = 2
-           AND  id NOT in  #{exclude}
+           AND  id NOT in (#{exclude})
            
            <if test='keyword !=null and keyword !=""'>
                          AND id LIKE '%'||#{keyword}||'%' 
@@ -61,9 +61,9 @@
           FROM member
           WHERE 1=1 
           AND grade = 2
-          AND  id NOT in #{exclude}
+          AND  id NOT in (#{exclude})
            <if test='keyword !=null and keyword !=""'>
-                         AND id LIKE '%'||#{keyword}||'%' 
+                         AND id LIKE '%'||#{keyword}||'%'
            </if> 
      </select>
      
