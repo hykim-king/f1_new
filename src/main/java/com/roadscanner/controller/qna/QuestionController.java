@@ -26,33 +26,48 @@ public class QuestionController {
     private final QuestionService questionService;
     private final AnswerService answerService;
 
-    @ModelAttribute
-    public PaginationDTO pagination(@RequestParam(defaultValue = "1") int page,
-                                    @RequestParam(defaultValue = "10") int size,
-                                    @ModelAttribute QuestionSearchCond searchCond) {
+    @GetMapping
+    public String index(Model model,
+                        @RequestParam(defaultValue = "1") int page,
+                        @RequestParam(defaultValue = "10") int size,
+                        @RequestParam(defaultValue = "") String searchType,
+                        @RequestParam(defaultValue = "") String keyword,
+                        @RequestParam(required = false) Integer category) {
+
+        QuestionSearchCond searchCond = new QuestionSearchCond();
+        searchCond.setSearchType(searchType);
+        searchCond.setKeyword(keyword);
+        searchCond.setCategory(category); // 카테고리 설정
 
         int totalQuestions = questionService.countQuestions(searchCond);
 
         // 페이지 번호가 유효한지 확인
-        if (page < 1) page = 1;
-        if (totalQuestions == 0) page = 0;
+        if (page < 1) {
+            page = 1;
+        }
 
         // 총 페이지 수가 0이면, 페이지 번호도 0으로 설정
+        if (totalQuestions == 0) {
+            page = 0;
+        }
+
         PaginationDTO pagination = new PaginationDTO(page, size, totalQuestions);
-        if (page > pagination.getTotalPage()) page = pagination.getTotalPage();
 
-        return pagination;
-    }
-
-    @GetMapping
-    public String index(Model model,
-                        @ModelAttribute QuestionSearchCond searchCond,
-                        @ModelAttribute PaginationDTO pagination) {
+        // 현재 페이지 번호가 총 페이지 수보다 크면, 현재 페이지 번호를 총 페이지 수로 설정
+        if (page > pagination.getTotalPage()) {
+            page = pagination.getTotalPage();
+        }
 
         model.addAttribute("questions", questionService.findAll(pagination, searchCond));
         model.addAttribute("pagination", pagination);
-        model.addAttribute("page", pagination.getPage());
+        model.addAttribute("page", page);
 
+        // 검색 조건 추가
+        model.addAttribute("searchType", searchType);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("category", category);
+
+        // 공지사항 목록을 조회해서 모델에 추가
         List<QuestionListResponseDTO> notice = questionService.findNotice();
         model.addAttribute("notice", notice);
 
@@ -61,17 +76,53 @@ public class QuestionController {
 
     @GetMapping("/my")
     public String findMyQuestion(Model model,
-                                 @ModelAttribute QuestionSearchCond searchCond,
-                                 @ModelAttribute PaginationDTO pagination,
+                                 @RequestParam(defaultValue = "1") int page,
+                                 @RequestParam(defaultValue = "10") int size,
+                                 @RequestParam(defaultValue = "") String searchType,
+                                 @RequestParam(defaultValue = "") String keyword,
+                                 @RequestParam(required = false) Integer category,
                                  @SessionAttribute("user") MemberVO memberVO) {
 
+        QuestionSearchCond searchCond = new QuestionSearchCond();
+
+        searchCond.setSearchType(searchType);
+        searchCond.setKeyword(keyword);
+        searchCond.setCategory(category); // 카테고리 설정
+        searchCond.setId(memberVO.getId());  // user 정보 설정
+
+        int totalQuestions = questionService.countMyQuestions(searchCond);
+
+        // 페이지 번호가 유효한지 확인
+        if (page < 1) {
+            page = 1;
+        }
+
+        // 총 페이지 수가 0이면, 페이지 번호도 0으로 설정
+        if (totalQuestions == 0) {
+            page = 0;
+        }
+
+        PaginationDTO pagination = new PaginationDTO(page, size, totalQuestions);
+
+        // 현재 페이지 번호가 총 페이지 수보다 크면, 현재 페이지 번호를 총 페이지 수로 설정
+        if (page > pagination.getTotalPage()) {
+            page = pagination.getTotalPage();
+        }
+
+        // user 정보 추가
         String id = memberVO.getId();
 
         model.addAttribute("questions", questionService.findMyQuestion(id, pagination, searchCond));
         model.addAttribute("pagination", pagination);
-        model.addAttribute("page", pagination.getPage());
+        model.addAttribute("page", page);
+
+        // 검색 조건 추가
+        model.addAttribute("searchType", searchType);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("category", category);
 
         return "qna/my-question";
+
     }
 
 

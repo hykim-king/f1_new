@@ -10,6 +10,8 @@ public interface QuestionService {
 
     List<QuestionListResponseDTO> findMyQuestion(String id, PaginationDTO pagination, QuestionSearchCond searchCond);
 
+    int countMyQuestions(QuestionSearchCond searchCond);
+
     List<QuestionListResponseDTO> findNotice();
 
     List<QuestionListResponseDTO> findAll(PaginationDTO pagination, QuestionSearchCond questionSearch);

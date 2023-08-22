@@ -63,5 +63,12 @@ public interface QuestionDAO extends BaseRepository<QuestionVO> {
      */
     List<QuestionVO> findMyQuestion(@Param("id") String id, @Param("pagination") PaginationDTO pagination, @Param("searchCond") QuestionSearchCond searchCond);
 
+    /**
+     * 내 글 개수 세기
+     * @param searchCond
+     * @return
+     */
+    int countMyQuestions(QuestionSearchCond searchCond);
+
 
 }
