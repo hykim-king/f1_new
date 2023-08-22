@@ -60,7 +60,7 @@ public class UploadController implements PcwkLogger {
 	//@RequestMapping(value = "/upload", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	public String upload(@RequestParam(name = "imgName", required = false) String imageName, Model model,
 					FileUploadVO inVO, ResultImgVO resultVO) throws SQLException {
-		
+		String flaskResult = "";
 		int imgNo = 0;
 		
 		//직전 업로드한 파일url
@@ -70,11 +70,12 @@ public class UploadController implements PcwkLogger {
 			model.addAttribute("thisUrl", url);
 			
 			// Flask API와 통신하여 결과값 받아오기
-			String flaskResult = restTemplateService.callFlaskApi(url);
+			flaskResult = restTemplateService.callFlaskApi(url);
 			flaskResult = flaskResult.trim(); // 공백 및 줄바꿈 문자 제거
 	        
 			// 결과값 int로 변환
 	        imgNo = Integer.parseInt(flaskResult);
+	        model.addAttribute("imgNo", imgNo);
 			
 		} else {
 			LOG.debug("session Connect Failed!");
@@ -85,7 +86,11 @@ public class UploadController implements PcwkLogger {
 		model.addAttribute("reasons", reasonList);
 		
 		//결과 이미지
-		resultVO.setNo(imgNo);
+		if (imgNo >= 0 && imgNo <= 42) {
+			resultVO.setNo(imgNo);
+		} else {
+			resultVO.setNo(404);
+		}
 		ResultImgVO resultImg = imgService.getResultImg(resultVO);
 		model.addAttribute("resultImg", resultImg);
 		
