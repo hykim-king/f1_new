@@ -50,7 +50,7 @@
     <h2>${resultImg.name}</h2>
     <!-- 세로로 긴 내용 -->
     <label>
-      <img id="resultImg" src="${resultImg.url}" alt="resultImg">
+      <img id="resultImg" src="${resultImg.url}" alt="resultImg"> imgNo=${imgNo}
     </label>
     <div>${resultImg.content}</div>
     <!-- 피드백 버튼 -->

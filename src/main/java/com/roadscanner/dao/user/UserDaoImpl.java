@@ -86,7 +86,6 @@ public class UserDaoImpl implements UserDao {
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
 		LOG.debug("│ 3 . encoderpw2 :" + encoderpw.getPassword());
 		LOG.debug("└────────────────────────────────────────────────────────┘");
-	
 	if(passwordEncoder.matches(user.getPassword(),encoderpw.getPassword())) {
 		flag = 1;
 	}else {
@@ -96,6 +95,7 @@ public class UserDaoImpl implements UserDao {
 		return flag;
 	}
 		return flag;
+		
 	}
 
 	@Override
