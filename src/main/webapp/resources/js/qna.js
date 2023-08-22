@@ -49,11 +49,10 @@ const main = {
     update : function () {
         const data = new FormData();
         data.append('no', $('#no').val());
-        // data.append('category', $('#category').val());
+        data.append('category', $('#category').val());
+        data.append('id', $('#id').val());
         data.append('title', $('#title').val());
         data.append('content', $('#content').val());
-
-        alert(data);
 
         const file = $('#attachFile')[0].files[0];
         if (file) { // 파일이 존재하는 경우에만 추가
@@ -64,8 +63,8 @@ const main = {
 
         $.ajax({
             type: 'POST',
-            url: '/api/qna/' + no,
             enctype:'multipart/form-data',
+            url: '/api/qna/' + no,
             processData: false,
             contentType: false,
             data: data
@@ -73,6 +72,7 @@ const main = {
             alert("글이 수정되었습니다.");
             window.location.href = '/qna/' + no; // 수정된 페이지로 리다이렉트
         }).fail(function (error) {
+            alert("수정 실패했습니다.");
             alert(JSON.stringify(error));
         });
     },

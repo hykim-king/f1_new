@@ -60,8 +60,8 @@ public class QuestionServiceImpl implements QuestionService, PcwkLogger {
         vo.setContent(request.getContent());
 
         if (attachFile != null) {
-            vo.setOriginalFilename(attachFile.getUploadFileName());
-            vo.setStoreFilename(attachFile.getStoreFileName());
+            vo.setOriginalFilename(attachFile.getUploadFilename());
+            vo.setStoreFilename(attachFile.getStoreFilename());
             vo.setImageUrl(attachFile.getUrl());
         }
 
@@ -82,26 +82,30 @@ public class QuestionServiceImpl implements QuestionService, PcwkLogger {
     @Override
     @Transactional
     public Long update(Long no, QuestionUpdateRequestDTO request) throws IOException {
+
         QuestionVO vo = questionDAO.findByNo(no);
 
-        // 기존에 사용자가 업로드한 이미지를 삭제함
+        LOG.debug("데이터베이스에 있던 이미지 이름={}", vo.getStoreFilename());
+
         if (vo.getStoreFilename() != null) {
             fileStore.deleteFile(vo.getStoreFilename());
         }
 
-        // 새 이미지 업로드
-        if (request.getAttachFile() != null && request.getAttachFile().isEmpty()) {
-            UploadFile attachFile = fileStore.storeFile(request.getAttachFile());
-            vo.setOriginalFilename(attachFile.getUploadFileName());
-            vo.setStoreFilename(attachFile.getStoreFileName());
+        // 파일을 S3에 업로드
+        UploadFile attachFile = null;
+        if (request.getAttachFile() != null && !request.getAttachFile().isEmpty()) {
+            attachFile = fileStore.storeFile(request.getAttachFile());
+            vo.setOriginalFilename(attachFile.getUploadFilename());
+            vo.setStoreFilename(attachFile.getStoreFilename());
             vo.setImageUrl(attachFile.getUrl());
         }
 
-        // 제목 및 내용 수정
         LOG.debug("사용자 요청={}", request);
+        // 제목 및 내용 수정
         vo.setTitle(request.getTitle());
         vo.setContent(request.getContent());
 
+        LOG.debug("데이터베이스에 수정될 내용={}", vo);
         questionDAO.update(vo);
         return no;
     }
