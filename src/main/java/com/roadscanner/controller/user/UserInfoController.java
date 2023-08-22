@@ -50,7 +50,7 @@ public class UserInfoController {
         
         
         int flag = this.userService.doChangeInfo(member);
-        
+        System.out.println("│ flag==                                  │"+flag);
         String jsonString = "";
         MessageVO message = new MessageVO();
         
@@ -60,11 +60,12 @@ public class UserInfoController {
         	message.setMsgId("10");
         	message.setMsgContents("비빌번호를 수정했습니다");
         	
-        }if(flag == 3) {
+        }
+        if(flag == 3) {
         	message.setMsgId("30");
         	message.setMsgContents("현재와 같은  비밀번호입니다.");
 
-        } else {
+        }if(flag != 1 && flag != 3) {
         	message.setMsgId("20");
         	message.setMsgContents("회원정보 수정에 실패했습니다.");
         }
