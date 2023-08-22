@@ -9,6 +9,7 @@ import com.roadscanner.dto.qna.QuestionUpdateRequestDTO;
 import com.roadscanner.service.qna.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,14 +29,21 @@ public class QuestionApiController implements PcwkLogger {
     private final QuestionService questionService;
     private final AmazonS3Store fileStore;
 
+    /**
+     * @ModelAttribute는 model.addAttribute()를 생략시키게 해준다.
+     * @param request
+     * @return
+     * @throws IOException
+     */
     // 등록
     @PostMapping("/api/qna/save")
     public ResponseEntity<?> save(@ModelAttribute QuestionSaveRequestDTO request) throws IOException {
         Map<String, String> errors = validateRequest(request);
-
         LOG.debug("save 실행");
 
         if (!errors.isEmpty()) {
+            LOG.debug("error ={}", errors);
+            // 실패하게 되면 에러메시지를 담아 전송하고 Ajax를 통해 에러메시지를 출력시킨다.
             return ResponseEntity.badRequest().body(errors);
         }
 
@@ -49,6 +57,7 @@ public class QuestionApiController implements PcwkLogger {
      * @return
      */
     private Map<String, String> validateRequest(QuestionSaveRequestDTO request) {
+        // 검증 오류 보관
         Map<String, String> errors = new HashMap<>();
 
         // 제목 검증
