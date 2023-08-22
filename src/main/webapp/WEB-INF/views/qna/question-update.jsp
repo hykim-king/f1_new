@@ -17,8 +17,7 @@
         <div class="mb-2 row align-items-center" style="display: none;">
             <label for="category" class="form-label col-auto pe-1 m-0">답변 상태</label>
             <div class="col">
-                <input type="text" id="category" class="form-control"
-                    value="${question.category}" readonly>
+                <input type="text" id="category" class="form-control" value="${question.category}" readonly>
             </div>
         </div>
 
@@ -31,14 +30,14 @@
 
         <div class="mb-3 row">
             <div class="col">
-                <input type="text" class="form-control" id="title"
-                    value="${question.title}" placeholder="제목을 입력하세요.">
+                <input type="text" class="form-control" id="title" value="${question.title}" placeholder="제목을 입력하세요.">
             </div>
         </div>
 
         <div class="d-flex mb-3 row align-items-center">
             <div class="col">
                 <input type="file" id="attachFile" name="attachFile" class="form-control" accept="image/*">
+<%--                <input type="text" class="form-control" value="${question.originalFilename}" placeholder="원본파일명">--%>
             </div>
         </div>
 
