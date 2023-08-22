@@ -66,23 +66,26 @@
         <!-- pagination -->
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
+                <c:if test="${memberPage.prev}">  
+                    <li class="page-item"><a class="page-link" href="/login/list_member?num=1&keyword=${memberPage.keyword}"> << </a></li>
+                </c:if>
+            
 	            <c:if test="${memberPage.prev}">
 		            <li class="page-item"><a class="page-link" aria-label="Previous" href="/login/list_member?num=${memberPage.startPageNum - 5}&keyword=${memberPage.keyword}">이전</a></li>
 		        </c:if>
 		        
 		        <c:forEach begin="${memberPage.startPageNum}" end="${memberPage.endPageNum}" var="num">      
-		              <c:if test="${select != num}">
-		                <li class="page-item"><a class="page-link" href="/login/list_member?num=${num}&keyword=${memberPage.keyword}">${num}</a></li>
-		              </c:if>
-		              
-		              <c:if test="${select == num}">
-		                <li class="page-item"><a class="page-link" href="/login/list_member?num=${num}&keyword=${memberPage.keyword}">${num}</a></li>
-		              </c:if>
+		                <li class="page-item ${select == num  ? 'active' : ''} ${select == num  ? 'disabled' : ''}">
+		                <a class="page-link" href="/login/list_member?num=${num}&keyword=${memberPage.keyword}">${num}</a></li>
 		        </c:forEach>
 		        
 		        <c:if test="${memberPage.next}">  
 		            <li class="page-item"><a class="page-link" href="/login/list_member?num=${memberPage.endPageNum + 1}&keyword=${memberPage.keyword}">다음</a></li>
 		        </c:if>
+		        
+		         <c:if test="${memberPage.next}">  
+                    <li class="page-item"><a class="page-link" href="/login/list_member?num=${Math.round(Math.ceil(memberPage.count/memberPage.pageNumCnt))}&keyword=${memberPage.keyword}">>></a></li>
+                </c:if>
                 
             </ul>
         </nav>
