@@ -1,6 +1,7 @@
+<%@include file ="login/head.jsp" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="CP" value="${pageContext.request.contextPath}"/>
 <%
     // 서버 측에서 사용자 세션을 확인하고, 세션이 없으면 기본 페이지로 리다이렉트합니다.
     if (session.getAttribute("user") == null) {
@@ -21,15 +22,11 @@
 %>  
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Feedback Graph</title>
-</head>
+<title>Feedback Graph</title>
 
 <%@include file ="login/navbar.jsp" %>
 
-<body>
+<body id="font-id">
   <div class="container">
     <h2>Feedback</h2>
     
@@ -87,7 +84,6 @@
 		</div>   
   </div> <!--container -->
 
-	<script src="${CP}/resources/js/jquery-3.7.0.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1"></script>
 	<script src="${CP}/resources/js/graph.js"></script>
 

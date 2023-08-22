@@ -1,3 +1,5 @@
+<%@include file ="login/head.jsp" %>
+
 <%@page import="com.roadscanner.domain.upload.FileUploadVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -22,19 +24,13 @@
 	return;
 	}
 %> 
-<c:set var="CP" value="${pageContext.request.contextPath }"/>
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-	<title>ImgManagement</title>
-</head>
+<title>ImgManagement</title>
 
   <%@include file ="login/navbar.jsp" %>
   
-<body>
+<body id="font-id">
   <div class="container" style="width:930px;">
     <!-- 카테고리 선택 -->
     <div class="top-box d-flex justify-content-start">
@@ -174,8 +170,6 @@
   </div>
   <!-- 모달 창  end -->
   
-<script src="${CP}/resources/js/jquery-3.7.0.js"></script>  
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 <script src="${CP}/resources/js/imgMng.js"></script></body>
 </body>
 
