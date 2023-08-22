@@ -29,7 +29,7 @@ const main = {
         if (file) { // 파일이 존재하는 경우에만 추가
             data.append('attachFile', file);
         }
-
+        
         $.ajax({
             type: 'POST',
             enctype: 'multipart/form-data', // 이 부분 추가
@@ -42,6 +42,22 @@ const main = {
             window.location.href = '/qna';
         }).fail(function (error) {
             alert("등록 실패했습니다.");
+            if (error.responseJSON) {
+                // 제목 오류 메시지 처리
+                if (error.responseJSON.title) {
+                    $('#title-error').text(error.responseJSON.title);
+                }
+
+                // 내용 오류 메시지 처리
+                if (error.responseJSON.content) {
+                    $('#content-error').text(error.responseJSON.content);
+                }
+
+                // 이미지 파일 오류 메시지 처리
+                if (error.responseJSON.attachFile) {
+                    $('#attachFile-error').text(error.responseJSON.attachFile);
+                }
+            }
             console.error(error);
         });
     },

@@ -27,21 +27,22 @@
 
         <div class="row" style="display: none;">
             <label for="id" class="col-sm-2 col-form-label">작성자</label>
-            <div class="col-sm-10">
+            <div class="col-sm-10">자
                 <input type="text" class="form-control" id="id" value="${user.id}" readonly>
             </div>
         </div>
 
         <div class="mb-3 row">
             <div class="col">
-                <input type="text" class="form-control" id="title"
-                    value="${question.title}" style="outline:none; box-shadow:none;" placeholder="제목을 입력하세요.">
+                <input type="text" class="form-control" id="title" value="${question.title}" style="outline:none; box-shadow:none;" placeholder="제목을 입력하세요.">
+                <div id="title-error"></div>
             </div>
         </div>
 
         <div class="d-flex mb-3 row align-items-center">
             <div class="col">
                 <input type="file" id="attachFile" name="attachFile" class="form-control" style="outline:none; box-shadow:none;" accept="image/*">
+                <div id="attachFile-error"></div>
             </div>
             <!-- 취소 버튼 -->
             <button type="button" id="btn-cancel" class="btn-close"></button>
@@ -50,6 +51,7 @@
         <div class="mb-3 row">
             <div class="col">
                 <textarea class="form-control" id="content" rows="10" style="outline:none; box-shadow:none;" placeholder="내용을 입력하세요."></textarea>
+                <div id="content-error"></div>
             </div>
         </div>
         <div class="text-center">
