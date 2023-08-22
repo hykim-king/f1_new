@@ -1,11 +1,8 @@
 package com.roadscanner.dao.user;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import com.roadscanner.domain.user.MemberVO;
-
-
 
 public interface UserDao {
 	
@@ -16,7 +13,6 @@ public interface UserDao {
      * @throws SQLException
      */
     public int withdraw(MemberVO user) throws SQLException;
-
 	
 	/**
 	 * id를 사용하여 회원정보 출력
@@ -25,8 +21,7 @@ public interface UserDao {
 	 * @throws SQLException
 	 */
 	public MemberVO selectOne(MemberVO inVO) throws SQLException;
-	
-	
+		
 	/**
 	 * 아이디 여부  체크
 	 * @param user
@@ -36,9 +31,9 @@ public interface UserDao {
 	public MemberVO searchId(MemberVO user) throws SQLException;
 	
 	/**
-	 * 
+	 * 회원 등급 검색
 	 * @param user
-	 * @return
+	 * @return 1: 일반회원 / 2: 관리자 / 3: 정지회원
 	 * @throws SQLException
 	 */
 	public MemberVO searchgrade(MemberVO user) throws SQLException;
@@ -46,10 +41,11 @@ public interface UserDao {
 	/**
 	 * 비밀번호 여부  체크
 	 * @param user
-	 * @return 해당 pw
+	 * @return 암호화(BCrypt)된 비밀번호
 	 * @throws SQLException
 	 */
 	public MemberVO searchPw(MemberVO user) throws SQLException;
+	
 	/**
 	 * 아이디 존재 여부  체크
 	 * @param user
@@ -61,7 +57,7 @@ public interface UserDao {
 	/**
 	 * 패스워드 존재 여부  체크
 	 * @param user
-	 * @return 해당 id
+	 * @return 1: 중복 PW 존재 / 0: 중복 PW 없음
 	 * @throws SQLException
 	 */
 	public int searchPwCheck(MemberVO user) throws SQLException;
@@ -77,7 +73,7 @@ public interface UserDao {
 	/**
 	 * 비밀번호 체크
 	 * @param user
-	 * @return 1: id 존재 , 0: id 없음 
+	 * @return 1: 수정 성공 / 2: 입력값 오류 > 수정 실패 / 3: 같은 비밀번호 > 수정 실패
 	 * @throws SQLException
 	 */
 	public int passCheck(MemberVO user) throws SQLException;
@@ -89,6 +85,13 @@ public interface UserDao {
 	 * @throws SQLException
 	 */
 	public int idCheck(MemberVO user) throws SQLException;
+	
+	/**
+	 * 이메일 중복체크
+	 * @param user
+	 * @return 1: 중복 이메일 존재 / 0: 중복 이메일 없음
+	 * @throws SQLException
+	 */
 	public int emailCheck(MemberVO user) throws SQLException;
 	
 	/**
