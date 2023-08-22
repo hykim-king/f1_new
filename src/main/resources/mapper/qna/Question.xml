@@ -2,23 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.roadscanner.dao.qna.QuestionDAO">
 
-<!-- 질문 작성/저장 -->
-    <!--insert id="save" useGeneratedKeys="true" keyProperty="no">
-        INSERT INTO QUESTION (category, id, title, content)
-        VALUES (#{category}, #{id}, #{title}, #{content})
-    </insert>-->
-
     <!-- 오라클 insert 확인 O-->
     <insert id="save">
-        INSERT INTO QUESTION (no, category, id, idx, title, content)
-        VALUES (QUESTION_SEQ.NEXTVAL, #{category}, #{id}, #{idx}, #{title}, #{content})
+        insert into QUESTION(category, id, title, content, original_filename, store_filename, image_url)
+        VALUES (#{category}, #{id}, #{title}, #{content}, #{originalFilename}, #{storeFilename}, #{imageUrl})
     </insert>
-
-<!--    <insert id="save">-->
-<!--        INSERT INTO QUESTION (no, category, id, title, content)-->
-<!--        VALUES (#{no}, #{category}, #{id}, #{title}, #{content})-->
-<!--    </insert>-->
-
 
     <!-- no로 질문 조회 오라클 O-->
     <select id="findByNo" resultType="QuestionVO">
@@ -26,30 +14,54 @@
             no,
             category,
             views,
-            idx,
             id,
             title,
             content,
             create_date AS createDate,
-            update_date AS updateDate
---         update_date AS updateDate
+            update_date AS updateDate,
+            original_filename AS originalFilename,
+            store_filename AS storeFilename,
+            image_url AS imageUrl
         FROM QUESTION
         WHERE no = #{no}
     </select>
 
-    <!-- 모든 질문 조회 getAllQuestions에서 수정 -->
+    <!-- 모든 질문 조회 -->
     <select id="findAll" resultType="QuestionVO">
-        SELECT
-            no,
-            category,
-            views,
-            idx,
-            id,
-            title,
-            content,
-            create_date AS createDate,
-            update_date AS updateDate
-        FROM QUESTION
+        SELECT *
+        FROM (
+            SELECT a.*, rownum rnum
+            FROM (
+                SELECT
+                    no,
+                    category,
+                    views,
+                    id,
+                    title,
+                    content,
+                    create_date AS createDate,
+                    update_date AS updateDate
+                FROM QUESTION
+
+                WHERE 1=1
+                <if test="searchCond.category == null">
+                    AND category != 10
+                </if>
+                <if test="searchCond.category != null">
+                    AND category = #{searchCond.category}
+                </if>
+                <if test="searchCond.searchType == 'title' and searchCond.keyword != null">
+                    AND title LIKE '%' || #{searchCond.keyword} || '%'
+                </if>
+                <if test="searchCond.searchType == 'content' and searchCond.keyword != null">
+                    AND content LIKE '%' || #{searchCond.keyword} || '%'
+                </if>
+                <if test="searchCond.searchType == 'both' and searchCond.keyword != null">
+                    AND (title LIKE '%' || #{searchCond.keyword} || '%' OR content LIKE '%' || #{searchCond.keyword} || '%')
+                </if>
+                ORDER BY no DESC
+            ) a WHERE rownum &lt;= #{pagination.start} + #{pagination.size}
+        ) WHERE rnum &gt; #{pagination.start}
     </select>
 
     <!-- 질문 업데이트 -->
@@ -57,10 +69,12 @@
         UPDATE QUESTION
         SET
             category = #{category},
-            idx = #{idx},
             title = #{title},
             content = #{content},
-            update_date = CURRENT_TIMESTAMP
+            update_date = CURRENT_TIMESTAMP,
+            image_url = #{imageUrl},
+            original_filename = #{originalFilename},
+            store_filename = #{storeFilename}
         WHERE no = #{no}
     </update>
 
@@ -69,26 +83,22 @@
         DELETE FROM QUESTION WHERE no = #{no}
     </delete>
 
-    <!-- 페이징 구현 -->
-    <select id="findAllWithPaging" resultType="QuestionVO">
-        SELECT *
-        FROM (SELECT a.*, rownum rnum
-              FROM (SELECT
-                        no,
-                        category,
-                        views,
-                        title,
-                        id,
-                        create_date AS createDate,
-                        update_date AS updateDate
-                    FROM QUESTION
-                    ORDER BY CASE WHEN category = 10 THEN 1 ELSE 2 END, no DESC
-                   ) a WHERE rownum &lt;= #{start} + #{size}
-             ) WHERE rnum &gt; #{start}
-    </select>
-
+    <!-- 조건에 해당하는 게시글 개수 -->
     <select id="countQuestions" resultType="int">
         SELECT count(*) FROM question
+        WHERE 1=1
+        <if test="category != null">
+            AND category = #{category}
+        </if>
+        <if test="searchType == 'title' and keyword != null">
+            AND title LIKE '%' || #{keyword} || '%'
+        </if>
+        <if test="searchType == 'content' and keyword != null">
+            AND content LIKE '%' || #{keyword} || '%'
+        </if>
+        <if test="searchType == 'both' and keyword != null">
+            AND (title LIKE '%' || #{keyword} || '%' OR content LIKE '%' || #{keyword} || '%')
+        </if>
     </select>
 
     <!-- 조회수 증가 -->
@@ -97,5 +107,35 @@
         SET views = views + 1
         WHERE no = #{no}
     </update>
+
+    <!-- 답변 등록 시 카테고리 변경 -->
+    <update id="updateCategory">
+        UPDATE question
+        SET category = (
+            CASE
+                WHEN EXISTS (SELECT 1 FROM answer WHERE question.no = answer.no)
+                    THEN 20
+                ELSE 30
+                END
+            )
+        WHERE no = #{no}
+    </update>
+
+    <!-- 공지사항 조회 -->
+    <select id="findNotice" resultType="QuestionVO">
+        SELECT
+            no,
+            category,
+            views,
+            id,
+            title,
+            content,
+            create_date AS createDate,
+            update_date AS updateDate
+        FROM QUESTION
+        WHERE category = 10
+        ORDER BY no DESC
+        FETCH FIRST 3 ROWS ONLY
+    </select>
 
 </mapper>
