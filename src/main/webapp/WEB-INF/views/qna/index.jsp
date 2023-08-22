@@ -5,22 +5,11 @@
     <title>로드스캐너 - 게시판</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/resources/css/qna.css" rel="stylesheet">
+
 </head>
 <body>
 <div class="container mt-4">
-    <h1 class="mb-4">Q&A 게시판</h1>
-
-<%--    <form class="mb-3">--%>
-<%--        <div class="input-group">--%>
-<%--            <select name="searchType" class="form-select">--%>
-<%--                <option value="title">제목</option>--%>
-<%--                <option value="content">내용</option>--%>
-<%--                <option value="both">제목 + 내용</option>--%>
-<%--            </select>--%>
-<%--            <input type="text" name="keyword" class="form-control" placeholder="검색어를 입력하세요">--%>
-<%--            <button type="submit" class="btn btn-primary">검색</button>--%>
-<%--        </div>--%>
-<%--    </form>--%>
+    <h1 class="mb-4"><a href="/qna" class="qna-title-link">Q&A 게시판</a></h1>
 
     <form class="mb-3" name="searchFrm" action="/qna" method="get">
         <div class="row g-1 d-flex justify-content-between mt-3 mb-3">

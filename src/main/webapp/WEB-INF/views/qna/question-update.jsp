@@ -10,7 +10,7 @@
 </head>
 <body>
      <form class="container mt-4" id="question-edit-form">
-        <h1 class="mb-4">Q&A 게시판</h1>
+        <h1 class="mb-4"><a href="/qna" class="qna-title-link">Q&A 게시판</a></h1>
         <!-- 이 부분에 히든 필드 추가 -->
         <input type="hidden" id="no" value="${question.no}">
 
