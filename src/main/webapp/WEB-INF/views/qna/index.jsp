@@ -131,29 +131,40 @@
             role="button">글쓰기</a>
     </div>
 
-    <!-- 페이징 -->
-    <div class="pagination">
-        <!-- 처음과 이전 버튼 -->
-        <a href="?page=1&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}">&lt&lt</a>
-        <a href="?page=${page - 1 < 1 ? 1 : page - 1}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}">&lt</a>
-
-        <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">
-            <c:choose>
-                <c:when test="${i == page}">
-                    <span>${i}</span> <!-- 현재 페이지 -->
-                </c:when>
-                <c:otherwise>
-                    <a href="?page=${i}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}">${i}</a>
-                </c:otherwise>
-            </c:choose>
-        </c:forEach>
-
-        <!-- 다음과 마지막 버튼 -->
-        <a href="?page=${page + 1 > pagination.totalPage ? pagination.totalPage : page + 1}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}">&gt</a>
-        <a href="?page=${pagination.totalPage}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}">&gt&gt</a>
-    </div>
-    <!-- // 페이징 end -->
-
+    <!-- 페이징 시작 -->
+	<nav aria-label="Page navigation">
+	    <ul class="pagination justify-content-center">
+	        <!-- 첫 페이지 및 이전 페이지 링크 -->
+	        <li class="page-item ${pagination.page <= 1 ? 'disabled' : ''}">
+	            <a class="page-link" href="?page=1&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}" aria-label="First">
+	                &laquo;&laquo;
+	            </a>
+	        </li>
+	        <li class="page-item ${pagination.page <= 1 ? 'disabled' : ''}">
+	            <a class="page-link" href="?page=${pagination.page - 1}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}" aria-label="Previous">
+	                &laquo;
+	            </a>
+	        </li>
+	        <!-- 페이지 번호 링크 -->
+	        <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">
+	            <li class="page-item ${i == pagination.page ? 'active' : ''}">
+	                <a class="page-link" href="?page=${i}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}">${i}</a>
+	            </li>
+	        </c:forEach>
+	        <!-- 다음 페이지 및 마지막 페이지 링크 -->
+	        <li class="page-item ${pagination.page >= pagination.totalPage ? 'disabled' : ''}">
+	            <a class="page-link" href="?page=${pagination.page + 1}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}" aria-label="Next">
+	                &raquo;
+	            </a>
+	        </li>
+	        <li class="page-item ${pagination.page >= pagination.totalPage ? 'disabled' : ''}">
+	            <a class="page-link" href="?page=${pagination.totalPage}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}" aria-label="Last">
+	                &raquo;&raquo;
+	            </a>
+	        </li>
+	    </ul>
+	</nav>
+	<!-- 페이징 끝 -->
 
 </body>
 </html>
