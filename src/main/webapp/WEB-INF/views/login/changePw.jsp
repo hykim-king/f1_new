@@ -1,35 +1,22 @@
+  <%@include file ="head.jsp" %>
+  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%-- <%
-    // 서버 측에서 사용자 세션을 확인하고, 세션이 없으면 기본 페이지로 리다이렉트합니다.
-    if (session.getAttribute("user") == null) {
-      response.sendRedirect("/login");
-    }
-%> --%>
-<c:set var="CP" value="${pageContext.request.contextPath}"/> 
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- CSS -->
 <link rel="stylesheet"  href="${CP}/resources/css/changePw.css">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Sans+KR&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link  href="${CP}/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
-<script src="${CP}/resources/js/bootstrap/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
-<script src="${CP}/resources/js/jquery-3.7.0.js"></script>
 <title>로드스캐너 마이페이지</title>
-</head>
 
   <%@include file ="navbar.jsp" %>
 
-<body class="d-flex flex-column min-vh-100">
+<body id="font-id" class="d-flex flex-column min-vh-100">
  <h3 style="text-align: center; margin-top: 100px; margin-bottom: 40px;">비밀번호 재설정 페이지</h3>
   <div id="container">
       <form>
-        <fieldset style="border:0 solid black;">
+        <fieldset id="none-border">
           <ul class="list-group" style="list-style: none;">
             <li>
               <label>이메일</label><br/>
@@ -66,13 +53,15 @@
     <div class="update_btn">
       <input type="button" class="btn btn-outline-primary" id="changePw" value="변경">
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <input type="button" class="btn btn-outline-danger" id="cancel" value="취소">
+      <input type="button" class="btn btn-outline-danger" id="cancle" value="취소">
     </div>
 </body>
 
   <%@include file ="footer.jsp" %>
 
 <script>
+
+//비밀번호 정규식
 function check_pw() {
     var pw = document.getElementById('rpassword').value;
     var num = pw.search(/[0-9]/g);
@@ -111,26 +100,28 @@ function check_pw() {
     
 }   // check_pw end
 
+// 이메일 정규식
 function check_email(event) {
-    const hangul = /[^0-9a-zA-Z@\.]/g;
+    const eng = /[^0-9a-z@\.]/g;
     const ele = event.target;
     
-    if(hangul.test(ele.value)) {
-      ele.value = ele.value.replace(hangul,'');
+    if(eng.test(ele.value)) {
+      ele.value = ele.value.replace(eng,'');
     }
     
 }   // check_email
 
+// 이메일 인증번호
 function email_authNumber() {
     const email = $('#remail').val();    // 이메일 주소값 얻어오기!
     const checkInput = $('#checkInput'); // 인증번호 입력하는곳
         
     if("ok" != document.getElementById('emailok').value){
-    	
+      
       alert('이메일 중복 확인 후, 진행하세요');
       
     } else {
-    	
+      
         $.ajax({
             type : 'get',
             url : "change_mailCheck?email=" + email,
@@ -148,8 +139,7 @@ function email_authNumber() {
 
 } // email_authNumber end
 
-// 인증번호 비교
-// blur -> focus가 벗어나는 경우 발생
+// 이메일 인증번호 비교 (blur -> focus가 벗어나는 경우 발생)
 $('#checkInput').blur(function() {
     const inputCode = $(this).val();
     const $resultMsg = $('#mail-check-warn');
@@ -170,23 +160,23 @@ $('#checkInput').blur(function() {
     
 });   // checkInput function end
 
-$(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하는 영역
+$(document).ready(function(){
    console.log("document ready");
    
-  $("#cancel").on("click", function(){
+  $("#cancle").on("click", function(){
     
-    window.location.href="${CP}/findIdPw";
+    window.location.href='${CP}/findIdPw';
     
   });   // $("#cancel") click
   
   $("#changePw").on("click", function(){
     
-	    let registerPw = document.getElementById('rpassword2').value;
-	    let registerEmail =  $('#remail').val();
-	    console.log(registerEmail);
-	     
-	    document.register_form.pw.value = registerPw;
-	    document.register_form.email.value = registerEmail;
+      let registerPw = document.getElementById('rpassword2').value;
+      let registerEmail =  $('#remail').val();
+      console.log(registerEmail);
+       
+      document.register_form.pw.value = registerPw;
+      document.register_form.email.value = registerEmail;
 
       
       if("" == document.getElementById('rpassword').value || "" == document.getElementById('rpassword2').value) {
@@ -213,14 +203,16 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
             password: $("#pw").val(),
             email: $("#email").val()
           },
-          success:function(data){//통신 성공
+          success:function(data){
               let parsedJSON = JSON.parse(data);
               
+              // 비밀번호 재설정 성공
               if("10" == parsedJSON.msgId) {
                 alert(parsedJSON.msgContents);
                 window.location.href="${CP}/login";
               }
               
+              // 비밀번호 재설정 실패
               if("20" == parsedJSON.msgId) {
                   alert(parsedJSON.msgContents);
                   return;
@@ -279,12 +271,11 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
             console.log("error:"+data);
           }
           
-    }); //  $.ajax End --------------------------
-     
+    }); //  $.ajax End --------------------------    
     
   });  // #idDulpCheck end
-  
-  
+   
 });   //모든 화면이 다 로딩이 되면 실행하는 영역
+
 </script>
 </html>

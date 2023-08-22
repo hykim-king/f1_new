@@ -6,6 +6,10 @@
 	  width: 800px;
 	}
 	
+	#none-border > fieldset {
+	   border:0 solid black;
+	}
+	
 	label {
 	  font-size: 20px;
 	}
@@ -22,7 +26,7 @@
 	   text-align: center;
 	}
 	
-	#changePw, #cancel {
+	#changePw, #cancle {
 	   margin-top: 40px;
 	   width: 150px;
 	}
