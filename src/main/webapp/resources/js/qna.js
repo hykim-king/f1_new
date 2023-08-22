@@ -45,17 +45,20 @@ const main = {
             if (error.responseJSON) {
                 // 제목 오류 메시지 처리
                 if (error.responseJSON.title) {
-                    $('#title-error').text(error.responseJSON.title);
+                    $('#title').addClass('filed-error'); // input 필드에 클래스 추가
+                    $('#title-error').text(error.responseJSON.title).addClass('filed-error');
                 }
 
                 // 내용 오류 메시지 처리
                 if (error.responseJSON.content) {
-                    $('#content-error').text(error.responseJSON.content);
+                    $('#content').addClass('filed-error');
+                    $('#content-error').text(error.responseJSON.content).addClass('filed-error');
                 }
 
                 // 이미지 파일 오류 메시지 처리
                 if (error.responseJSON.attachFile) {
-                    $('#attachFile-error').text(error.responseJSON.attachFile);
+                    $('#attachFile').addClass('filed-error');
+                    $('#attachFile-error').text(error.responseJSON.attachFile).addClass('filed-error');
                 }
             }
             console.error(error);
