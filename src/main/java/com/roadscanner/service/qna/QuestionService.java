@@ -8,9 +8,7 @@ import java.util.List;
 
 public interface QuestionService{
 
-    /**
-     * 게시글 작성
-     */
+    List<QuestionListResponseDTO> findNotice();
 
     List<QuestionListResponseDTO> findAll(PaginationDTO pagination, QuestionSearchCond questionSearch);
 

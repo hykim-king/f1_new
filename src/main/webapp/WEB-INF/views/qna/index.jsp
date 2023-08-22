@@ -78,7 +78,26 @@
                <th class="text-center">조회수</th>
            </tr>
         </thead>
+
+       <!-- 필터링 조건이 존재하는지 확인하는 변수 -->
+       <c:set var="isFiltered" value="${category != null or searchType != '' or keyword != ''}" />
+
         <tbody class="table-group-divider" style="border-color: #DCDCDC;">
+            <!-- 공지사항 출력 -->
+            <c:if test="${!isFiltered}">
+                <c:forEach items="${notice}" var="notice">
+                    <tr class="table" style="background-color: #F0F0F0;">
+                        <td class="text-center">${notice.no}</td>
+                        <td class="text-center"><span class="badge" style="background-color: #F87217; color: white;">공지</span></td>
+                        <td><a href="/qna/${notice.no}" class="text-dark qna-link notice-title">${notice.title}</a></td>
+                        <td class="text-center">${notice.id}</td>
+                        <td class="text-center">${notice.createDate}</td>
+                        <td class="text-center">${notice.views}</td>
+                    </tr>
+                </c:forEach>
+            </c:if>
+
+            <!-- 기존 질문 목록 출력 -->
             <c:forEach items="${questions}" var="question">
                 <c:choose>
                     <c:when test="${question.category == 10}">
@@ -118,6 +137,7 @@
             </c:forEach>
         </tbody>
     </table>
+
     <!-- 글쓰기 버튼 -->
     <div class="d-flex justify-content-end">
         <a href="/qna/save" class="btn btn-outline-secondary my-1"
