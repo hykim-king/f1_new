@@ -2,11 +2,14 @@ package com.roadscanner.controller.user;
 
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.roadscanner.cmn.DTO;
 import com.roadscanner.cmn.MessageVO;
 import com.roadscanner.domain.user.MemberVO;
 import com.roadscanner.domain.user.list_admin;
@@ -27,8 +31,11 @@ import com.google.gson.Gson;
 /**
  * Handles requests for the application home page.
  */
+
+
 @Controller
 public class LoginController {	
+	
 	final Logger LOG = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired
@@ -37,19 +44,25 @@ public class LoginController {
 	@Autowired
 	MailSendService mailSend;
 	
+	@GetMapping("/main")
+	public String main() {
+		LOG.debug("MainPage start");
+		return "/login/main";
+	}
+	
 	/**
 	 * 로그인 화면에 처음 접근할때 호출 하는 함수
 	 * @param vo
 	 * @return
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginPageStart(@ModelAttribute("user") MemberVO vo) {
+	public String loginPageStart() {
 		System.out.println("로그인 화면으로 이동...");
 		return "/login/login";
 	}
 	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String admin(@ModelAttribute("user") MemberVO vo) {
+	public String admin() {
 		System.out.println("관리자 화면으로 이동...");
 		return "/login/admin";
 	}
@@ -82,23 +95,23 @@ public class LoginController {
         // (1 : id 미입력)
         if(null == user.getId() || "".equals(user.getId())) {
             message.setMsgId("1");
-            message.setMsgContents("아이디를 입력 하세요.");
+            message.setMsgContents("아이디를 입력하세요.");
             return new Gson().toJson(message);        
         }
         // (2 : pass 미입력)
         if(null == user.getPassword() || "".equals(user.getPassword())) {
             message.setMsgId("2");
-            message.setMsgContents("비밀번호를 입력 하세요.");
+            message.setMsgContents("비밀번호를 입력하세요.");
             return new Gson().toJson(message);        
         }
         
         int status = this.userService.doLogin(user);        
         if(10==status) {         // (10 : id 오류)
             message.setMsgId("10");
-            message.setMsgContents("아이디를 확인 하세요.");
+            message.setMsgContents("아이디를 확인하세요.");
         }else if(20==status) {     // (20 : pass 오류)
             message.setMsgId("20");
-            message.setMsgContents("비밀번호를 확인  하세요.");
+            message.setMsgContents("비밀번호를 확인하세요.");
         }else if(30==status) {                    // (30 : 성공)
             message.setMsgId("30");
             message.setMsgContents(user.getId()+"가 로그인 되었습니다.");
@@ -130,10 +143,11 @@ public class LoginController {
 	/* 로그아웃시에 셰션 제거 호출  */
     @GetMapping("/logout")
     public String logoutButtonEvent(HttpSession session) {
-    	LOG.debug("로그아웃");
+    	LOG.debug("┌────────────────────────────────────────────────────────┐");
+        LOG.debug("│ logoutButtonEvent()                                    │");
+        LOG.debug("└────────────────────────────────────────────────────────┘");
 		session.invalidate();
-		LOG.debug("로그아웃 완료");
-		return "/login/login";	
+		return "redirect:/login";	
 	}
     
     @GetMapping("/**/mailCheck")
@@ -155,19 +169,6 @@ public class LoginController {
 	public String findId(String email, String id) {
 		return mailSend.findId(email, id);
 	}
-    
-    /**
-     * 비밀번호 찾기 (이메일로 전송)
-     * @param email
-     * @param pw
-     * @return
-     */
-    @PostMapping("/**/toEmailFindPw")
-	@ResponseBody
-	public String findPw(String email, String pw) {
-		return mailSend.findPw(email, pw);
-	}
-
 
     /**
      * 아이디/비밀번호 찾기 화면
@@ -202,7 +203,7 @@ public class LoginController {
         result = this.userService.doSearchId(user);        
         if("-1".equals(result)) {         // (10 : id 오류)
             message.setMsgId("10");
-            message.setMsgContents("이메일을 확인해 주세요.");
+            message.setMsgContents("이메일을 확인해주세요.");
         }else {                    
             message.setMsgId("30");
             message.setMsgContents(result);
@@ -225,7 +226,7 @@ public class LoginController {
     public String findPw(MemberVO user, HttpSession httpSession) throws SQLException {
         System.out.println("┌────────────────────────────────────────────────────────┐");
         System.out.println("│ findPw()                                               │");
-        System.out.println("│ 비밀번호찾기 기능                                                                                     │");
+        System.out.println("│ 비밀번호찾기 기능                                                                                                │");
         System.out.println("└────────────────────────────────────────────────────────┘");
         String jsonString = "";    
         MessageVO message = new MessageVO();
@@ -236,10 +237,10 @@ public class LoginController {
         pwresult = this.userService.doSearchPw(user);        
         if("-1".equals(pwresult)) {         // (10 : id 오류)
             message.setMsgId("10");
-            message.setMsgContents("아이디와 이메일을 확인해 주세요.");
+            message.setMsgContents("아이디와 이메일을 확인해주세요.");
         }else {                    
             message.setMsgId("30");
-            message.setMsgContents(pwresult);
+            message.setMsgContents("비밀번호 재설정 페이지로 이동합니다.");
         }
         jsonString = new Gson().toJson(message);        
         System.out.println("│ jsonString : "+jsonString);
@@ -315,9 +316,9 @@ public class LoginController {
 		System.out.println("┌────────────────────────────────────────────────────────┐");
         System.out.println("│ membershipRegister()                                   │");
         System.out.println("└────────────────────────────────────────────────────────┘");
+        System.out.println("│ user : "+ user.getPassword());
         System.out.println("│ user : "+ user.toString());
-
-        
+       
 		int flag = this.userService.register(user);
 		
 		String jsonString = "";
@@ -335,5 +336,5 @@ public class LoginController {
 		
 		return jsonString;
 	}
-	
+		
 }

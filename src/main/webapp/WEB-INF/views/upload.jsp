@@ -1,146 +1,24 @@
+  <%@include file ="login/head.jsp" %>
+  
 <%@ page import="org.springframework.ui.Model"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="CP" value="${pageContext.request.contextPath }"/>
+<%
+    // 서버 측에서 사용자 세션을 확인하고, 세션이 없으면 기본 페이지로 리다이렉트합니다.
+    if (session.getAttribute("user") == null) {
+      response.sendRedirect("/login");
+    }
+%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-<script src="${CP}/resources/js/jquery-3.7.0.js"></script>
+
+<!-- CSS -->
+<link  href="${CP}/resources/css/upload.css" rel="stylesheet">
 <title>File Upload</title>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    height: 100vh;
-    overflow: hidden;
-  }
-  
-  .left {
-    flex: 1;
-    border: 1px solid #ccc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .right {
-    flex: 1;
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .divider {
-    width: 1px;
-    background-color: #ccc;
-    height: 100%;
-  }
-  
-  #fileUploadLabel {
-    margin-left: 20px;
-    display: inline-block;
-    overflow: hidden;
-    position: relative;
-    height: 400px;
-  }
-  
-  #fileUploadLabel img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
-  #cancelContainer {
-    position: relative;
-  }
-  
-  #selectedImage {
-    max-width: 500px;
-  }
-  
-  #cancelButton {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    z-index: 2;
-  }
-  
-  #cancelButton img{
-    width: 30px;
-    height: 30px;
-  }
-  
-  #resultImg {
-    width: 300px;
-  }
-  
-  #FeedbackButtons {
-    width: 45%;
-    display: flex;
-    justify-content: space-between;
-    padding: 30px;
-  }
-  
-  #FeedbackButtons img {
-    width: 100px;
-    height: 100px;
-  }
-  
-  #dislikeReason {
-    width: 220px;
-    font-size: 16px;
-    background-color: #f5f5f5;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    text-align: center;
-  }
-  
-  #reasonForm {
-    margin-bottom: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  
-  label {
-    display: block;
-    text-align: center;
-  }
-  
-  input[type="submit"] {
-    margin-top: 40px;
-    display: block;
-    width: 100%;
-    height: 60px;
-    font-size: 22px;
-  }
-  
-  input[type="file"] {
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    display: none;
-  }
-</style>
-</head>
-<body>
+
+<header> <%@include file ="login/navbar.jsp" %> </header>
+<body id="font-id">
+<div id="separation">
 <input id="thisName" type="hidden" value="${thisName}">
   <div class="left">
     <form action="fileUploaded" method="post" enctype="multipart/form-data" onsubmit="return false;">
@@ -149,6 +27,7 @@
           <img id="selectButtonImg" alt="SelectButton" src="${CP}/resources/img/selectButton.jpg" width="400" height="400">
         </label>
         <!-- 파일 선택 -->
+        <input type="hidden" id="userid" value="${user.id}">
         <input id=fileUpload name="fileUpload" type="file" accept=".jpg, .jpeg, .png, .bmp, .tiff, .webp, .ico, .svg" onchange="displaySelectedFile(event)" style="display: none;">
         <div id="cancelContainer" style ="display: block;">
           <img id="selectedImage" src="${thisUrl}" alt="Selected Image">
@@ -168,12 +47,12 @@
 
   <div class="right" id="rightContent">
     <!-- 우측 영역의 내용을 입력 -->
-    <h2>우측 영역</h2>
+    <h2>${resultImg.name}</h2>
     <!-- 세로로 긴 내용 -->
     <label>
-      <img id="resultImg" src="${resultImg}" alt="resultImg">
+      <img id="resultImg" src="${resultImg.url}" alt="resultImg">
     </label>
-    <p>[1]동해 물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람, 대한으로 길이 보전하세 [2]남산 위에 저 소나무, 철갑을 두른 듯 바람서리 불변함은 우리 기상일세 무궁화 삼천리 화려강산 대한 사람, 대한으로 길이 보전하세 [3]가을 하늘 공활한데 높고 구름 없이 밝은 달은 우리 가슴 일편단심일세 무궁화 삼천리 화려강산 대한 사람, 대한으로 길이 보전하세 [4]이 기상과 이 맘으로 충성을 다하여 괴로우나 즐거우나 나라 사랑하세 무궁화 삼천리 화려강산 대한 사람, 대한으로 길이 보전하세</p>
+    <div>${resultImg.content}</div>
     <!-- 피드백 버튼 -->
     <div id="FeedbackButtons">
       <button id="likeButton" type="button" class="btn btn-link"><img src="${CP}/resources/img/thumbsup.jpg" alt="붐업 이미지"></button>
@@ -206,7 +85,7 @@
     </form>
      -->
   </div>
-  
+</div> 
   <script>
     // 선택한 이미지 미리보기로 보여주기-------------------------------------------------------
     // 이미지 미리보기 취소
@@ -276,11 +155,11 @@
     // '표지판 알아보기'클릭 시 파일 업로드, 결과창 나타내기
     $("#runButton").on("click", function(){
       //console.log('runButton click');
-      
+      let userid = $("#userid").val();
       let formData = new FormData();
         formData.append("fileUpload", $("#fileUpload")[0].files[0]);
         formData.append("idx", 1);
-        formData.append("id", "testid");
+        formData.append("id", userid);
         formData.append("category", 10);
         formData.append("name", "testname");
         formData.append("url", "testurl");
@@ -410,4 +289,5 @@
         //window.location.reload();
   </script>
 </body>
+<footer> <%@ include file="login/footer.jsp" %> </footer>
 </html>

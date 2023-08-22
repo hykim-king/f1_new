@@ -1,11 +1,7 @@
 @charset "UTF-8";
   
-  header {
-  
-  }
-  
 	#container {
-	  margin-top: 60px;
+	  margin-top: 40px;
 	  margin: auto;
 	  width: 800px;
 	}
@@ -18,7 +14,7 @@
 	  height: 50px;
 	}
 	
-	.margin_li {
+	#for-margin-id li {
 	  margin-top: 20px;
 	}
 	
@@ -27,7 +23,6 @@
 	}
 	
 	#update, #cancel {
-	   margin-top: 40px;
 	   width: 150px;
 	}
 	

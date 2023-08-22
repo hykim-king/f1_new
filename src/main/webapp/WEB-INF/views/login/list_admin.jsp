@@ -1,35 +1,13 @@
+  <%@include file ="head.jsp" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="CP" value="${pageContext.request.contextPath }"/>
-<%-- 
-<%
- String strReferer = request.getHeader("referer");
- if(strReferer == null){
-%>
- <script language="javascript">
-  alert("접속을 차단합니다.");
-  document.location.href="${CP}/login";
- </script>
-<%
- return;
- }
-%> --%>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <script src="${CP}/resources/js/jquery-3.7.0.js"></script>
-    <title>회원 관리</title>
-</head>
-<body>
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+<title>회원 관리</title>
+
+<body id="font-id">
 <!-- 관리자 리스트  ---------------------------------------------------------------> 
 <div class="container"> 
     <form>  
@@ -68,12 +46,18 @@
         <!-- 검색 폼 -->
         <div class="row mb-3">
             <div class="col">
-                    <div class="form-group">
+                    <div class="form-group" style="display: flex;">
                         <input type="text" id ="searchid" name="keyword" class="form-control" placeholder="아이디 검색">
                         <input type="hidden" id="exclude" name="exclude" value="${user.id}">
+                    <div style="margin-left : 7px;">
+	                    <button type="submit" id ="searchidbtn" class="btn btn-primary ml-2"
+	                    style="width: 70px;">검색</button>
+	                </div>
+	                <div style="margin-left : 7px; ">   
+	                    <button type="button" id= "deletebtn" class="btn btn-primary ml-2"
+	                    style="width: 70px;">삭제</button>
                     </div>
-                    <button type="submit" id ="searchidbtn" class="btn btn-primary ml-2">검색</button>
-                    <button type="button" id= "deletebtn" class="btn btn-primary ml-2">삭제</button>
+                    </div>
             </div>
         </div>
         <!-- 검색 폼 end ------------------------------------------------------------>
@@ -82,21 +66,21 @@
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
                 <c:if test="${adminPage.prev}">
-                    <li class="page-item"><a class="page-link" aria-label="Previous" href="/list_admin?num=${adminPage.startPagenum - 5}&keyword=${adminPage.keyword}&exclude=${user.id}">이전</a></li>
+                    <li class="page-item"><a class="page-link" aria-label="Previous" href="/login/list_admin?num=${adminPage.startPagenum - 5}&keyword=${adminPage.keyword}&exclude=${user.id}">이전</a></li>
                 </c:if>
                 
                 <c:forEach begin="${adminPage.startPagenum}" end="${adminPage.endPagenum}" var="num">      
                       <c:if test="${select != num}">
-                        <li class="page-item"><a class="page-link" href="/list_admin?num=${num}&keyword=${adminPage.keyword}&exclude=${user.id}">${num}</a></li>
+                        <li class="page-item"><a class="page-link" href="/login/list_admin?num=${num}&keyword=${adminPage.keyword}&exclude=${user.id}">${num}</a></li>
                       </c:if>
                       
                       <c:if test="${select == num}">
-                        <li class="page-item"><a class="page-link" href="/list_admin?num=${num}&keyword=${adminPage.keyword}&exclude=${user.id}">${num}</a></li>
+                        <li class="page-item"><a class="page-link" href="/login/list_admin?num=${num}&keyword=${adminPage.keyword}&exclude=${user.id}">${num}</a></li>
                       </c:if>
                 </c:forEach>
                 
                 <c:if test="${adminPage.next}">  
-                    <li class="page-item"><a class="page-link" href="/list_admin?num=${adminPage.endPagenum + 1}&keyword=${adminPage.keyword}&exclude=${user.id}">다음</a></li>
+                    <li class="page-item"><a class="page-link" href="/login/list_admin?num=${adminPage.endPagenum + 1}&keyword=${adminPage.keyword}&exclude=${user.id}">다음</a></li>
                 </c:if>
                 
             </ul>
@@ -116,7 +100,7 @@ $(document).ready(function() {
 
 	console.log(paramnekey)
 	if(paramnekey == null){
-        window.location.href="/list_admin?num=1"+ '&exclude=' + $("#exclude").val();
+        window.location.href="/login/list_admin?num=1"+ '&exclude=' + $("#exclude").val();
    }
 });
 
@@ -146,7 +130,7 @@ $("#deletebtn").on("click",function(){
               // AJAX 요청을 보냅니다.
                   $.ajax({
                       type: "POST",
-                      url:"${CP}/withdraw",
+                      url:"${CP}/delete",
                       dataType:"html",
                       data: {
                        id: tmpVal

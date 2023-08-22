@@ -1,35 +1,13 @@
+  <%@include file ="head.jsp" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="CP" value="${pageContext.request.contextPath }"/>
 
-<%
- String strReferer = request.getHeader("referer");
- if(strReferer == null){
-%>
- <script language="javascript">
-  alert("접속을 차단합니다.");
-  document.location.href="${CP}/login";
- </script>
-<%
- return;
- }
-%>
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+<title>회원 관리</title>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <script src="${CP}/resources/js/jquery-3.7.0.js"></script>
-    <title>회원 관리</title>
-</head>
-<body>
+<body id="font-id">
     <div class="container">
     
   <!-- 일반회원 --------------------------------------------------------------->
@@ -70,11 +48,17 @@
         <!-- 검색 폼 -->
         <div class="row mb-3">
             <div class="col">
-                    <div class="form-group">
+                    <div class="form-group" style="display: flex;">
                         <input type="text" id="searchid" name="keyword" class="form-control" placeholder="아이디 검색">
+                     <div style="margin-left : 7px;">
+	                    <button type="submit" id= "searchidbtn" class="btn btn-primary ml-2"
+	                    style="width: 70px;">검색</button>
+	                 </div>   
+	                 <div style="margin-left : 7px;">   
+	                    <button type="button" id= "deletebtn" class="btn btn-primary ml-2"
+	                    style="width: 70px;">정지</button>        
                     </div>
-                    <button type="submit" id= "searchidbtn" class="btn btn-primary ml-2">검색</button>
-                    <button type="button" id= "deletebtn" class="btn btn-primary ml-2">정지</button>        
+                    </div>
             </div>
         </div>
         <!-- 검색 폼 end ------------------------------------------------------------>
@@ -83,21 +67,21 @@
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
 	            <c:if test="${memberPage.prev}">
-		            <li class="page-item"><a class="page-link" aria-label="Previous" href="/list_member?num=${memberPage.startPageNum - 5}&keyword=${memberPage.keyword}">이전</a></li>
+		            <li class="page-item"><a class="page-link" aria-label="Previous" href="/login/list_member?num=${memberPage.startPageNum - 5}&keyword=${memberPage.keyword}">이전</a></li>
 		        </c:if>
 		        
 		        <c:forEach begin="${memberPage.startPageNum}" end="${memberPage.endPageNum}" var="num">      
 		              <c:if test="${select != num}">
-		                <li class="page-item"><a class="page-link" href="/list_member?num=${num}&keyword=${memberPage.keyword}">${num}</a></li>
+		                <li class="page-item"><a class="page-link" href="/login/list_member?num=${num}&keyword=${memberPage.keyword}">${num}</a></li>
 		              </c:if>
 		              
 		              <c:if test="${select == num}">
-		                <li class="page-item"><a class="page-link" href="/list_member?num=${num}&keyword=${memberPage.keyword}">${num}</a></li>
+		                <li class="page-item"><a class="page-link" href="/login/list_member?num=${num}&keyword=${memberPage.keyword}">${num}</a></li>
 		              </c:if>
 		        </c:forEach>
 		        
 		        <c:if test="${memberPage.next}">  
-		            <li class="page-item"><a class="page-link" href="/list_member?num=${memberPage.endPageNum + 1}&keyword=${memberPage.keyword}">다음</a></li>
+		            <li class="page-item"><a class="page-link" href="/login/list_member?num=${memberPage.endPageNum + 1}&keyword=${memberPage.keyword}">다음</a></li>
 		        </c:if>
                 
             </ul>
@@ -118,18 +102,17 @@ $("#searchidbtn").on("click",function(){
 	let keyword = $("#searchid").val();
 	console.log(keyword);
 
-	location.href = "/list_member?num=1"+ "&keyword=" + keyword;
+	location.href = "/login/list_member?num=1"+ "&keyword=" + keyword;
 	});
 </script>
 
 <script>
 $("#deletebtn").on("click",function(){
-	console.log("haha");
 	
 	$("input[name='delcheckbox']").each(function(){
 	    if( $(this).is(":checked") == true ){
 	      var tmpVal = $(this).val();
-	      console.log(tmpVal);
+	     
 	      
 		      // AJAX 요청을 보냅니다.
 		          $.ajax({
@@ -159,6 +142,7 @@ $("#deletebtn").on("click",function(){
 	       
 	    }
 	  }); //--체크박스 체크
+	$('#banned_iframe', parent.document).get(0).contentDocument.location.reload(); 
 	location.reload();
 });
 </script>          

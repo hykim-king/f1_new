@@ -7,6 +7,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.roadscanner.domain.user.MemberVO;
@@ -17,7 +19,8 @@ import com.roadscanner.domain.user.MemberVO;
 public class UserDaoImpl implements UserDao {
 	final String NAMESPACE = "com.roadscanner.dao.user.UserDao";
 	final String DOT = ".";
-
+	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 
@@ -52,7 +55,7 @@ public class UserDaoImpl implements UserDao {
 		LOG.debug("│ 2. param : " + user.toString());
 		LOG.debug("└────────────────────────────────────────────────────────┘");
 		flag = this.sqlSessionTemplate.selectOne(statement, user);
-
+		LOG.debug("│ 3. flag : " + flag);
 		return flag;
 	}
 	
@@ -71,22 +74,39 @@ public class UserDaoImpl implements UserDao {
 	
 	@Override
 	public int passCheck(MemberVO user) throws SQLException {
+		
 		int flag = 0;
 		String statement = this.NAMESPACE + DOT + "passCheck";
+		String statementpw = this.NAMESPACE + DOT + "encoder";
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
 		LOG.debug("│ 1. statement " + statement);
 		LOG.debug("│ 2. param=\n" + user.toString());
 		LOG.debug("└────────────────────────────────────────────────────────┘");
-		flag = this.sqlSessionTemplate.selectOne(statement, user);
-
+		MemberVO encoderpw = this.sqlSessionTemplate.selectOne(statementpw,user);	
+		LOG.debug("┌────────────────────────────────────────────────────────┐");
+		LOG.debug("│ 3 . encoderpw2 :" + encoderpw.getPassword());
+		LOG.debug("└────────────────────────────────────────────────────────┘");
+	if(passwordEncoder.matches(user.getPassword(),encoderpw.getPassword())) {
+		flag = 1;
+	}else {
+		LOG.debug("┌────────────────────────────────────────────────────────┐");
+		LOG.debug("│ hhhhhhhhhhhhhhhhhhhhhhhh");
+		LOG.debug("└────────────────────────────────────────────────────────┘");
 		return flag;
+	}
+		return flag;
+		
 	}
 
 	@Override
 	public int insertOne(MemberVO user) throws SQLException {
+		String encoder = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encoder);
 		System.out.println("============================================");
 		System.out.println("MembershipDaoImpl addUser()");
+		System.out.println("passwordEncoder ::"+ encoder);
 		System.out.println("============================================");
+		
 		
 		int flag = 0;
 		String statement = this.NAMESPACE + DOT + "insertOne";
@@ -94,6 +114,7 @@ public class UserDaoImpl implements UserDao {
 		LOG.debug("│ 1. statement " + statement);
 		LOG.debug("│ 2. param=\n" + user.toString());
 		LOG.debug("└────────────────────────────────────────────────────────┘");
+		
 		flag = this.sqlSessionTemplate.insert(statement, user);
 
 		return flag;
@@ -135,7 +156,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public int searchPwCheck(MemberVO user) throws SQLException {
+	public int searchPwCheck(MemberVO user) throws SQLException {	
 		int flag = 0;
 		String statement = this.NAMESPACE + DOT + "searchPwCheck";
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
@@ -170,18 +191,43 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int updatePw(MemberVO user) throws SQLException {
-		int flag = 0;
+		String statementpw = this.NAMESPACE + DOT + "encoder";
+		MemberVO encoderpw = this.sqlSessionTemplate.selectOne(statementpw,user);
+
 		String statement = this.NAMESPACE + DOT + "updatepassword";
+		int flag = -1;
+		
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
 		LOG.debug("│ statement " + statement);
+		LOG.debug("│ encoder " + encoderpw);
 		LOG.debug("└────────────────────────────────────────────────────────┘");
-		flag = this.sqlSessionTemplate.update(statement, user);
-
-		return flag;
+					
+		if(passwordEncoder.matches(user.getPassword(),encoderpw.getPassword())) {
+			LOG.debug("┌────────────────────────────────────────────────────────┐");
+			LOG.debug("│ ffffffffffffffff");
+			LOG.debug("└────────────────────────────────────────────────────────┘");
+			flag = 3;
+			return flag;
+			
+		}else{
+			LOG.debug("┌────────────────────────────────────────────────────────┐");
+			LOG.debug("│ ssssssssssssssss");
+			LOG.debug("└────────────────────────────────────────────────────────┘");
+			String encoder = passwordEncoder.encode(user.getPassword());
+			user.setPassword(encoder);
+			LOG.debug("┌────────────────────────────────────────────────────────┐");
+			LOG.debug("│ encoder::" + encoder);
+			LOG.debug("└────────────────────────────────────────────────────────┘");
+			
+			flag = this.sqlSessionTemplate.update(statement, user);
+		}
+			return flag;
 	}
+
 
 	@Override
 	public int updateUser(MemberVO user) throws SQLException {
+		
 		int flag = 0;
 		String statement = this.NAMESPACE + DOT + "updateUser";
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
@@ -193,26 +239,11 @@ public class UserDaoImpl implements UserDao {
 		return flag;
 	}
 
-	@Override
-	public MemberVO selectOneMypage(MemberVO inVO) throws SQLException {
-		String statement = this.NAMESPACE + ".selectOneMypage";
-		LOG.debug("┌────────────────────────────────────────────────────────┐");
-		LOG.debug("│ statement " + statement);
-		LOG.debug("└────────────────────────────────────────────────────────┘");
-		MemberVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
-
-		if (outVO != null) {
-			System.out.println(outVO.toString());
-		} else {
-			System.out.println("쿼리 결과가 없습니다.");
-		}
-		return outVO;
-	}
 
 	@Override
 	public int withdraw(MemberVO user) throws SQLException {
 	    int flag = 0;
-	    String statement = this.NAMESPACE + DOT + "withdraw";
+	    String statement = this.NAMESPACE + DOT + "deleteOne";
 	    LOG.debug("┌────────────────────────────────────────────────────────┐");
 	    LOG.debug("│ statement " + statement);
 	    LOG.debug("│ param=\n" + user.toString());
@@ -240,6 +271,23 @@ public class UserDaoImpl implements UserDao {
 		String statement = this.NAMESPACE + DOT + "clearUser";
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
 		LOG.debug("│ statement " + statement);
+		LOG.debug("└────────────────────────────────────────────────────────┘");
+		flag = this.sqlSessionTemplate.update(statement, user);
+
+		return flag;
+	}
+
+	@Override
+	public int changePw(MemberVO user) throws SQLException {
+		
+		String encoder = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encoder);
+		
+		int flag = 0;
+		String statement = this.NAMESPACE + DOT + "changePw";
+		LOG.debug("┌────────────────────────────────────────────────────────┐");
+		LOG.debug("│ statement " + statement);
+		LOG.debug("│ encoder " + encoder);
 		LOG.debug("└────────────────────────────────────────────────────────┘");
 		flag = this.sqlSessionTemplate.update(statement, user);
 
