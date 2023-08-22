@@ -100,6 +100,16 @@ public class QuestionServiceImpl implements QuestionService, PcwkLogger {
             vo.setImageUrl(attachFile.getUrl());
         }
 
+        /**
+         * 2023.08.22(화) S3에 파일 삭제하는것에 문제가 있음 확인 필요.
+         * 주석으로 처리해둠
+         */
+//        if (attachFile != null) {
+//            vo.setOriginalFilename(attachFile.getUploadFilename());
+//            vo.setStoreFilename(attachFile.getStoreFilename());
+//            vo.setImageUrl(attachFile.getUrl());
+//        }
+
         LOG.debug("사용자 요청={}", request);
         // 제목 및 내용 수정
         vo.setTitle(request.getTitle());
