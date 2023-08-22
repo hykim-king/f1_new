@@ -189,3 +189,5 @@ Servers/
 >>>>>>> ch/fileupload
 *.properties
 logs/
+road-scanner-key.pem
+src/main/resources/h2-properties
