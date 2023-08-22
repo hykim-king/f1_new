@@ -19,7 +19,6 @@
             content,
             create_date AS createDate,
             update_date AS updateDate,
-            image_url AS imageUrl,
             original_filename AS originalFilename,
             store_filename AS storeFilename,
             image_url AS imageUrl
