@@ -3,9 +3,9 @@
 <html>
 <head>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/resources/css/qna.css" rel="stylesheet">
   <meta charset="UTF-8">
-  <meta name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>로드스캐너 - 게시판 수정</title>
 </head>
 <body>
@@ -30,26 +30,26 @@
 
         <div class="mb-3 row">
             <div class="col">
-                <input type="text" class="form-control" id="title" style="outline:none; box-shadow:none;" value="${question.title}" placeholder="제목을 입력하세요.">
+                <input type="text" class="form-control" id="title" value="${question.title}" placeholder="제목을 입력하세요.">
             </div>
         </div>
 
         <div class="d-flex mb-3 row align-items-center">
             <div class="col">
-                <input type="file" id="attachFile" name="attachFile" class="form-control" style="outline:none; box-shadow:none;" accept="image/*">
+                <input type="file" id="attachFile" name="attachFile" class="form-control" accept="image/*">
 <%--                <input type="text" class="form-control" value="${question.originalFilename}" placeholder="원본파일명">--%>
             </div>
         </div>
 
         <div class="mb-3 row">
             <div class="col">
-                <textarea class="form-control" id="content" rows="10" style="outline:none; box-shadow:none;" placeholder="내용을 입력하세요.">${question.content}</textarea>
+                <textarea class="form-control" id="content" rows="10" placeholder="내용을 입력하세요.">${question.content}</textarea>
             </div>
         </div>
 
         <div class="text-center">
             <a href="/qna/${question.no}" role="button" class="btn btn-secondary">취소</a>
-            <button type="button" id="btn-update" class="btn" style="background-color: #024089; color:white"; value="수정">수정</button>
+            <button type="button" id="btn-update" class="btn" value="수정">수정</button>
         </div>
     </form>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>

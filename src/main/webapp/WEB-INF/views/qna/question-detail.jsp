@@ -151,7 +151,7 @@
 
                         <div class="mb-2 mx-4">
                             <a href="/qna/${question.no}" id="href">
-                              <button type="button" class="btn" id="btn-answer-cansel">취소</button>
+                              <button type="button" class="btn" id="btn-answer-cancel">취소</button>
                             </a>
                             <button type="submit" id="btn-answer-updated" class="btn" value="수정">완료</button>
                         </div>

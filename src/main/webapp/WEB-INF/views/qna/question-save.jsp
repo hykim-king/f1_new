@@ -35,13 +35,13 @@
         <div class="mb-3 row">
             <div class="col">
                 <input type="text" class="form-control" id="title"
-                    value="${question.title}" style="outline:none; box-shadow:none;" placeholder="제목을 입력하세요.">
+                    value="${question.title}" placeholder="제목을 입력하세요.">
             </div>
         </div>
 
         <div class="d-flex mb-3 row align-items-center">
             <div class="col">
-                <input type="file" id="attachFile" name="attachFile" class="form-control" style="outline:none; box-shadow:none;" accept="image/*">
+                <input type="file" id="attachFile" name="attachFile" class="form-control" accept="image/*">
             </div>
             <!-- 취소 버튼 -->
             <button type="button" id="btn-cancel" class="btn-close"></button>
@@ -49,12 +49,12 @@
 
         <div class="mb-3 row">
             <div class="col">
-                <textarea class="form-control" id="content" rows="10" style="outline:none; box-shadow:none;" placeholder="내용을 입력하세요."></textarea>
+                <textarea class="form-control" id="content" rows="10" placeholder="내용을 입력하세요."></textarea>
             </div>
         </div>
         <div class="text-center">
             <a href="/qna" role="button" class="btn btn-secondary">취소</a>
-            <button type="submit" id="btn-save" class="btn" style="background-color: #024089; outline:none; color: white;" value="저장">등록</button>
+            <button type="submit" id="btn-save" class="btn" value="저장">등록</button>
         </div>
     </form>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
