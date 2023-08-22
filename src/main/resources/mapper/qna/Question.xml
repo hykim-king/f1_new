@@ -8,6 +8,7 @@
         VALUES (#{category}, #{id}, #{title}, #{content}, #{originalFilename}, #{storeFilename}, #{imageUrl})
     </insert>
 
+
     <!-- no로 질문 조회 오라클 O-->
     <select id="findByNo" resultType="QuestionVO">
         SELECT
@@ -26,43 +27,47 @@
         WHERE no = #{no}
     </select>
 
+
     <!-- 모든 질문 조회 -->
     <select id="findAll" resultType="QuestionVO">
-        SELECT *
+    SELECT *
+    FROM (
+        SELECT a.*, rownum rnum
         FROM (
-            SELECT a.*, rownum rnum
-            FROM (
-                SELECT
-                    no,
-                    category,
-                    views,
-                    id,
-                    title,
-                    content,
-                    create_date AS createDate,
-                    update_date AS updateDate
-                FROM QUESTION
+            SELECT
+                no,
+                category,
+                views,
+                id,
+                title,
+                content,
+                create_date AS createDate,
+                update_date AS updateDate
+            FROM QUESTION
 
-                WHERE 1=1
-                <if test="searchCond.category == null">
-                    AND category != 10
-                </if>
-                <if test="searchCond.category != null">
-                    AND category = #{searchCond.category}
-                </if>
-                <if test="searchCond.searchType == 'title' and searchCond.keyword != null">
-                    AND title LIKE '%' || #{searchCond.keyword} || '%'
-                </if>
-                <if test="searchCond.searchType == 'content' and searchCond.keyword != null">
-                    AND content LIKE '%' || #{searchCond.keyword} || '%'
-                </if>
-                <if test="searchCond.searchType == 'both' and searchCond.keyword != null">
-                    AND (title LIKE '%' || #{searchCond.keyword} || '%' OR content LIKE '%' || #{searchCond.keyword} || '%')
-                </if>
-                ORDER BY no DESC
-            ) a WHERE rownum &lt;= #{pagination.start} + #{pagination.size}
-        ) WHERE rnum &gt; #{pagination.start}
+            WHERE 1=1
+
+            <if test="searchCond.category == null">
+                AND category != 10
+            </if>
+            <if test="searchCond.category != null">
+                AND category = #{searchCond.category}
+            </if>
+            <if test="searchCond.searchType == 'title' and searchCond.keyword != null">
+                AND title LIKE '%' || #{searchCond.keyword} || '%'
+            </if>
+            <if test="searchCond.searchType == 'content' and searchCond.keyword != null">
+                AND content LIKE '%' || #{searchCond.keyword} || '%'
+            </if>
+            <if test="searchCond.searchType == 'both' and searchCond.keyword != null">
+                AND (title LIKE '%' || #{searchCond.keyword} || '%' OR content LIKE '%' || #{searchCond.keyword} || '%')
+            </if>
+
+            ORDER BY no DESC
+        ) a WHERE rownum &lt;= #{pagination.start} + #{pagination.size}
+    ) WHERE rnum &gt; #{pagination.start}
     </select>
+
 
     <!-- 질문 업데이트 -->
     <update id="update">
@@ -78,10 +83,12 @@
         WHERE no = #{no}
     </update>
 
+
     <!-- 질문 삭제 -->
     <delete id="delete">
         DELETE FROM QUESTION WHERE no = #{no}
     </delete>
+
 
     <!-- 조건에 해당하는 게시글 개수 -->
     <select id="countQuestions" resultType="int">
@@ -101,12 +108,14 @@
         </if>
     </select>
 
+
     <!-- 조회수 증가 -->
     <update id="increaseViews">
         UPDATE QUESTION
         SET views = views + 1
         WHERE no = #{no}
     </update>
+
 
     <!-- 답변 등록 시 카테고리 변경 -->
     <update id="updateCategory">
@@ -120,6 +129,7 @@
             )
         WHERE no = #{no}
     </update>
+
 
     <!-- 공지사항 조회 -->
     <select id="findNotice" resultType="QuestionVO">
@@ -136,6 +146,44 @@
         WHERE category = 10
         ORDER BY no DESC
         FETCH FIRST 3 ROWS ONLY
+    </select>
+
+    <!-- 내 글 보기 -->
+    <select id="findMyQuestion" resultType="QuestionVO">
+        SELECT *
+        FROM (
+            SELECT a.*, rownum rnum
+            FROM (
+                SELECT
+                    no,
+                    category,
+                    views,
+                    id,
+                    title,
+                    content,
+                    create_date AS createDate,
+                    update_date AS updateDate
+                FROM QUESTION
+                WHERE id = #{id}
+
+                <if test="searchCond.category == null">
+                    AND category != 10
+                </if>
+                <if test="searchCond.category != null">
+                    AND category = #{searchCond.category}
+                </if>
+                <if test="searchCond.searchType == 'title' and searchCond.keyword != null">
+                    AND title LIKE '%' || #{searchCond.keyword} || '%'
+                </if>
+                <if test="searchCond.searchType == 'content' and searchCond.keyword != null">
+                    AND content LIKE '%' || #{searchCond.keyword} || '%'
+                </if>
+                <if test="searchCond.searchType == 'both' and searchCond.keyword != null">
+                    AND (title LIKE '%' || #{searchCond.keyword} || '%' OR content LIKE '%' || #{searchCond.keyword} || '%')
+                </if>
+                ORDER BY no DESC
+            ) a WHERE rownum &lt;= #{pagination.start} + #{pagination.size}
+        ) WHERE rnum &gt; #{pagination.start}
     </select>
 
 </mapper>
