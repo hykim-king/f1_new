@@ -13,7 +13,7 @@
 <!-- JS -->
 <script src="${CP}/resources/js/jquery-3.7.0.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-
+<style> .nav-item {font-size: 15px;} </style>
 </head>
 
 <nav id="font-id" class="navbar navbar-expand-md mb-4" style="background-color: white;">
@@ -23,7 +23,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+      <ul class="navbar-nav me-auto mb-md-0">
         <c:if test="${user ne null}">
           <li class="nav-item">
             <a class="nav-link" href="${CP}/main/preUpload">사진 업로드</a>

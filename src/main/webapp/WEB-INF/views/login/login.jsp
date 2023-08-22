@@ -59,8 +59,6 @@
       console.log("doLogin");
       
       if(confirm('로그인 하시겠습니까?')==false) return;
-      console.log("userId : "+$("#id").val());
-      console.log("passwd : "+$("#pw").val());
         
       if(""==$("#id").val() || 0==$("#id").val().length){
           alert("아이디를 입력하세요");  // javascript 메시지 다이얼 로그

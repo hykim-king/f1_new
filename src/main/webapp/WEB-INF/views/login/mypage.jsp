@@ -106,9 +106,8 @@ function check_pw() {
             document.getElementById('pw_check').innerHTML='비밀번호가 일치하지 않습니다.';
             document.getElementById('pw_check').style.color='red';
             document.getElementById('pw_check').style.fontSize='15px';
-            document.getElementById('rpassword').value='';
             document.getElementById('rpassword2').value='';
-            document.getElementById('rpassword').focus();
+            document.getElementById('rpassword2').focus();
         }
         
     }
