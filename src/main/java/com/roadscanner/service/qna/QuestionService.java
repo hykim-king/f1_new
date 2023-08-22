@@ -6,7 +6,7 @@ import com.roadscanner.dto.qna.*;
 import java.io.IOException;
 import java.util.List;
 
-public interface QuestionService{
+public interface QuestionService {
 
     List<QuestionListResponseDTO> findNotice();
 
@@ -16,7 +16,9 @@ public interface QuestionService{
 
     QuestionResponseDTO findByNo(Long no);
 
-    Long update(Long no, QuestionUpdateRequestDTO dto);
+//    List<QuestionListResponseDTO> findAll();
+
+    Long update(Long no, QuestionUpdateRequestDTO dto) throws IOException;
 
     Long delete(Long no);
 

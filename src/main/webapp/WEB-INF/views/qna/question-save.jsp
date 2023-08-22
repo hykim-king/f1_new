@@ -2,11 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>로드스캐너 - 게시판 등록</title>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/css/qna.css" rel="stylesheet">
 </head>
 <body>
     <form class="container mt-4" id="question-form">
@@ -43,6 +43,8 @@
             <div class="col">
                 <input type="file" id="attachFile" name="attachFile" class="form-control" style="outline:none; box-shadow:none;" accept="image/*">
             </div>
+            <!-- 취소 버튼 -->
+            <button type="button" id="btn-cancel" class="btn-close"></button>
         </div>
 
         <div class="mb-3 row">
@@ -52,8 +54,7 @@
         </div>
         <div class="text-center">
             <a href="/qna" role="button" class="btn btn-secondary">취소</a>
-            <button type="submit" id="btn-save" class="btn" style="background-color: #024089; outline:none; color: white;"
-                value="저장">등록</button>
+            <button type="submit" id="btn-save" class="btn" style="background-color: #024089; outline:none; color: white;" value="저장">등록</button>
         </div>
     </form>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>

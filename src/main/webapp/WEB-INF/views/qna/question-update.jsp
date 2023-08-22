@@ -17,8 +17,7 @@
         <div class="mb-2 row align-items-center" style="display: none;">
             <label for="category" class="form-label col-auto pe-1 m-0">답변 상태</label>
             <div class="col">
-                <input type="text" id="category" class="form-control"
-                    value="${question.category}" readonly>
+                <input type="text" id="category" class="form-control" value="${question.category}" readonly>
             </div>
         </div>
 
@@ -31,14 +30,14 @@
 
         <div class="mb-3 row">
             <div class="col">
-                <input type="text" class="form-control" id="title" style="outline:none; box-shadow:none;"
-                    value="${question.title}" placeholder="제목을 입력하세요.">
+                <input type="text" class="form-control" id="title" style="outline:none; box-shadow:none;" value="${question.title}" placeholder="제목을 입력하세요.">
             </div>
         </div>
 
         <div class="d-flex mb-3 row align-items-center">
             <div class="col">
                 <input type="file" id="attachFile" name="attachFile" class="form-control" style="outline:none; box-shadow:none;" accept="image/*">
+<%--                <input type="text" class="form-control" value="${question.originalFilename}" placeholder="원본파일명">--%>
             </div>
         </div>
 
@@ -50,7 +49,7 @@
 
         <div class="text-center">
             <a href="/qna/${question.no}" role="button" class="btn btn-secondary">취소</a>
-            <button type="button" id="btn-update" class="btn" style="background-color: #024089; color:white; value="수정">수정</button>
+            <button type="button" id="btn-update" class="btn" style="background-color: #024089; color:white"; value="수정">수정</button>
         </div>
     </form>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>

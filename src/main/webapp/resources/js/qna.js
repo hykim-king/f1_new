@@ -47,25 +47,32 @@ const main = {
     },
 
     update : function () {
-        const data = {
-            category: $('#category').val(),
-            title: $('#title').val(),
-            idx: $('#idx').val(),
-            content: $('#content').val(),
-        };
+        const data = new FormData();
+        data.append('no', $('#no').val());
+        data.append('category', $('#category').val());
+        data.append('id', $('#id').val());
+        data.append('title', $('#title').val());
+        data.append('content', $('#content').val());
+
+        const file = $('#attachFile')[0].files[0];
+        if (file) { // 파일이 존재하는 경우에만 추가
+            data.append('attachFile', file);
+        }
 
         const no = $('#no').val();
 
         $.ajax({
-            type: 'PUT',
+            type: 'POST',
+            enctype:'multipart/form-data',
             url: '/api/qna/' + no,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(data)
+            processData: false,
+            contentType: false,
+            data: data
         }).done(function () {
             alert("글이 수정되었습니다.");
             window.location.href = '/qna/' + no; // 수정된 페이지로 리다이렉트
         }).fail(function (error) {
+            alert("수정 실패했습니다.");
             alert(JSON.stringify(error));
         });
     },
