@@ -114,12 +114,15 @@
             if(pw.length<8 || pw.length>20) {
                window.alert('비밀번호는 8글자 이상, 20글자 이하만 이용 가능합니다.');
                document.getElementById('pw_form').value='';
+               document.getElementById('pw_form').focus();
             } else if(pw.search(/\s/) != -1) {
                window.alert('비밀번호는 공백 없이 이용 가능합니다');
                document.getElementById('pw_form').value='';
+               document.getElementById('pw_form').focus();
             } else if(num < 0 || eng < 0 || spe < 0) {
                window.alert('영문, 숫자, 특수문자를 최소 1글자 이상씩 사용하여 입력해주세요');
                document.getElementById('pw_form').value='';
+               document.getElementById('pw_form').focus();
             }           
             
             if(document.getElementById('pw_form').value !='' && document.getElementById('pw2_form').value!='') {
@@ -127,11 +130,13 @@
                 if(document.getElementById('pw_form').value == document.getElementById('pw2_form').value) {
                     document.getElementById('pw_check').innerHTML='비밀번호가 일치합니다.'
                     document.getElementById('pw_check').style.color='blue';
+                    document.getElementById('pw_check').style.fontSize='15px';
                 } else {
                     document.getElementById('pw_check').innerHTML='비밀번호가 일치하지 않습니다.';
                     document.getElementById('pw_check').style.color='red';
-                    document.getElementById('pw_form').value='';
+                    document.getElementById('pw_check').style.fontSize='15px';
                     document.getElementById('pw2_form').value='';
+                    document.getElementById('pw2_form').focus();
                 }
                 
             }
@@ -350,9 +355,7 @@
                   //console.log("success data:"+data);
                   // JSON.parse() 메서드는 JSON 문자열의 구문을 분석하고, 그 결과에서 JavaScript 값이나 객체를 생성합니다.
                   let parsedJSON = JSON.parse(data);
-                  console.log("parsedJSON.msgId:"+parsedJSON.msgId);
                                    
-                  
                   if("10" == parsedJSON.msgId){
                     alert(parsedJSON.msgContents);  // javascript 메시지 다이얼 로그
                     $("#email_front").focus();
@@ -413,7 +416,7 @@ $('#checkInput').blur(function() {
     const $resultMsg = $('#mail-check-warn');
 
     if (inputCode == code) {
-        $resultMsg.html('인증번호가 일치합니다.');
+        $resultMsg.html('인증번호 일치');
         $resultMsg.css('color', 'green');
         $resultMsg.css('display', 'block');
         $resultMsg.css('font-size', '13px');
@@ -423,7 +426,7 @@ $('#checkInput').blur(function() {
         certified_Email = true;
     } else {
         certified_Email = false;
-        $resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!');
+        $resultMsg.html('인증번호 불일치');
         $resultMsg.css('color', 'red');
         $resultMsg.css('display', 'block');
         $resultMsg.css('font-size', '13px');
