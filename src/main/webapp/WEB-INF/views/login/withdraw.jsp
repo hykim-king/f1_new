@@ -25,18 +25,19 @@
 <body id="font-id" class="d-flex flex-column min-vh-100">
 <c:if test="${user ne null }">
     <div class="container">
+
         <h1 style="text-align: center; margin-top: 100px; margin-bottom: 100px;">RoadScanner</h1>
-        <form>
+        <form onsubmit="return false;">
           <label for="password"></label>
-          <input type="password" id="upassword"  placeholder="비밀번호를 입력하세요">
-        </form>
-        <input type="hidden" id="uid"  value="${user.id}">
-        <input type="hidden" id="upw"  value="${user.password}">
+          <input type="password" id="rawPassword" name="rawPassword" placeholder="비밀번호를 입력하세요">
+        
+        <input type="hidden" id="id" name="id" value="${user.id}">
         <div class="wbut">
 	       <input type="button" class="btn btn-outline-dark" id="withdraw" value="회원 탈퇴하기">
 	    </div>
-    
-    </div>
+	    </form>
+        </div>
+       
 </c:if>  
 <c:if test="${user eq null}">  <!-- 유저 정보X -->
 	<div style="text-align: center; margin:80px; auto;">
@@ -69,15 +70,15 @@
 	               url:"${CP}/withdraw",
 	               dataType:"html",
 	               data: {
-	                id: $("#uid").val(),
-	                password: $("#upassword").val()
+	                id: $("#id").val(),
+	                password: $("#rawPassword").val()
 	               },
 	               success:function(data) {
 	                let parsedJSON = JSON.parse(data);
 	                  
 	                    if("10" == parsedJSON.msgId){
 	                          alert(parsedJSON.msgContents);
-	                          window.location.href="${CP}/login";
+	                          window.location.href="${CP}/logout";
 	                   } 
 	                                         
 	                   if("20" == parsedJSON.msgId){

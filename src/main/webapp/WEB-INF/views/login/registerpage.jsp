@@ -267,7 +267,7 @@
             console.log("idDulpCheck ready");
             
             var id_str = document.getElementById('id_form').value;
-            console.log(id_str);
+           
             
             if(""==$('#id_form').val() || 0==$('#id_form').val().length){
               alert("아이디를 입력하세요");  // javascript 메시지 다이얼 로그
