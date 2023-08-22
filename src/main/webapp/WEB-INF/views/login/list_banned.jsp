@@ -104,12 +104,12 @@ $("#searchidbt").on("click",function(){
 
 <script>
 $("#deletebtn").on("click",function(){
-    console.log("haha");
+  
     
     $("input[name='delcheckbox']").each(function(){
         if( $(this).is(":checked") == true ){
           var tmpVal = $(this).val();
-          console.log(tmpVal);
+         
         
           
           
@@ -141,8 +141,8 @@ $("#deletebtn").on("click",function(){
            
         }
       }); //--체크박스 체크
+    $('#member_iframe', parent.document).get(0).contentDocument.location.reload(); 
     location.reload();
-    document.getElementById(member_iframe).contentDocument.location.reload(true);
 });
 </script>
 </html>

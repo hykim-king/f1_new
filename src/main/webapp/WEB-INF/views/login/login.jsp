@@ -56,7 +56,7 @@
 <script>
     //jquery 이벤트 감지 (#은 id를 감지한는것이다.)
     $("#doLogin").on("click",function(){
-      console.log("doLogin");
+      
       
       if(confirm('로그인 하시겠습니까?')==false) return;
         
@@ -84,7 +84,7 @@
                 //console.log("success data:"+data);
                 // JSON.parse() 메서드는 JSON 문자열의 구문을 분석하고, 그 결과에서 JavaScript 값이나 객체를 생성합니다.
                 let paredJSON = JSON.parse(data);
-                console.log("paredJSON.msgId:"+paredJSON.msgId);
+            
                 
                 if("1"==paredJSON.msgId || "10"==paredJSON.msgId){
                   alert(paredJSON.msgContents);  // javascript 메시지 다이얼 로그
