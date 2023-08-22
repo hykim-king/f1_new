@@ -8,44 +8,36 @@
 <link  rel="stylesheet" href="${CP}/resources/css/default.css">
 <title>로드스캐너 로그인</title>
 
-  <%@include file ="navbar.jsp" %>
-
 <body id="font-id" class="d-flex flex-column min-vh-100">
 <c:if test="${user eq null}"> 
-    <div class = "roadscannercontainer">
-    <form onsubmit="return false;"> 
-        <div class = "loginbox">
-
-            <div class= "loginboxdiv">
-              <img class= "icon" src="${CP}/resources/img/usericon.png"></img>
-              <input class="loginidpwbtn" type="text" id="id" name="id" placeholder="아이디"><p/>
-	        </div>
+    <div class="roadscannercontainer">
+      <p id="head-logo">RoadScanner</p>
+	    <form onsubmit="return false;"> 
+	        <div class="loginbox">
+	
+	            <div class="loginboxdiv">
+	              <img class="icon" src="${CP}/resources/img/usericon.png"></img>
+	              <input class="loginidpwbtn" type="text" id="id" name="id" placeholder="아이디"><p/>
+		           </div>
+		         
+			        <div class="loginboxdiv" style="margin-top: 20px">
+			          <img class="icon"  src="${CP}/resources/img/passwordicon.png"></img>
+			          <input class="loginidpwbtn" type="password" id="pw" name= "pw" placeholder="비밀번호"><p/>
+			        </div>
+			        
+		          <button type="submit" class="btn btn-primary loginbtn" id="doLogin" name="doLogin">로그인</button><p/>
 	         
-	        <div class= "loginboxdiv" style="margin-top: 20px">
-	          <img class= "icon"  src="${CP}/resources/img/passwordicon.png" ></img>
-	          <input class="loginidpwbtn" type="password" id="pw" name= "pw" placeholder="비밀번호"><p/>
-	        </div>
-	          <button  type="submit" class="loginbtn" id="doLogin" name="doLogin" >로그인</button><p/>
-         
-            <div style="margin: auto;">
-            
-            <button type="button" class="outbtn1"
-              onclick=" window.location.href='${CP}/findIdPw';">
-	            <div class= "btndiv" style="background-color: blue;">
-		          ID/PW찾기
-		        </div>
-	        </button>
-	           
-	        <button type="button" class="outbtn2" 
-              onclick=" window.location.href='${CP}/registerpage';">
-		        <div class= "btndiv" style="background-color: yellow;">    
-		                   회원가입
+	            <div id="button-div">
+	            
+	            <button type="button" class="btn btn-outline-dark for-btn-center"
+	              onclick="window.location.href='${CP}/findIdPw';">ID/PW찾기</button>
+		           
+		          <button type="button" class="btn btn-outline-dark for-btn-center" 
+	              onclick=" window.location.href='${CP}/registerpage';">회원가입</button>
+	            
 	            </div>
-            </button>
-            
-            </div>
-	    </div>  <!-- class = loginbox  -->
-	  </form> 
+		    </div>  <!-- class = loginbox  -->
+		  </form> 
     </div>
 </c:if> <!-- 유저 정보X-end -->   
 
