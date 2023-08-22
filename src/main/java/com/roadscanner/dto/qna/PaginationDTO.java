@@ -14,21 +14,27 @@ public class PaginationDTO {
     private boolean hasPrev; // 이전 페이지 존재 여부
     private boolean hasNext; // 다음 페이지 존재 여부
 
+    private static final int PAGE_BLOCK = 5; // 한 번에 표시할 페이지 수
+
     public PaginationDTO(int page, int size, int countQuestions) {
         this.page = page;
         this.size = size;
         this.totalPage = (int) Math.ceil((double) countQuestions / size);
 
         // 시작 페이지와 끝 페이지 계산 로직
-        this.startPage = Math.max(1, page - 2);
-        this.endPage = Math.min(totalPage, page + 2);
+        if (totalPage <= PAGE_BLOCK) {
+            this.startPage = 1;
+            this.endPage = totalPage;
+        } else {
+            this.startPage = ((page - 1) / PAGE_BLOCK) * PAGE_BLOCK + 1;
+            this.endPage = Math.min(this.startPage + PAGE_BLOCK - 1, totalPage);
+        }
 
         // 이전/다음 페이지 존재 여부 설정
         this.hasPrev = startPage > 1;
         this.hasNext = endPage < totalPage;
     }
 
-    //
     public int getStart() {
         return (page - 1) * size;
     }

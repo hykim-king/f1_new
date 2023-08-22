@@ -98,6 +98,7 @@
 <!--        SELECT count(*) FROM question-->
 <!--    </select>-->
 
+    <!-- 조건에 해당하는 게시글 개수 -->
     <select id="countQuestions" resultType="int">
         SELECT count(*) FROM question
         WHERE 1=1
@@ -145,5 +146,14 @@
             )
         WHERE no = #{no}
     </update>
+
+    <!-- 공지사항 조회 -->
+    <select id="findNotice" resultType="QuestionVO">
+        SELECT *
+        FROM QUESTION
+        WHERE category = 10
+        ORDER BY no DESC
+        FETCH FIRST 3 ROWS ONLY
+    </select>
 
 </mapper>

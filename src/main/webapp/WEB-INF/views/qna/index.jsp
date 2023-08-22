@@ -126,25 +126,27 @@
 
     <!-- 페이징 -->
     <div class="pagination">
-      <c:if test="${pagination.hasPrev}">
-          <a href="?page=1&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}">처음</a>
-          <a href="?page=${pagination.startPage - 1}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}">이전</a>
-      </c:if>
-      <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">
-          <c:choose>
-              <c:when test="${i == page}">
-                  <span>${i}</span> <!-- 현재 페이지 -->
-              </c:when>
-              <c:otherwise>
-                  <a href="?page=${i}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}">${i}</a>
-              </c:otherwise>
-          </c:choose>
-      </c:forEach>
-      <c:if test="${pagination.hasNext}">
-          <a href="?page=${pagination.endPage + 1}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}">다음</a>
-          <a href="?page=${pagination.totalPage}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}">마지막</a>
-      </c:if>
+        <!-- 처음과 이전 버튼 -->
+        <a href="?page=1&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}">&lt&lt</a>
+        <a href="?page=${page - 1 < 1 ? 1 : page - 1}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}">&lt</a>
+
+        <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">
+            <c:choose>
+                <c:when test="${i == page}">
+                    <span>${i}</span> <!-- 현재 페이지 -->
+                </c:when>
+                <c:otherwise>
+                    <a href="?page=${i}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}">${i}</a>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+
+        <!-- 다음과 마지막 버튼 -->
+        <a href="?page=${page + 1 > pagination.totalPage ? pagination.totalPage : page + 1}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}">&gt</a>
+        <a href="?page=${pagination.totalPage}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}">&gt&gt</a>
     </div>
     <!-- // 페이징 end -->
+
+
 </body>
 </html>
