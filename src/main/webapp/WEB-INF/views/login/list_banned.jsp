@@ -66,23 +66,26 @@
         <!-- pagination -->
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
+                <c:if test="${BannedPage.prev}">  
+				    <li class="page-item"><a class="page-link" href="/login/list_banned?num=1&keyword=${BannedPage.keyword}"> << </a></li>
+				</c:if>
+                   
                 <c:if test="${BannedPage.prev}">
                     <li class="page-item"><a class="page-link" aria-label="Previous" href="/login/list_banned?num=${BannedPage.startPagenum - 5}&keyword=${BannedPage.keyword}">이전</a></li>
                 </c:if>
                 
-                <c:forEach begin="${BannedPage.startPagenum}" end="${BannedPage.endPagenum}" var="num">      
-                      <c:if test="${select != num}">
-                        <li class="page-item"><a class="page-link" href="/login/list_banned?num=${num}&keyword=${BannedPage.keyword}">${num}</a></li>
-                      </c:if>
-                      
-                      <c:if test="${select == num}">
-                        <li class="page-item"><a class="page-link" href="/login/list_banned?num=${num}&keyword=${BannedPage.keyword}">${num}</a></li>
-                      </c:if>
+                <c:forEach begin="${BannedPage.startPagenum}" end="${BannedPage.endPagenum}" var="num">
+                        <li class="page-item ${select == num  ? 'active' : ''} ${select == num  ? 'disabled' : ''}">
+                        <a class="page-link" href="/login/list_banned?num=${num}&keyword=${BannedPage.keyword}">${num}</a></li>
                 </c:forEach>
                 
                 <c:if test="${BannedPage.next}">  
                     <li class="page-item"><a class="page-link" href="/login/list_banned?num=${BannedPage.endPagenum + 1}&keyword=${BannedPage.keyword}">다음</a></li>
                 </c:if>
+                
+                <c:if test="${BannedPage.next}">  
+				    <li class="page-item"><a class="page-link" href="/login/list_banned?num=${Math.round((Math.ceil(BannedPage.count/BannedPage.pageNumCnt)))}&keyword=${BannedPage.keyword}">>></a></li>
+				</c:if>
                 
             </ul>
         </nav>
@@ -145,4 +148,5 @@ $("#deletebtn").on("click",function(){
     location.reload();
 });
 </script>
+
 </html>
