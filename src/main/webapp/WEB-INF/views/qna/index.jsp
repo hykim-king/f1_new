@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
 <head>
     <title>로드스캐너 - 게시판</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -59,6 +59,10 @@
    <table class="table table-hover">
        <thead class="table-group-divider">
            <tr>
+               <!-- 체크박스 컬럼 추가 (관리자만 보이게) -->
+               <c:if test="${user.grade == 2}">
+                   <th class="text-center"><input type="checkbox" id="select-all"></th>
+               </c:if>
                <th class="text-center">번호</th>
                <th class="text-center">분류</th>
                <th class="text-center">제목</th>
@@ -73,7 +77,7 @@
 
         <tbody class="table-group-divider">
             <!-- 공지사항 출력 -->
-            <c:if test="${!isFiltered}">
+            <c:if test="${!isFiltered and user.grade != 2}">
                 <c:forEach items="${notice}" var="notice">
                     <tr class="table" id="gongTable">
                         <td class="text-center">${notice.no}</td>
@@ -91,6 +95,11 @@
                 <c:choose>
                     <c:when test="${question.category == 10}">
                         <tr class="table" id="gongTable">
+                            <c:if test="${user.grade == 2}">
+                               <td class="text-center">
+                                   <input type="checkbox" class="delete-checkbox" value="${question.no}">
+                               </td>
+                            </c:if>
                             <td class="text-center">${question.no}</td>
                             <td class="text-center">
                             <span class="badge" id="gong">공지</span></td>
@@ -103,6 +112,11 @@
                     </c:when>
                     <c:otherwise>
                         <tr>
+                            <c:if test="${user.grade == 2}">
+                                <td class="text-center">
+                                    <input type="checkbox" class="delete-checkbox" value="${question.no}">
+                                </td>
+                            </c:if>
                             <td class="text-center">${question.no}</td>
                             <td class="text-center">
                                 <c:choose>
@@ -127,44 +141,58 @@
 
     <!-- 글쓰기 버튼 -->
     <div class="d-flex justify-content-end">
+        <!-- 삭제 버튼 추가 (관리자만 보이게) -->
+        <c:if test="${user.grade == 2}">
+            <div class="d-flex justify-content-start">
+                <button type="button" class="btn btn-outline-secondary my-1" id="btn-delete-selected">선택삭제</button>
+            </div>
+        </c:if>
         <a href="/qna/save" class="btn btn-outline-secondary my-1"
             role="button">글쓰기</a>
     </div>
 
     <!-- 페이징 시작 -->
-	<nav aria-label="Page navigation">
-	    <ul class="pagination justify-content-center">
-	        <!-- 첫 페이지 및 이전 페이지 링크 -->
-	        <li class="page-item ${pagination.page <= 1 ? 'disabled' : ''}">
-	            <a class="page-link" href="?page=1&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}" aria-label="First">
-	                &laquo;&laquo;
-	            </a>
-	        </li>
-	        <li class="page-item ${pagination.page <= 1 ? 'disabled' : ''}">
-	            <a class="page-link" href="?page=${pagination.page - 1}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}" aria-label="Previous">
-	                &laquo;
-	            </a>
-	        </li>
-	        <!-- 페이지 번호 링크 -->
-	        <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">
-	            <li class="page-item ${i == pagination.page ? 'active' : ''}">
-	                <a class="page-link" href="?page=${i}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}">${i}</a>
-	            </li>
-	        </c:forEach>
-	        <!-- 다음 페이지 및 마지막 페이지 링크 -->
-	        <li class="page-item ${pagination.page >= pagination.totalPage ? 'disabled' : ''}">
-	            <a class="page-link" href="?page=${pagination.page + 1}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}" aria-label="Next">
-	                &raquo;
-	            </a>
-	        </li>
-	        <li class="page-item ${pagination.page >= pagination.totalPage ? 'disabled' : ''}">
-	            <a class="page-link" href="?page=${pagination.totalPage}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}" aria-label="Last">
-	                &raquo;&raquo;
-	            </a>
-	        </li>
-	    </ul>
-	</nav>
-	<!-- 페이징 끝 -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <!-- 맨 처음 페이지 링크 -->
+            <li class="page-item ${pagination.page <= 1 ? 'disabled' : ''}">
+                <a class="page-link" href="?page=1&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}" aria-label="First">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <!-- 이전 페이지 링크 -->
+            <li class="page-item ${pagination.page <= 1 ? 'disabled' : ''}">
+                <a class="page-link" href="?page=${pagination.page - 1}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}" aria-label="Previous">
+                    <span aria-hidden="true">&lsaquo;</span>
+                </a>
+            </li>
 
+            <!-- 페이지 번호 링크 -->
+            <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">
+                <li class="page-item ${i == pagination.page ? 'active' : ''}">
+                    <a class="page-link" href="?page=${i}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}">${i}</a>
+                </li>
+            </c:forEach>
+
+            <!-- 다음 페이지 링크 -->
+            <li class="page-item ${pagination.page >= pagination.totalPage ? 'disabled' : ''}">
+                <a class="page-link" href="?page=${pagination.page + 1}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}" aria-label="Next">
+                    <span aria-hidden="true">&rsaquo;</span>
+                </a>
+            </li>
+            <!-- 맨 마지막 페이지 링크 -->
+            <li class="page-item ${pagination.page >= pagination.totalPage ? 'disabled' : ''}">
+                <a class="page-link" href="?page=${pagination.totalPage}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}" aria-label="Last">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- 페이징 끝 -->
+
+    <!-- 부트스트랩 JS 및 Popper.js 추가 -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/resources/js/qna.js"></script>
 </body>
 </html>
