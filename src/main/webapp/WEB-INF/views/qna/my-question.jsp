@@ -19,7 +19,6 @@
                     <div class="col-auto mx-1">
                         <select name="category" id="category" class="form-select" style="border-color:secondary; outline:none; box-shadow:none;">
                             <option value="">전체</option>
-<%--                            <option value="10" ${category == 10 ? 'selected' : ''}>공지</option>--%>
                             <option value="20" ${category == 20 ? 'selected' : ''}>답변완료</option>
                             <option value="30" ${category == 30 ? 'selected' : ''}>답변대기</option>
                         </select>

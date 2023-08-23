@@ -78,8 +78,11 @@
         <tbody class="table-group-divider">
             <!-- 공지사항 출력 -->
             <c:if test="${!isFiltered and user.grade != 2}">
+                <div class="mb-3">
+                    <button id="toggle-notice" class="btn btn-outline-secondary my-1">공지</button>
+                </div>
                 <c:forEach items="${notice}" var="notice">
-                    <tr class="table" id="gongTable">
+                    <tr class="table notice-row" id="gongTable">
                         <td class="text-center">${notice.no}</td>
                         <td class="text-center"><span class="badge" id="gong">공지</span></td>
                         <td><a href="/qna/${notice.no}" class="text-dark qna-link notice-title">${notice.title}</a></td>

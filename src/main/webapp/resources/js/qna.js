@@ -51,6 +51,11 @@ const main = {
         // 페이지 로드시 체크박스 선택 상태에 따른 버튼 표시 상태 초기화
         showDeleteBtn();
 
+        // toggle-notice 버튼에 대한 클릭 이벤트 리스너 추가
+        $('#toggle-notice').on('click', function () {
+            $('.notice-row').toggle();  // 공지사항 섹션의 표시 상태를 토글
+        });
+
     },
 
     save: function () {
