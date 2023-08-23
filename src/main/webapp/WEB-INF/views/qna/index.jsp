@@ -1,13 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>로드스캐너 - 게시판</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/resources/css/qna.css" rel="stylesheet">
-
-</head>
+<%@include file ="/WEB-INF/views/layout/header.jsp" %>
 <body>
+<%@include file ="/WEB-INF/views/layout/navbar.jsp" %>
 <div class="container mt-4">
     <h1 class="mb-4"><a href="/qna" class="qna-title-link">Q&A 게시판</a></h1>
 
@@ -165,6 +160,4 @@
 	    </ul>
 	</nav>
 	<!-- 페이징 끝 -->
-
-</body>
-</html>
+    <%@include file ="/WEB-INF/views/layout/footer.jsp" %>
