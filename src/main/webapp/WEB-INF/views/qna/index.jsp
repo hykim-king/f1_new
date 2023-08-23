@@ -139,17 +139,18 @@
         </tbody>
     </table>
 
-    <!-- 글쓰기 버튼 -->
-    <div class="d-flex justify-content-end">
-        <!-- 삭제 버튼 추가 (관리자만 보이게) -->
-        <c:if test="${user.grade == 2}">
-            <div class="d-flex justify-content-start">
-                <button type="button" class="btn btn-outline-secondary my-1" id="btn-delete-selected">선택삭제</button>
-            </div>
-        </c:if>
-        <a href="/qna/save" class="btn btn-outline-secondary my-1"
-            role="button">글쓰기</a>
-    </div>
+	<!-- 글쓰기 버튼 -->
+	<div class="d-flex justify-content-between align-items-center">
+	    <!-- 삭제 버튼 추가 (관리자만 보이게) -->
+	    <c:if test="${user.grade == 2}">
+	        <div class="mx-1">
+	            <button type="button" class="btn btn-outline-secondary my-1" id="btn-delete-selected">선택삭제</button>
+	        </div>
+	    </c:if>
+	    <div class="mx-1">
+	        <a href="/qna/save" class="btn btn-outline-secondary my-1" role="button">글쓰기</a>
+	    </div>
+	</div>
 
     <!-- 페이징 시작 -->
     <nav aria-label="Page navigation">
