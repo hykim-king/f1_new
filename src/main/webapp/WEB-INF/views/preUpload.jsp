@@ -13,13 +13,12 @@
 
 <!DOCTYPE html>
 <html>
+<head>
+	<link  href="${CP}/resources/css/preUpload.css" rel="stylesheet">
+	<title>Main</title>
+</head>
 
-<!-- CSS -->
-<link  href="${CP}/resources/css/preUpload.css" rel="stylesheet">
-<title>Main</title>
-
-  <header> <%@include file ="login/navbar.jsp" %> </header>
-
+<header> <%@include file ="login/navbar.jsp" %> </header>
 <body id="font-id" class="d-flex flex-column min-vh-100">
   <div class="left">
     <form action="fileUploaded" method="post" enctype="multipart/form-data" onsubmit="return false;">
@@ -31,17 +30,15 @@
         <input type="hidden" id="userid" value="${user.id}">
         <input id=fileUpload name="fileUpload" type="file" accept=".jpg, .jpeg, .png, .bmp, .tiff, .webp, .ico, .svg" onchange="displaySelectedFile(event)" style="display: none;">
         <div id="cancelContainer">
-          <div class="imageWrapper">
-            <img id="selectedImage" alt="Selected Image">
-          </div>
-          <button id="cancelButton" type="button" class="btn btn-link">
-            <img alt="XButton" src="${CP}/resources/img/cancel.png">
-          </button>
+          <img id="selectedImage" alt="Selected Image">
+					<button id="cancelButton" type="button" class="btn btn-link">
+					  <img alt="XButton" src="${CP}/resources/img/cancel.png">
+					</button>
         </div>
       </div>
       <!-- 모델로 사진 전송, 실행 -->
       <div id="RunContainer" style="display: none;">
-        <input type="submit" value="표지판 알아보기" id="runButton">
+        <input class="btn btn-outline-secondary" type="submit" value="표지판 알아보기" id="runButton">
       </div>
     </form>
   </div>
@@ -144,7 +141,5 @@
 
   </script>
 </body>
-
-  <footer> <%@include file ="login/footer.jsp" %> </footer>
-
+<footer> <%@ include file="login/footer.jsp" %> </footer>
 </html>

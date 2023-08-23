@@ -197,7 +197,7 @@
   </div>
   <!-- 모달 창  end -->
   
-<script src="${CP}/resources/js/imgMng.js"></script></body>
+<script src="${CP}/resources/js/imgMng.js"></script>
 </body>
 
   <%@include file ="login/footer.jsp" %>
