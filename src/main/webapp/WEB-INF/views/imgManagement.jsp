@@ -26,7 +26,12 @@
 %> 
 <!DOCTYPE html>
 <html>
-<title>ImgManagement</title>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<title>ImgManagement</title>
+</head>
 
   <%@include file ="login/navbar.jsp" %>
   
@@ -50,8 +55,8 @@
         <label for="form-check-label">전체선택</label>
       </div>
       <div>
-        <button type="button" id="selectDeleteBtn" class="btn btn-outline-danger" onclick="selectDelete()">DELETE</button>
-        <button type="button" id="selectSaveBtn" class="btn btn-dark" style="width: 200px; margin-left: 10px" onclick="selectSave()">SAVE</button>
+        <button type="button" id="selectDeleteBtn" class="btn btn-outline-secondary" onclick="selectDelete()">DELETE</button>
+        <button type="button" id="selectSaveBtn" class="btn btn-outline-warning" style="width: 200px; margin-left: 10px" onclick="selectSave()">SAVE</button>
       </div>
     </div>
   </div>
@@ -92,26 +97,46 @@
   
   <!-- 페이징 -->
   <ul class="pagination justify-content-center">
-    <!-- 이전 페이지 버튼 -->
+    <!-- 처음 페이지 -->
     <li class="page-item ${pageNo <= 1 ? 'disabled' : ''}">
-      <a class="page-link" href="${CP}/imgManagement?pageNo=${pageNo - 1}&category=${category}">
-        <span>&laquo;</span>
+      <a class="page-link" href="${CP}/imgManagement?pageNo=1&category=${category}">
+        <span>&lt&lt</span>
+      </a>
+    </li>    
+  
+    <!-- 10개 중 첫 번째 -->
+    <li class="page-item ${pageNo == startPage ? 'disabled' : ''}">
+      <a class="page-link" href="${CP}/imgManagement?pageNo=${startPage}&category=${category}">
+        <span>&lt</span>
       </a>
     </li>
     
-    <!-- 페이지 번호 -->
-    <c:forEach begin="1" end="${totalPages}" var="pageNum">
-      <li class="page-item ${pageNo == pageNum ? 'active' : ''} ${pageNo == pageNum ? 'disabled' : ''}">
-        <a class="page-link" href="${CP}/imgManagement?pageNo=${pageNum}&category=${category}">${pageNum}</a>
-      </li>
-    </c:forEach>
+	  <!-- 페이지 번호 -->
+		<c:choose>
+		  <c:when test="${endPage > totalPages}">
+		    <c:set var="endPage" value="${totalPages}" />
+		    <c:set var="startPage" value="${endPage - 9 < 1 ? 1 : endPage - 9}" />
+		  </c:when>
+		</c:choose>
+		<c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
+		  <li class="page-item ${pageNo == pageNum ? 'active' : ''} ${pageNo == pageNum ? 'disabled' : ''}">
+		    <a class="page-link" href="${CP}/imgManagement?pageNo=${pageNum}&category=${category}">${pageNum}</a>
+		  </li>
+		</c:forEach>
     
-    <!-- 다음 페이지 버튼 -->
+    <!-- 10개 중 마지막 -->
+    <li class="page-item ${pageNo == endPage ? 'disabled' : ''}">
+      <a class="page-link" href="${CP}/imgManagement?pageNo=${endPage}&category=${category}">
+        <span>&gt</span>
+      </a>
+    </li>
+    
+    <!-- 마지막 페이지 -->
     <li class="page-item ${pageNo >= totalPages ? 'disabled' : ''}">
-      <a class="page-link" href="${CP}/imgManagement?pageNo=${pageNo + 1}&category=${category}">
-        <span>&raquo;</span>
+      <a class="page-link" href="${CP}/imgManagement?pageNo=${totalPages}&category=${category}">
+        <span>&gt&gt</span>
       </a>
-    </li>
+    </li>    
   </ul>
   <!-- 페이징 end -->
   
@@ -122,48 +147,50 @@
   <div class="image-modal" id="imageModal">
     <div class="sort-horizon">
       <div class="left">
-        <img src="#" class="modalImage" id="modalImage">
+        <div class="modalImageWrapper">
+          <img src="#" class="modalImage" id="modalImage">
+        </div>
         <button type="button" class="btn-close"></button>
       </div>
       <div class="divider"></div>
       <div class="right">
-        <table class="table" style="width: 350px;">
+        <table class="table detail_table" style="width: 400px;">
           <tr>
-            <td class="fw-bold">번호</td>
+            <th class="badge bg-secondary mt-2 text-white">번호</th>
             <td id="idx"></td>
           </tr>
           <tr>
-            <td class="fw-bold">이름</td>
+            <th class="badge bg-secondary mt-2 text-white">이름</th>
             <td id="name"></td>
           </tr>
           <tr>
-            <td class="fw-bold">업로더</td>
+            <th class="badge bg-secondary mt-2 text-white">업로더</th>
             <td id="id"></td>
           </tr>
           <tr>
-            <td class="fw-bold">날짜</td>
+            <th class="badge bg-secondary mt-2 text-white">날짜</th>
             <td id="uploadDate"></td>
           </tr>
           <tr>
-            <td class="fw-bold">크기</td>
+            <th class="badge bg-secondary mt-2 text-white">크기</th>
             <td id="fileSize"></td>
           </tr>
            <tr>
-            <td class="fw-bold">상태</td>
+            <th class="badge bg-secondary mt-2 text-white">상태</th>
             <td id="category"></td>
           </tr>
           <tr>
-            <td class="fw-bold">오류1</td>
+            <th class="badge bg-secondary mt-2 text-white">오류1</th>
             <td id="u1"></td>
           </tr>
           <tr>
-            <td class="fw-bold">오류2</td>
+            <th class="badge bg-secondary mt-2 text-white">오류2</th>
             <td id="u2"></td>
           </tr>
         </table>
         <div style="margin-top:20px;">
-          <button type="button" id="detailDeleteBtn" class="btn btn-outline-danger">DELETE</button>
-          <button type="button" id="detailSaveBtn" class="btn btn-dark" style="width:250px; margin-left:5px;">SAVE</button>
+          <button type="button" id="detailDeleteBtn" class="btn btn-outline-secondary" style="width: 140px;">DELETE</button>
+          <button type="button" id="detailSaveBtn" class="btn btn-outline-warning" style="width:250px; margin-left:10px;">SAVE</button>
         </div>
       </div>
     </div>
@@ -174,6 +201,6 @@
 </body>
 
   <%@include file ="login/footer.jsp" %>
-  <link rel="stylesheet" href="${CP}/resources/css/imgManagement.css" >
+  <link rel="stylesheet" href="${CP}/resources/css/imgMng.css" >
   
 </html>
