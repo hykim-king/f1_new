@@ -31,7 +31,9 @@
         <input type="hidden" id="userid" value="${user.id}">
         <input id=fileUpload name="fileUpload" type="file" accept=".jpg, .jpeg, .png, .bmp, .tiff, .webp, .ico, .svg" onchange="displaySelectedFile(event)" style="display: none;">
         <div id="cancelContainer">
-          <img id="selectedImage" alt="Selected Image">
+          <div class="imageWrapper">
+            <img id="selectedImage" alt="Selected Image">
+          </div>
           <button id="cancelButton" type="button" class="btn btn-link">
             <img alt="XButton" src="${CP}/resources/img/cancel.png">
           </button>

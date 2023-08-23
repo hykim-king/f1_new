@@ -3,7 +3,7 @@
   body {
     margin: 0;
     padding: 0;
-    height: 100vh;
+    height: 70vh;
     overflow: hidden;
   }
   
@@ -56,14 +56,22 @@
     position: relative;
   }
   
+  .imageWrapper {
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+  }
+  
   #selectedImage {
-    max-width: 500px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
   
   #cancelButton {
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 8px;
+    right: 8px;
     z-index: 2;
   }
   
