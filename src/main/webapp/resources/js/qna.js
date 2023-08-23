@@ -50,19 +50,6 @@ const main = {
         // 페이지 로드시 체크박스 선택 상태에 따른 버튼 표시 상태 초기화
         showDeleteBtn();
 
-        // $('#btn-toggle-notice').on('click', function () {
-        //     $('.notice-row').toggle(); // 공지 테이블의 표시/숨김을 전환
-        //
-        //     // 로컬 스토리지에 토글 상태를 저장합니다. (테이블이 표시되면 'show', 숨겨지면 'hide')
-        //     sessionStorage.setItem('notice-toggle', $('.notice-row').is(':visible') ? 'show' : 'hide');
-        // });
-        //
-        // // 페이지가 로드될 때 세션 스토리지에서 토글 상태를 불러와 설정
-        // const toggleStatus = sessionStorage.getItem('notice-toggle');
-        // if (toggleStatus === 'hide') {
-        //     $('.notice-row').hide();
-        // }
-
         $('#btn-toggle-notice').on('click', function () {
             $('.notice-row').toggle(); // 공지 테이블의 표시/숨김을 전환
 
