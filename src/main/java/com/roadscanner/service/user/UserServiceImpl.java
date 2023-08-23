@@ -198,7 +198,6 @@ public class UserServiceImpl implements UserService {
         return checkStatus;
 	}
 	
-
 	@Override
 	public int doWithdraw(MemberVO user) {
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
@@ -218,6 +217,16 @@ public class UserServiceImpl implements UserService {
 	    } catch (SQLException e) {
 	        LOG.error("Error occurred while withdrawing user: " + e.getMessage());
 	    }
+	    return checkStatus;
+	}
+	
+	@Override
+	public int delete(MemberVO user) throws SQLException {
+		LOG.debug("┌────────────────────────────────────────────────────────┐");
+		LOG.debug("│ UserServiceImpl delete()                           │");
+		LOG.debug("└────────────────────────────────────────────────────────┘");
+	    int checkStatus = 0;
+	    checkStatus = this.userDao.deleteOne(user);
 	    return checkStatus;
 	}
 

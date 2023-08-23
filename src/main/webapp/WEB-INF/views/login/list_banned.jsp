@@ -112,10 +112,7 @@ $("#deletebtn").on("click",function(){
     $("input[name='delcheckbox']").each(function(){
         if( $(this).is(":checked") == true ){
           var tmpVal = $(this).val();
-         
-        
-          
-          
+
               // AJAX 요청을 보냅니다.
                   $.ajax({
                       type: "POST",
@@ -129,12 +126,12 @@ $("#deletebtn").on("click",function(){
                          
                            if("10" == parsedJSON.msgId){
                               $('#messagebox3').attr('value', parsedJSON.msgContents);
-                              location.reload();
+                              window.location.href= "/login/list_banned?num=1&keyword=${BannedPage.keyword}";
                           } 
                                                 
                           if("20" == parsedJSON.msgId){
                               $('#messagebox3').attr('value',parsedJSON.msgContents);
-                              location.reload();
+                              return;  
                           }
                       },
                       error: function(data) {
