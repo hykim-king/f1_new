@@ -160,6 +160,7 @@
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
+
             <!-- 이전 페이지 링크 -->
             <li class="page-item ${pagination.page <= 1 ? 'disabled' : ''}">
                 <a class="page-link" href="?page=${pagination.page - 1}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}" aria-label="Previous">
@@ -180,6 +181,7 @@
                     <span aria-hidden="true">&rsaquo;</span>
                 </a>
             </li>
+
             <!-- 맨 마지막 페이지 링크 -->
             <li class="page-item ${pagination.page >= pagination.totalPage ? 'disabled' : ''}">
                 <a class="page-link" href="?page=${pagination.totalPage}&size=${pagination.size}&searchType=${searchType}&keyword=${keyword}&category=${category}" aria-label="Last">
