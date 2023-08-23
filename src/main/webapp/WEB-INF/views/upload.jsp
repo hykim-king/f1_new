@@ -31,9 +31,11 @@
         <input type="hidden" id="userid" value="${user.id}">
         <input id=fileUpload name="fileUpload" type="file" accept=".jpg, .jpeg, .png, .bmp, .tiff, .webp, .ico, .svg" onchange="displaySelectedFile(event)" style="display: none;">
         <div id="cancelContainer" style ="display: block;">
-          <div id="for-margin">
-            <img id="selectedImage" src="${thisUrl}" alt="Selected Image">
-          </div>
+          <c:if test="${resultImg.name ne null}">
+	          <div id="for-margin">
+	            <img id="selectedImage" src="${thisUrl}" alt="Selected Image">
+	          </div>
+          </c:if>
           <button id="cancelButton" type="button" class="btn btn-link">
             <img alt="XButton" src="${CP}/resources/img/cancel.png">
           </button>
@@ -104,7 +106,7 @@
     const cancelButton = document.getElementById('cancelButton');
     const RunContainer = document.getElementById('RunContainer');
     const mention = document.getElementById('semi-conductor');
-
+    
     function displaySelectedFile(event) {
       const file = event.target.files[0];
       if (file) {
@@ -123,6 +125,7 @@
           cancelContainer.style.display = 'block';       // 미리보기 보이기
           selectedImage.src = reader.result;
           RunContainer.style.display = 'block'; // "표지판 알아보기" 버튼 보이기
+          
         };
         
         // 추가: 허용된 이미지 확장자 체크
