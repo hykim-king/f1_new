@@ -47,7 +47,7 @@
         <div class="row mb-3">
             <div class="col">
                     <div class="form-group" style="display: flex;">
-                        <input type="text" id ="searchid" name="keyword" class="form-control" placeholder="아이디 검색">
+                        <input type="text" id ="searchid" name="keyword" class="form-control" value="<c:out value='${adminPage.keyword}'/>" placeholder="아이디 검색">
                         <input type="hidden" id="exclude" name="exclude" value="${user.id}">
                     <div style="margin-left : 7px;">
 	                    <button type="submit" id ="searchidbtn" class="btn btn-primary ml-2"

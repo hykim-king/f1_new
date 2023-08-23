@@ -121,7 +121,7 @@ public class UserServiceImpl implements UserService {
 		int status = this.userDao.idCheck(user);
 		
 		if(1 == status) {
-			LOG.debug("│ UserServiceImpl doLogin ssucess                    │");
+			LOG.debug("│ UserServiceImpl doLogin success                    │");
 			String grade = String.valueOf(this.userDao.searchgrade(user).getGrade());
 			status = userDao.passCheck(user);
 			

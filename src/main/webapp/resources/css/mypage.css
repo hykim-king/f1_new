@@ -1,7 +1,6 @@
 @charset "UTF-8";
   
 	#container {
-	  margin-top: 40px;
 	  margin: auto;
 	  width: 800px;
 	}
@@ -27,11 +26,11 @@
 	}
 	
 	#myQnAboard {
-       margin-top: 60px;
-       width: 200px;
+     margin-top: 60px;
+     width: 200px;
   }
     
   #withdraw {
-       margin-top: 20px;
-       width: 200px;
+     margin-top: 20px;
+     width: 200px;
   }

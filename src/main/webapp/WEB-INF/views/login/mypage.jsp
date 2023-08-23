@@ -20,12 +20,12 @@
 <body id="font-id" class="d-flex flex-column min-vh-100">
   <!-- 일반 -->
   <c:if  test="${user ne null}">
-	  <c:if test="${user.grade ==1}">
-	     <h2 style="text-align: center; margin-top: 50px; margin-bottom: 20px;">${user.id}님 의 마이페이지</h2>
+	  <c:if test="${user.grade == 1}">
+	     <h2 style="text-align: center; margin-top: 50px;">${user.id}님 의 마이페이지</h2>
 	  </c:if>
 	  <!-- 관리자 -->
-	  <c:if test="${user.grade ==2}">
-	     <h2 style="text-align: center; margin-top: 50px; margin-bottom: 20px;">관리자 ${user.id}님 의 마이페이지</h2>
+	  <c:if test="${user.grade == 2}">
+	     <h2 style="text-align: center; margin-top: 50px;">관리자 ${user.id}님 의 마이페이지</h2>
 	  </c:if>
 		  <div id="container">
 				  <form>
@@ -57,7 +57,7 @@
 				<div class="update_btn">
 			    <input type="button" class="btn btn-outline-primary" id="update" value="수정">
 			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			    <input type="button" class="btn btn-outline-danger" id="cancel" value="취소">
+			    <input type="button" class="btn btn-outline-danger" id="cancel"  value="취소">    
 		    </div>
 		    
 		    <c:if test="${user.grade == 1}">
@@ -130,56 +130,59 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
     });   // $("#withdraw") click 
 
   $("#cancel").on("click", function(){
-    
-    window.location.href="${CP}/login";
+
+    	window.location.href="${CP}/main/preUpload";
     
   });   // $("#cancel") click
-  
+   
   $("#update").on("click", function(){
     if(""==$("#rpassword").val() || 0==$("#rpassword").val().length){
           alert("비밀번호를 입력하세요");  // javascript 메시지 다이얼 로그
           $("#rpassword").focus();
           return;
           
-    }else {
+    } else {
 
-    $.ajax({
-          type: "POST",
-          url:"${CP}/update",
-          asyn:"true",
-          dataType:"html",
-          data:{
-            id: $("#rid").val(),
-            password: $("#rpassword").val(),
-            email: $("#remail").val()
-          },
-          success:function(data){
-              let parsedJSON = JSON.parse(data);
-              
-              // 업데이트 성공 : 로그인 페이지로 리턴
-              if("10" == parsedJSON.msgId) {
-                alert(parsedJSON.msgContents);
-                window.location.href="${CP}/logout";
-              }
-              
-              // 업데이트  실패 (입력값 오류)
-              if("20" == parsedJSON.msgId) {
-                    alert(parsedJSON.msgContents);
-                    return;
-                }
-              
-              // 업데이트 실패 (현재 비밀번호와 동일한 값 입력)
-              if("30" == parsedJSON.msgId) {
-                    alert(parsedJSON.msgContents);
-                    return;
-                }           
-              
-            },
-            error:function(data){//실패시 처리
-              console.log("error:"+data);
-            }
-        });  // ajax end
-    };  
+		    $.ajax({
+		          type: "POST",
+		          url:"${CP}/update",
+		          asyn:"true",
+		          dataType:"html",
+		          data:{
+		            id: $("#rid").val(),
+		            password: $("#rpassword").val(),
+		            email: $("#remail").val()
+		          },
+		          success:function(data){
+		              let parsedJSON = JSON.parse(data);
+		              
+		              // 업데이트 성공
+		              if("10" == parsedJSON.msgId) {
+		                alert(parsedJSON.msgContents);
+		                window.location.href="${CP}/logout";
+		              }
+		              
+		              // 업데이트  실패 (입력값 오류)
+		              if("20" == parsedJSON.msgId) {
+		                    alert(parsedJSON.msgContents);
+		                    return;
+		                }
+		              
+		              // 업데이트 실패 (현재 비밀번호와 동일한 값 입력)
+		              if("30" == parsedJSON.msgId) {
+		                    alert(parsedJSON.msgContents);
+		                    return;
+		                }           
+		              
+		            },
+		            error:function(data){//실패시 처리
+		              console.log("error:"+data);
+		            }
+		            
+		        });  // ajax end
+        
+    }   // else end
+    
   });   // $("#update") click
   
 });   //모든 화면이 다 로딩이 되면 실행하는 영역

@@ -97,9 +97,6 @@
                   return;
                 }
                 if("30"==paredJSON.msgId){//로그인 성공
-                  alert(paredJSON.msgContents);
-                  
-                  //javascript 내장객체 : url
                   window.location.href="${CP}/main/preUpload";
                 }
                 if("40"==paredJSON.msgId) {
