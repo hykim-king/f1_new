@@ -21,6 +21,7 @@
 <div id="separation">
 <input id="thisName" type="hidden" value="${thisName}">
   <div class="left">
+    <h2 id="semi-conductor">사용자 업로드 이미지</h2><br/>
     <form action="fileUploaded" method="post" enctype="multipart/form-data" onsubmit="return false;">
       <div id="previewGroup" style="display: flex; flex-direction: row;">
         <label id="fileUploadLabel" for="fileUpload" style="display: none; cursor: pointer;">
@@ -30,7 +31,9 @@
         <input type="hidden" id="userid" value="${user.id}">
         <input id=fileUpload name="fileUpload" type="file" accept=".jpg, .jpeg, .png, .bmp, .tiff, .webp, .ico, .svg" onchange="displaySelectedFile(event)" style="display: none;">
         <div id="cancelContainer" style ="display: block;">
-          <img id="selectedImage" src="${thisUrl}" alt="Selected Image">
+          <div id="for-margin">
+            <img id="selectedImage" src="${thisUrl}" alt="Selected Image">
+          </div>
           <button id="cancelButton" type="button" class="btn btn-link">
             <img alt="XButton" src="${CP}/resources/img/cancel.png">
           </button>
@@ -41,18 +44,22 @@
         <input type="submit" value="표지판 알아보기" id="runButton">
       </div>
     </form>
+    <c:if test="${resultImg.name ne null}">
+      <div id="for-gap" style="margin-bottom: 285px;"></div>
+    </c:if>
   </div>
 
   <div class="divider"></div>
 
   <div class="right" id="rightContent">
     <!-- 우측 영역의 내용을 입력 -->
-    <h2>${resultImg.name}</h2>
+    <h2>표지판 이름 : ${resultImg.name}</h2><br/>
     <!-- 세로로 긴 내용 -->
     <label>
-      <img id="resultImg" src="${resultImg.url}" alt="resultImg"> imgNo=${imgNo}
-    </label>
-    <div>${resultImg.content}</div>
+      <img id="resultImg" src="${resultImg.url}" alt="resultImg">
+    </label><br/><br/>
+    <div id="content-font-style">${resultImg.content}</div><br/>
+    <p style="border-top: 1px solid black; padding-top: 20px;">결과를 확인하여 의견을 제공해주세요. 제공하신 데이터를 바탕으로 더 정확한 서비스를 제공하겠습니다.</p>
     <!-- 피드백 버튼 -->
     <div id="FeedbackButtons">
       <button id="likeButton" type="button" class="btn btn-link"><img src="${CP}/resources/img/thumbsup.jpg" alt="붐업 이미지"></button>
@@ -96,6 +103,7 @@
     const selectedImage = document.getElementById('selectedImage');
     const cancelButton = document.getElementById('cancelButton');
     const RunContainer = document.getElementById('RunContainer');
+    const mention = document.getElementById('semi-conductor');
 
     function displaySelectedFile(event) {
       const file = event.target.files[0];
@@ -119,7 +127,8 @@
         
         // 추가: 허용된 이미지 확장자 체크
         const allowedExtensions = ['jpg', 'jpeg', 'png', 'bmp', 'tiff', 'webp', 'ico', 'svg'];
-        const fileExtension = file.name.split('.').pop().toLowerCase();
+        const fileExtension = file.name.split('.').pop().toLowerCase();        
+        
         if (!allowedExtensions.includes(fileExtension)) {
           alert('이미지 파일이 아닙니다.');
           fileUploadInput.value = '';
@@ -141,6 +150,7 @@
       fileUploadLabel.style.display = 'block';      // 파일선택 버튼 이미지 보이기
       cancelContainer.style.display = 'none';       // 미리보기 숨기기
       RunContainer.style.display = 'none'; // "표지판 알아보기" 버튼 숨기기
+      mention.style.display = 'none';     // 멘트 숨기기
       //console.log(`displaySelectedFile: None`);
     });
     // 선택한 이미지 미리보기로 보여주기 End----------------------------------------------------
@@ -155,6 +165,7 @@
     // '표지판 알아보기'클릭 시 파일 업로드, 결과창 나타내기
     $("#runButton").on("click", function(){
       //console.log('runButton click');
+
       let userid = $("#userid").val();
       let formData = new FormData();
         formData.append("fileUpload", $("#fileUpload")[0].files[0]);
