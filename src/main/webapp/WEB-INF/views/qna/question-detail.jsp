@@ -58,6 +58,17 @@
                     </div>
                 </c:when>
 
+                <c:when test="${user.id != question.id && user.grade == 2}">
+                    <div class="row mx-2 mb-2">
+                        <div class="col-auto">
+                            <button type="button" id="btn-delete" class="btn">삭제</button>
+                        </div>
+                        <div class="col-auto ms-auto">
+                            <a href="/qna" class="btn btn-secondary">목록</a>
+                        </div>
+                    </div>
+                </c:when>
+
                 <c:otherwise>
                     <div class="row mx-2 mb-2">
                         <div class="col-auto ms-auto">

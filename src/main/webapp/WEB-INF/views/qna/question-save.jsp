@@ -19,7 +19,7 @@
 	            </c:when>
 	
 	            <c:otherwise>  <!-- 일반 사용자인 경우 -->
-	                <p id="categoryLabel" class="categoryLabel">[답변 대기]</p>
+	                <p id="categoryLabel" class="categoryLabel">[답변대기]</p>
 	                <input type="hidden" id="category" name="category" value="30">
 	            </c:otherwise>
 	        </c:choose>
