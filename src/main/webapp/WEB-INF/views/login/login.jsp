@@ -18,23 +18,21 @@
 	            <div class="loginboxdiv">
 	              <img class="icon" src="${CP}/resources/img/usericon.png"></img>
 	              <input class="loginidpwbtn" type="text" id="id" name="id" placeholder="아이디"><p/>
-		           </div>
+		          </div>
 		         
 			        <div class="loginboxdiv" style="margin-top: 20px">
 			          <img class="icon"  src="${CP}/resources/img/passwordicon.png"></img>
 			          <input class="loginidpwbtn" type="password" id="pw" name= "pw" placeholder="비밀번호"><p/>
 			        </div>
 			        
-		          <button type="submit" class="btn btn-primary loginbtn" id="doLogin" name="doLogin">로그인</button><p/>
+		          <button type="submit" class="btn btn-warning loginbtn" id="doLogin" name="doLogin">로그인</button><p/>
 	         
 	            <div id="button-div">
-	            
-	            <button type="button" class="btn btn-outline-dark for-btn-center"
-	              onclick="window.location.href='${CP}/findIdPw';">ID/PW찾기</button>
-		           
-		          <button type="button" class="btn btn-outline-dark for-btn-center" 
-	              onclick=" window.location.href='${CP}/registerpage';">회원가입</button>
-	            
+		            <button type="button" class="btn btn-outline-dark for-btn-center"
+		              onclick="window.location.href='${CP}/findIdPw';">ID/PW찾기</button>
+			           
+			          <button type="button" class="btn btn-outline-dark for-btn-center" 
+		              onclick=" window.location.href='${CP}/registerpage';">회원가입</button>
 	            </div>
 		    </div>  <!-- class = loginbox  -->
 		  </form> 

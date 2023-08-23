@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-
+<link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap" rel="stylesheet">
 <!-- JS -->
 <script src="${CP}/resources/js/jquery-3.7.0.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
@@ -18,7 +18,7 @@
 
 <nav id="font-id" class="navbar navbar-expand-md mb-4" style="background-color: white;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="${CP}/main">RoadScanner</a>
+    <a class="navbar-brand" href="${CP}/main" style="font-family: 'Bruno Ace', cursive;">RoadScanner</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -48,13 +48,13 @@
       <form class="d-flex" role="search">
         <!-- 로그인 세션 X -->
         <c:if test="${user eq null}">
-          <button type="button" id="login" onclick="location.href='${CP}/login'" class="btn btn-outline-primary me-2">Login</button>
-          <button type="button" onclick="location.href='${CP}/registerpage'" class="btn btn-outline-primary" style="margin-right: 50px;">Sign-up</button>
+          <button type="button" id="login" onclick="location.href='${CP}/login'" class="btn btn-sm btn-outline-secondary me-3">Login</button>
+          <button type="button" onclick="location.href='${CP}/registerpage'" class="btn btn-sm btn-outline-secondary" style="margin-right: 50px;">Sign-up</button>
         </c:if>
         <!-- 로그인 세션 O -->
         <c:if test="${user ne null}">
-          <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='${CP}/mypage'">MyPage</button>
-          <button type="button" class="btn btn-outline-primary" onclick="location.href='${CP}/logout'" style="margin-right: 50px;">LogOut</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary me-3" onclick="location.href='${CP}/mypage'">MyPage</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='${CP}/logout'" style="margin-right: 50px;">LogOut</button>
         </c:if>        
       </form>
     </div>

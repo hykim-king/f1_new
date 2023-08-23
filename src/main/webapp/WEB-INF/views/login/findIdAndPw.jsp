@@ -15,13 +15,12 @@
 <div style="margin-top: 70px;">
       <div class = "roadscannercontainer"><!-- id 찾기 -->
       
-        <h1 style="text-align: center; font-weight: 900;">RoadScanner</h1>
-          <h4 style="text-align: center; margin-top:50px; font-weight: 800;">아이디 찾기</h4>
+        <h1 style="text-align: center; font-weight: 900; font-family: 'Bruno Ace', cursive;">RoadScanner</h1>
+          <h4 style="text-align: center; margin-top:70px; margin-bottom:50px; font-weight: 800;">아이디 찾기</h4>
           <form class="formabc" onsubmit="return false;">
-                          이메일<br/>
-	          <input type="email" class = "findinput" id="email" name= "email" placeholder="이메일"><br/>
+	          <input type="email" class = "findinput" id="email" name= "email" placeholder="  이메일"><br/>
 	          <input type="hidden" id="set_id">
-	          <button type="button" class= "btn btn-outline-dark findbtn" id="findId" name="findId">아이디 찾기</button>
+	          <button type="button" class= "btn btn-secondary findbtn" id="findId" name="findId">아이디 찾기</button>
           </form>
             <input type ="hidden" id ="id" name ="id">
             
@@ -33,15 +32,13 @@
 		  
 			  <h4 style="text-align: center; margin-bottom:50px; font-weight: 800;">비밀번호 재설정</h4>
 		    <form class = "formabc" onsubmit="return false;">
-		            아이디<br/>
 		      <input type="text" class="findinput" style="margin-bottom: 20px;"
-		          id="userId" name="userId" onkeyup="id_form_check(event)" placeholder="아이디"><br/>
-		            이메일<br/>
-		      <input type="email" class="findinput" id="email2" name= "email2" placeholder="이메일"><br/>
-		      <button type="button" class= "btn btn-outline-dark findbtn" id="findPw" name="findPw">비밀번호 재설정</button>
+		          id="userId" name="userId" onkeyup="id_form_check(event)" placeholder="  아이디"><br/>
+		      <input type="email" class="findinput" id="email2" name= "email2" placeholder="  이메일"><br/>
+		      <button type="button" class= "btn btn-secondary findbtn" id="findPw" name="findPw">비밀번호 재설정</button>
 		    </form>
 		    
-		    <div style="text-align: center; width:400px; height: 60px; margin:40px auto;"></div>
+      <div style="margin:30px auto;"></div>
 		    
 	    </div><!-- pw 찾기 -->   
 	    
