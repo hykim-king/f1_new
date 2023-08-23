@@ -14,7 +14,7 @@
     <select id="selectOne" parameterType="MemberVO"  resultMap="MemberMap" >
         SELECT *
         FROM member
-        WHERE id = #{id}
+        WHERE id = '#{id}'
     </select>
     
 
@@ -22,7 +22,7 @@
     <select id="idCheck" parameterType="MemberVO" resultType="int">
       SELECT COUNT(*)
       FROM member
-      WHERE id = #{id}
+      WHERE id = <![CDATA[']]>#{id}<![CDATA[']]>
     </select>
     
     
@@ -30,27 +30,27 @@
     <select id="emailCheck" parameterType="MemberVO" resultType="int">
       SELECT COUNT(*) cnt
       FROM member
-      WHERE email = #{email}
+      WHERE email = <![CDATA[ ' ]]>#{email}<![CDATA[ ' ]]>
     </select>
     
     <!-- 등급 체크 -->
     <select id="gradeCheck" parameterType="MemberVO" resultMap="MemberMap">
       SELECT COUNT(*) cnt
       FROM member
-      WHERE id = #{id}
+      WHERE id = '#{id}'
     </select>
     
      <!-- 비밀번호 검사 -->
     <select id="encoder" parameterType="MemberVO" resultMap="MemberMap">
       SELECT password
       FROM member
-      WHERE id = #{id}
+      WHERE id = '#{id}'
     </select>
     
     <select id="gradeCheckid" parameterType="MemberVO" resultMap="MemberMap">
       SELECT grade
       FROM member
-      WHERE id = #{id}
+      WHERE id = '#{id}'
     </select>
     
     <!-- 아이디 + 패스워드 체크 -->
