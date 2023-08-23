@@ -93,3 +93,8 @@
     color:white;
 }
 /* ------//question-save,update.jsp end------ */
+
+.field-error {
+    border-color: #dc3545;
+    color: #dc3545;
+}
