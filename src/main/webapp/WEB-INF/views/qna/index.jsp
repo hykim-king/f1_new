@@ -5,11 +5,11 @@
 <%@include file ="/WEB-INF/views/layout/navbar.jsp" %>
     <div class="container mt-4">
             <c:choose>
-                <c:when test="user.grade != 2">
-                    <h1 class="mb-4"><a href="/qna" class="qna-title-link">Q&A 게시판</a></h1>
+                <c:when test="${user.grade == 2}">
+                    <h1 class="mb-4"><a href="/qna" class="qna-title-link">Q&A 게시판(관리자)</a></h1>
                 </c:when>
                 <c:otherwise>
-                    <h1 class="mb-4"><a href="/qna" class="qna-title-link">Q&A 게시판(관리자)</a></h1>
+                     <h1 class="mb-4"><a href="/qna" class="qna-title-link">Q&A 게시판</a></h1>
                 </c:otherwise>
             </c:choose>
 
