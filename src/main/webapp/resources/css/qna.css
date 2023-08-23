@@ -94,7 +94,7 @@
 }
 /* ------//question-save,update.jsp end------ */
 
-.filed-error {
+.field-error {
     border-color: #dc3545;
     color: #dc3545;
 }

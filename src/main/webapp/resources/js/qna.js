@@ -41,28 +41,28 @@ const main = {
             alert('글이 등록되었습니다.');
             window.location.href = '/qna';
         }).fail(function (error) {
+            const errors = error.responseJSON; // 서버에서 전달된 에러메시지
             alert("등록 실패했습니다.");
-            if (error.responseJSON) {
-                // 제목 오류 메시지 처리
-                if (error.responseJSON.title) {
-                    $('#title').addClass('filed-error'); // input 필드에 클래스 추가
-                    $('#title-error').text(error.responseJSON.title).addClass('filed-error');
-                }
+            // 제목 오류 메시지 처리
 
-                // 내용 오류 메시지 처리
-                if (error.responseJSON.content) {
-                    $('#content').addClass('filed-error');
-                    $('#content-error').text(error.responseJSON.content).addClass('filed-error');
-                }
-
-                // 이미지 파일 오류 메시지 처리
-                if (error.responseJSON.attachFile) {
-                    $('#attachFile').addClass('filed-error');
-                    $('#attachFile-error').text(error.responseJSON.attachFile).addClass('filed-error');
-                }
+            if (errors.title) { // 'error'가 아닌 'errors'를 사용
+                $('#title').addClass('field-error'); // input 필드에 클래스 추가
+                $('#title-error').text(errors.title).addClass('field-error');
             }
-            console.error(error);
-        });
+
+            // 내용 오류 메시지 처리
+            if (errors.content) {
+                $('#content').addClass('field-error');
+                $('#content-error').text(errors.content).addClass('field-error');
+            }
+
+            // 이미지 파일 오류 메시지 처리
+            if (errors.attachFile) {
+                $('#attachFile').addClass('field-error');
+                $('#attachFile-error').text(errors.attachFile).addClass('field-error');
+            }
+        })
+        console.error(error);
     },
 
     update : function () {
@@ -92,7 +92,10 @@ const main = {
             window.location.href = '/qna/' + no; // 수정된 페이지로 리다이렉트
         }).fail(function (error) {
             alert("수정 실패했습니다.");
-            alert(JSON.stringify(error));
+            const responseJSON = JSON.parse(error.responseText);
+            responseJSON.forEach(function (errorMessage) {
+                alert(errorMessage);
+            });
         });
     },
 
