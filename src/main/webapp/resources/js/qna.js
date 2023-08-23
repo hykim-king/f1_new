@@ -1,5 +1,19 @@
+// CKEDITOR 관련 초기화
+CKEDITOR.replace('content', {
+    // 툴바 설정을 통해 원하는 버튼만 포함
+    toolbar: [
+        { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike' ] },
+        { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
+        { name: 'links', items: [ 'Link', 'Unlink' ] },
+        { name: 'styles', items: [ 'Format', 'Font', 'FontSize' ] }
+    ],
+    // 필요하지 않은 플러그인 제거
+    removePlugins: 'image,flash,tabletools,smiley'
+});
+
 const main = {
     init: function () {
+
         const _this = this;
         $('#btn-save').on('click', function (e) {
             e.preventDefault();
@@ -17,31 +31,11 @@ const main = {
             }
         });
 
-        // 이미지 미리보기
-        // $('#attachFile').on('change', function(e) {
-        //     const file = e.target.files[0];
-        //     const reader = new FileReader();
-        //
-        //     reader.onload = function(e) {
-        //         $('#preview-image').attr('src', e.target.result); // src 속성 설정
-        //         $('#preview-image').css('display', 'block'); // 미리보기 이미지 보이기
-        //     };
-        //
-        //     reader.readAsDataURL(file);
-        // });
-
         // 이미지 삭제
         $('#btn-remove-file').on('click', function(e) {
-            e.preventDefault(); // 기본 동작을 막습니다.
-            $('#attachFile').val(''); // 파일 입력 필드를 초기화합니다.
-            // $('#preview-image').attr('src', ''); // 미리보기 이미지 URL 초기화
-            // $('#preview-image').css('display', 'none'); // 미리보기 이미지 숨기기
-
-            // Bootstrap의 파일 입력 초기화
-            // $('.custom-file-label').text(''); // 파일 이름을 초기화
+            e.preventDefault(); // 기본 동작을 막음
+            $('#attachFile').val(''); // 파일 입력 필드를 초기화
         });
-
-
 
         $('#btn-delete-selected').on('click', function () {
             // console.log('select button clicked');
@@ -77,7 +71,18 @@ const main = {
         // 페이지 로드시 체크박스 선택 상태에 따른 버튼 표시 상태 초기화
         showDeleteBtn();
 
+        $('#attachFile').change(function() {
+            const fileName = $(this).val().split('\\').pop();
+            if (fileName) {
+                $('#original-filename').text(fileName);
+                $('#originalFilename').val(fileName);
+            }
+        });
     },
+
+    /**
+     * 게시글 작성과 관련됨.
+     */
 
     save: function () {
         if (!validateForm()) return; // 검증 실패 시 함수 종료
@@ -86,7 +91,10 @@ const main = {
         data.append('category', $('#category').val());
         data.append('id', $('#id').val());
         data.append('title', $('#title').val());
-        data.append('content', $('#content').val());
+
+        const content = CKEDITOR.instances.content.getData();
+        // data.append('content', $('#content').val());
+        data.append('content', content);
 
         const file = $('#attachFile')[0].files[0];
         if (file) { // 파일이 존재하는 경우에만 추가
@@ -137,7 +145,10 @@ const main = {
         data.append('category', $('#category').val());
         data.append('id', $('#id').val());
         data.append('title', $('#title').val());
-        data.append('content', $('#content').val());
+
+        const content = CKEDITOR.instances.content.getData();
+        // data.append('content', $('#content').val());
+        data.append('content', content);
 
         const file = $('#attachFile')[0].files[0];
         if (file) { // 파일이 존재하는 경우에만 추가
@@ -330,16 +341,18 @@ function validateForm() {
     }
 
     // 제목과 내용이 비어있는지 검증
-    const content = $('#content').val();
     if (!title) {
         alert('제목은 필수입니다.');
         $('#title').focus(); // 제목 입력 필드에 포커스
         return false;
     }
 
+    // const content = $('#content').val();
+    const content = CKEDITOR.instances.content.getData();
     if (!content) {
         alert('내용은 필수입니다.');
-        $('#content').focus(); // 내용 입력 필드에 포커스
+        // $('#content').focus(); // 내용 입력 필드에 포커스
+        CKEDITOR.instances.content.focus(); // CKEditor 내용 부분에 포커스
         return false;
     }
 

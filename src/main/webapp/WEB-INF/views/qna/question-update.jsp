@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file ="/WEB-INF/views/layout/header.jsp" %>
 <body>
 <%@include file ="/WEB-INF/views/layout/navbar.jsp" %>
@@ -30,10 +29,14 @@
 
         <div class="d-flex mb-3 row align-items-center">
             <div class="col">
-                <input type="file" id="attachFile" name="attachFile" class="form-control" accept="image/*">
-<%--                <input type="text" class="form-control" value="${question.originalFilename}" placeholder="원본파일명">--%>
+                <div class="input-group">
+                    <input type="file" id="attachFile" name="attachFile" class="form-control" accept="image/*">
+                    <span id="btn-remove-file" class="input-group-text">삭제</span>
+                </div>
+                <input type="hidden" id="originalFilename" name="originalFilename" value="${question.originalFilename}">
             </div>
         </div>
+
 
         <div class="mb-3 row">
             <div class="col">
