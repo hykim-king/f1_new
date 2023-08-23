@@ -19,6 +19,8 @@ const main = {
     },
 
     save: function () {
+        if (!validateForm()) return; // 검증 실패 시 함수 종료
+
         const data = new FormData();
         data.append('category', $('#category').val());
         data.append('id', $('#id').val());
@@ -66,6 +68,9 @@ const main = {
     },
 
     update : function () {
+
+        if (!validateForm()) return; // 검증 실패 시 함수 종료
+
         const data = new FormData();
         data.append('no', $('#no').val());
         data.append('category', $('#category').val());
@@ -241,3 +246,47 @@ const answer = {
 // 초기화 함수 호출
 // main.init();
 answer.init();
+
+function validateForm() {
+    // 제목 길이 검증
+    const title = $('#title').val();
+    if (title.length > 15) {
+        alert('제목은 15글자 이하여야 합니다.');
+        $('#title').focus(); // 제목 입력 필드에 포커스
+        return false;
+    }
+
+    // 제목과 내용이 비어있는지 검증
+    const content = $('#content').val();
+    if (!title) {
+        alert('제목은 필수입니다.');
+        $('#title').focus(); // 제목 입력 필드에 포커스
+        return false;
+    }
+
+    if (!content) {
+        alert('내용은 필수입니다.');
+        $('#content').focus(); // 내용 입력 필드에 포커스
+        return false;
+    }
+
+    // 이미지 파일 검증
+    const file = $('#attachFile')[0].files[0];
+    if (file) {
+        if (!file.type.match('image.*')) {
+            alert('유효한 이미지 파일만 업로드할 수 있습니다.');
+            $('#attachFile').focus(); // 파일 입력 필드에 포커스
+            return false;
+        }
+
+        // 파일 크기 검증 (5MB 이하)
+        const fileSizeMB = file.size / (1024 * 1024);
+        if (fileSizeMB > 5) {
+            alert('파일 크기는 5MB 이하여야 합니다.');
+            $('#attachFile').focus(); // 파일 입력 필드에 포커스
+            return false;
+        }
+    }
+
+    return true;
+}
