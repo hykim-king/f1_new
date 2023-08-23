@@ -6,21 +6,8 @@
 	  box-shadow: none;
 	  border-color: #c1c1c1;
 	}
-	.btn-outline-danger {
-	  border-color: #E57373;
-	  color: #E57373;
-	}
-	.btn-outline-danger:hover {
-	  border-color: #E57373;
-	  background-color: #E57373;
-	}
-	.btn-dark {
-	  border-color: #616161;
-	  background-color: #616161;
-	}
-	.btn-dark:hover {
-	  border-color: #424242;
-	  background-color: #424242;  
+	.btn-outline-warning:hover {
+	  color: white;
 	}
 	.form-check-input {
 	  cursor: pointer; /* 커서 */
@@ -38,7 +25,7 @@
 	  box-shadow: none;
 	}
 	.table-box {
-	  margin-top: 10px;
+	  margin-top: 20px;
 	  margin-bottom: 30px;
 	}
 	.image-container {
@@ -69,16 +56,16 @@
 	  cursor: pointer;
 	}
 	.page-link {
-	  color: #000;
+	  color: #343a40;
 	}
 	.page-item.active .page-link {
 	  z-index: 1;
 	  color: white;
-	  border-color: #607D8B;
-	  background-color: #607D8B;
+	  border-color: #6c757d;
+	  background-color: #6c757d;
 	}
 	.page-link:focus, .page-link:hover {
-	  color: #000;
+	  color: #343a40;
 	  box-shadow: none;
 	}
 	
@@ -117,7 +104,7 @@
 	  flex-direction: column; /* 내부의 요소들을 세로로 정렬 */
 	  justify-content: center; /* 수평 가운데 정렬 */
 	  align-items: center; /* 수직 가운데 정렬 */    
-	  width: 500px;
+	  width: 600px;
 	  height: 700px;
 	  padding-right: 30px;
 	}
@@ -129,10 +116,20 @@
 	.sort-horizon {
 	  display: flex;
 	}
-	.modalImage {
-	  max-width: 700px;
-	  max-height: 400px;
-	}
+  .modalImageWrapper {
+    width: 450px;
+    height: 400px;
+    margin: 0 auto;
+  }
+  .modalImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .detail_table tr td {
+	  font-size: 13px;
+	  color: #222222;
+  }
 	.overlay-modal {
 	  position: fixed;
 	  top: 0;
