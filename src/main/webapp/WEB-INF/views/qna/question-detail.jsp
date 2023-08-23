@@ -162,6 +162,5 @@
                 </div>
             </form>
         </c:if>
-
     </div>
 <%@include file ="/WEB-INF/views/layout/footer.jsp" %>
