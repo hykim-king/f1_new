@@ -18,27 +18,27 @@ const main = {
         });
 
         // 이미지 미리보기
-        $('#attachFile').on('change', function(e) {
-            const file = e.target.files[0];
-            const reader = new FileReader();
-
-            reader.onload = function(e) {
-                $('#preview-image').attr('src', e.target.result); // src 속성 설정
-                $('#preview-image').css('display', 'block'); // 미리보기 이미지 보이기
-            };
-
-            reader.readAsDataURL(file);
-        });
+        // $('#attachFile').on('change', function(e) {
+        //     const file = e.target.files[0];
+        //     const reader = new FileReader();
+        //
+        //     reader.onload = function(e) {
+        //         $('#preview-image').attr('src', e.target.result); // src 속성 설정
+        //         $('#preview-image').css('display', 'block'); // 미리보기 이미지 보이기
+        //     };
+        //
+        //     reader.readAsDataURL(file);
+        // });
 
         // 이미지 삭제
         $('#btn-remove-file').on('click', function(e) {
             e.preventDefault(); // 기본 동작을 막습니다.
             $('#attachFile').val(''); // 파일 입력 필드를 초기화합니다.
-            $('#preview-image').attr('src', ''); // 미리보기 이미지 URL 초기화
-            $('#preview-image').css('display', 'none'); // 미리보기 이미지 숨기기
+            // $('#preview-image').attr('src', ''); // 미리보기 이미지 URL 초기화
+            // $('#preview-image').css('display', 'none'); // 미리보기 이미지 숨기기
 
             // Bootstrap의 파일 입력 초기화
-            $('.custom-file-label').text(''); // 파일 이름을 초기화
+            // $('.custom-file-label').text(''); // 파일 이름을 초기화
         });
 
 

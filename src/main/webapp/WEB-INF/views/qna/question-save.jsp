@@ -33,14 +33,15 @@
             </div>
         </div>
 
-        <div class="d-flex mb-3 row align-items-center">
+        <div class="row align-items-center mb-3">
             <div class="col">
-                <input type="file" id="attachFile" name="attachFile" class="form-control" accept="image/*">
-                <button type="button" id="btn-remove-file" class="btn">이미지 삭제</button>
-                <img id="preview-image" src="" alt="Image preview" style="display: none;"> <!-- 이미지 미리보기를 위한 요소 -->
-                <div id="attachFile-error"></div>
+                <div class="input-group">
+                    <input type="file" id="attachFile" name="attachFile" class="form-control" accept="image/*">
+                    <span id="btn-remove-file" class="input-group-text">삭제</span>
+                </div>
             </div>
         </div>
+<%--        <img id="preview-image" src="" alt="Image preview" style="display: none;">--%>
 
         <div class="mb-3 row">
             <div class="col">
