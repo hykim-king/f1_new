@@ -185,8 +185,9 @@
         $("#uploadDate").text(data.uploadDate);
         $("#fileSize").text(data.fileSize);
         $("#category").text(category_val);
-        $("#u1").text((data.u1 === 0) ? "오류없음" : "오류있음");
-        $("#u2").text((data.u2 === 0) ? "오류없음" : "오류있음");
+        $("#u1").text((data.u1 === 0 || data.u1 === null) ? "오류없음" : "오류있음");
+        $("#u2").text((data.u2 === 0 || data.u1 === null) ? "오류없음" : "오류있음");
+        $("#u3").text((data.u3 === 0 || data.u1 === null) ? "오류없음" : "오류있음");
       },
       error: function(data) { //실패시 처리
         console.log("error:" + data);

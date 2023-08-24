@@ -15,13 +15,14 @@
 	  new Chart(document.getElementById("feedback_barchart"), {
 	      type: 'bar',
 	      data: {
-	        labels: ['인식 오류', '결과 오류'],
+	        labels: ['모양 오류', '색깔 오류', '그림/숫자 오류'],
 	        datasets: [{
-	          data: [data.u1, data.u2],
+	          data: [data.u1, data.u2, data.u3],
 	          label: 'feedback',
 	          backgroundColor: [
 	            '#C8E6C9',
 	            '#BBDEFB',
+	            '#FFFACD'
 	          ],
 	          barThickness: 75
 	        }]
@@ -55,6 +56,7 @@
 	    
 	    $("#u1").text(data.u1 + "건");
 	    $("#u2").text(data.u2 + "건");
+	    $("#u3").text(data.u2 + "건");
 	    
 	    let total = parseInt(data.u1) + parseInt(data.u2);
 	    $("#total").text(total + "건");
@@ -88,6 +90,7 @@
 	let dateList = []; // 날짜 리스트
 	let u1List = []; // 오류1 리스트
 	let u2List = []; // 오류2 리스트
+	let u3List = []; // 오류3 리스트
 	  
 	// default 그래프 (현재 월에 해당하는 그래프)
 	function defaultMonthlyGraph(uploadDate) {
@@ -123,17 +126,24 @@
 		          labels: dateList,
 		          datasets: [{
 		            data: u1List,
-		            label: '인식오류',
+		            label: '모양 오류',
 		            borderColor: '#C8E6C9',
 		            fill: false,
 		            tension: 0
 		          },
 		          {
 		            data: u2List,
-		            label: '결과오류',
+		            label: '색깔 오류',
 		            borderColor: '#BBDEFB',
 		            fill: false,
 		            tension: 0
+		          },
+		          {
+		        	  data: u3List,
+		        	  label: '그림/숫자 오류',
+		        	  borderColor: '#FFFACD',
+		        	  fill: false,
+		        	  tension: 0
 		          }]
 		        },
 		        options: {
@@ -185,6 +195,7 @@
 		let dateList = []; // 날짜 리스트
 		let u1List = []; // 오류1 리스트
 		let u2List = []; // 오류2 리스트
+		let u3List = []; // 오류3 리스트
 	
 		$.ajax({
 			type: "GET",
@@ -214,22 +225,29 @@
 			  let ctx = document.getElementById('feedback_linechart').getContext('2d');
 			  window.myChart = new Chart(ctx, {
 			    type: 'line',
-			    data: {
-			      labels: dateList,
-			      datasets: [{
-			        data: u1List,
-			        label: '인식오류',
-			        borderColor: '#C8E6C9',
-			        fill: false,
-			        tension: 0
-			      },
-			      {
-			        data: u2List,
-			        label: '결과오류',
-			        borderColor: '#BBDEFB',
-			        fill: false,
-			        tension: 0
-			      }]
+		        data: {
+			          labels: dateList,
+			          datasets: [{
+			            data: u1List,
+			            label: '모양 오류',
+			            borderColor: '#C8E6C9',
+			            fill: false,
+			            tension: 0
+			          },
+			          {
+			            data: u2List,
+			            label: '색깔 오류',
+			            borderColor: '#BBDEFB',
+			            fill: false,
+			            tension: 0
+			          },
+			          {
+			        	  data: u3List,
+			        	  label: '그림/숫자 오류',
+			        	  borderColor: '#FFFACD',
+			        	  fill: false,
+			        	  tension: 0
+			          }]
 			    },
 			    options: {
 			      plugins: {

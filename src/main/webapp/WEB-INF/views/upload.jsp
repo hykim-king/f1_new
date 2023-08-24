@@ -11,9 +11,6 @@
 %>
 <!DOCTYPE html>
 <html>
-
-<!-- CSS -->
-<link  href="${CP}/resources/css/upload.css" rel="stylesheet">
 <title>File Upload</title>
 
 <header> <%@include file ="login/navbar.jsp" %> </header>
@@ -60,17 +57,17 @@
       <button id="dislikeButton" type="button" class="btn btn-link"><img src="${CP}/resources/img/thumbsdown.jpg" alt="붐따 이미지"></button>
     </div>
     <form id="reasonForm" method="post" style="display: none;">
-      <div id="dislikeReason" class="card">
+      <div id="dislikeReason" class="card" style="border: none;">
         <div class="card-body">
           <c:forEach var="reason" items="${reasons}" varStatus="loop">
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="" id="reason${loop.count}" name="reason">
-              <label class="form-check-label card-text" for="reason${loop.count}">
+              <label class="form-check-label card-text ms-2" for="reason${loop.count}">
                 ${reason}
               </label>
             </div>
           </c:forEach>
-          <button id="submitButton" type="button">선택</button>
+          <button class="btn btn-sm btn-secondary" id="submitButton" type="button" style="margin-top: 15px; margin-left: 70px;">선택</button>
         </div>
       </div>
     </form>
@@ -283,5 +280,7 @@
         //window.location.reload();
   </script>
 </body>
-<footer> <%@ include file="login/footer.jsp" %> </footer>
+	<footer> <%@ include file="login/footer.jsp" %> </footer>
+	<!-- CSS -->
+	<link  href="${CP}/resources/css/upload.css" rel="stylesheet">
 </html>

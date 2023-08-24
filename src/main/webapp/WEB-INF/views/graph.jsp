@@ -27,7 +27,7 @@
 <%@include file ="login/navbar.jsp" %>
 
 <body id="font-id">
-  <div class="container">
+  <div class="container main-content">
     <h2>Feedback</h2>
     
     <div class="accordion">
@@ -50,12 +50,16 @@
 			        </thead>
 			        <tbody>
 			          <tr>
-			            <td>인식 오류</td>
+			            <td>모양 오류</td>
 			            <td id="u1"></td>
 			          </tr>
 			          <tr>
-			            <td>결과 오류</td>
+			            <td>색깔 오류</td>
 			            <td id="u2"></td>
+			          </tr>
+			          <tr>
+			            <td>그림/숫자 오류</td>
+			            <td id="u3"></td>
 			          </tr>
 			          <tr  class="table-light">
 			            <td>전체</td>

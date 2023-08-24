@@ -55,8 +55,8 @@
         <label for="form-check-label">전체선택</label>
       </div>
       <div>
-        <button type="button" id="selectDeleteBtn" class="btn btn-outline-secondary" onclick="selectDelete()">DELETE</button>
-        <button type="button" id="selectSaveBtn" class="btn btn-outline-warning" style="width: 200px; margin-left: 10px" onclick="selectSave()">SAVE</button>
+        <button type="button" id="selectDeleteBtn" class="btn btn-secondary" onclick="selectDelete()">DELETE</button>
+        <button type="button" id="selectSaveBtn" class="btn btn-warning" style="width: 200px; margin-left: 10px; color:white;" onclick="selectSave()">SAVE</button>
       </div>
     </div>
   </div>
@@ -180,17 +180,21 @@
             <td id="category"></td>
           </tr>
           <tr>
-            <th class="badge bg-secondary mt-2 text-white">오류1</th>
+            <th class="badge bg-secondary mt-2 text-white">모양 오류</th>
             <td id="u1"></td>
           </tr>
           <tr>
-            <th class="badge bg-secondary mt-2 text-white">오류2</th>
+            <th class="badge bg-secondary mt-2 text-white">색깔 오류</th>
             <td id="u2"></td>
+          </tr>
+          <tr>
+            <th class="badge bg-secondary mt-2 text-white">그림/숫자 오류</th>
+            <td id="u3"></td>
           </tr>
         </table>
         <div style="margin-top:20px;">
-          <button type="button" id="detailDeleteBtn" class="btn btn-outline-secondary" style="width: 140px;">DELETE</button>
-          <button type="button" id="detailSaveBtn" class="btn btn-outline-warning" style="width:250px; margin-left:10px;">SAVE</button>
+          <button type="button" id="detailDeleteBtn" class="btn btn-secondary" style="width: 140px;">DELETE</button>
+          <button type="button" id="detailSaveBtn" class="btn btn-warning" style="width:250px; margin-left:10px; color:white;">SAVE</button>
         </div>
       </div>
     </div>

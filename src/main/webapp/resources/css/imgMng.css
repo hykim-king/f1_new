@@ -2,12 +2,13 @@
 	.top-box {
 	  margin-bottom: 20px;
 	}
+	.form-select:hover {
+	  cursor: pointer;
+	}
 	.form-select:focus {
 	  box-shadow: none;
 	  border-color: #c1c1c1;
-	}
-	.btn-outline-warning:hover {
-	  color: white;
+	  cursor: pointer;
 	}
 	.form-check-input {
 	  cursor: pointer; /* 커서 */
