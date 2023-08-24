@@ -2,6 +2,7 @@ package com.roadscanner.dao.user;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
 import java.sql.SQLException;
 
@@ -29,6 +30,8 @@ import com.roadscanner.domain.user.MemberVO;
 @Transactional
 public class MemberDaoTest {
 	
+	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();	
+	
 	@Autowired
 	UserDao dao;
 	
@@ -44,6 +47,13 @@ public class MemberDaoTest {
 		vo02 = new MemberVO("DaoTest02", "password02", "test02@gmail.com", 1);
 		vo03 = new MemberVO("DaoTest03", "password03", "test03@gmail.com", 1);
 		
+		vo01.setPassword(passwordEncoder.encode(vo01.getPassword()));
+		vo02.setPassword(passwordEncoder.encode(vo02.getPassword()));
+		vo03.setPassword(passwordEncoder.encode(vo03.getPassword()));
+		
+		System.out.println("vo01.setPassword ::" + vo01.getPassword());
+		System.out.println("vo02.setPassword ::" + vo02.getPassword());
+		System.out.println("vo03.setPassword ::" + vo03.getPassword());
 	}
 	
 	@Test
