@@ -118,7 +118,7 @@ public class QuestionServiceImpl implements QuestionService, PcwkLogger {
         LOG.debug("데이터베이스에 있던 게시글 ={}", question);
 
         if (request.isFileChanged()) {
-//            fileStore.deleteFile(question.getStoreFilename());
+            fileStore.deleteFile(question.getStoreFilename());
             if (request.getAttachFile() == null) {
                 question.setOriginalFilename(null);
                 question.setStoreFilename(null);
