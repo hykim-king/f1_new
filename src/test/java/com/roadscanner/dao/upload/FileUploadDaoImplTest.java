@@ -48,11 +48,11 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	@Before
 	public void setUp() throws Exception {
 
-		uploadVO1 = new FileUploadVO(11, "a", 10, "20230802", "230731095807_dog.jpg", "url01", 700, 0, 0, 0);
-		uploadVO2 = new FileUploadVO(12, "a", 10, "20230202", "230731095807_cat.jpg", "url02", 800, 0, 0, 0);
-		uploadVO3 = new FileUploadVO(13, "a", 10, "20230402", "230731095807_cow.jpg", "url03", 900, 0, 0, 0);
+		uploadVO1 = new FileUploadVO(11, "a", 10, "20230802", "230731095807_dog.jpg", "url01", 700, 0, 0, 0, 0);
+		uploadVO2 = new FileUploadVO(12, "a", 10, "20230202", "230731095807_cat.jpg", "url02", 800, 0, 0, 0, 0);
+		uploadVO3 = new FileUploadVO(13, "a", 10, "20230402", "230731095807_cow.jpg", "url03", 900, 0, 0, 0, 0);
 
-		search = new FileUploadVO(10, "a", 10, "20230802", "230731095807_dog.jpg", "url01", 700, 0, 0, 0);
+		search = new FileUploadVO(10, "a", 10, "20230802", "230731095807_dog.jpg", "url01", 700, 0, 0, 0, 0);
 	}
 
 	/*
@@ -68,7 +68,7 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 		
 		LOG.debug("------------------------------");
 		for (FileUploadVO vo : list) {
-			LOG.debug("날짜: " + vo.getUploadDate() + ", 인식오류: " + vo.getU1() + ", 결과오류: " + vo.getU2());
+			LOG.debug("날짜: " + vo.getUploadDate() + ", 모양오류: " + vo.getU1() + ", 색깔오류: " + vo.getU2() + ", 그림/숫자오류: " + vo.getU3());
 		}
 		LOG.debug("------------------------------");
 	}
@@ -88,8 +88,9 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 
 		// 결과 출력
 		LOG.debug("------------------------------");
-		LOG.debug("누적인식오류: " + outVO1.getU1());
-		LOG.debug("누적결과오류: " + outVO1.getU2());
+		LOG.debug("누적모양오류: " + outVO1.getU1());
+		LOG.debug("누적색깔오류: " + outVO1.getU2());
+		LOG.debug("누적그림/숫자오류: " + outVO1.getU3());
 		LOG.debug("------------------------------");
 	}
 
@@ -125,6 +126,7 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 		outVO1.setChecked(1);
 		outVO1.setU1(1);
 		outVO1.setU2(1);
+		outVO1.setU3(1);
 
 		int flag = dao.doUpdate(outVO1);
 		assertEquals(flag, 1);
@@ -264,6 +266,7 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 		assertEquals(outVO.getChecked(), inVO.getChecked());
 		assertEquals(outVO.getU1(), inVO.getU1());
 		assertEquals(outVO.getU2(), inVO.getU2());
+		assertEquals(outVO.getU3(), inVO.getU3());
 	}
 
 	@Test

@@ -82,7 +82,7 @@ public class UploadController implements PcwkLogger {
 		}
 		
 		//피드백 원인을 리스트로
-		List<String> reasonList = new ArrayList<String>(Arrays.asList("싫어요 이유1", "싫어요 이유2"));
+		List<String> reasonList = new ArrayList<String>(Arrays.asList("모양 인식 오류", "색깔 인식 오류", "그림/숫자 인식 오류"));
 		model.addAttribute("reasons", reasonList);
 		
 		//결과 이미지
@@ -148,6 +148,7 @@ public class UploadController implements PcwkLogger {
 		newVO.setCategory(inVO.getCategory());
 		newVO.setU1(inVO.getU1());
 		newVO.setU2(inVO.getU2());
+		newVO.setU3(inVO.getU3());
 		
 		String result = "";
 		LOG.debug("┌───────────────────────────────┐");
