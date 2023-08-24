@@ -85,7 +85,7 @@
 
     <!-- 조건에 해당하는 게시글 개수 -->
     <select id="countQuestions" resultType="int">
-        SELECT count(*) FROM question
+        SELECT count(*) FROM QUESTION
         WHERE 1=1
         <if test="category != null">
             AND category = #{category}
@@ -110,10 +110,10 @@
 
     <!-- 답변 등록 시 카테고리 변경 -->
     <update id="updateCategory">
-        UPDATE question
+        UPDATE QUESTION
         SET category = (
             CASE
-                WHEN EXISTS (SELECT 1 FROM answer WHERE question.no = answer.no)
+                WHEN EXISTS (SELECT 1 FROM ANSWER WHERE QUESTION.no = ANSWER.no)
                     THEN 20
                 ELSE 30
                 END

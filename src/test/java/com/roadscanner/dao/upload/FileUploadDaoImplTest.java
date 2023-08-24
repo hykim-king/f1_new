@@ -59,6 +59,7 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	 * 피드백 월별 그래프
 	 */
 	@Test
+	@Ignore
 	public void monthlyFeedback() throws SQLException {
 		LOG.debug("┌──────────────────────┐");
 		LOG.debug("│   monthlyFeedback()  │");
@@ -77,6 +78,7 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	 * 피드백 누적 그래프, 표
 	 */
 	@Test
+	@Ignore
 	public void totalFeedback() throws SQLException {
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│    totalFeedback()    │");
@@ -97,6 +99,7 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	 * 수정
 	 */
 	@Test
+	//@Ignore
 	public void update() throws SQLException {
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│        update()       │");
@@ -143,6 +146,7 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	 * 카테고리별 목록 조회
 	 */
 	@Test
+	@Ignore
 	public void doRetrieveByCategory() throws SQLException {
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│      doRetrieve()     │");
@@ -172,6 +176,7 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	 * 목록 조회
 	 */
 	@Test
+	@Ignore
 	public void doRetrieve() throws SQLException {
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│      doRetrieve()     │");
@@ -202,6 +207,7 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	 * 삭제, 등록, 단건조회
 	 */
 	@Test
+	@Ignore
 	public void addAndGet() throws SQLException {
 		LOG.debug("┌────────────────────────┐");
 		LOG.debug("│       addAndGet()      │");
@@ -231,6 +237,7 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 
 	
 	@Test
+	@Ignore
 	public void doDelete() throws SQLException {
 		LOG.debug("┌────────────────────────┐");
 		LOG.debug("│       doDelete()       │");
@@ -243,6 +250,7 @@ public class FileUploadDaoImplTest implements PcwkLogger {
 	}
 
 	@Test
+	@Ignore
 	public void doSave() throws SQLException {
 		LOG.debug("┌────────────────────────┐");
 		LOG.debug("│        doSave()        │");

@@ -11,11 +11,11 @@
   </resultMap>    
       
     <!-- 페이징 + 검색 -->
-     <select id="member" parameterType="hashMap" resultMap="MemberMap">
+     <select id="MEMBER" parameterType="hashMap" resultMap="MemberMap">
         SELECT roadnum,road2.*
       FROM(
           SELECT row_number() OVER(ORDER BY road.no) AS roadnum, road.*
-           FROM member road
+           FROM MEMBER road
            WHERE grade = 1
            <if test="keyword !=null and keyword !=''">
                          AND id LIKE '%'||#{keyword}||'%' 
@@ -27,9 +27,9 @@
      </select>
 
      <!-- 검색  카운팅 -->
-      <select id="member_searchCntBox" parameterType="hashMap" resultType="int">
+      <select id="MEMBER_searchCntBox" parameterType="hashMap" resultType="int">
         SELECT COUNT(id) cnt
-        FROM member
+        FROM MEMBER
         WHERE 1=1 
         AND grade = 1
            <if test="keyword !=null and keyword !=''">
@@ -42,7 +42,7 @@
         SELECT roadnum,road2.*
         FROM(
           SELECT row_number() OVER(ORDER BY road.no) AS roadnum, road.*
-           FROM member road
+           FROM MEMBER road
            WHERE grade = 2
            AND  id NOT in (#{exclude})
            
@@ -58,7 +58,7 @@
      <!-- 검색  카운팅 -->
       <select id="admin_searchCntBox" parameterType="hashMap" resultType="int">
           SELECT COUNT(id) cnt
-          FROM member
+          FROM MEMBER
           WHERE 1=1 
           AND grade = 2
           AND  id NOT in (#{exclude})
@@ -72,7 +72,7 @@
         SELECT roadnum,road3.*
         FROM(
           SELECT row_number() OVER(ORDER BY road.no) AS roadnum, road.*
-           FROM member road
+           FROM MEMBER road
            WHERE grade = 3
            <if test="keyword !=null and keyword !=''">
                          AND id LIKE '%'||#{keyword}||'%' 
@@ -86,7 +86,7 @@
      <!-- 검색  카운팅 -->
       <select id="banned_searchCntBox" parameterType="hashMap" resultType="int">
           SELECT COUNT(id) cnt
-          FROM member
+          FROM MEMBER
           WHERE 1=1 
           AND grade = 3
            <if test="keyword !=null and keyword !=''">
