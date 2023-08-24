@@ -1,7 +1,9 @@
 package com.roadscanner.controller.user;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -89,7 +91,7 @@ public class LoginController {
     // 회원가입 메일인증 서비스 호출
     @GetMapping("/**/mailCheck")
 	@ResponseBody
-	public String mailCheck(String email) {
+	public String mailCheck(String email) throws UnsupportedEncodingException, MessagingException {
     	
 		LOG.debug("회원가입 이메일 인증 요청 시작");
 		return mailSend.joinEmail(email);
@@ -98,7 +100,7 @@ public class LoginController {
     // 아이디 찾기 메일인증 서비스 호출
     @PostMapping("/**/toEmailFindId")
 	@ResponseBody
-	public String findId(String email, String id) {
+	public String findId(String email, String id) throws UnsupportedEncodingException, MessagingException {
     	
     	LOG.debug("아이디찾기 이메일 인증 요청 시작");
 		return mailSend.findId(email, id);

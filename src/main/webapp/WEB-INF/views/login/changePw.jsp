@@ -177,15 +177,20 @@ $(document).ready(function(){
        
       document.register_form.pw.value = registerPw;
       document.register_form.email.value = registerEmail;
-
       
-      if("" == document.getElementById('rpassword').value || "" == document.getElementById('rpassword2').value) {
-          alert("비밀번호를 입력하세요");
-          return false;
-      }
+      
+      if("" == document.getElementById('remail').value){
+          alert("이메일 인증을 진행해주십시오.");
+            return false;
+        }
             
       if("" == document.getElementById('checkInput').value){
-        alert("이메일 인증을 진행해 주십시오.");
+        alert("이메일 인증번호를 입력해주십시오.");
+          return false;
+      }
+
+      if("" == document.getElementById('rpassword').value || "" == document.getElementById('rpassword2').value) {
+          alert("비밀번호를 입력하세요");
           return false;
       }
       
@@ -260,9 +265,12 @@ $(document).ready(function(){
             } 
             
             if("10" == parsedJSON.msgId){//
-              alert(parsedJSON.msgContents);
+              if (confirm(parsedJSON.msgContents) == true){
               $('#emailok').attr('value',"ok");
               email_authNumber();
+              };
+            }else{
+            	return;
             }
             
            

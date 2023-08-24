@@ -1,7 +1,9 @@
 package com.roadscanner.controller.user;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -52,7 +54,7 @@ public class UserInfoController {
     // 비밀번호 재설정 페이지 인증번호 전송
     @GetMapping("/**/change_mailCheck")
 	@ResponseBody
-	public String change_mailCheck(String email) {
+	public String change_mailCheck(String email) throws UnsupportedEncodingException, MessagingException {
     	
 		LOG.debug("비밀번호 재설정 페이지 이메일 인증 요청");
 		return mailSend.change_mailCheck(email);
@@ -107,7 +109,7 @@ public class UserInfoController {
         
         if(10 == result) {
         	message.setMsgId("10");
-        	message.setMsgContents("가입된 이메일입니다, 비밀번호를 재설정하겠습니다.");
+        	message.setMsgContents("가입된 이메일입니다, 인증번호를 전송하시겠습니까?");
         	
         } else if(20 == result) {
         	message.setMsgId("20");
