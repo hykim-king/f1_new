@@ -44,14 +44,13 @@
                     </div>
             </div>
         </div>
-<%--        <img id="preview-image" src="" alt="Image preview" style="display: none;">--%>
 
         <div class="mb-3 row">
             <div class="col">
                 <textarea class="form-control" id="content" rows="10" placeholder="내용을 입력하세요."></textarea>
-                <div id="content-error"></div>
             </div>
         </div>
+
         <div class="text-center">
             <a href="/qna" role="button" class="btn btn-secondary">취소</a>
             <button type="submit" id="btn-save" class="btn" value="저장">등록</button>
