@@ -25,4 +25,7 @@ public class QuestionUpdateRequestDTO {
     @NotBlankWithoutHtml(message = "내용은 필수입니다.")
     private String content;
 
+    // 기본값 : false, 업데이트 되었는지 확인
+    private boolean isFileChanged;
+
 }

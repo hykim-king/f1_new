@@ -34,6 +34,7 @@
                     <button class="btn btn-outline-secondary" type="button" id="btn-select-file">파일 선택</button>
                     <input type="text" id="fileText" class="form-control" value="${question.originalFilename}" readonly>
                     <button id="btn-remove-file" class="btn btn-outline-secondary" type="button">삭제</button>
+                    <input type="hidden" id="isFileChanged" name="isFileChanged" value="false">
                 </div>
             </div>
         </div>

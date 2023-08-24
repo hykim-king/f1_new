@@ -2,6 +2,7 @@ $(document).ready(function () {
     // 파일 선택 버튼을 클릭하면 숨겨진 파일 입력 필드를 클릭합니다.
     $('#btn-select-file').click(function () {
         $('#attachFile').click();
+        $('#isFileChanged').val('true'); // boolean 사용
     });
 
     // 파일이 선택되면 파일 이름을 텍스트 입력 필드에 표시합니다.
@@ -15,6 +16,7 @@ $(document).ready(function () {
         // $('#attachFile').replaceWith($('#attachFile').clone(true));
         $('#attachFile').val('');
         $('#fileText').val(''); // 텍스트 입력 필드를 초기화합니다.
+        $('#isFileChanged').val('true'); // boolean 사용
     });
 });
 
@@ -163,6 +165,10 @@ const main = {
         const content = CKEDITOR.instances.content.getData();
         // data.append('content', $('#content').val());
         data.append('content', content);
+
+        const isFileChanged = $('#isFileChanged').val();
+        alert(isFileChanged);
+        data.append('isFileChanged', isFileChanged);
 
         const file = $('#attachFile')[0].files[0];
         if (file) { // 파일이 존재하는 경우에만 추가
