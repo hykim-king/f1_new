@@ -23,14 +23,6 @@ public interface UserService {
 	public int doLogin(MemberVO user) throws SQLException;
 	
 	/**
-	 * 패스워드 존재 여부  체크
-	 * @param user
-	 * @return 1: 중복 PW 존재 / 0: 중복 PW 없음
-	 * @throws SQLException
-	 */
-	public int doPwCheck(MemberVO user) throws SQLException;
-	
-	/**
 	 * 회원가입
 	 * @param user
 	 * @return 1: 성공 , 0: 실패

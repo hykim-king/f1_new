@@ -221,22 +221,6 @@ public class UserDaoImpl implements UserDao {
 			return flag;
 	}
 
-
-	@Override
-	public int updateUser(MemberVO user) throws SQLException {
-		
-		int flag = 0;
-		String statement = this.NAMESPACE + DOT + "updateUser";
-		LOG.debug("┌────────────────────────────────────────────────────────┐");
-		LOG.debug("│ statement : " + statement);
-		LOG.debug("└────────────────────────────────────────────────────────┘");
-		flag = this.sqlSessionTemplate.update(statement, user);
-		LOG.debug("flag: " + flag);
-
-		return flag;
-	}
-
-
 	@Override
 	public int withdraw(MemberVO user) throws SQLException {
 	    int flag = 0;

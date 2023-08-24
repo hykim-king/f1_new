@@ -71,26 +71,6 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public int doPwCheck(MemberVO user) throws SQLException {
-		LOG.debug("┌────────────────────────────────────────────────────────┐");
-		LOG.debug("│ UserServiceImpl doPwCheck()                            │");
-		LOG.debug("└────────────────────────────────────────────────────────┘");
-		
-		int result = 0;
-		int flag = 0;
-		
-		flag = this.userDao.searchPwCheck(user);
-		
-		// 10: 중복 존재, 20: 중복 없음
-		if(1 == flag) {
-			result = 10;
-		} else if (0 == flag) {
-			result = 20;
-		} 
-		return result;
-	}
-	
-	@Override
 	public int doEmailDuplCheck(MemberVO user) throws SQLException {
 		LOG.debug("┌────────────────────────────────────────────────────────┐");
 		LOG.debug("│ UserServiceImpl doEmailDuplCheck()                     │");
