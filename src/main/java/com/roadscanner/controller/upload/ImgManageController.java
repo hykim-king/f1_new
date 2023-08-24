@@ -297,15 +297,20 @@ public class ImgManageController implements PcwkLogger {
 	    
 	    // 총 페이지 수
 	    int totalPages = (int) Math.ceil((double) totalCnt / inVO.getPageSize());
-
+	    
+	    // 페이지당 첫 번째 링크, 마지막 링크
+	    int startPage = ((pageNo - 1) / 10) * 10 + 1;
+        int endPage = startPage + 9;
+	    
 	    // 모델에 속성 추가
 	    model.addAttribute("list", list);
 	    model.addAttribute("inVO", inVO);
 	    model.addAttribute("pageNo", inVO.getPageNo());
 	    model.addAttribute("category", inVO.getCategory()); 
-	    model.addAttribute("totalCnt", totalCnt);
 	    model.addAttribute("totalPages", totalPages);
-
+	    model.addAttribute("startPage", startPage);
+	    model.addAttribute("endPage", endPage);
+	    
 		return "imgManagement";
 	}
 
