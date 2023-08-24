@@ -38,7 +38,9 @@
 
 <c:if  test="${user ne null}">
 <div class ="admin_container">
-    <h1 style="margin: auto; text-align:center;">관리자전용 페이지입니다.</h1>   
+<br/>
+
+    <!-- <h1 style="margin: auto; text-align:center;">관리자전용 페이지입니다.</h1> -->   
     <iframe id ="member_iframe" src="http://localhost:8080/login/list_member"
     style="margin: 50px auto; height: 500px;"></iframe>
 

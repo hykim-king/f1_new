@@ -255,7 +255,8 @@
                     "category" : 30,
                     "checked" : 0,
                     "u1" : isSelected[0],
-                    "u2" : isSelected[1]
+                    "u2" : isSelected[1],
+                    "u3" : isSelected[2]
                 },
                 success:function(data){
                     console.log("feedback update:", data);
