@@ -29,11 +29,12 @@
 
         <div class="d-flex mb-3 row align-items-center">
             <div class="col">
-                <div class="input-group">
-                    <input type="file" id="attachFile" name="attachFile" class="form-control" accept="image/*">
-                    <span id="btn-remove-file" class="input-group-text">삭제</span>
+                <div class="input-group mb-3">
+                    <input type="file" id="attachFile" name="attachFile" class="form-control" accept="image/*" style="display:none;">
+                    <button class="btn btn-outline-secondary" type="button" id="btn-select-file">파일 선택</button>
+                    <input type="text" id="fileText" class="form-control" value="${question.originalFilename}" readonly>
+                    <button id="btn-remove-file" class="btn btn-outline-secondary" type="button">삭제</button>
                 </div>
-                <input type="hidden" id="originalFilename" name="originalFilename" value="${question.originalFilename}">
             </div>
         </div>
 

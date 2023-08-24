@@ -1,3 +1,22 @@
+$(document).ready(function () {
+    // 파일 선택 버튼을 클릭하면 숨겨진 파일 입력 필드를 클릭합니다.
+    $('#btn-select-file').click(function () {
+        $('#attachFile').click();
+    });
+
+    // 파일이 선택되면 파일 이름을 텍스트 입력 필드에 표시합니다.
+    $('#attachFile').change(function () {
+        var fileName = $(this).val().split('\\').pop(); // 파일 경로에서 파일 이름만 가져옵니다.
+        $('#fileText').val(fileName);
+    });
+
+    // 삭제 버튼을 클릭하면 파일 입력 필드와 텍스트 입력 필드를 초기화합니다.
+    $('#btn-remove-file').click(function () {
+        $('#attachFile').replaceWith($('#attachFile').clone(true));
+        $('#fileText').val(''); // 텍스트 입력 필드를 초기화합니다.
+    });
+});
+
 // CKEDITOR 관련 초기화
 CKEDITOR.replace('content', {
     // 툴바 설정을 통해 원하는 버튼만 포함
@@ -12,6 +31,7 @@ CKEDITOR.replace('content', {
 });
 
 const main = {
+
     init: function () {
 
         const _this = this;
@@ -32,10 +52,10 @@ const main = {
         });
 
         // 이미지 삭제
-        $('#btn-remove-file').on('click', function(e) {
-            e.preventDefault(); // 기본 동작을 막음
-            $('#attachFile').val(''); // 파일 입력 필드를 초기화
-        });
+        // $('#btn-remove-file').on('click', function(e) {
+        //     e.preventDefault(); // 기본 동작을 막음
+        //     $('#attachFile').val(''); // 파일 입력 필드를 초기화
+        // });
 
         $('#btn-delete-selected').on('click', function () {
             // console.log('select button clicked');
@@ -71,13 +91,6 @@ const main = {
         // 페이지 로드시 체크박스 선택 상태에 따른 버튼 표시 상태 초기화
         showDeleteBtn();
 
-        $('#attachFile').change(function() {
-            const fileName = $(this).val().split('\\').pop();
-            if (fileName) {
-                $('#original-filename').text(fileName);
-                $('#originalFilename').val(fileName);
-            }
-        });
     },
 
     /**
