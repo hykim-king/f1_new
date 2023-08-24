@@ -18,7 +18,7 @@
 
 <nav id="font-id" class="navbar navbar-expand-md mb-4" style="background-color: white;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="${CP}/main" style="font-family: 'Bruno Ace', cursive;">RoadScanner</a>
+    <a class="navbar-brand" href="${CP}/main" style="font-family: 'Bruno Ace', cursive; font-weight: 900;">RoadScanner</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

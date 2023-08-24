@@ -10,7 +10,7 @@
 
 <body id="font-id" class="d-flex flex-column min-vh-100">
 <c:if test="${user eq null}"> 
-   <a href="${CP}/main" id="head-logo">RoadScanner</a>
+   <a href="${CP}/main" id="head-logo" style="font-weight: 900;">RoadScanner</a>
     <div class="roadscannercontainer">
 	    <form onsubmit="return false;"> 
 	        <div class="loginbox">
