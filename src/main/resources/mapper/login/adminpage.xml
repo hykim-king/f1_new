@@ -5,38 +5,35 @@
           <result column="id"            property="id"   />
           <result column="password"      property="password"  />
           <result column="email"         property="email"/>
-          <result column="grade"         property="grade"/>  
-          <result column="reg_date"          property="regdate"/> 
-          <result column="no"        property="no"/>   
-  </resultMap>    
-      
+          <result column="grade"         property="grade"/>
+          <result column="reg_date"          property="regdate"/>
+          <result column="no"        property="no"/>
+  </resultMap>
     <!-- 페이징 + 검색 -->
-     <select id="MEMBER" parameterType="hashMap" resultMap="MemberMap">
+     <select id="member" parameterType="hashMap" resultMap="MemberMap">
         SELECT roadnum,road2.*
       FROM(
           SELECT row_number() OVER(ORDER BY road.no) AS roadnum, road.*
            FROM MEMBER road
            WHERE grade = 1
            <if test="keyword !=null and keyword !=''">
-                         AND id LIKE '%'||#{keyword}||'%' 
-           </if> 
+                         AND id LIKE CONCAT('%', #{keyword}, '%')
+           </if>
           ORDER BY road.no
           ) road2
-      WHERE roadnum BETWEEN #{dpPost} AND #{postNum}+ #{dpPost}-1         
+      WHERE roadnum BETWEEN #{dpPost} AND #{postNum}+ #{dpPost}-1
       ORDER BY road2.no
      </select>
-
      <!-- 검색  카운팅 -->
-      <select id="MEMBER_searchCntBox" parameterType="hashMap" resultType="int">
-        SELECT COUNT(id) cnt
+      <select id="member_searchCntBox" parameterType="hashMap" resultType="int">
+        SELECT COUNT(id) AS cnt
         FROM MEMBER
-        WHERE 1=1 
+        WHERE 1=1
         AND grade = 1
            <if test="keyword !=null and keyword !=''">
-                         AND id LIKE '%'||#{keyword}||'%' 
-           </if> 
+                         AND id LIKE CONCAT('%', #{keyword}, '%')
+           </if>
      </select>
-     
      <!-- 페이징 + 검색 -->
      <select id="admin" parameterType="hashMap" resultMap="MemberMap">
         SELECT roadnum,road2.*
@@ -45,28 +42,25 @@
            FROM MEMBER road
            WHERE grade = 2
            AND  id NOT in (#{exclude})
-           
            <if test='keyword !=null and keyword !=""'>
-                         AND id LIKE '%'||#{keyword}||'%' 
-           </if> 
+                         AND id LIKE CONCAT('%', #{keyword}, '%')
+           </if>
           ORDER BY road.no
           ) road2
-        WHERE roadnum BETWEEN #{dpPost} AND #{postNum}+ #{dpPost}-1         
+        WHERE roadnum BETWEEN #{dpPost} AND #{postNum}+ #{dpPost}-1
         ORDER BY road2.no
      </select>
-
      <!-- 검색  카운팅 -->
       <select id="admin_searchCntBox" parameterType="hashMap" resultType="int">
           SELECT COUNT(id) cnt
           FROM MEMBER
-          WHERE 1=1 
+          WHERE 1=1
           AND grade = 2
           AND  id NOT in (#{exclude})
            <if test='keyword !=null and keyword !=""'>
-                         AND id LIKE '%'||#{keyword}||'%'
-           </if> 
+                         AND id LIKE CONCAT('%', #{keyword}, '%')
+           </if>
      </select>
-     
      <!-- 페이징 + 검색 -->
      <select id="banned" parameterType="hashMap" resultMap="MemberMap">
         SELECT roadnum,road3.*
@@ -75,24 +69,21 @@
            FROM MEMBER road
            WHERE grade = 3
            <if test="keyword !=null and keyword !=''">
-                         AND id LIKE '%'||#{keyword}||'%' 
-           </if> 
+                         AND id LIKE CONCAT('%', #{keyword}, '%')
+           </if>
           ORDER BY road.no
           ) road3
-        WHERE roadnum BETWEEN #{dpPost} AND #{postNum}+ #{dpPost}-1         
+        WHERE roadnum BETWEEN #{dpPost} AND #{postNum}+ #{dpPost}-1
         ORDER BY road3.no
      </select>
-
      <!-- 검색  카운팅 -->
       <select id="banned_searchCntBox" parameterType="hashMap" resultType="int">
           SELECT COUNT(id) cnt
           FROM MEMBER
-          WHERE 1=1 
+          WHERE 1=1
           AND grade = 3
            <if test="keyword !=null and keyword !=''">
-                         AND id LIKE '%'||#{keyword}||'%' 
-           </if> 
+                         AND id LIKE CONCAT('%', #{keyword}, '%')'
+           </if>
      </select>
-     
-
 </mapper>
