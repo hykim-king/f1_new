@@ -21,11 +21,11 @@
   <!-- 일반 -->
   <c:if  test="${user ne null}">
 	  <c:if test="${user.grade == 1}">
-	     <h2 style="text-align: center; margin-top: 50px;">${user.id}님 의 마이페이지</h2>
+	     <h2 style="text-align: center; margin-top: 50px;"><span style="color:#666666;">${user.id}</span>님 의 마이페이지</h2>
 	  </c:if>
 	  <!-- 관리자 -->
 	  <c:if test="${user.grade == 2}">
-	     <h2 style="text-align: center; margin-top: 50px;">관리자 ${user.id}님 의 마이페이지</h2>
+	     <h2 style="text-align: center; margin-top: 50px;">관리자 <span style="color:#ffc107;">${user.id}</span>님 의 마이페이지</h2>
 	  </c:if>
 		  <div id="container">
 				  <form>
@@ -55,9 +55,9 @@
 				</div>
 				
 				<div class="update_btn">
-			    <input type="button" class="btn btn-outline-primary" id="update" value="수정">
+			    <input type="button" class="btn btn-warning" style="color:white;" id="update" value="수정">
 			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			    <input type="button" class="btn btn-outline-danger" id="cancel"  value="취소">    
+			    <input type="button" class="btn btn-secondary" id="cancel"  value="취소">    
 		    </div>
 		    
 		    <c:if test="${user.grade == 1}">
@@ -73,7 +73,13 @@
 </body>
 
   <%@include file ="footer.jsp" %>
-
+	<style>
+	  /* 부트스트랩 호버 수정 */
+	  .form-control:focus {
+	    box-shadow: none;
+	    border-color: #666666;
+	  }
+	</style>
 <script>
 
 function check_pw() {

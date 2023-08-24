@@ -5,6 +5,26 @@
 
 <!-- Bootstrap Icons -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+<style>
+/* 부트스트랩 호버 수정 */
+.form-control:focus {
+  box-shadow: none;
+  border-color: #666666;
+}
+.page-link {
+  color: #343a40;
+}
+.page-item.active .page-link {
+  z-index: 1;
+  color: white;
+  border-color: #6c757d;
+  background-color: #6c757d;
+}
+.page-link:focus, .page-link:hover {
+  color: #343a40;
+  box-shadow: none;
+}
+</style>
 <title>회원 관리</title>
 
 <body id="font-id">
@@ -50,12 +70,12 @@
                         <input type="text" id ="searchid" name="keyword" class="form-control" value="<c:out value='${adminPage.keyword}'/>" placeholder="아이디 검색">
                         <input type="hidden" id="exclude" name="exclude" value="${user.id}">
                     <div style="margin-left : 7px;">
-	                    <button type="submit" id ="searchidbtn" class="btn btn-primary ml-2"
+	                    <button type="submit" id ="searchidbtn" class="btn btn-secondary ml-2"
 	                    style="width: 70px;">검색</button>
 	                </div>
 	                <div style="margin-left : 7px; ">   
-	                    <button type="button" id= "deletebtn" class="btn btn-primary ml-2"
-	                    style="width: 70px;">삭제</button>
+	                    <button type="button" id= "deletebtn" class="btn btn-warning ml-2"
+	                    style="width: 70px; color:white;">삭제</button>
                     </div>
                     </div>
             </div>
