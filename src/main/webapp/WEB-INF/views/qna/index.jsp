@@ -138,7 +138,7 @@
                                     </c:choose>
                                 </td>
                                 <td><a href="/qna/${question.no}" class="text-dark qna-link">${question.title}</a></td>
-                                <td class="text-center author-column">${question.id}</td>
+                                <td class="text-center">${question.id}</td>
                                 <td class="text-center">${question.createDate}</td>
                                 <td class="text-center">${question.views}</td>
                             </tr>
