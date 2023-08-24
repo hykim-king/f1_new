@@ -12,7 +12,8 @@ $(document).ready(function () {
 
     // 삭제 버튼을 클릭하면 파일 입력 필드와 텍스트 입력 필드를 초기화합니다.
     $('#btn-remove-file').click(function () {
-        $('#attachFile').replaceWith($('#attachFile').clone(true));
+        // $('#attachFile').replaceWith($('#attachFile').clone(true));
+        $('#attachFile').val('');
         $('#fileText').val(''); // 텍스트 입력 필드를 초기화합니다.
     });
 });

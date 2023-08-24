@@ -135,6 +135,12 @@ public class QuestionServiceImpl implements QuestionService, PcwkLogger {
             vo.setImageUrl(attachFile.getUrl());
         }
 
+        if (request.getAttachFile() == null) {
+            vo.setOriginalFilename(null);
+            vo.setStoreFilename(null);
+            vo.setImageUrl(null);
+        }
+
 
 //        if (attachFile != null) {
 //            vo.setOriginalFilename(attachFile.getUploadFilename());
@@ -146,7 +152,6 @@ public class QuestionServiceImpl implements QuestionService, PcwkLogger {
         // 제목 및 내용 수정
         vo.setTitle(request.getTitle());
         vo.setContent(request.getContent());
-
         LOG.debug("데이터베이스에 수정될 내용={}", vo);
         questionDAO.update(vo);
         return no;
