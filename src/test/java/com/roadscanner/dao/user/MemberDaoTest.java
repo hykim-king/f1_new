@@ -89,9 +89,9 @@ public class MemberDaoTest {
 		out02.setPassword(out02.getPassword()+updatestr02);
 		out03.setPassword(out03.getPassword()+updatestr03);
 		
-		dao.updateUser(out01);
-		dao.updateUser(out02);
-		dao.updateUser(out03);
+		dao.updatePw(out01);
+		dao.updatePw(out02);
+		dao.updatePw(out03);
 		
 		MemberVO update01 = dao.selectOne(vo01);
 		MemberVO update02 = dao.selectOne(vo02);
