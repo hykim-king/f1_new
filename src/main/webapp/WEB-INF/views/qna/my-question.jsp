@@ -49,7 +49,6 @@
             </div>
         </form>
 
-
        <table class="table table-hover">
         <colgroup>
             <col style="width: 5%;">

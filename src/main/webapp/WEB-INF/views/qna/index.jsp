@@ -61,6 +61,14 @@
         </form>
 
         <table class="table table-hover">
+        <colgroup>
+            <col style="width: 5%;">
+            <col style="width: 15%;">
+            <col style="width: 35%;">
+            <col style="width: 15%;">
+            <col style="width: 15%;">
+            <col style="width: 15%;">
+        </colgroup>
            <thead class="table-group-divider">
                <tr>
                    <!-- 체크박스 컬럼 추가 (관리자만 보이게) -->
@@ -106,7 +114,7 @@
                                 <span class="badge" id="gong">공지</span></td>
                                 <td><a href="/qna/${question.no}"
                                     class="text-dark qna-link notice-title">${question.title}</a></td>
-                                <td class="text-center author-column">${question.id}</td>
+                                <td class="text-center">${question.id}</td>
                                 <td class="text-center">${question.createDate}</td>
                                 <td class="text-center">${question.views}</td>
                             </tr>
@@ -142,16 +150,16 @@
 
         <!-- 글쓰기 버튼 -->
         <div class="d-flex justify-content-between align-items-center">
-		    <div class="mx-1">
-		        <!-- 삭제 버튼 추가 (관리자만 보이게) -->
-		        <c:if test="${user.grade == 2}">
-		            <button type="button" class="btn btn-outline-secondary my-1" id="btn-delete-selected">선택삭제</button>
-		        </c:if>
-		    </div>
-		    <div class="ml-auto mx-1">
-		        <a href="/qna/save" class="btn btn-outline-secondary my-1" role="button">글쓰기</a>
-		    </div>
-		</div>
+            <div class="mx-1">
+                <!-- 삭제 버튼 추가 (관리자만 보이게) -->
+                <c:if test="${user.grade == 2}">
+                    <button type="button" class="btn btn-outline-secondary my-1" id="btn-delete-selected">선택삭제</button>
+                </c:if>
+            </div>
+            <div class="ml-auto mx-1">
+                <a href="/qna/save" class="btn btn-outline-secondary my-1" role="button">글쓰기</a>
+            </div>
+        </div>
 
         <!-- 페이징 시작 -->
         <nav aria-label="Page navigation">
@@ -189,4 +197,3 @@
         <!-- 페이징 끝 -->
     </div>
 <%@include file ="/WEB-INF/views/layout/footer.jsp" %>
-

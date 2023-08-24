@@ -16,9 +16,6 @@
 .notice-title {
     font-weight: bold; /* 공지 제목 굵게 표시 */
 }
-.author-column {
-    width: 120px; /* 필요한대로 너비 조정 */
-}
 #category {
     border-color:secondary;
     outline:none;
