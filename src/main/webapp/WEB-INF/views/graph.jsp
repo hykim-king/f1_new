@@ -23,6 +23,7 @@
 <!DOCTYPE html>
 <html>
 <title>Feedback Graph</title>
+<script src="https://kit.fontawesome.com/726783c905.js" crossorigin="anonymous"></script>
 
 <%@include file ="login/navbar.jsp" %>
 
@@ -34,11 +35,11 @@
 		  <div class="accordion-item">
 		    <div class="accordion-header">
 		      <span>싫어요 피드백 누적 개수</span>
-		      <span class="accordion-icon">∨</span>
+		      <span class="accordion-icon"><i class="fa-solid fa-chevron-down fa-lg" style="color: #000000;"></i></span>
 		    </div>
 		    <div class="accordion-content">
 		      <div class="d-flex justify-content-center align-items-center flex-column">
-			      <div class="barchart">
+			      <div class="barchart" style="margin-top:20px;">
 			        <canvas id="feedback_barchart"></canvas>
 			      </div>
 			      <table class="table table-bordered text-center" style="width: 60%;">
@@ -73,7 +74,7 @@
 		  <div class="accordion-item">
 		    <div class="accordion-header">
           <span>월별 싫어요 피드백 개수 변화</span>
-          <span class="accordion-icon">∨</span>
+          <span class="accordion-icon"><i class="fa-solid fa-chevron-down fa-lg" style="color: #000000;"></i></span>
 		    </div>
 		    <div class="accordion-content">
 		      <div class="container" style="width:60%; margin-bottom:10px;">
