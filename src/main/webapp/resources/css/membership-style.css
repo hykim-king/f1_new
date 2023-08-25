@@ -1,4 +1,26 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap');
+
+#head-logo {
+    font-family: 'Bruno Ace', cursive;
+    font-size: 50px;
+    text-decoration: none;
+    color: black; 
+    margin: auto;
+  text-align: center;
+
+}
+
+#head-logo2 {
+    font-size: 50px;
+    text-decoration: none;
+    color: black; 
+    margin: auto;
+    margin-left: 20px;
+  text-align: center;
+    
+}
+
 
 .reg_container {
   margin : 60px auto;

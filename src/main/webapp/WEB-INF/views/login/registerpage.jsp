@@ -12,7 +12,7 @@
 
 <body class="d-flex flex-column min-vh-100">
 <div class ="reg_container" id="font-id">
-    <h1>RoadScanner 회원가입</h1>
+    <div style="display:flex;"><h1 id="head-logo">RoadScanner</h1><h1 id="head-logo2">회원가입</h1></div>
     &nbsp;
 	       <form action="" method="post" name="membership" style="margin: auto;">         
 	           <ul class= "ccu">
