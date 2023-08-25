@@ -39,7 +39,7 @@
       </div>
     </form>
   </div>
-<footer>
+
   <%@include file ="/WEB-INF/views/layout/footer.jsp" %>
- </footer>
+
   <script src="/resources/js/upload/preUpload.js"></script>

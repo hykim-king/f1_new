@@ -13,7 +13,7 @@
 
   <%@include file ="/WEB-INF/views/layout/navbar.jsp" %>
 
-<body id="font-id" class="d-flex flex-column min-vh-100">
+<body id="font-id" class="d-flex flex-column" style=" min-height: 80vh !important;">
   <!-- 일반 -->
   <c:if  test="${user ne null}">
 	  <c:if test="${user.grade == 1}">

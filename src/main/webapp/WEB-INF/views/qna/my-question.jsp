@@ -144,6 +144,5 @@
         <!-- 페이징 끝 -->
     </div>
 </body>
-<footer>
+
 <%@include file ="/WEB-INF/views/layout/footer.jsp" %>
-</footer>

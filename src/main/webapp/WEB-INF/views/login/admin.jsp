@@ -28,7 +28,7 @@
 	
   <%@include file ="/WEB-INF/views/layout/navbar.jsp" %>
 
-<body id="font-id">
+<body id="font-id"  min-height: 100vh !important;>
 
 <c:if  test="${user ne null}">
 <div class ="admin_container">
@@ -62,5 +62,7 @@
         <h4><a href="${CP}/login">Go To 로그인</a></h4>
     </div>            
 </c:if> <!-- 유저 정보X-end -->
-
+</body>
+<div style="position:relative ">
   <%@include file ="/WEB-INF/views/layout/footer.jsp" %>
+</div>

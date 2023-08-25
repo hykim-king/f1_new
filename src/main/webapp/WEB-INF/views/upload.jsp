@@ -73,14 +73,14 @@
     </form>
   </div>
 </div> 
-<<<<<<< HEAD
+
 </body>
 <div style="position: relative; margin-top: 57px;">
   <%@include file ="/WEB-INF/views/layout/footer.jsp"%>
 </div>
-=======
+
 <footer>
   <%@include file ="/WEB-INF/views/layout/footer.jsp" %>
  </footer>
->>>>>>> 105fd46576b26eebacbda3df65936621cecd589e
+
   <script src="/resources/js/upload/upload.js"></script>
