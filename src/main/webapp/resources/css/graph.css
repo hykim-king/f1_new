@@ -58,6 +58,11 @@
    font-size: 18px;
  }
  
+#logo-fix1, #logo-fix2{
+	 font-size: 1.25em;
+   line-height: 1.05em;
+}
+
  /* 열린 아코디언 스타일 */
  .accordion-item.open .accordion-content {
    display: block;

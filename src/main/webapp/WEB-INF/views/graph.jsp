@@ -22,7 +22,7 @@
  }
 %>  
 <!-- CSS -->
-<link rel="stylesheet" href="${CP}/resources/css/graph.css" >
+<link rel="stylesheet" href="/resources/css/graph.css" >
 <script src="https://kit.fontawesome.com/726783c905.js" crossorigin="anonymous"></script>
 
   <%@include file ="/WEB-INF/views/layout/navbar.jsp" %>
@@ -35,7 +35,7 @@
 		  <div class="accordion-item">
 		    <div class="accordion-header">
 		      <span>싫어요 피드백 누적 개수</span>
-		      <span class="accordion-icon"><i class="fa-solid fa-chevron-down fa-lg" style="color: #000000;"></i></span>
+		      <span class="accordion-icon"><i class="fa-solid fa-chevron-down fa-lg" id="logo-fix1" style="color: #000000;"></i></span>
 		    </div>
 		    <div class="accordion-content">
 		      <div class="d-flex justify-content-center align-items-center flex-column">
@@ -74,7 +74,7 @@
 		  <div class="accordion-item">
 		    <div class="accordion-header">
           <span>월별 싫어요 피드백 개수 변화</span>
-          <span class="accordion-icon"><i class="fa-solid fa-chevron-down fa-lg" style="color: #000000;"></i></span>
+          <span class="accordion-icon"><i class="fa-solid fa-chevron-down fa-lg" id="logo-fix2" style="color: #000000;"></i></span>
 		    </div>
 		    <div class="accordion-content">
 		      <div class="container" style="width:60%; margin-bottom:10px;">
