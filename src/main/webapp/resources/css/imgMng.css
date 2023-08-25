@@ -127,8 +127,9 @@
     height: 100%;
     object-fit: contain;
   }
-  .detail_table tr td {
-	  font-size: 13px;
+  .detail_table {
+    font-family: 'NanumSquareNeo';
+	  font-size: 15px;
 	  color: #222222;
   }
 	.overlay-modal {

@@ -148,39 +148,39 @@
       <div class="right">
         <table class="table detail_table" style="width: 400px;">
           <tr>
-            <th class="badge bg-secondary mt-2 text-white">번호</th>
+            <th class="text-center fw-bold">번호</th>
             <td id="idx"></td>
           </tr>
           <tr>
-            <th class="badge bg-secondary mt-2 text-white">이름</th>
+            <th class="text-center fw-bold">이름</th>
             <td id="name"></td>
           </tr>
           <tr>
-            <th class="badge bg-secondary mt-2 text-white">업로더</th>
+            <th class="text-center fw-bold">업로더</th>
             <td id="id"></td>
           </tr>
           <tr>
-            <th class="badge bg-secondary mt-2 text-white">날짜</th>
+            <th class="text-center fw-bold">날짜</th>
             <td id="uploadDate"></td>
           </tr>
           <tr>
-            <th class="badge bg-secondary mt-2 text-white">크기</th>
+            <th class="text-center fw-bold">크기</th>
             <td id="fileSize"></td>
           </tr>
            <tr>
-            <th class="badge bg-secondary mt-2 text-white">상태</th>
+            <th class="text-center fw-bold">상태</th>
             <td id="category"></td>
           </tr>
           <tr>
-            <th class="badge bg-secondary mt-2 text-white">모양 오류</th>
+            <th class="text-center fw-bold">모양 오류</th>
             <td id="u1"></td>
           </tr>
           <tr>
-            <th class="badge bg-secondary mt-2 text-white">색깔 오류</th>
+            <th class="text-center fw-bold">색깔 오류</th>
             <td id="u2"></td>
           </tr>
           <tr>
-            <th class="badge bg-secondary mt-2 text-white">그림/숫자 오류</th>
+            <th class="text-center fw-bold">그림/숫자 오류</th>
             <td id="u3"></td>
           </tr>
         </table>
