@@ -23,8 +23,10 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CopyObjectRequest;
 import com.amazonaws.services.s3.model.CopyObjectResult;
+import com.roadscanner.cmn.AmazonS3Store;
 import com.roadscanner.cmn.PcwkLogger;
 import com.roadscanner.dao.upload.FileUploadDao;
+import com.roadscanner.domain.UploadFile;
 import com.roadscanner.domain.upload.FileUploadVO;
 
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
@@ -40,6 +42,8 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 	@Autowired
 	@Qualifier(value = "fileUploadDaoImpl")
 	FileUploadDao dao;
+	
+	AmazonS3Store S3filemanager;
 
 	//@Autowired
 	FileUploadVO uploadVO;
@@ -153,33 +157,16 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 		LOG.debug("│   deleteFileToS3   │");
 		LOG.debug("└────────────────────┘");
 
-		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("config/upload.properties");
-		Properties properties = new Properties();
-		properties.load(inputStream);
-
-		String accessKey = properties.getProperty("cloud.aws.credentials.accessKey");
-		String secretKey = properties.getProperty("cloud.aws.credentials.secretKey");
-		String bucketName = properties.getProperty("cloud.aws.s3.bucket");
-		String region = properties.getProperty("cloud.aws.region.static");
-		String objectKey = inVO.getName(); // 파일의 키
-                
-		// AWS credentials 설정
-		BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
-
-		// Amazon S3 클라이언트 생성
-		AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
-				.withCredentials(new AWSStaticCredentialsProvider(credentials)).withRegion(region) // 적절한 리전 설정
-				.build();
-
 		try {
 			// S3 객체 삭제
-			s3Client.deleteObject(bucketName, objectKey);
-			LOG.debug("***********");
-			LOG.debug("S3 버킷에서 삭제");
-			LOG.debug("***********");
+			S3filemanager.deleteFile(inVO.getName());
+			
+			LOG.debug("**********************");
+			LOG.debug("*File delete Success!*");
+			LOG.debug("**********************");
 		} catch (Exception e) {
 			e.printStackTrace();
-			LOG.debug("S3에서 삭제 실패: " + e.getMessage());
+			LOG.debug("Error: " + e.getMessage());
 		}
 
 		return inVO;
@@ -202,48 +189,16 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 		LOG.debug("│UploadFile to Bucket│");
 		LOG.debug("└────────────────────┘");
 
-		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("config/upload.properties");
-		Properties properties = new Properties();
-		properties.load(inputStream);
-
-		// AWS 자격 증명 설정
-		String accessKey = properties.getProperty("cloud.aws.credentials.accessKey");
-		String secretKey = properties.getProperty("cloud.aws.credentials.secretKey");
-		String region = properties.getProperty("cloud.aws.region.static");
-
-		// S3 버킷 설정
-		String bucketName = properties.getProperty("cloud.aws.s3.bucket");
-
-		// 파일 이름 형식(yyyyMMddHH24MISS_원본파일명), 등록일, url, 파일 크기 설정
-		Date currentDate = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-
-		String datestr = dateFormat.format(currentDate);
-		String fileName = datestr + "_" + file.getOriginalFilename();
-		String url = "https://" + bucketName + ".S3." + region + ".amazonaws.com/" + fileName;
-		int fileSize = (int) (file.getSize() / 1024);
-
-		File convertedFile = new File(file.getOriginalFilename());
-		try (FileOutputStream fos = new FileOutputStream(convertedFile)) {
-			fos.write(file.getBytes());
-		}
-
-		S3Client s3Client = S3Client.builder().region(Region.of(region))
-				.credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(accessKey, secretKey)))
-				.build();
-
 		try {
-			PutObjectRequest request = PutObjectRequest.builder().bucket(bucketName).key(fileName).build();
-
-			s3Client.putObject(request, convertedFile.toPath());
+			UploadFile result = S3filemanager.storeFile(file);
+			
 			LOG.debug("**********************");
 			LOG.debug("*File upload Success!*");
 			LOG.debug("**********************");
 
-			uploadVO.setUploadDate(datestr);
-			uploadVO.setName(fileName);
-			uploadVO.setUrl(url);
-			uploadVO.setFileSize(fileSize);
+			uploadVO.setName(result.getStoreFilename());
+			uploadVO.setUrl(result.getUrl());
+			uploadVO.setFileSize(file.getSize());
 
 			String voString = uploadVO.toString();
 			LOG.debug("┌──────────┐");
@@ -254,10 +209,6 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 		} catch (S3Exception e) {
 			System.err.println("Error: " + e.getMessage());
 			throw e;
-
-		} finally {
-			// 클라이언트 리소스 정리
-			s3Client.close();
 		}
 	}
 
