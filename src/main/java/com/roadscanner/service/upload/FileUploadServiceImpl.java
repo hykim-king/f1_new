@@ -1,14 +1,8 @@
 package com.roadscanner.service.upload;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Reader;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -28,13 +22,6 @@ import com.roadscanner.cmn.PcwkLogger;
 import com.roadscanner.dao.upload.FileUploadDao;
 import com.roadscanner.domain.UploadFile;
 import com.roadscanner.domain.upload.FileUploadVO;
-
-import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
-import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
-import software.amazon.awssdk.regions.Region;
-import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.PutObjectRequest;
-import software.amazon.awssdk.services.s3.model.S3Exception;
 
 @Service
 public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
@@ -157,17 +144,7 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 		LOG.debug("│   deleteFileToS3   │");
 		LOG.debug("└────────────────────┘");
 
-		try {
-			// S3 객체 삭제
-			S3filemanager.deleteFile(inVO.getName());
-			
-			LOG.debug("**********************");
-			LOG.debug("*File delete Success!*");
-			LOG.debug("**********************");
-		} catch (Exception e) {
-			e.printStackTrace();
-			LOG.debug("Error: " + e.getMessage());
-		}
+		S3filemanager.deleteFile(inVO.getName());
 
 		return inVO;
 
@@ -191,25 +168,16 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 		
 		UploadFile result = S3filemanager.storeFile(file);
 
-		try {
-			LOG.debug("**********************");
-			LOG.debug("*File upload Success!*");
-			LOG.debug("**********************");
-
-			uploadVO.setName(result.getStoreFilename());
-			uploadVO.setUrl(result.getUrl());
-			uploadVO.setFileSize(file.getSize());
-
-			String voString = uploadVO.toString();
-			LOG.debug("┌──────────┐");
-			LOG.debug("│ uploadVO: " + voString);
-			LOG.debug("└──────────┘");
-
-			return uploadVO;
-		} catch (S3Exception e) {
-			System.err.println("Error: " + e.getMessage());
-			throw e;
-		}
+		uploadVO.setName(result.getStoreFilename());
+		uploadVO.setUrl(result.getUrl());
+		uploadVO.setFileSize(file.getSize());
+		
+		String voString = uploadVO.toString();
+		LOG.debug("┌──────────┐");
+		LOG.debug("│ uploadVO: " + voString);
+		LOG.debug("└──────────┘");
+		
+		return uploadVO;
 	}
 
 }
