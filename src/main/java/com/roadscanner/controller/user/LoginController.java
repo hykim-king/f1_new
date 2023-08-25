@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -57,7 +58,9 @@ public class LoginController {
 	
 	//관리자 페이지 접속
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String admin() {
+	public String admin(HttpServletRequest request, Model model) {
+		String ipAddress = request.getServerName();
+		model.addAttribute("host", ipAddress);
 		
 		LOG.debug("관리자 화면 이동");
 		return "/login/admin";	

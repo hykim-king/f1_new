@@ -41,14 +41,14 @@
 <br/>
 
     <!-- <h1 style="margin: auto; text-align:center;">관리자전용 페이지입니다.</h1> -->   
-    <iframe id ="member_iframe" src="http://localhost:8080/login/list_member"
+    <iframe id ="member_iframe" src="http://${host}:8080/login/list_member"
     style="margin: 50px auto; height: 500px;"></iframe>
 
 
 <br/>
 
     <h1 style="margin: auto; text-align:center;"></h1>   
-    <iframe id ="admin_iframe" src="http://localhost:8080/login/list_admin"
+    <iframe id ="admin_iframe" src="http://${host}:8080/login/list_admin"
     style="margin: 50px auto; height: 500px;"></iframe>
 
 
@@ -56,7 +56,7 @@
 
 
     <h1 style="margin: auto; text-align:center;"></h1>   
-    <iframe id ="banned_iframe" src="http://localhost:8080/login/list_banned"
+    <iframe id ="banned_iframe" src="http://${host}:8080/login/list_banned"
     style="margin: 50px auto; height: 500px;"></iframe>
 </div>
 </c:if>

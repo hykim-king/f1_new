@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.roadscanner.cmn.PcwkLogger;
 import com.roadscanner.domain.user.MemberVO;
 import com.roadscanner.domain.user.list_admin;
 import com.roadscanner.domain.user.list_banned;
@@ -19,7 +18,7 @@ import com.roadscanner.service.user.AdminService;
 
 @Controller
 @RequestMapping("/login")
-public class AdminpageController implements PcwkLogger {
+public class AdminpageController {
 
 @Inject
 AdminService service;
@@ -33,24 +32,17 @@ AdminService service;
 		
 		list_member memberPage = new list_member();
 		
-		LOG.debug("***********");
-		LOG.debug("list_member");
-		
 		memberPage.setNum(num);
 		memberPage.setCount(service.member_searchCntBox(keyword)); 
 		memberPage.setKeyword(keyword);
 		memberPage.setPageid(pageid);
-		LOG.debug("*m111111111");
 		
 		List<MemberVO> list = null;
 		list = service.member(memberPage.getdpPost(), memberPage.getPostNum(), keyword);
-		LOG.debug("*m222222222");
 			
 		model.addAttribute("list", list);   
 		model.addAttribute("memberPage", memberPage);
 		model.addAttribute("select", num);
-		LOG.debug("*m333333333");
-		LOG.debug("***********");
 				
 		}
 	
@@ -64,25 +56,18 @@ AdminService service;
 		
 		list_admin adminPage = new list_admin();
 		
-		LOG.debug("**********");
-		LOG.debug("list_admin");
-		
 		adminPage.setnum(num);
 		adminPage.setcount(service.admin_searchCntBox(keyword,exclude)); 
 		adminPage.setkeyword(keyword);
 		adminPage.setexclude(exclude);
 		adminPage.setpageid(pageid);
-		LOG.debug("*a11111111");
 		
 		List<MemberVO> list = null;
 		list = service.admin(adminPage.getdpPost(), adminPage.getPostnum(),keyword,exclude);
-		LOG.debug("*a22222222");
 			
 		model.addAttribute("list", list);   
 		model.addAttribute("adminPage", adminPage);
 		model.addAttribute("select", num);
-		LOG.debug("*a33333333");
-		LOG.debug("**********");
 		
 		}
 	
@@ -95,24 +80,17 @@ AdminService service;
 		
 		list_banned BannedPage = new list_banned();
 		
-		LOG.debug("***********");
-		LOG.debug("list_banned");
-		
 		BannedPage.setnum(num);
 		BannedPage.setcount(service.banned_searchCntBox(keyword)); 
 		BannedPage.setkeyword(keyword);
 		BannedPage.setPageid(pageid);
-		LOG.debug("*b111111111");
 		
 		List<MemberVO> list = null;
 		list = service.banned(BannedPage.getdpPost(), BannedPage.getPostnum(), keyword);
-		LOG.debug("*b222222222");
 		
 		model.addAttribute("list", list);   
 		model.addAttribute("BannedPage", BannedPage);
 		model.addAttribute("select", num);
-		LOG.debug("*b333333333");
-		LOG.debug("***********");
 				
 		}
 
