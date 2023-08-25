@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav id="font-id" class="navbar navbar-expand-md mb-4" style="background-color: white;">
     <div class="container-fluid">
         <a class="navbar-brand roadscanner" href="${CP}/main">RoadScanner</a>
@@ -28,16 +29,16 @@
                 </c:if>
             </ul>
             <form class="d-flex" role="search">
-                <!-- 로그인 세션 X -->
-                <c:if test="${user eq null}">
-                    <button type="button" class="btn btn-sm btn-outline-secondary me-2" id="login" onclick="location.href='${CP}/login'" >Login</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='${CP}/registerpage'" style="margin-right: 50px;">Sign-up</button>
-                </c:if>
-                <!-- 로그인 세션 O -->
-                <c:if test="${user ne null}">
-                    <button type="button" class="btn btn-sm btn-outline-secondary me-2" onclick="location.href='${CP}/mypage'">MyPage</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='${CP}/logout'" style="margin-right: 50px;">LogOut</button>
-                </c:if>
+                <c:choose>
+                    <c:when test="${user ne null}">
+                        <button type="button" class="btn btn-sm btn-outline-secondary me-2" onclick="location.href='${CP}/mypage'">MyPage</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='${CP}/logout'" style="margin-right: 50px;">LogOut</button>
+                    </c:when>
+                    <c:otherwise>
+                        <button type="button" class="btn btn-sm btn-outline-secondary me-2" id="login" onclick="location.href='${CP}/login'" >Login</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='${CP}/registerpage'" style="margin-right: 50px;">Sign-up</button>
+                    </c:otherwise>
+                </c:choose>
             </form>
         </div>
     </div>

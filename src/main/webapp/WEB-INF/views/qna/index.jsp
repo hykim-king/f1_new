@@ -3,9 +3,14 @@
 <header>
 <%@include file ="/WEB-INF/views/layout/header.jsp" %>
 <%@include file ="/WEB-INF/views/layout/navbar.jsp" %>
+<<<<<<< HEAD
 </header> 
 <body>
     <div class="container mt-4"  style="min-height: 90vh !important;">
+=======
+<body class="min-vh-100">
+    <div class="container mt-4">
+>>>>>>> 105fd46576b26eebacbda3df65936621cecd589e
             <c:choose>
                 <c:when test="${user.grade == 2}">
                     <h1 class="mb-4"><a href="/qna" class="qna-title-link">Q&A 게시판(관리자)</a></h1>
