@@ -188,10 +188,10 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 		LOG.debug("┌────────────────────┐");
 		LOG.debug("│UploadFile to Bucket│");
 		LOG.debug("└────────────────────┘");
+		
+		UploadFile result = S3filemanager.storeFile(file);
 
 		try {
-			UploadFile result = S3filemanager.storeFile(file);
-			
 			LOG.debug("**********************");
 			LOG.debug("*File upload Success!*");
 			LOG.debug("**********************");
