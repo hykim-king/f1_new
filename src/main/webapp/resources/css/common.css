@@ -2,6 +2,28 @@ body {
     font-family: 'NanumSquareNeo', sans-serif;
 }
 
+#font-id {
+  font-family: 'NanumSquareNeoBold';
+}
+
 h1, h2, h3, thead, .badge {
     font-weight: bold;
+}
+
+footer {
+	  font-family: 'NanumSquareNeo', sans-serif;
+}
+
+.roadscanner {
+	font-family: 'Bruno Ace', cursive; 
+	font-weight: 900;
+}
+
+.nav-item {
+	font-size: 15px;
+}
+
+.form-control:focus {
+      box-shadow: none;
+      border-color: #666666;
 }

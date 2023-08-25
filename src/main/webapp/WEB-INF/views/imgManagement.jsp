@@ -1,7 +1,7 @@
-<%@include file ="login/head.jsp" %>
+  <%@include file ="/WEB-INF/views/layout/header.jsp" %>
 
 <%@page import="com.roadscanner.domain.upload.FileUploadVO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
   FileUploadVO inVO = (FileUploadVO)request.getAttribute("inVO");
@@ -24,16 +24,8 @@
   return;
   }
 %> 
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  <title>ImgManagement</title>
-</head>
 
-  <%@include file ="login/navbar.jsp" %>
+  <%@include file ="/WEB-INF/views/layout/navbar.jsp" %>
   
 <body id="font-id">
   <div class="container" style="width:930px;">
@@ -204,7 +196,5 @@
 <script src="${CP}/resources/js/imgMng.js"></script>
 </body>
 
-  <%@include file ="login/footer.jsp" %>
+  <%@include file ="/WEB-INF/views/layout/footer.jsp" %>
   <link rel="stylesheet" href="${CP}/resources/css/imgMng.css" >
-  
-</html>

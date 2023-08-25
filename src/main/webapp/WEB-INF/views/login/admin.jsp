@@ -1,7 +1,6 @@
-  <%@include file ="head.jsp" %>
+  <%@include file ="/WEB-INF/views/layout/header.jsp" %>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
     // 서버 측에서 사용자 세션을 확인하고, 세션이 없으면 기본 페이지로 리다이렉트합니다.
@@ -15,24 +14,19 @@
 %>
  <script language="javascript">
   alert("접속을 차단합니다.");
-  document.location.href="${CP}/login";
+  document.location.href="/login";
  </script>
 <%
  return;
  }
 %>
-<!DOCTYPE html>
-<html>  
-
-<meta charset="UTF-8">
 <!-- CSS -->
 <link  rel="stylesheet" href="${CP}/resources/css/admin.css" >
 
 <!-- Bootstrap Icons -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-<title>관리자 페이지</title>
 	
-  <%@include file ="navbar.jsp" %>
+  <%@include file ="/WEB-INF/views/layout/navbar.jsp" %>
 
 <body id="font-id">
 
@@ -69,8 +63,4 @@
     </div>            
 </c:if> <!-- 유저 정보X-end -->
 
-</body>
-
-  <%@include file ="footer.jsp" %>
-
-</html>
+  <%@include file ="/WEB-INF/views/layout/footer.jsp" %>

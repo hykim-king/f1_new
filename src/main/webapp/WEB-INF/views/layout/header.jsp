@@ -1,9 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
-    <title>로드스캐너 - 게시판</title>
+    <title>RoadScanner</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap" rel="stylesheet">
     <link href="/resources/css/common.css" rel="stylesheet">
     <link href="/resources/css/qna.css" rel="stylesheet">
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
