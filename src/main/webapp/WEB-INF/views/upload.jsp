@@ -9,12 +9,11 @@
       response.sendRedirect("/login");
     }
 %>
-
   <%@include file ="/WEB-INF/views/layout/navbar.jsp" %>
 <!-- CSS -->
 <link  href="${CP}/resources/css/upload.css" rel="stylesheet">
 
-<body id="font-id">
+<body id="font-id" style="min-height: 90vh !important;">
 <div id="separation">
 <input id="thisName" type="hidden" value="${thisName}">
   <div class="left">
@@ -73,6 +72,8 @@
     </form>
   </div>
 </div> 
-
-  <%@include file ="/WEB-INF/views/layout/footer.jsp" %>
+</body>
+<div style="position: relative; margin-top: 57px;">
+  <%@include file ="/WEB-INF/views/layout/footer.jsp"%>
+</div>
   <script src="/resources/js/upload/upload.js"></script>

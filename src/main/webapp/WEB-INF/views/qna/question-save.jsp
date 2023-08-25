@@ -1,8 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<header>
 <%@include file ="/WEB-INF/views/layout/header.jsp" %>
-<body>
 <%@include file ="/WEB-INF/views/layout/navbar.jsp" %>
+</header>
+<body>
     <form class="container mt-4" id="question-form">
         <h1 class="mb-4"><a href="/qna" class="qna-title-link">Q&A 게시판</a></h1>
         <div class="row align-items-center">
@@ -57,4 +59,6 @@
             <button type="submit" id="btn-save" class="btn" value="저장">등록</button>
         </div>
     </form>
-    <%@include file ="/WEB-INF/views/layout/footer.jsp" %>
+
+<%@include file ="/WEB-INF/views/layout/footer.jsp" %>
+

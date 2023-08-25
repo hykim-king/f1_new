@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<header>
 <%@include file ="/WEB-INF/views/layout/header.jsp" %>
-<body>
 <%@include file ="/WEB-INF/views/layout/navbar.jsp" %>
+</header>
+<body>
     <form class="container mt-4" id="question-edit-form">
         <h1 class="mb-4"><a href="/qna" class="qna-title-link">Q&A 게시판</a></h1>
         <!-- 이 부분에 히든 필드 추가 -->
@@ -51,4 +53,6 @@
             <button type="button" id="btn-update" class="btn" value="수정">수정</button>
         </div>
     </form>
+<footer>
 <%@include file ="/WEB-INF/views/layout/footer.jsp" %>
+</footer>

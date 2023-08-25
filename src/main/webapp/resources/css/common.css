@@ -1,5 +1,6 @@
 body {
     font-family: 'NanumSquareNeo', sans-serif;
+    height:auto;
 }
 
 #font-id {
@@ -12,6 +13,9 @@ h1, h2, h3, thead, .badge {
 
 footer {
 	  font-family: 'NanumSquareNeo', sans-serif;
+	   position: absolute; 
+	   bottom:0;
+	   width: 100%;
 }
 
 .roadscanner {

@@ -1,8 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file ="/WEB-INF/views/layout/header.jsp" %>
-<body>
+<header>
 <%@include file ="/WEB-INF/views/layout/navbar.jsp" %>
+</header>
+<body>
     <div class="container mt-4">
         <h1 class="mb-4"><a href="/qna" class="qna-title-link">Q&A 게시판</a></h1>
         <div class="card mb-5">
@@ -163,4 +165,6 @@
             </form>
         </c:if>
     </div>
+<footer>
 <%@include file ="/WEB-INF/views/layout/footer.jsp" %>
+</footer>

@@ -1,9 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<header>
 <%@include file ="/WEB-INF/views/layout/header.jsp" %>
-<body class="min-vh-100">
 <%@include file ="/WEB-INF/views/layout/navbar.jsp" %>
-    <div class="container mt-4">
+</header> 
+<body>
+    <div class="container mt-4"  style="min-height: 90vh !important;">
             <c:choose>
                 <c:when test="${user.grade == 2}">
                     <h1 class="mb-4"><a href="/qna" class="qna-title-link">Q&A 게시판(관리자)</a></h1>
@@ -209,4 +211,7 @@
         </nav>
         <!-- 페이징 끝 -->
     </div>
+  </body>
+<div>
 <%@include file ="/WEB-INF/views/layout/footer.jsp" %>
+</div>
