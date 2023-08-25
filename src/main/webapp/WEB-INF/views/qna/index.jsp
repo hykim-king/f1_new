@@ -1,8 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file ="/WEB-INF/views/layout/header.jsp" %>
-<body class="min-vh-100">
 <%@include file ="/WEB-INF/views/layout/navbar.jsp" %>
+<body class="min-vh-100">
     <div class="container mt-4">
             <c:choose>
                 <c:when test="${user.grade == 2}">
