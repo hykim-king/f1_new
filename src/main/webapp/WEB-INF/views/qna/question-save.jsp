@@ -38,20 +38,19 @@
         <div class="row align-items-center mb-3">
             <div class="col">
                 <div class="col">
-                    <div class="input-group mb-3">
+                    <div class="input-group">
                         <input type="file" id="attachFile" name="attachFile" class="form-control" accept="image/*" style="display:none;">
                         <button class="btn btn-outline-secondary" type="button" id="btn-select-file">파일 선택</button>
                         <input type="text" id="fileText" class="form-control" readonly>
                         <button id="btn-remove-file" class="btn btn-outline-secondary" type="button">삭제</button>
                     </div>
+                </div>
             </div>
         </div>
-<%--        <img id="preview-image" src="" alt="Image preview" style="display: none;">--%>
 
         <div class="mb-3 row">
             <div class="col">
-                <textarea class="form-control" id="content" rows="10" placeholder="내용을 입력하세요."></textarea>
-                <div id="content-error"></div>
+                <textarea class="form-control" id="content" rows="10" placeholder="내용을 입력하세요."> </textarea>
             </div>
         </div>
         <div class="text-center">
