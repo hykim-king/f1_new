@@ -4,7 +4,7 @@
 
     <!-- 답변 등록 -->
     <insert id="save">
-        INSERT INTO answer (
+        INSERT INTO ANSWER (
             no,
             id,
             content
@@ -17,13 +17,13 @@
 
     <!-- 답변 삭제 -->
     <delete id="delete">
-        DELETE FROM answer
+        DELETE FROM ANSWER
         WHERE no = #{no}
     </delete>
 
     <!-- 답변 수정 -->
     <update id="update">
-        UPDATE answer
+        UPDATE ANSWER
         SET
             content = #{content},
             update_date = CURRENT_TIMESTAMP
@@ -38,7 +38,7 @@
             content,
             create_date AS createDate,
             update_date AS updateDate
-        FROM answer
+        FROM ANSWER
         WHERE no = #{no}
     </select>
 

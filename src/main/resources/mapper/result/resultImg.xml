@@ -10,7 +10,7 @@
         content,
         url
     FROM
-        result_image
+        RESULT_IMAGE
     WHERE
         no = #{no}
   </select>

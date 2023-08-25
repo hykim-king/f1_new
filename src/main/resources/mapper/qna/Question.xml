@@ -7,7 +7,7 @@
         insert into QUESTION(category, id, title, content, original_filename, store_filename, image_url)
         VALUES (#{category}, #{id}, #{title}, #{content}, #{originalFilename}, #{storeFilename}, #{imageUrl})
     </insert>
-    
+
     <!-- no로 질문 조회 오라클 O-->
     <select id="findByNo" resultType="QuestionVO">
         SELECT
@@ -26,47 +26,44 @@
         WHERE no = #{no}
     </select>
 
-
     <!-- 모든 질문 조회 -->
     <select id="findAll" resultType="QuestionVO">
-    SELECT *
-    FROM (
-        SELECT a.*, rownum rnum
-        FROM (
-            SELECT
-                no,
-                category,
-                views,
-                id,
-                title,
-                content,
-                create_date AS createDate,
-                update_date AS updateDate
-            FROM QUESTION
-
-            WHERE 1=1
-
-            <if test="searchCond.category == null">
-                AND category != 10
-            </if>
-            <if test="searchCond.category != null">
-                AND category = #{searchCond.category}
-            </if>
-            <if test="searchCond.searchType == 'title' and searchCond.keyword != null">
-                AND title LIKE '%' || #{searchCond.keyword} || '%'
-            </if>
-            <if test="searchCond.searchType == 'content' and searchCond.keyword != null">
-                AND content LIKE '%' || #{searchCond.keyword} || '%'
-            </if>
-            <if test="searchCond.searchType == 'both' and searchCond.keyword != null">
-                AND (title LIKE '%' || #{searchCond.keyword} || '%' OR content LIKE '%' || #{searchCond.keyword} || '%')
-            </if>
-
-            ORDER BY no DESC
-        ) a WHERE rownum &lt;= #{pagination.start} + #{pagination.size}
-    ) WHERE rnum &gt; #{pagination.start}
+      SELECT *
+              FROM (
+                  SELECT a.*, @rownum := @rownum + 1 AS rnum
+                  FROM (
+                      SELECT
+                          no,
+                          category,
+                          views,
+                          id,
+                          title,
+                          content,
+                          create_date AS createDate,
+                          update_date AS updateDate
+                      FROM QUESTION
+                      WHERE 1=1
+                      <if test="searchCond.category == null">
+                          AND category != 10
+                      </if>
+                      <if test="searchCond.category != null">
+                          AND category = #{searchCond.category}
+                      </if>
+                      <if test="searchCond.searchType == 'title' and searchCond.keyword != null">
+                          AND title LIKE CONCAT('%', #{searchCond.keyword}, '%')
+                      </if>
+                      <if test="searchCond.searchType == 'content' and searchCond.keyword != null">
+                          AND content LIKE CONCAT('%', #{searchCond.keyword}, '%')
+                      </if>
+                      <if test="searchCond.searchType == 'both' and searchCond.keyword != null">
+                          AND (title LIKE CONCAT ('%', #{searchCond.keyword}, '%') OR content LIKE CONCAT ('%', #{searchCond.keyword}, '%'))
+                      </if>
+                      ORDER BY no DESC
+                  ) a, (SELECT @rownum := 0) r
+              ) b
+          WHERE b.rnum &lt;= #{pagination.start} + #{pagination.size}
+          AND b.rnum &gt; #{pagination.start}
     </select>
-
 
     <!-- 질문 업데이트 -->
     <update id="update">
@@ -82,38 +79,28 @@
         WHERE no = #{no}
     </update>
 
-
     <!-- 질문 삭제 -->
     <delete id="delete">
         DELETE FROM QUESTION WHERE no = #{no}
     </delete>
 
-
     <!-- 조건에 해당하는 게시글 개수 -->
     <select id="countQuestions" resultType="int">
-        SELECT count(*) FROM question
+        SELECT count(*) FROM QUESTION
         WHERE 1=1
-        <if test="category == null">
-            AND category != 10
-        </if>
         <if test="category != null">
-            <if test="category != 10">
-                AND category != 10
-            </if>
             AND category = #{category}
         </if>
         <if test="searchType == 'title' and keyword != null">
-            AND title LIKE '%' || #{keyword} || '%'
+            AND title LIKE CONCAT('%', #{keyword}, '%')
         </if>
         <if test="searchType == 'content' and keyword != null">
-            AND content LIKE '%' || #{keyword} || '%'
+            AND content LIKE CONCAT('%', #{keyword}, '%')
         </if>
         <if test="searchType == 'both' and keyword != null">
-            AND (title LIKE '%' || #{keyword} || '%' OR content LIKE '%' || #{keyword} || '%')
+            AND (title LIKE CONCAT('%', #{keyword}, '%') OR content LIKE CONCAT('%', #{keyword}, '%'))
         </if>
     </select>
-
-
 
     <!-- 조회수 증가 -->
     <update id="increaseViews">
@@ -122,20 +109,18 @@
         WHERE no = #{no}
     </update>
 
-
     <!-- 답변 등록 시 카테고리 변경 -->
     <update id="updateCategory">
-        UPDATE question
+        UPDATE QUESTION
         SET category = (
             CASE
-                WHEN EXISTS (SELECT 1 FROM answer WHERE question.no = answer.no)
+                WHEN EXISTS (SELECT 1 FROM ANSWER WHERE QUESTION.no = ANSWER.no)
                     THEN 20
                 ELSE 30
                 END
             )
         WHERE no = #{no}
     </update>
-
 
     <!-- 공지사항 조회 -->
     <select id="findNotice" resultType="QuestionVO">
@@ -151,69 +136,7 @@
         FROM QUESTION
         WHERE category = 10
         ORDER BY no DESC
-        FETCH FIRST 3 ROWS ONLY
-    </select>
-
-    <!-- 내 글 보기 -->
-    <select id="findMyQuestion" resultType="QuestionVO">
-        SELECT *
-        FROM (
-            SELECT a.*, rownum rnum
-            FROM (
-                SELECT
-                    no,
-                    category,
-                    views,
-                    id,
-                    title,
-                    content,
-                    create_date AS createDate,
-                    update_date AS updateDate
-                FROM QUESTION
-                WHERE id = #{id}
-
-                <if test="searchCond.category == null">
-                    AND category != 10
-                </if>
-                <if test="searchCond.category != null">
-                    AND category = #{searchCond.category}
-                </if>
-                <if test="searchCond.searchType == 'title' and searchCond.keyword != null">
-                    AND title LIKE '%' || #{searchCond.keyword} || '%'
-                </if>
-                <if test="searchCond.searchType == 'content' and searchCond.keyword != null">
-                    AND content LIKE '%' || #{searchCond.keyword} || '%'
-                </if>
-                <if test="searchCond.searchType == 'both' and searchCond.keyword != null">
-                    AND (title LIKE '%' || #{searchCond.keyword} || '%' OR content LIKE '%' || #{searchCond.keyword} || '%')
-                </if>
-                ORDER BY no DESC
-            ) a WHERE rownum &lt;= #{pagination.start} + #{pagination.size}
-        ) WHERE rnum &gt; #{pagination.start}
-    </select>
-
-    <!-- 본인 글 개수 count -->
-    <select id="countMyQuestions" resultType="int">
-        SELECT count(*) FROM question
-        WHERE id = #{id}
-        <if test="category == null">
-            AND category != 10
-        </if>
-        <if test="category != null">
-            <if test="category != 10">
-                AND category != 10
-            </if>
-            AND category = #{category}
-        </if>
-        <if test="searchType == 'title' and keyword != null">
-            AND title LIKE '%' || #{keyword} || '%'
-        </if>
-        <if test="searchType == 'content' and keyword != null">
-            AND content LIKE '%' || #{keyword} || '%'
-        </if>
-        <if test="searchType == 'both' and keyword != null">
-            AND (title LIKE '%' || #{keyword} || '%' OR content LIKE '%' || #{keyword} || '%')
-        </if>
+        LIMIT 3
     </select>
 
 </mapper>

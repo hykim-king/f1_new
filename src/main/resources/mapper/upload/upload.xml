@@ -7,10 +7,9 @@
     SELECT
         TO_CHAR(upload_date, 'MM/DD') AS uploadDate,
         COUNT(DECODE(u1, 1, 1)) AS u1,
-        COUNT(DECODE(u2, 1, 1)) AS u2,
-        COUNT(DECODE(u3, 1, 1)) AS u3
+        COUNT(DECODE(u2, 1, 1)) AS u2
     FROM
-        upload_image
+        UPLOAD_IMAGE
     WHERE TO_CHAR(upload_date, 'MM') = TO_CHAR(TO_DATE(#{uploadDate}), 'MM')
     GROUP BY TO_CHAR(upload_date, 'MM/DD')
     ORDER BY uploadDate
@@ -20,10 +19,9 @@
   <select id="totalFeedback" resultType="FileUploadVO">
     SELECT
         COUNT(DECODE(u1, 1, 1)) AS u1,
-        COUNT(DECODE(u2, 1, 1)) AS u2,
-        COUNT(DECODE(u3, 1, 1)) AS u3
+        COUNT(DECODE(u2, 1, 1)) AS u2
     FROM
-        upload_image
+        UPLOAD_IMAGE
   </select>
   
   <!-- 카테고리별 사진 목록 조회 -->
@@ -39,7 +37,7 @@
                 SELECT ROWNUM AS rnum, T1.*
                 FROM (
                     SELECT *
-                    FROM upload_image
+                    FROM UPLOAD_IMAGE
                     WHERE category = #{category}
                     AND checked = 0
                     ORDER BY upload_date DESC
@@ -51,7 +49,7 @@
         CROSS JOIN
         (
             SELECT COUNT(*) AS totalCnt
-            FROM upload_image
+            FROM UPLOAD_IMAGE
             WHERE category = #{category}
             AND checked = 0
         )B
@@ -70,7 +68,7 @@
                 SELECT ROWNUM AS rnum, T1.*
                 FROM (
                 SELECT *
-                    FROM upload_image
+                    FROM UPLOAD_IMAGE
                     WHERE category in (10, 20, 30)
                     AND checked = 0
                     ORDER BY upload_date DESC
@@ -82,7 +80,7 @@
         CROSS JOIN
         (
             SELECT COUNT(*) AS totalCnt
-            FROM upload_image
+            FROM UPLOAD_IMAGE
             WHERE category in (10, 20, 30)
             AND checked = 0
         )B
@@ -91,47 +89,45 @@
   <!-- 사진 상세 조회 -->
   <select id="doSelectOne" parameterType="FileUploadVO" resultType="FileUploadVO">
     SELECT
-        idx,
-        id,
-        category,
-        TO_CHAR(upload_date, 'YYYY-MM-DD HH24:MI:SS') AS uploadDate,
-        name,
-        url,
-        file_size AS fileSize,
-        checked,
-        u1,
-        u2,
-        u3
+      idx,
+      id,
+      category,
+      DATE_FORMAT(upload_date, '%Y-%m-%d %H:%i:%s') AS uploadDate,
+      name,
+      url,
+      file_size AS fileSize,
+      checked,
+      u1,
+      u2
     FROM
-        upload_image
+      UPLOAD_IMAGE
     WHERE
-        name = #{name}
+      name = #{name}
   </select>
+
   
   <!-- 사진 수정 -->
   <update id="doUpdate" parameterType="FileUploadVO">
-    UPDATE upload_image
+    UPDATE UPLOAD_IMAGE
     SET
       url      = #{url},
       category = #{category},
       checked  = #{checked},
       u1       = #{u1},
-      u2       = #{u2},
-      u3       = #{u3}
+      u2       = #{u2}
     WHERE
       name = #{name}
   </update>
   
   <!-- 사진 삭제 -->
   <delete id="doDelete" parameterType="FileUploadVO">
-    DELETE FROM upload_image
+    DELETE FROM UPLOAD_IMAGE
     WHERE name = #{name}
   </delete>
   
   <!-- 사진 업로드 -->
   <insert id="doSave" parameterType="FileUploadVO">
-    INSERT INTO upload_image (
-        idx,
+    INSERT INTO UPLOAD_IMAGE (
         id,
         category,
         upload_date,
@@ -140,10 +136,9 @@
         file_size,
         checked
     ) VALUES (
-        upload_seq.NEXTVAL, <!-- upload_seq.NEXTVAL -->
         #{id},
-        10,
-        SYSDATE,
+        #{category},
+        NOW(),
         #{name},
         #{url},
         #{fileSize},
