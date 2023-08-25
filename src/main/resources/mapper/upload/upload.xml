@@ -7,7 +7,8 @@
 	  SELECT
 	      DATE_FORMAT(upload_date, '%m/%d') AS uploadDate,
 	      SUM(CASE WHEN u1 = 1 THEN 1 ELSE 0 END) AS u1,
-	      SUM(CASE WHEN u2 = 1 THEN 1 ELSE 0 END) AS u2
+	      SUM(CASE WHEN u2 = 1 THEN 1 ELSE 0 END) AS u2,
+	      SUM(CASE WHEN u3 = 1 THEN 1 ELSE 0 END) AS u3
 	  FROM
 	      UPLOAD_IMAGE
 	  WHERE MONTH(upload_date) = MONTH(STR_TO_DATE(#{uploadDate}, '%Y-%m-%d'))
@@ -19,7 +20,8 @@
 	<select id="totalFeedback" resultType="FileUploadVO">
 	  SELECT
 	      SUM(CASE WHEN u1 = 1 THEN 1 ELSE 0 END) AS u1,
-	      SUM(CASE WHEN u2 = 1 THEN 1 ELSE 0 END) AS u2
+	      SUM(CASE WHEN u2 = 1 THEN 1 ELSE 0 END) AS u2,
+	      SUM(CASE WHEN u3 = 1 THEN 1 ELSE 0 END) AS u3
 	  FROM
 	      UPLOAD_IMAGE
 	</select>
