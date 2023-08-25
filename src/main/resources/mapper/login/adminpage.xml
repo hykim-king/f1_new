@@ -6,8 +6,8 @@
           <result column="password"      property="password"  />
           <result column="email"         property="email"/>
           <result column="grade"         property="grade"/>
-          <result column="reg_date"          property="regdate"/>
-          <result column="no"        property="no"/>
+          <result column="reg_date"      property="regdate"/>
+          <result column="no"            property="no"/>
   </resultMap>
     <!-- 페이징 + 검색 -->
      <select id="member" parameterType="hashMap" resultMap="MemberMap">
