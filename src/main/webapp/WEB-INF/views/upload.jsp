@@ -79,8 +79,4 @@
   <%@include file ="/WEB-INF/views/layout/footer.jsp"%>
 </div>
 
-<footer>
-  <%@include file ="/WEB-INF/views/layout/footer.jsp" %>
- </footer>
-
-  <script src="/resources/js/upload/upload.js"></script>
+<script src="/resources/js/upload/upload.js"></script>
