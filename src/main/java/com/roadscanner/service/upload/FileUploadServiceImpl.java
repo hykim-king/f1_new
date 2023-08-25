@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Reader;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -11,7 +12,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.ibatis.io.Resources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -50,10 +50,9 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 
 		int flag = 0;
 
-		String absolutePath = "f1_new/src/main/java/config/upload.properties";
-		Reader reader = new FileReader(absolutePath);
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("config/upload.properties");
 		Properties properties = new Properties();
-		properties.load(reader);
+		properties.load(inputStream);
 
 		String accessKey = properties.getProperty("cloud.aws.credentials.accessKey");
 		String secretKey = properties.getProperty("cloud.aws.credentials.secretKey");
@@ -154,10 +153,9 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 		LOG.debug("│   deleteFileToS3   │");
 		LOG.debug("└────────────────────┘");
 
-		String absolutePath = "f1_new/src/main/java/config/upload.properties";
-		Reader reader = new FileReader(absolutePath);
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("config/upload.properties");
 		Properties properties = new Properties();
-		properties.load(reader);
+		properties.load(inputStream);
 
 		String accessKey = properties.getProperty("cloud.aws.credentials.accessKey");
 		String secretKey = properties.getProperty("cloud.aws.credentials.secretKey");
@@ -204,10 +202,9 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 		LOG.debug("│UploadFile to Bucket│");
 		LOG.debug("└────────────────────┘");
 
-		String absolutePath = "f1_new/src/main/java/config/upload.properties";
-		Reader reader = new FileReader(absolutePath);
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("config/upload.properties");
 		Properties properties = new Properties();
-		properties.load(reader);
+		properties.load(inputStream);
 
 		// AWS 자격 증명 설정
 		String accessKey = properties.getProperty("cloud.aws.credentials.accessKey");
