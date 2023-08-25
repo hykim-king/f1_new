@@ -2,6 +2,7 @@ package com.roadscanner.service.upload;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.sql.SQLException;
@@ -51,6 +52,7 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 
 		String absolutePath = "f1_new/src/main/java/config/upload.properties";
 		Reader reader = new FileReader(absolutePath);
+		Properties properties = new Properties();
 		properties.load(reader);
 
 		String accessKey = properties.getProperty("cloud.aws.credentials.accessKey");
@@ -154,6 +156,7 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 
 		String absolutePath = "f1_new/src/main/java/config/upload.properties";
 		Reader reader = new FileReader(absolutePath);
+		Properties properties = new Properties();
 		properties.load(reader);
 
 		String accessKey = properties.getProperty("cloud.aws.credentials.accessKey");
@@ -203,6 +206,7 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 
 		String absolutePath = "f1_new/src/main/java/config/upload.properties";
 		Reader reader = new FileReader(absolutePath);
+		Properties properties = new Properties();
 		properties.load(reader);
 
 		// AWS 자격 증명 설정
