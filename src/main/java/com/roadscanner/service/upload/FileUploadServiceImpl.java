@@ -195,25 +195,30 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 		LOG.debug("┌────────────────────┐");
 		LOG.debug("│UploadFile to Bucket│");
 		LOG.debug("│Bucket properties: "+region+bucket);
-		LOG.debug("└────────────────────┘");
 
 		// 파일 이름 형식(yyyyMMddHH24MISS_원본파일명), 등록일, url, 파일 크기 설정
 		Date currentDate = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+		LOG.debug("│*******************1│");
 
 		String datestr = dateFormat.format(currentDate);
 		String fileName = datestr + "_" + file.getOriginalFilename();
 		String url = "https://" + bucket + ".S3." + region + ".amazonaws.com/" + fileName;
 		int fileSize = (int) (file.getSize() / 1024);
+		LOG.debug("│*******************2│");
 
 		File convertedFile = new File(file.getOriginalFilename());
 		try (FileOutputStream fos = new FileOutputStream(convertedFile)) {
 			fos.write(file.getBytes());
 		}
+		LOG.debug("│*******************3│");
 
 		S3Client s3Client = S3Client.builder().region(Region.of(region))
 				.credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(accessKey, secretKey)))
 				.build();
+		LOG.debug("│*******************4│");
+		
+		LOG.debug("└────────────────────┘");
 
 		try {
 			PutObjectRequest request = PutObjectRequest.builder().bucket(bucket).key(fileName).build();
