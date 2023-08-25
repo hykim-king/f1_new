@@ -1,5 +1,6 @@
+<header>
   <%@include file ="/WEB-INF/views/layout/header.jsp" %>
-  
+</header>  
 <%@ page import="org.springframework.ui.Model"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -73,6 +74,7 @@
     </form>
   </div>
 </div> 
-
+<footer>
   <%@include file ="/WEB-INF/views/layout/footer.jsp" %>
+ </footer>
   <script src="/resources/js/upload/upload.js"></script>

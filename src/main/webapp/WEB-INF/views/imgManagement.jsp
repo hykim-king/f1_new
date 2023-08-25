@@ -1,5 +1,6 @@
+<header>
   <%@include file ="/WEB-INF/views/layout/header.jsp" %>
-
+</header>
 <%@page import="com.roadscanner.domain.upload.FileUploadVO"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -195,6 +196,7 @@
   
 <script src="${CP}/resources/js/imgMng.js"></script>
 </body>
-
+<footer>
   <%@include file ="/WEB-INF/views/layout/footer.jsp" %>
+ </footer>
   <link rel="stylesheet" href="${CP}/resources/css/imgMng.css" >
