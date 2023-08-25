@@ -103,7 +103,8 @@
       file_size AS fileSize,
       checked,
       u1,
-      u2
+      u2,
+      u3
     FROM
       UPLOAD_IMAGE
     WHERE
@@ -119,7 +120,8 @@
       category = #{category},
       checked  = #{checked},
       u1       = #{u1},
-      u2       = #{u2}
+      u2       = #{u2},
+      u3       = #{u3}
     WHERE
       name = #{name}
   </update>
