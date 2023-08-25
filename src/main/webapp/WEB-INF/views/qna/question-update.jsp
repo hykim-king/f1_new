@@ -33,7 +33,7 @@
                 <div class="input-group">
                     <input type="file" id="attachFile" name="attachFile" class="form-control" accept="image/*" style="display:none;">
                     <button class="btn btn-outline-secondary" type="button" id="btn-select-file">파일 선택</button>
-                    <input type="text" id="fileText" class="form-control" value="${question.originalFilename}" readonly>
+                    <input type="text" id="fileText" class="form-control" value="${question.originalFilename}" placeholder="첨부 파일 없음" readonly>
                     <button id="btn-remove-file" class="btn btn-outline-secondary" type="button">삭제</button>
                     <input type="hidden" id="isFileChanged" name="isFileChanged" value="false">
                 </div>

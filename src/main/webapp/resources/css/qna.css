@@ -2,7 +2,6 @@
     text-decoration: none;
     color: inherit;
 }
-
 .qna-title-link:hover {
     color: inherit;
 }
@@ -15,6 +14,9 @@
 }
 .notice-title {
     font-weight: bold; /* 공지 제목 굵게 표시 */
+}
+.notice-row {
+	background-color: #DCDCDC;
 }
 #category {
     border-color:secondary;
@@ -32,7 +34,7 @@
     box-shadow:none;
 }
 .table-group-divider {border-color: #DCDCDC;}
-#gongTable {background-color: #F0F0F0;}
+#gongTable {background-color: #DCDCDC;}
 #gong {background-color: #F87217;}
 #wan {background-color: #024089;}
 #dae {
@@ -110,6 +112,35 @@
 #attachFile {
     outline:none;
     box-shadow:none;
+}
+#fileText {
+    outline:none;
+    box-shadow:none;
+}
+#fileText:active, #fileText:focus {
+    outline:none;
+    box-shadow:none;
+    border-color:#ced4da;
+}
+#btn-select-file {
+    background-color: #DCDCDC;
+    color: #6c757d;
+    border-color: #c2c2c2;
+    border-radius: 5px 0 0 5px;
+}
+#btn-select-file:hover {
+    background-color: #6c757d;
+    color: white;
+    border-color: #c2c2c2;
+}
+#btn-remove-file {
+    color: #6c757d;
+    border-color: #c2c2c2;
+}
+#btn-remove-file:hover {
+    background-color: #DCDCDC;
+    color: #6c757d;
+    border-color: #c2c2c2;
 }
 #content {
     outline:none;
