@@ -52,11 +52,11 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
       
     });   // $("#withdraw") click 
 
-  $("#cancel").on("click", function(){
+  $("#cancle").on("click", function(){
 
     	window.location.href="/main/preUpload";
     
-  });   // $("#cancel") click
+  });   // $("#cancle") click
    
   $("#update").on("click", function(){
     if(""==$("#rpassword").val() || 0==$("#rpassword").val().length){

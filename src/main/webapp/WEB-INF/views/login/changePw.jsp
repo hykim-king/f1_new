@@ -9,7 +9,7 @@
   <%@include file ="/WEB-INF/views/layout/navbar.jsp" %>
 
 <body id="font-id" class="d-flex flex-column">
- <h3 style="text-align: center; margin-top: 100px; margin-bottom: 40px;">비밀번호 재설정 페이지</h3>
+ <h3 style="text-align: center; margin-top: 100px;">비밀번호 재설정 페이지</h3>
   <div id="container">
       <form>
         <fieldset id="none-border">
@@ -19,7 +19,7 @@
               <div style="display: flex;">
 	              <input class="form-control" type="text" id="remail" placeholder="이메일 주소" onkeyup="check_email(event)"
 	                     style="width: 700px; margin-right: 50px;">
-	              <input type="button" class="btn btn-outline-primary" id="emailDulpCheck" value="유저 확인">
+	              <input type="button" class="btn btn-warning" id="emailDulpCheck" value="유저 확인" style="color:white;">
               </div>
             </li>
             <li>
@@ -47,9 +47,8 @@
         <input type="hidden" name="emailok" id="emailok"> 
     </div>
     <div class="update_btn">
-      <input type="button" class="btn btn-outline-primary" id="changePw" value="변경">
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <input type="button" class="btn btn-outline-danger" id="cancle" value="취소">
+      <input type="button" class="btn btn-warning" id="changePw" value="변경" style="color:white;">
+      <input type="button" class="btn btn-secondary" id="cancle" value="취소">
     </div>
 
 
