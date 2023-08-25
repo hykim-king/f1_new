@@ -49,9 +49,8 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 
 		int flag = 0;
 
-		String resource = "config/upload.properties";
-		Properties properties = new Properties();
-		Reader reader = Resources.getResourceAsReader(resource);
+		String absolutePath = "f1_new/src/main/java/config/upload.properties";
+		Reader reader = new FileReader(absolutePath);
 		properties.load(reader);
 
 		String accessKey = properties.getProperty("cloud.aws.credentials.accessKey");
@@ -153,9 +152,8 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 		LOG.debug("│   deleteFileToS3   │");
 		LOG.debug("└────────────────────┘");
 
-		String resource = "config/upload.properties";
-		Properties properties = new Properties();
-		Reader reader = Resources.getResourceAsReader(resource);
+		String absolutePath = "f1_new/src/main/java/config/upload.properties";
+		Reader reader = new FileReader(absolutePath);
 		properties.load(reader);
 
 		String accessKey = properties.getProperty("cloud.aws.credentials.accessKey");
@@ -163,7 +161,7 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 		String bucketName = properties.getProperty("cloud.aws.s3.bucket");
 		String region = properties.getProperty("cloud.aws.region.static");
 		String objectKey = inVO.getName(); // 파일의 키
-
+                
 		// AWS credentials 설정
 		BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
 
@@ -203,9 +201,8 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 		LOG.debug("│UploadFile to Bucket│");
 		LOG.debug("└────────────────────┘");
 
-		String resource = "config/upload.properties";
-		Properties properties = new Properties();
-		Reader reader = Resources.getResourceAsReader(resource);
+		String absolutePath = "f1_new/src/main/java/config/upload.properties";
+		Reader reader = new FileReader(absolutePath);
 		properties.load(reader);
 
 		// AWS 자격 증명 설정
