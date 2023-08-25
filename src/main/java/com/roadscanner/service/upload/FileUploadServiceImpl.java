@@ -207,9 +207,12 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 		int fileSize = (int) (file.getSize() / 1024);
 		LOG.debug("│*******************2│");
 
-		File convertedFile = new File(file.getOriginalFilename());
+		File convertedFile = new File("/tmp/" + file.getOriginalFilename()); // 임시 디렉토리에 저장
 		try (FileOutputStream fos = new FileOutputStream(convertedFile)) {
-			fos.write(file.getBytes());
+		    fos.write(file.getBytes());
+		} catch (IOException e) {
+		    e.printStackTrace();
+		    LOG.debug("Error: " + e.getMessage());
 		}
 		LOG.debug("│*******************3│");
 
