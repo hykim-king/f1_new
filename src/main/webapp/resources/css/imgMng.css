@@ -131,6 +131,10 @@
     font-family: 'NanumSquareNeo';
 	  font-size: 15px;
 	  color: #222222;
+	  width: 650px;
+  }
+  .detail_table th {
+    width: 150px;
   }
 	.overlay-modal {
 	  position: fixed;

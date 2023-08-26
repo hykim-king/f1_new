@@ -95,7 +95,7 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
 		}
 	
 		if("ok" != document.getElementById('idok').value) {
-			alert("아이디 인증을 진해하십시오.");
+			alert("아이디 인증을 진행하세요.");
 		    return false;
 		}
 	
@@ -110,7 +110,7 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
 		}
 		
 		if("" == document.getElementById('checkInput').value){
-			alert("이메일 인증을 진행해 주십시오.");
+			alert("이메일 인증을 진행해주세요.");
 		    return false;
 		}
 		
@@ -174,7 +174,7 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
 	    
 	    $.ajax({
 	        type: "POST",
-	        url:"$/idDulpCheck",
+	        url:"/idDulpCheck",
 	        dataType:"html",
 	        data:{
 	        	id: $("#id_form").val()

@@ -158,13 +158,13 @@ if (strReferer == null) {
 			</div>
 			<div class="divider"></div>
 			<div class="right">
-				<table class="table detail_table" style="width: 550px;">
+				<table class="table detail_table">
 					<tr>
 						<th class="text-center fw-bold">번호</th>
 						<td id="idx"></td>
 					</tr>
 					<tr>
-						<th class="text-center fw-bold">이름</th>
+						<th class="text-center fw-bold" style="vertical-align: middle;">이름</th>
 						<td id="name"></td>
 					</tr>
 					<tr>
