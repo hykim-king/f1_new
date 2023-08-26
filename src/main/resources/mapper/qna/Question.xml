@@ -178,7 +178,8 @@
 		            AND (title LIKE CONCAT('%', #{searchCond.keyword}, '%') OR content LIKE CONCAT('%', #{searchCond.keyword}, '%'))
 		        </if>
 		        ORDER BY no DESC
-		        LIMIT #{pagination.start}, #{pagination.size}
+            WHERE b.rnum &lt;= #{pagination.start} + #{pagination.size}
+            AND b.rnum &gt; #{pagination.start}
 		    ) a
 		</select>
 
