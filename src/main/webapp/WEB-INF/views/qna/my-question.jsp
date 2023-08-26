@@ -5,7 +5,7 @@
 <%@include file ="/WEB-INF/views/layout/navbar.jsp" %>
 </header>
 <body>
-    <div class="container mt-4">
+    <div class="container mt-5">
         <h1 class="mb-4"><a href="/qna/my" class="qna-title-link">내 문의글 보기</a></h1>
 
         <form class="mb-3" name="searchFrm" action="/qna/my" method="get">

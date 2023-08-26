@@ -40,6 +40,12 @@ function check_pw() {
 $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하는 영역
    console.log("document ready");
    
+   $("#myQnAboard").on("click", function(){
+	   
+	   window.location.href="/qna/my";
+	   
+   });
+   
    $("#login").on("click", function(){
      
      window.location.href="/login";
