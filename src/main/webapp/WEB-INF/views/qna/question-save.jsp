@@ -5,7 +5,7 @@
 <%@include file ="/WEB-INF/views/layout/navbar.jsp" %>
 </header>
 <body>
-    <form class="container mt-4" id="question-form">
+    <form class="container mt-5" id="question-form">
         <h1 class="mb-4"><a href="/qna" class="qna-title-link">Q&A 게시판</a></h1>
         <div class="row align-items-center">
 	        <c:choose>

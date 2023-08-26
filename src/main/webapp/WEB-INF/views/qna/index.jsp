@@ -118,7 +118,7 @@
                 <c:forEach items="${questions}" var="question">
                     <c:choose>
                         <c:when test="${question.category == 10}">
-                            <tr class="table notice-row" id="gongTable" style="background-color: #DCDCDC;">
+                            <tr class="table notice-row" id="gongTable">
                                 <c:if test="${user.grade == 2}">
                                    <td class="text-center">
                                        <input type="checkbox" class="delete-checkbox" value="${question.no}">
