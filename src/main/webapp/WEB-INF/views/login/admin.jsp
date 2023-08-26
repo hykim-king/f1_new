@@ -8,18 +8,6 @@
       response.sendRedirect("/login");
     }
 %>
-<%
- String strReferer = request.getHeader("referer");
- if(strReferer == null){
-%>
- <script language="javascript">
-  alert("접속을 차단합니다.");
-  document.location.href="/login";
- </script>
-<%
- return;
- }
-%>
 <!-- CSS -->
 <link  rel="stylesheet" href="${CP}/resources/css/admin.css" >
 
@@ -62,6 +50,14 @@
         <h4><a href="${CP}/login">Go To 로그인</a></h4>
     </div>            
 </c:if> <!-- 유저 정보X-end -->
+
+  <%-- 세션이 없이 해당 페이지 진입하면 로그인 페이지로 이동 --%>
+  <c:if test="${user.grade != 2}">
+    <script>     
+        window.location.href = "/login";
+    </script>   
+  </c:if>
+
 </body>
 <div style="position:relative ">
   <%@include file ="/WEB-INF/views/layout/footer.jsp" %>

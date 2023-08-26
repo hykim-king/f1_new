@@ -9,7 +9,6 @@
       response.sendRedirect("/login");
     }
 %>
-
 <!-- CSS -->
 <link rel="stylesheet" href="/resources/css/graph.css" >
 <script src="https://kit.fontawesome.com/726783c905.js" crossorigin="anonymous"></script>
@@ -77,6 +76,13 @@
 		  </div> <!-- accordion-item -->
 		</div>   
   </div> <!--container -->
+  
+  <%-- 세션이 없이 해당 페이지 진입하면 로그인 페이지로 이동 --%>
+  <c:if test="${user.grade != 2}">
+    <script>     
+        window.location.href = "/login";
+    </script>   
+  </c:if>
 
   <%@include file ="/WEB-INF/views/layout/footer.jsp" %>
 

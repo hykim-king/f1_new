@@ -14,18 +14,6 @@ if (session.getAttribute("user") == null) {
 	response.sendRedirect("/login");
 }
 %>
-<%
-	String strReferer = request.getHeader("referer");
-if (strReferer == null) {
-%>
-<script language="javascript">
-	alert("접속을 차단합니다.");
-	document.location.href = "${CP}/login";
-</script>
-<%
-	return;
-}
-%>
 <link rel="stylesheet" href="${CP}/resources/css/imgMng.css">
 
 <%@include file="/WEB-INF/views/layout/navbar.jsp"%>
@@ -206,6 +194,13 @@ if (strReferer == null) {
 		</div>
 	</div>
 	<!-- 모달 창  end -->
+	
+  <%-- 세션이 없이 해당 페이지 진입하면 로그인 페이지로 이동 --%>
+  <c:if test="${user.grade != 2}">
+    <script>     
+        window.location.href = "/login";
+    </script>   
+  </c:if>
 
 	<%@include file="/WEB-INF/views/layout/footer.jsp"%>
 	<script src="${CP}/resources/js/imgMng.js"></script>
