@@ -13,9 +13,6 @@ h1, h2, h3, thead, .badge {
 
 footer {
 	  font-family: 'NanumSquareNeo', sans-serif;
-	  position: absolute; 
-	  bottom:0;
-	  width: 100%;
 }
 
 .roadscanner {
