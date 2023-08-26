@@ -28,8 +28,8 @@
           <li class="nav-item">
             <a class="nav-link" href="${CP}/main/preUpload">사진 업로드</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">게시판</a>
+          <li class="nav-item" style="font-size: 18px;">
+            <a class="nav-link" href="${CP}/qna">게시판</a>
           </li>
         </c:if>
         <c:if test="${user.grade == 2}">
