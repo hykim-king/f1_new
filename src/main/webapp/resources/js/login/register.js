@@ -114,10 +114,16 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
 		    return false;
 		}
 		
+		if("1" == document.getElementById('auth').value) {
+			alert("이메일 인증번호를 전송하지 않았습니다. 인증 후 가입을 진행해주세요");
+			return false;
+		}
+		
 		if( document.getElementById('checkInput').value != code){
 			alert("이메일 인증번호가 다릅니다.");
 		    return false;
 		}
+		
 	          
 		$.ajax({
 		    type: "POST",
@@ -280,9 +286,9 @@ $('#mail-Check-Btn').click(function() {
 	        url : "mailCheck?email=" + email,
 	        success : function(data) {
 
-		    console.log("data : " + data);
 		    $('#checkInput').attr('disabled', false);
 		    code = data;
+		    $('#auth').attr('value', 2);
 		    alert('인증번호가 전송되었습니다.')
 	        }
 	    

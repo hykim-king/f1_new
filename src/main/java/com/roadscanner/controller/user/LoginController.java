@@ -159,7 +159,7 @@ public class LoginController {
             
         } else {
             message.setMsgId("99");
-            message.setMsgContents("알수 없는 오류");            
+            message.setMsgContents("알 수 없는 오류");            
         }
         
         jsonString = new Gson().toJson(message);

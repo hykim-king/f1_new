@@ -9,18 +9,7 @@
       response.sendRedirect("/login");
     }
 %>
-<%
- String strReferer = request.getHeader("referer");
- if(strReferer == null){
-%>
- <script language="javascript">
-  alert("접속을 차단합니다.");
-  document.location.href="${CP}/login";
- </script>
-<%
- return;
- }
-%>  
+
 <!-- CSS -->
 <link rel="stylesheet" href="/resources/css/graph.css" >
 <script src="https://kit.fontawesome.com/726783c905.js" crossorigin="anonymous"></script>
