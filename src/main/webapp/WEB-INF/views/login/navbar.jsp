@@ -25,7 +25,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav me-auto mb-md-0">
         <c:if test="${user ne null}">
-          <li class="nav-item">
+          <li class="nav-item" style="font-size: 18px;">
             <a class="nav-link" href="${CP}/main/preUpload">사진 업로드</a>
           </li>
           <li class="nav-item" style="font-size: 18px;">
