@@ -20,66 +20,66 @@
 <body id="font-id" class="d-flex flex-column min-vh-100">
   <!-- 일반 -->
   <c:if  test="${user ne null}">
-	  <c:if test="${user.grade == 1}">
-	     <h2 style="text-align: center; margin-top: 50px;"><span style="color:#666666;">${user.id}</span>님 의 마이페이지</h2>
-	  </c:if>
-	  <!-- 관리자 -->
-	  <c:if test="${user.grade == 2}">
-	     <h2 style="text-align: center; margin-top: 50px;">관리자 <span style="color:#ffc107;">${user.id}</span>님 의 마이페이지</h2>
-	  </c:if>
-		  <div id="container">
-				  <form>
-				    <fieldset style="border:0 solid black;">
-				      <ul class="list-group" id="for-margin-id" style="list-style: none;">
-					      <li>
-						      <label>아이디</label><br/>
-						      <input class="form-control" type="text" id="rid" readonly="readonly" value="${user.id}">
-						    </li>
-						    <li>
-						      <label>비밀번호 수정</label><br/>
-						      <input class="form-control" type="password" id="rpassword" placeholder="문자, 숫자, 특수문자 포함 (8~20글자)" onchange="check_pw()">
-						    </li>
-						    <li>
-						      <label>비밀번호 확인</label>
-						      <label id="pw_check" style="margin-left: 10px;"></label><br/>
-						      <input class="form-control" type="password" id="rpassword2" placeholder="비밀번호 재입력" onchange="check_pw()">
-						    </li>
-						    <li>
-						      <label>이메일</label><br/>
-						      <input class="form-control" type="text" id="remail" readonly="readonly" value="${user.email}">
-						    </li>
-					    </ul>
-					    <input type="hidden" id="upw"  value="${user.password}">
-				    </fieldset>
-				  </form>
-				</div>
-				
-				<div class="update_btn">
-			    <input type="button" class="btn btn-warning" style="color:white;" id="update" value="수정">
-			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			    <input type="button" class="btn btn-secondary" id="cancel"  value="취소">    
-		    </div>
-		    
-		    <c:if test="${user.grade == 1}">
-			    <div class="qna_btn">
-			       <input type="button" class="btn btn-outline-dark" id="myQnAboard" value="내 QnA보기">
-			    </div>
-			    <div class="draw_btn">
-			       <input type="button" class="btn btn-outline-dark" id="withdraw" value="탈퇴">
-			    </div>
-		    </c:if>
-	</c:if>
+    <c:if test="${user.grade == 1}">
+       <h2 style="text-align: center; margin-top: 50px;"><span style="color:#666666;">${user.id}</span>님 의 마이페이지</h2>
+    </c:if>
+    <!-- 관리자 -->
+    <c:if test="${user.grade == 2}">
+       <h2 style="text-align: center; margin-top: 50px;">관리자 <span style="color:#ffc107;">${user.id}</span>님 의 마이페이지</h2>
+    </c:if>
+      <div id="container">
+          <form>
+            <fieldset style="border:0 solid black;">
+              <ul class="list-group" id="for-margin-id" style="list-style: none;">
+                <li>
+                  <label>아이디</label><br/>
+                  <input class="form-control" type="text" id="rid" readonly="readonly" value="${user.id}">
+                </li>
+                <li>
+                  <label>비밀번호 수정</label><br/>
+                  <input class="form-control" type="password" id="rpassword" placeholder="문자, 숫자, 특수문자 포함 (8~20글자)" onchange="check_pw()">
+                </li>
+                <li>
+                  <label>비밀번호 확인</label>
+                  <label id="pw_check" style="margin-left: 10px;"></label><br/>
+                  <input class="form-control" type="password" id="rpassword2" placeholder="비밀번호 재입력" onchange="check_pw()">
+                </li>
+                <li>
+                  <label>이메일</label><br/>
+                  <input class="form-control" type="text" id="remail" readonly="readonly" value="${user.email}">
+                </li>
+              </ul>
+              <input type="hidden" id="upw"  value="${user.password}">
+            </fieldset>
+          </form>
+        </div>
+        
+        <div class="update_btn">
+          <input type="button" class="btn btn-warning" style="color:white;" id="update" value="수정">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="button" class="btn btn-secondary" id="cancel"  value="취소">    
+        </div>
+        
+        <c:if test="${user.grade == 1}">
+          <div class="qna_btn">
+             <input type="button" class="btn btn-outline-dark" id="myQnAboard" value="내 QnA보기">
+          </div>
+          <div class="draw_btn">
+             <input type="button" class="btn btn-outline-dark" id="withdraw" value="탈퇴">
+          </div>
+        </c:if>
+  </c:if>
 
 </body>
 
   <%@include file ="footer.jsp" %>
-	<style>
-	  /* 부트스트랩 호버 수정 */
-	  .form-control:focus {
-	    box-shadow: none;
-	    border-color: #666666;
-	  }
-	</style>
+  <style>
+    /* 부트스트랩 호버 수정 */
+    .form-control:focus {
+      box-shadow: none;
+      border-color: #666666;
+    }
+  </style>
 <script>
 
 function check_pw() {
@@ -124,10 +124,10 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
    console.log("document ready");
    
    $("#myQnAboard").on("click", function(){
-	       
-	   window.location.href="/qna/my";
-	       
-	 });
+         
+     window.location.href="/qna/my";
+         
+   });
 
    
    $("#login").on("click", function(){
@@ -144,7 +144,7 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
 
   $("#cancel").on("click", function(){
 
-    	window.location.href="${CP}/main/preUpload";
+      window.location.href="${CP}/main/preUpload";
     
   });   // $("#cancel") click
    
@@ -156,43 +156,43 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
           
     } else {
 
-		    $.ajax({
-		          type: "POST",
-		          url:"${CP}/update",
-		          asyn:"true",
-		          dataType:"html",
-		          data:{
-		            id: $("#rid").val(),
-		            password: $("#rpassword").val(),
-		            email: $("#remail").val()
-		          },
-		          success:function(data){
-		              let parsedJSON = JSON.parse(data);
-		              
-		              // 업데이트 성공
-		              if("10" == parsedJSON.msgId) {
-		                alert(parsedJSON.msgContents);
-		                window.location.href="${CP}/logout";
-		              }
-		              
-		              // 업데이트  실패 (입력값 오류)
-		              if("20" == parsedJSON.msgId) {
-		                    alert(parsedJSON.msgContents);
-		                    return;
-		                }
-		              
-		              // 업데이트 실패 (현재 비밀번호와 동일한 값 입력)
-		              if("30" == parsedJSON.msgId) {
-		                    alert(parsedJSON.msgContents);
-		                    return;
-		                }           
-		              
-		            },
-		            error:function(data){//실패시 처리
-		              console.log("error:"+data);
-		            }
-		            
-		        });  // ajax end
+        $.ajax({
+              type: "POST",
+              url:"${CP}/update",
+              asyn:"true",
+              dataType:"html",
+              data:{
+                id: $("#rid").val(),
+                password: $("#rpassword").val(),
+                email: $("#remail").val()
+              },
+              success:function(data){
+                  let parsedJSON = JSON.parse(data);
+                  
+                  // 업데이트 성공
+                  if("10" == parsedJSON.msgId) {
+                    alert(parsedJSON.msgContents);
+                    window.location.href="${CP}/logout";
+                  }
+                  
+                  // 업데이트  실패 (입력값 오류)
+                  if("20" == parsedJSON.msgId) {
+                        alert(parsedJSON.msgContents);
+                        return;
+                    }
+                  
+                  // 업데이트 실패 (현재 비밀번호와 동일한 값 입력)
+                  if("30" == parsedJSON.msgId) {
+                        alert(parsedJSON.msgContents);
+                        return;
+                    }           
+                  
+                },
+                error:function(data){//실패시 처리
+                  console.log("error:"+data);
+                }
+                
+            });  // ajax end
         
     }   // else end
     

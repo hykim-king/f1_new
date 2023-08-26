@@ -203,7 +203,7 @@ public class FileUploadServiceImpl implements PcwkLogger, FileUploadService {
 		String datestr = dateFormat.format(currentDate);
 		String fileName = datestr + "_" + file.getOriginalFilename();
 		String url = "https://" + bucket + ".S3." + region + ".amazonaws.com/" + fileName;
-		int fileSize = (int) (file.getSize() / 1024);
+		double fileSize = file.getSize() / 1024.0;
 
 		File convertedFile = new File("/tmp/" + file.getOriginalFilename()); // 임시 디렉토리에 저장
 		try (FileOutputStream fos = new FileOutputStream(convertedFile)) {
