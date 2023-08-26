@@ -22,7 +22,7 @@
 	          backgroundColor: [
 	            '#C8E6C9',
 	            '#BBDEFB',
-	            '#FFFACD'
+	            '#FFCDD2'
 	          ],
 	          barThickness: 75
 	        }]
@@ -130,21 +130,21 @@
 		          datasets: [{
 		            data: u1List,
 		            label: '모양 오류',
-		            borderColor: 'red',
+		            borderColor: '#00c853',
 		            fill: false,
 		            tension: 0
 		          },
 		          {
 		            data: u2List,
 		            label: '색깔 오류',
-		            borderColor: 'blue',
+		            borderColor: '#304ffe',
 		            fill: false,
 		            tension: 0
 		          },
 		          {
 		        	  data: u3List,
 		        	  label: '그림/숫자 오류',
-		        	  borderColor: 'green',
+		        	  borderColor: '#f44336',
 		        	  fill: false,
 		        	  tension: 0
 		          }]
@@ -236,21 +236,21 @@
 			          datasets: [{
 			            data: u1List,
 			            label: '모양 오류',
-			            borderColor: 'red',
+			            borderColor: '#00c853',
 			            fill: false,
 			            tension: 0
 			          },
 			          {
 			            data: u2List,
 			            label: '색깔 오류',
-			            borderColor: 'blue',
+			            borderColor: '#304ffe',
 			            fill: false,
 			            tension: 0
 			          },
 			          {
 			        	  data: u3List,
 			        	  label: '그림/숫자 오류',
-			        	  borderColor: 'green',
+			        	  borderColor: '#f44336',
 			        	  fill: false,
 			        	  tension: 0
 			          }]

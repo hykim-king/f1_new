@@ -16,7 +16,6 @@
         FROM MEMBER
         WHERE id = #{id}
     </select>
-    
 
     <!-- 아이디 체크 -->
     <select id="idCheck" parameterType="MemberVO" resultType="int">
@@ -25,7 +24,6 @@
       WHERE id = #{id}
     </select>
     
-    
     <!-- 이메일 체크 -->
     <select id="emailCheck" parameterType="MemberVO" resultType="int">
       SELECT COUNT(*) cnt
@@ -33,22 +31,9 @@
       WHERE email = #{email}
     </select>
     
-    <!-- 등급 체크 -->
-    <select id="gradeCheck" parameterType="MemberVO" resultMap="MemberMap">
-      SELECT COUNT(*) cnt
-      FROM MEMBER
-      WHERE id = #{id}
-    </select>
-    
      <!-- 비밀번호 검사 -->
     <select id="encoder" parameterType="MemberVO" resultMap="MemberMap">
       SELECT password
-      FROM MEMBER
-      WHERE id = #{id}
-    </select>
-    
-    <select id="gradeCheckid" parameterType="MemberVO" resultMap="MemberMap">
-      SELECT grade
       FROM MEMBER
       WHERE id = #{id}
     </select>
@@ -61,11 +46,11 @@
       AND password = #{password}
     </select>
     
-  <!-- 이메일로  계정 존재 여부 검색 -->
-  <select id="searchIdCheck" parameterType="MemberVO" resultType="int">
-    SELECT COUNT(*) cnt
-    FROM MEMBER
-    WHERE email  = #{email}
+    <!-- 이메일로  계정 존재 여부 검색 -->
+    <select id="searchIdCheck" parameterType="MemberVO" resultType="int">
+	    SELECT COUNT(*) cnt
+	    FROM MEMBER
+	    WHERE email  = #{email}
     </select>    
     
     <!-- 이메일로  id 검색 -->
@@ -79,7 +64,22 @@
       SELECT grade
       FROM MEMBER
       WHERE id  = #{id}
-    </select>    
+    </select>
+    
+		<!-- ID찾기 때 정지된 회원 등급 검색 -->   
+		<select id="findIdGrade" parameterType="MemberVO" resultMap="MemberMap">
+      SELECT grade
+      FROM MEMBER
+      WHERE email  = #{email}
+		</select>
+		
+		<!-- PW찾기 때 정지된 회원 등급 검색 -->   
+		<select id="findPwGrade" parameterType="MemberVO" resultMap="MemberMap">
+      SELECT grade
+      FROM MEMBER
+      WHERE email  = #{email}
+      AND id = #{id}
+		</select>     
        
     <!-- id + 이메일  비밀번호 여부 검색 -->
     <select id="searchPwCheck" parameterType="MemberVO" resultType="int">
@@ -122,14 +122,6 @@
     AND email  = #{email}
   </update>
   
-  <!-- 사용자 정보 변경 -->
-  <update id="updateUser" parameterType="MemberVO">
-    UPDATE MEMBER         
-    SET password  = #{password}
-    WHERE id = #{id}
-    AND email = #{email}
-  </update>
-  
     <!-- 계정 정지 (등급 3은 아이디가 정지되어 로그인이 불가능) -->
     <update id="forbiddenUser" parameterType="MemberVO">
       UPDATE MEMBER         
@@ -143,7 +135,6 @@
       SET grade = 1
       WHERE id = #{id}
     </update>
-
   
   <!-- 유저 삭제 -->
   <delete id="deleteOne" parameterType="MemberVO">
@@ -157,12 +148,5 @@
     SET password  = #{password}
     WHERE email = #{email}
   </update>
-  
-  <!-- 비밀번호 재설정 전용 검사문 -->
-  <select id="ChangeEncoder" parameterType="MemberVO" resultMap="MemberMap">
-    SELECT password
-    FROM MEMBER
-    WHERE email = #{email}
-  </select>
   
 </mapper>

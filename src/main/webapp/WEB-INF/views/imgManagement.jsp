@@ -14,18 +14,6 @@ if (session.getAttribute("user") == null) {
 	response.sendRedirect("/login");
 }
 %>
-<%
-	String strReferer = request.getHeader("referer");
-if (strReferer == null) {
-%>
-<script language="javascript">
-	alert("접속을 차단합니다.");
-	document.location.href = "${CP}/login";
-</script>
-<%
-	return;
-}
-%>
 <link rel="stylesheet" href="${CP}/resources/css/imgMng.css">
 
 <%@include file="/WEB-INF/views/layout/navbar.jsp"%>
@@ -34,32 +22,23 @@ if (strReferer == null) {
 	<div class="container" style="width: 930px;">
 		<!-- 카테고리 선택 -->
 		<div class="top-box d-flex justify-content-start">
-			<select class="form-select" id="categoryDropdown" name="category"
-				style="width: 200px;">
-				<option value="0" <%if (0 == category)
-	out.print("selected");%>>전체</option>
-				<option value="10" <%if (10 == category)
-	out.print("selected");%>>기본</option>
-				<option value="20" <%if (20 == category)
-	out.print("selected");%>>좋아요</option>
-				<option value="30" <%if (30 == category)
-	out.print("selected");%>>싫어요</option>
+			<select class="form-select" id="categoryDropdown" name="category" style="width: 200px;">
+				<option value="0" <%if (0 == category)out.print("selected");%>>전체</option>
+				<option value="10" <%if (10 == category)out.print("selected");%>>기본</option>
+				<option value="20" <%if (20 == category)out.print("selected");%>>좋아요</option>
+				<option value="30" <%if (30 == category)out.print("selected");%>>싫어요</option>
 			</select>
 		</div>
 		<!-- 카테고리 선택 end -->
 
 		<!-- 전체선택, 삭제버튼, 저장버튼 -->
-		<div class="d-flex justify-content-between"">
-			<div class="form-check">
-				<input class="form-check-input" type="checkbox" id="selectAllBtn"
-					onclick="toggleSelectAll()"> <label for="form-check-label">전체선택</label>
+		<div class="d-flex justify-content-between">
+			<div class="form-check" style="margin-top:7px;">
+				<input class="form-check-input" type="checkbox" id="selectAllBtn" onclick="toggleSelectAll()"> <label for="form-check-label">전체선택</label>
 			</div>
 			<div>
-				<button type="button" id="selectDeleteBtn" class="btn btn-secondary"
-					onclick="selectDelete()">DELETE</button>
-				<button type="button" id="selectSaveBtn" class="btn btn-warning"
-					style="width: 200px; margin-left: 10px; color: white;"
-					onclick="selectSave()">SAVE</button>
+				<button type="button" id="selectDeleteBtn" class="btn btn-secondary" onclick="selectDelete()">DELETE</button>
+				<button type="button" id="selectSaveBtn" class="btn btn-warning" style="width: 200px; margin-left: 10px; color: white;" onclick="selectSave()">SAVE</button>
 			</div>
 		</div>
 	</div>
@@ -77,8 +56,7 @@ if (strReferer == null) {
 						<td>
 							<div class="image-container">
 								<div class="checkbox-local">
-									<input type="checkbox" class="form-check-input btn_check"
-										id="${vo.name}"> <label for="${vo.name}"></label>
+									<input type="checkbox" class="form-check-input btn_check" id="${vo.name}"> <label for="${vo.name}"></label>
 								</div>
 								<div class="image-wrapper">
 									<img class="uploaded-image" src="${vo.url}" alt="${vo.name}">
@@ -100,17 +78,18 @@ if (strReferer == null) {
 	<!-- 페이징 -->
 	<ul class="pagination justify-content-center">
 		<!-- 처음 페이지 -->
-		<li class="page-item ${pageNo <= 1 ? 'disabled' : ''}"><a
-			class="page-link"
-			href="${CP}/imgManagement?pageNo=1&category=${category}"> <span>&lt&lt</span>
-		</a></li>
+		<li class="page-item ${pageNo <= 1 ? 'disabled' : ''}">
+		  <a class="page-link" href="${CP}/imgManagement?pageNo=1&category=${category}">
+		    <span>&lt&lt</span>
+		  </a>
+		</li>
 
 		<!-- 10개 중 첫 번째 -->
-		<li class="page-item ${pageNo == startPage ? 'disabled' : ''}"><a
-			class="page-link"
-			href="${CP}/imgManagement?pageNo=${startPage}&category=${category}">
+		<li class="page-item ${pageNo == startPage ? 'disabled' : ''}">
+		  <a class="page-link" href="${CP}/imgManagement?pageNo=${startPage}&category=${category}">
 				<span>&lt</span>
-		</a></li>
+		  </a>
+	  </li>
 
 		<!-- 페이지 번호 -->
 		<c:choose>
@@ -120,26 +99,23 @@ if (strReferer == null) {
 			</c:when>
 		</c:choose>
 		<c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
-			<li
-				class="page-item ${pageNo == pageNum ? 'active' : ''} ${pageNo == pageNum ? 'disabled' : ''}">
-				<a class="page-link"
-				href="${CP}/imgManagement?pageNo=${pageNum}&category=${category}">${pageNum}</a>
+			<li class="page-item ${pageNo == pageNum ? 'active' : ''} ${pageNo == pageNum ? 'disabled' : ''}">
+				<a class="page-link" href="${CP}/imgManagement?pageNo=${pageNum}&category=${category}">${pageNum}</a>
 			</li>
 		</c:forEach>
 
 		<!-- 10개 중 마지막 -->
-		<li class="page-item ${pageNo == endPage ? 'disabled' : ''}"><a
-			class="page-link"
-			href="${CP}/imgManagement?pageNo=${endPage}&category=${category}">
+		<li class="page-item ${pageNo == endPage ? 'disabled' : ''}">
+		  <a class="page-link" href="${CP}/imgManagement?pageNo=${endPage}&category=${category}">
 				<span>&gt</span>
-		</a></li>
+		  </a>
+	  </li>
 
 		<!-- 마지막 페이지 -->
 		<li class="page-item ${pageNo >= totalPages ? 'disabled' : ''}">
-			<a class="page-link"
-			href="${CP}/imgManagement?pageNo=${totalPages}&category=${category}">
+			<a class="page-link" href="${CP}/imgManagement?pageNo=${totalPages}&category=${category}">
 				<span>&gt&gt</span>
-		</a>
+		  </a>
 		</li>
 	</ul>
 	<!-- 페이징 end -->
@@ -158,13 +134,13 @@ if (strReferer == null) {
 			</div>
 			<div class="divider"></div>
 			<div class="right">
-				<table class="table detail_table" style="width: 550px;">
+				<table class="table detail_table">
 					<tr>
 						<th class="text-center fw-bold">번호</th>
 						<td id="idx"></td>
 					</tr>
 					<tr>
-						<th class="text-center fw-bold">이름</th>
+						<th class="text-center fw-bold" style="vertical-align: middle;">이름</th>
 						<td id="name"></td>
 					</tr>
 					<tr>
@@ -206,6 +182,16 @@ if (strReferer == null) {
 		</div>
 	</div>
 	<!-- 모달 창  end -->
+	
+  <%-- 세션이 없이 해당 페이지 진입하면 로그인 페이지로 이동 --%>
+  <c:if test="${user.grade != 2}">
+    <script>     
+        window.location.href = "/login";
+    </script>   
+  </c:if>
 
-	<%@include file="/WEB-INF/views/layout/footer.jsp"%>
+	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="${CP}/resources/js/imgMng.js"></script>
+</body>
+</html>

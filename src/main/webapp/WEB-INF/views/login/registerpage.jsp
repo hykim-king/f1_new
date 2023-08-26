@@ -80,7 +80,8 @@
 		    <input type="hidden" name="grade" id="grade" value="1">
 		    <input type="hidden" name="id" id="id">
 		    <input type="hidden" name="pw" id="pw">
-		    <input type="hidden" name="email" id="email">         
+		    <input type="hidden" name="email" id="email">  
+		    <input type="hidden" name="auth" id="auth" value="1">      
       </form>
 				<input type="hidden" name="emailok" id="emailok"> 
 				<input type="hidden" name="idok" id="idok"> 

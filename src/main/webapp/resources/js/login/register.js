@@ -95,7 +95,7 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
 		}
 	
 		if("ok" != document.getElementById('idok').value) {
-			alert("아이디 인증을 진해하십시오.");
+			alert("아이디 인증을 진행하세요.");
 		    return false;
 		}
 	
@@ -110,14 +110,20 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
 		}
 		
 		if("" == document.getElementById('checkInput').value){
-			alert("이메일 인증을 진행해 주십시오.");
+			alert("이메일 인증을 진행해주세요.");
 		    return false;
+		}
+		
+		if("1" == document.getElementById('auth').value) {
+			alert("이메일 인증번호를 전송하지 않았습니다. 인증 후 가입을 진행해주세요");
+			return false;
 		}
 		
 		if( document.getElementById('checkInput').value != code){
 			alert("이메일 인증번호가 다릅니다.");
 		    return false;
 		}
+		
 	          
 		$.ajax({
 		    type: "POST",
@@ -174,7 +180,7 @@ $(document).ready(function(){  //모든 화면이 다 로딩이 되면 실행하
 	    
 	    $.ajax({
 	        type: "POST",
-	        url:"$/idDulpCheck",
+	        url:"/idDulpCheck",
 	        dataType:"html",
 	        data:{
 	        	id: $("#id_form").val()
@@ -280,9 +286,9 @@ $('#mail-Check-Btn').click(function() {
 	        url : "mailCheck?email=" + email,
 	        success : function(data) {
 
-		    console.log("data : " + data);
 		    $('#checkInput').attr('disabled', false);
 		    code = data;
+		    $('#auth').attr('value', 2);
 		    alert('인증번호가 전송되었습니다.')
 	        }
 	    

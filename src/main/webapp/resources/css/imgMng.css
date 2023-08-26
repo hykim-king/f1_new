@@ -40,7 +40,7 @@
 	  filter: brightness(40%);
 	}
 	.image-wrapper {
-	  margin: 0px 3px;
+	  margin: 3px;
 	}
 	.uploaded-image {
 	  display: block;
@@ -55,6 +55,12 @@
 	  left: 10px;
 	  z-index: 2;
 	  cursor: pointer;
+	}
+	.pagination {
+		position: fixed;
+	  bottom: 10px;
+	  left: 50%; /* 화면 가로 중앙 */
+	  transform: translateX(-50%); /* 가로 중앙으로 이동 */
 	}
 	.page-link {
 	  color: #343a40;
@@ -131,6 +137,10 @@
     font-family: 'NanumSquareNeo';
 	  font-size: 15px;
 	  color: #222222;
+	  width: 650px;
+  }
+  .detail_table th {
+    width: 150px;
   }
 	.overlay-modal {
 	  position: fixed;
