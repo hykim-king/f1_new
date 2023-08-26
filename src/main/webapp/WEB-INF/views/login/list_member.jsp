@@ -38,7 +38,7 @@
 <form>    
         <!-- 제목 -->
         <div class="page-header">
-            <h2 class="text-center">회원 관리</h2>
+            <h2 class="text-center">일반회원 리스트</h2>
         </div>
         <!-- 제목 end --------------------------------------------------------------->
 
