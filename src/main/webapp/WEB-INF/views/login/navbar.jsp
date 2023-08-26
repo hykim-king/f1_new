@@ -35,7 +35,7 @@
         <c:if test="${user.grade == 2}">
         <li class="nav-item dropdown">
           <input type="hidden" id="nekeyword" name="nekeyword" value ="${user.id}">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">관리자 기능</a>
+          <a class="nav-link dropdown-toggle" style="font-size: 18px;" href="#" data-bs-toggle="dropdown" aria-expanded="false">관리자 기능</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="${CP}/admin">List</a></li>
             <li><a class="dropdown-item" href="${CP}/imgManagement">Image Management</a></li>
