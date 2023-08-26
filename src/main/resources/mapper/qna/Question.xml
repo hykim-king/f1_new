@@ -143,44 +143,46 @@
         FROM QUESTION
         WHERE category = 10
         ORDER BY no DESC
-        FETCH FIRST 3 ROWS ONLY
+        LIMIT 3
     </select>
     
 		<!-- 내 글 보기 -->
 		<select id="findMyQuestion" resultType="QuestionVO">
-		    SELECT *
-		    FROM (
-		        SELECT
-		            no,
-		            category,
-		            views,
-		            id,
-		            title,
-		            content,
-		            create_date AS createDate,
-		            update_date AS updateDate
-		        FROM QUESTION
-		        WHERE id = #{id}
-		        
-		        <if test="searchCond.category == null">
-		            AND category != 10
-		        </if>
-		        <if test="searchCond.category != null">
-		            AND category = #{searchCond.category}
-		        </if>
-		        <if test="searchCond.searchType == 'title' and searchCond.keyword != null">
-		            AND title LIKE CONCAT('%', #{searchCond.keyword}, '%')
-		        </if>
-		        <if test="searchCond.searchType == 'content' and searchCond.keyword != null">
-		            AND content LIKE CONCAT('%', #{searchCond.keyword}, '%')
-		        </if>
-		        <if test="searchCond.searchType == 'both' and searchCond.keyword != null">
-		            AND (title LIKE CONCAT('%', #{searchCond.keyword}, '%') OR content LIKE CONCAT('%', #{searchCond.keyword}, '%'))
-		        </if>
-		        ORDER BY no DESC
-            WHERE b.rnum &lt;= #{pagination.start} + #{pagination.size}
-            AND b.rnum &gt; #{pagination.start}
-		    ) a
+      SELECT *
+              FROM (
+                  SELECT a.*, @rownum := @rownum + 1 AS rnum
+                  FROM (
+                      SELECT
+                          no,
+                          category,
+                          views,
+                          id,
+                          title,
+                          content,
+                          create_date AS createDate,
+                          update_date AS updateDate
+                      FROM QUESTION
+                      WHERE id = #{id}
+                      <if test="searchCond.category == null">
+                          AND category != 10
+                      </if>
+                      <if test="searchCond.category != null">
+                          AND category = #{searchCond.category}
+                      </if>
+                      <if test="searchCond.searchType == 'title' and searchCond.keyword != null">
+                          AND title LIKE CONCAT('%', #{searchCond.keyword}, '%')
+                      </if>
+                      <if test="searchCond.searchType == 'content' and searchCond.keyword != null">
+                          AND content LIKE CONCAT('%', #{searchCond.keyword}, '%')
+                      </if>
+                      <if test="searchCond.searchType == 'both' and searchCond.keyword != null">
+                          AND (title LIKE CONCAT ('%', #{searchCond.keyword}, '%') OR content LIKE CONCAT ('%', #{searchCond.keyword}, '%'))
+                      </if>
+                      ORDER BY no DESC
+                  ) a, (SELECT @rownum := 0) r
+              ) b
+          WHERE b.rnum &lt;= #{pagination.start} + #{pagination.size}
+          AND b.rnum &gt; #{pagination.start}
 		</select>
 
 		<!-- 본인 글 개수 count -->
