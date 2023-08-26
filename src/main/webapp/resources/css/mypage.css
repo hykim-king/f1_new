@@ -1,7 +1,7 @@
 @charset "UTF-8";
   
 #container {
-  margin: 0px auto;
+  margin: 25px auto;
   width: 800px;
 }
 
@@ -31,7 +31,7 @@ input {
 }
 
 #myQnAboard {
-   margin-top: 40px;
+   margin-top: 30px;
    width: 320px;
 }
   
