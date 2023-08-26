@@ -56,7 +56,6 @@
         
         <div class="update_btn">
           <input type="button" class="btn btn-warning" style="color:white;" id="update" value="수정">
-          &nbsp;&nbsp;
           <input type="button" class="btn btn-secondary" id="cancel"  value="취소">    
         </div>
         
