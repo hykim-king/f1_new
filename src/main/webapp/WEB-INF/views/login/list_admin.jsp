@@ -153,7 +153,7 @@ $("#deletebtn").on("click",function(){
               // AJAX 요청을 보냅니다.
                   $.ajax({
                       type: "POST",
-                      url:"${CP}/delete",
+                      url:"/delete",
                       dataType:"html",
                       data: {
                        id: tmpVal
