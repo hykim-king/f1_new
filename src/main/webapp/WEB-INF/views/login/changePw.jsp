@@ -30,7 +30,7 @@
             </li> 
             <li>
               <label>비밀번호 수정</label><br/>
-              <input class="form-control" type="password" id="rpassword" placeholder="문자, 숫자, 특수문자 포함 8~20글자)" onchange="check_pw()">
+              <input class="form-control" type="password" id="rpassword" placeholder="문자, 숫자, 특수문자 포함 (8~20글자)" onchange="check_pw()">
             </li>
             <li>
               <label>비밀번호 확인</label>

@@ -36,6 +36,12 @@
                       alert(paredJSON.msgContents);  // javascript 메시지 다이얼 로그
                       return;
                     }
+                    
+                    if("20" == paredJSON.msgId) {
+	                   alert(paredJSON.msgContents);  // javascript 메시지 다이얼 로그
+	                   return;
+	                }
+                    
                     if("30" == paredJSON.msgId){ //서치 성공
                     	$('#set_id').attr('value', paredJSON.msgContents);
                     	email_id_find();
@@ -85,6 +91,12 @@
                         alert(paredJSON.msgContents);  
                         return;
                       }
+                      
+                      if("20" == paredJSON.msgId) {
+                        alert(paredJSON.msgContents);  
+                        return;
+                      }
+                      
                       if("30" == paredJSON.msgId){
                     	  window.location.href="/changePw";
                       }
