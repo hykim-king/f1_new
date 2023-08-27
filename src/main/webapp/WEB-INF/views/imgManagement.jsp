@@ -77,47 +77,36 @@ if (session.getAttribute("user") == null) {
 
 	<!-- 페이징 -->
 	<ul class="pagination justify-content-center">
-		<!-- 처음 페이지 -->
-		<li class="page-item ${pageNo <= 1 ? 'disabled' : ''}">
-		  <a class="page-link" href="${CP}/imgManagement?pageNo=1&category=${category}">
-		    <span>&lt&lt</span>
-		  </a>
-		</li>
+    <li class="page-item ${pageNo <= 1 ? 'disabled' : ''}">
+        <a class="page-link" href="${CP}/imgManagement?pageNo=1&category=${category}">
+            <span>&lt&lt</span>
+        </a>
+    </li>
+    <li class="page-item ${pageNo <= 1 ? 'disabled' : ''} ${prevBlock < 1 ? 'disabled' : ''}">
+        <a class="page-link" href="${CP}/imgManagement?pageNo=${prevBlock}&category=${category}">
+            <span>&lt</span>
+        </a>
+    </li>
 
-		<!-- 10개 중 첫 번째 -->
-		<li class="page-item ${pageNo == startPage ? 'disabled' : ''}">
-		  <a class="page-link" href="${CP}/imgManagement?pageNo=${startPage}&category=${category}">
-				<span>&lt</span>
-		  </a>
-	  </li>
+    <c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
+        <li class="page-item ${pageNo == pageNum ? 'active disabled' : ''}">
+            <a class="page-link" href="${CP}/imgManagement?pageNo=${pageNum}&category=${category}">
+                ${pageNum}
+            </a>
+        </li>
+    </c:forEach>
 
-		<!-- 페이지 번호 -->
-		<c:choose>
-			<c:when test="${endPage > totalPages}">
-				<c:set var="endPage" value="${totalPages}" />
-				<c:set var="startPage" value="${endPage - 9 < 1 ? 1 : endPage - 9}" />
-			</c:when>
-		</c:choose>
-		<c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
-			<li class="page-item ${pageNo == pageNum ? 'active' : ''} ${pageNo == pageNum ? 'disabled' : ''}">
-				<a class="page-link" href="${CP}/imgManagement?pageNo=${pageNum}&category=${category}">${pageNum}</a>
-			</li>
-		</c:forEach>
-
-		<!-- 10개 중 마지막 -->
-		<li class="page-item ${pageNo == endPage ? 'disabled' : ''}">
-		  <a class="page-link" href="${CP}/imgManagement?pageNo=${endPage}&category=${category}">
-				<span>&gt</span>
-		  </a>
-	  </li>
-
-		<!-- 마지막 페이지 -->
-		<li class="page-item ${pageNo >= totalPages ? 'disabled' : ''}">
-			<a class="page-link" href="${CP}/imgManagement?pageNo=${totalPages}&category=${category}">
-				<span>&gt&gt</span>
-		  </a>
-		</li>
-	</ul>
+    <li class="page-item ${nextBlock > totalPages ? 'disabled' : ''}">
+        <a class="page-link" href="${CP}/imgManagement?pageNo=${nextBlock}&category=${category}">
+            <span>&gt</span>
+        </a>
+    </li>
+    <li class="page-item ${pageNo >= totalPages ? 'disabled' : ''}">
+        <a class="page-link" href="${CP}/imgManagement?pageNo=${totalPages}&category=${category}">
+            <span>&gt&gt</span>
+        </a>
+    </li>
+  </ul>
 	<!-- 페이징 end -->
 
 	<!-- 모달 창 바깥 불투명 검정 배경 -->
