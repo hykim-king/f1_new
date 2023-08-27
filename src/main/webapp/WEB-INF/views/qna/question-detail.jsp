@@ -165,6 +165,10 @@
             </form>
         </c:if>
     </div>
+    
+		<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="/resources/js/qna.js"></script>
 </body>
 <footer id="font-id" class="pt-3 mt-4" style="font-family: 'NanumSquareNeo'; position: absolute; bottom:0; width: 100%;">
   <ul class="nav justify-content-center border-bottom pb-3 mb-3">
