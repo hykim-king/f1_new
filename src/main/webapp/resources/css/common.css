@@ -31,3 +31,7 @@ footer {
       box-shadow: none;
       border-color: #666666;
 }
+
+#welcome {
+	margin: 25px 15px 1rem 0px;
+}

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<nav id="font-id" class="navbar navbar-expand-md mb-4 mt-2" style="background-color: white;">
+<nav id="font-id" class="navbar navbar-expand-md mb-4" style="background-color: #dcdcdc; opacity: 0.9;">
     <div class="container-fluid">
         <a class="navbar-brand roadscanner" href="${CP}/main" style="font-size: 22px;">RoadScanner</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,15 +28,18 @@
                     </li>
                 </c:if>
             </ul>
+            <div>
+                <p id="welcome">${user.id}님, 환영합니다!</p>
+            </div>
             <form class="d-flex" role="search" style="margin-top: 9px; margin-bottom: 0px;">
                 <c:choose>
                     <c:when test="${user ne null}">
-                        <button type="button" class="btn btn-md btn-outline-secondary me-2" onclick="location.href='${CP}/mypage'">MyPage</button>
-                        <button type="button" class="btn btn-md btn-outline-secondary" onclick="location.href='${CP}/logout'" style="margin-right: 50px;">LogOut</button>
+                        <button type="button" class="btn btn-md btn-outline-dark me-2" onclick="location.href='${CP}/mypage'">MyPage</button>
+                        <button type="button" class="btn btn-md btn-outline-dark" onclick="location.href='${CP}/logout'" style="margin-right: 50px;">LogOut</button>
                     </c:when>
                     <c:otherwise>
-                        <button type="button" class="btn btn-md btn-outline-secondary me-2" id="login" onclick="location.href='${CP}/login'" >Login</button>
-                        <button type="button" class="btn btn-md btn-outline-secondary" onclick="location.href='${CP}/registerpage'" style="margin-right: 50px;">Sign-up</button>
+                        <button type="button" class="btn btn-md btn-outline-dark me-2" id="login" onclick="location.href='${CP}/login'" >Login</button>
+                        <button type="button" class="btn btn-md btn-outline-dark" onclick="location.href='${CP}/registerpage'" style="margin-right: 50px;">Sign-up</button>
                     </c:otherwise>
                 </c:choose>
             </form>

@@ -23,7 +23,7 @@
 
         <div class="row" style="display: none;">
             <label for="id" class="col-sm-2 col-form-label">작성자</label>
-            <div class="col-sm-10">자
+            <div class="col-sm-10">
                 <input type="text" class="form-control" id="id" value="${user.id}" readonly>
             </div>
         </div>
