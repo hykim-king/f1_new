@@ -82,6 +82,7 @@ if (session.getAttribute("user") == null) {
             <span>&lt&lt</span>
         </a>
     </li>
+
     <li class="page-item ${pageNo <= 1 ? 'disabled' : ''} ${prevBlock < 1 ? 'disabled' : ''}">
         <a class="page-link" href="${CP}/imgManagement?pageNo=${prevBlock}&category=${category}">
             <span>&lt</span>
