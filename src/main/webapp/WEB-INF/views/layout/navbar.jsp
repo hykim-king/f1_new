@@ -28,9 +28,11 @@
                     </li>
                 </c:if>
             </ul>
-            <div>
-                <p id="welcome">${user.id}님, 환영합니다!</p>
-            </div>
+            <c:if test="${user ne null}">
+                <div>
+                    <p id="welcome">${user.id}님, 환영합니다!</p>
+                </div>
+            </c:if>
             <form class="d-flex" role="search" style="margin-top: 9px; margin-bottom: 0px;">
                 <c:choose>
                     <c:when test="${user ne null}">
