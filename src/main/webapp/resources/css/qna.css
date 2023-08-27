@@ -51,14 +51,7 @@
 
 
 
-/* ------paging------ */ 
-.pagination {
-  position: fixed;
-  bottom: 50px;
-  left: 50%; /* 화면 가로 중앙 */
-  transform: translateX(-50%); /* 가로 중앙으로 이동 */
-}
-  
+/* ------paging------ */   
 .page-link {
     color: black;
 }
