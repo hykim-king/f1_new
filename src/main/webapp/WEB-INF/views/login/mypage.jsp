@@ -1,4 +1,4 @@
-  <%@include file ="head.jsp" %>
+<%@include file ="head.jsp" %>
   
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -70,8 +70,11 @@
   </c:if>
 
 </body>
-
-  <%@include file ="footer.jsp" %>
+<footer id="font-id" class="pt-3 mt-4" style="font-family: 'NanumSquareNeo'; position: absolute; bottom:0; width: 100%;">
+  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+  </ul>
+  <p class="text-center text-body-secondary">&copy; 2023 F1 RoadScanner Project, All rights reserved.</p>
+</footer>
   <style>
     /* 부트스트랩 호버 수정 */
     .form-control:focus {

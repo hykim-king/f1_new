@@ -46,7 +46,13 @@
         <h4><a href="${CP}/logout">Go To 로그아웃</a></h4>
     </div>            
 </c:if> <!-- 유저 정보O-end -->
-
-
-  <%@include file ="/WEB-INF/views/layout/footer.jsp" %>
+  
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/resources/js/login/login.js"></script>
+</body>
+<footer id="font-id" class="pt-3 mt-4" style="font-family: 'NanumSquareNeo'; position: absolute; bottom:0; width: 100%;">
+  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+  </ul>
+  <p class="text-center text-body-secondary">&copy; 2023 F1 RoadScanner Project, All rights reserved.</p>
+</footer>
