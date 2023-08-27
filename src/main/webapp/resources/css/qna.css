@@ -10,13 +10,6 @@
 
 
 /* ------index.jsp------ */
-.pagination {
-  position: fixed;
-  bottom: 10px;
-  left: 50%; /* 화면 가로 중앙 */
-  transform: translateX(-50%); /* 가로 중앙으로 이동 */
-}
-
 .qna-link {
     text-decoration: none; /* 언더라인 제거 */
 }
