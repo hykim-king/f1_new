@@ -14,7 +14,7 @@
 <body id="font-id" class="d-flex flex-column">
 	<div style="margin-top: 30px;">
 	
-	      <div class = "roadscannercontainer"><!-- id 찾기 -->
+	      <div class = "roadscannercontainer" style="margin: 0px auto;"><!-- id 찾기 -->
 	      
 	        <h1 style="text-align: center; font-weight: 900; font-family: 'Bruno Ace', cursive;">RoadScanner</h1>
 	          <h4 style="text-align: center; margin-top:70px; margin-bottom:50px; font-weight: 800;">아이디 찾기</h4>
