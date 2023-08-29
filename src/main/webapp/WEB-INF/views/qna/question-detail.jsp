@@ -84,7 +84,7 @@
                     </div>
                     <div class="row m-2">
                         <div class="col">
-                            <p class="card-text"><b>작성자: ${user.id}</b>&emsp;작성일: ${answer.createDate}
+                            <p class="card-text"><b>작성자: projectmaster</b>&emsp;작성일: ${answer.createDate}
                                 <c:if test="${answer.updateDate != null}">&nbsp;|&nbsp;&nbsp;최종 수정일: ${answer.updateDate}</c:if>
                             </p>
                         </div>
